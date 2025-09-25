@@ -1110,11 +1110,11 @@ class CheckoutController extends Controller
         $order = null;
         
         if ($orderNumber) {
-            $order = Order::with(['items.product'])
+            $order = Order::with(['items.product', 'customer'])
                          ->where('order_number', $orderNumber)
                          ->first();
         }
-        
+
         return view('orders.success', compact('order', 'orderNumber'));
     }
 

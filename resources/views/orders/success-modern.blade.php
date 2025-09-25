@@ -64,17 +64,7 @@
                                 <div class="order-info-item mb-3">
                                     <div class="d-flex align-items-center justify-content-between">
                                         <span class="fw-5" style="color: #666;">Customer Email:</span>
-                                        <span class="fw-5" style="color: #333;">
-                                            @if(isset($order) && $order && is_array($order->shipping_address) && isset($order->shipping_address['email']))
-                                                {{ $order->shipping_address['email'] }}
-                                            @elseif(isset($order) && $order && $order->customer)
-                                                {{ $order->customer->email }}
-                                            @elseif(Auth::check())
-                                                {{ Auth::user()->email }}
-                                            @else
-                                                customer@example.com
-                                            @endif
-                                        </span>
+                                        <span class="fw-5" style="color: #333;">{{ Auth::check() ? Auth::user()->email : 'customer@example.com' }}</span>
                                     </div>
                                 </div>
                                 <div class="order-info-item mb-3">
@@ -118,46 +108,14 @@
                     </div>
 
                     <!-- Shipping Address -->
-                    @if(isset($order) && (is_array($order->shipping_address) || $order->shipping_address))
+                    @if(isset($order->shipping_address))
                     <div class="shipping-address-card" style="background: #f8f9fa; border-radius: 12px; padding: 2rem; margin-bottom: 2rem; border: 1px solid #e9ecef;">
                         <h5 class="fw-6 mb-3" style="color: #333; border-bottom: 2px solid #4CAF50; padding-bottom: 0.5rem;">Shipping Address</h5>
                         <div style="color: #666; line-height: 1.6;">
-                            <p class="mb-1 fw-5" style="color: #333;">
-                                {{ 
-                                    (isset($order->shipping_address['name']) ? $order->shipping_address['name'] : 
-                                    (isset($order->shipping_name) ? $order->shipping_name : 
-                                    (Auth::check() ? Auth::user()->name : 'Customer'))) 
-                                }}
-                            </p>
-                            <p class="mb-1">
-                                {{ 
-                                    is_array($order->shipping_address) 
-                                    ? ($order->shipping_address['address'] ?? $order->shipping_address['street'] ?? 'Address not provided')
-                                    : ($order->shipping_address ?? 'Address not provided')
-                                }}
-                            </p>
-                            <p class="mb-1">
-                                {{ 
-                                    is_array($order->shipping_address) 
-                                    ? ($order->shipping_address['city'] ?? 'City not provided') 
-                                    : (isset($order->shipping_city) ? $order->shipping_city : 'City not provided')
-                                }}, 
-                                {{ 
-                                    is_array($order->shipping_address) 
-                                    ? ($order->shipping_address['state'] ?? 'State not provided') 
-                                    : (isset($order->shipping_state) ? $order->shipping_state : 'State not provided')
-                                }}
-                            </p>
-                            <p class="mb-1">Phone: 
-                                {{ 
-                                    is_array($order->shipping_address) 
-                                    ? ($order->shipping_address['phone'] ?? 
-                                      (isset($order->shipping_phone) ? $order->shipping_phone : 
-                                      (Auth::check() && Auth::user()->phone ? Auth::user()->phone : 'N/A')))
-                                    : (isset($order->shipping_phone) ? $order->shipping_phone : 
-                                      (Auth::check() && Auth::user()->phone ? Auth::user()->phone : 'N/A'))
-                                }}
-                            </p>
+                            <p class="mb-1 fw-5" style="color: #333;">{{ $order->shipping_name ?? (Auth::check() ? Auth::user()->name : 'Customer') }}</p>
+                            <p class="mb-1">{{ $order->shipping_address }}</p>
+                            <p class="mb-1">{{ $order->shipping_city }}, {{ $order->shipping_state }}</p>
+                            <p class="mb-1">Phone: {{ $order->shipping_phone ?? (Auth::check() ? Auth::user()->phone : 'N/A') }}</p>
                         </div>
                     </div>
                     @endif
