@@ -360,8 +360,8 @@
                             @if(session('cart') && count(session('cart')) > 0)
                                 <!-- Coupon Section -->
                                 <div class="coupon-box">
-                                    <input type="text" name="coupon_code" id="coupon-input" placeholder="Discount code" value="{{ old('coupon_code') }}">
-                                    <button type="button" class="tf-btn btn-sm radius-3 btn-fill btn-icon animate-hover-btn" onclick="applyCoupon()">Apply</button>
+                                    <input type="text" name="coupon_code" id="coupon-code-input" placeholder="Discount code" value="{{ old('coupon_code') }}">
+                                    <button type="button" id="apply-coupon-btn" class="tf-btn btn-sm radius-3 btn-fill btn-icon animate-hover-btn" onclick="applyCoupon()">Apply</button>
                                 </div>
                                 
                                 @php
@@ -1177,46 +1177,273 @@
         }
 
         // Apply coupon
+        // Toast notification system
+        function showToast(message, type = 'info') {
+            const toastContainer = document.getElementById('toast-container') || createToastContainer();
+            
+            const toast = document.createElement('div');
+            toast.className = `toast align-items-center text-white bg-${type === 'error' ? 'danger' : type === 'success' ? 'success' : 'primary'} border-0`;
+            toast.setAttribute('role', 'alert');
+            toast.setAttribute('aria-live', 'assertive');
+            toast.setAttribute('aria-atomic', 'true');
+            
+            toast.innerHTML = `
+                <div class="d-flex">
+                    <div class="toast-body">
+                        ${message}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            `;
+            
+            toastContainer.appendChild(toast);
+            
+            const bsToast = new bootstrap.Toast(toast);
+            bsToast.show();
+            
+            toast.addEventListener('hidden.bs.toast', () => {
+                toast.remove();
+            });
+        }
+        
+        function createToastContainer() {
+            const container = document.createElement('div');
+            container.id = 'toast-container';
+            container.className = 'toast-container position-fixed top-0 end-0 p-3';
+            container.style.zIndex = '1055';
+            document.body.appendChild(container);
+            return container;
+        }
+        
+        // Global variables for coupon management
+        let appliedCoupon = null;
+        let currentDiscountAmount = 0;
+        let currentShippingCost = 0;
+        const subtotal = {{ $subtotal }};
+        
+        // Apply coupon code
         function applyCoupon() {
-            const couponCode = document.getElementById('coupon-input').value;
+            const couponInput = document.getElementById('coupon-code-input');
+            const couponCode = couponInput.value.trim();
+            
             if (!couponCode) {
-                alert('Please enter a coupon code');
+                showToast('Please enter a coupon code', 'error');
                 return;
             }
-
-            fetch('/api/apply-coupon', {
+            
+            const applyBtn = document.getElementById('apply-coupon-btn');
+            const originalText = applyBtn.innerHTML;
+            applyBtn.innerHTML = '<i class="spinner-border spinner-border-sm me-2"></i>Applying...';
+            applyBtn.disabled = true;
+            
+            // Get current shipping cost
+            const shippingElement = document.getElementById('shipping-amount');
+            currentShippingCost = shippingElement ? parseFloat(shippingElement.getAttribute('data-cost') || '0') : 0;
+            
+            // Prepare cart items data
+            const cartItems = [];
+            document.querySelectorAll('.checkout-product-item').forEach(item => {
+                const productId = item.getAttribute('data-product-id');
+                const quantity = item.querySelector('.quantity')?.textContent || '1';
+                const price = item.querySelector('.price')?.textContent?.replace(/[^0-9.]/g, '') || '0';
+                
+                cartItems.push({
+                    product_id: productId,
+                    quantity: parseInt(quantity),
+                    price: parseFloat(price)
+                });
+            });
+            
+            // Prepare request data
+            const requestData = {
+                coupon_code: couponCode,
+                subtotal: subtotal,
+                cart_items: cartItems,
+                shipping_cost: currentShippingCost,
+                user_id: {{ auth()->id() ?? 'null' }},
+                country: 'BD'
+            };
+            
+            console.log('Applying coupon:', requestData);
+            
+            fetch('{{ route("checkout.apply-coupon") }}', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Accept': 'application/json'
                 },
                 body: JSON.stringify({
-                    code: couponCode,
-                    total_amount: {{ $subtotal }}
+                    coupon_code: couponCode,
+                    subtotal: subtotal,
+                    cart_items: cartItems,
+                    shipping_cost: currentShippingCost
                 })
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
+                console.log('Coupon validation response:', data);
+                
                 if (data.success) {
-                    const discount = data.coupon.discount_amount;
-                    updateDiscountDisplay(discount);
+                    // Store applied coupon
+                    appliedCoupon = data.coupon;
+                    
+                    // Handle different types of discounts
+                    if (data.discount && data.discount.free_shipping) {
+                        // For free shipping coupons, set shipping to 0 and discount amount to shipping saved
+                        const shippingSaved = currentShippingCost;
+                        currentShippingCost = 0;
+                        currentDiscountAmount = data.discount.amount || 0;
+                        
+                        // Update shipping display to show free shipping
+                        updateShippingDisplay(0, true, 'Free shipping applied!');
+                        
+                        showToast(`Free shipping applied! You saved ৳${shippingSaved + currentDiscountAmount}`, 'success');
+                    } else {
+                        // For regular discounts
+                        currentDiscountAmount = parseFloat(data.discount.amount) || 0;
+                        showToast(`Coupon "${couponCode}" applied successfully! You saved ৳${currentDiscountAmount}`, 'success');
+                    }
+                    
+                    // Show applied coupon
+                    showAppliedCoupon(data.coupon);
+                    
+                    // Update displays
+                    updateDiscountDisplay(currentDiscountAmount);
                     updateOrderTotal();
                     
                     // Store coupon info in session
                     sessionStorage.setItem('applied_coupon', JSON.stringify({
                         code: couponCode,
-                        discount: discount
+                        discount: currentDiscountAmount,
+                        coupon_id: data.coupon.id,
+                        free_shipping: data.discount.free_shipping || false
                     }));
                     
-                    alert('Coupon applied successfully!');
+                    // Update the form with coupon data
+                    let couponIdInput = document.querySelector('input[name="coupon_id"]');
+                    if (!couponIdInput) {
+                        couponIdInput = document.createElement('input');
+                        couponIdInput.type = 'hidden';
+                        couponIdInput.name = 'coupon_id';
+                        document.querySelector('.form-checkout').appendChild(couponIdInput);
+                    }
+                    couponIdInput.value = data.coupon.id;
+                    
+                    // Clear input
+                    couponInput.value = '';
                 } else {
-                    alert(data.message || 'Invalid coupon code');
+                    console.error('Coupon validation failed:', data);
+                    showToast(data.message || 'Invalid coupon code', 'error');
                 }
             })
             .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred while applying the coupon');
+                console.error('Coupon application error:', error);
+                
+                // Provide more specific error messages
+                if (error.message.includes('Failed to fetch')) {
+                    showToast('Network error. Please check your internet connection and try again.', 'error');
+                } else if (error.message.includes('422')) {
+                    showToast('Invalid request data. Please check the coupon code and try again.', 'error');
+                } else if (error.message.includes('404')) {
+                    showToast('Coupon not found. Please check the coupon code.', 'error');
+                } else if (error.message.includes('500')) {
+                    showToast('Server error. Please try again later or contact support.', 'error');
+                } else {
+                    showToast('Error applying coupon', 'error');
+                }
+            })
+            .finally(() => {
+                applyBtn.innerHTML = originalText;
+                applyBtn.disabled = false;
             });
+        }
+        
+        // Show applied coupon in UI
+        function showAppliedCoupon(coupon) {
+            const couponBox = document.querySelector('.coupon-box');
+            
+            // Remove existing applied coupon display
+            const existingApplied = couponBox.querySelector('.applied-coupon');
+            if (existingApplied) {
+                existingApplied.remove();
+            }
+            
+            // Create applied coupon display
+            const appliedDiv = document.createElement('div');
+            appliedDiv.className = 'applied-coupon mt-2 p-2 bg-success text-white rounded d-flex justify-content-between align-items-center';
+            appliedDiv.innerHTML = `
+                <div>
+                    <i class="icon-check me-2"></i>
+                    <strong>${coupon.code}</strong> - ${coupon.name || coupon.discount_text || 'Coupon Applied'}
+                    ${coupon.free_shipping ? '<br><small>Free shipping included</small>' : ''}
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-light" onclick="removeCoupon()">
+                    <i class="icon-close"></i>
+                </button>
+            `;
+            
+            couponBox.appendChild(appliedDiv);
+            
+            // Hide the input and apply button
+            couponBox.querySelector('input').style.display = 'none';
+            couponBox.querySelector('button[onclick="applyCoupon()"]').style.display = 'none';
+        }
+        
+        // Remove applied coupon
+        function removeCoupon() {
+            // Reset coupon variables
+            appliedCoupon = null;
+            currentDiscountAmount = 0;
+            
+            // Remove applied coupon display
+            const appliedCoupon = document.querySelector('.applied-coupon');
+            if (appliedCoupon) {
+                appliedCoupon.remove();
+            }
+            
+            // Show input and apply button again
+            const couponBox = document.querySelector('.coupon-box');
+            couponBox.querySelector('input').style.display = 'block';
+            couponBox.querySelector('button[onclick="applyCoupon()"]').style.display = 'block';
+            
+            // Remove coupon data from form
+            const couponIdInput = document.querySelector('input[name="coupon_id"]');
+            if (couponIdInput) {
+                couponIdInput.remove();
+            }
+            
+            // Clear session storage
+            sessionStorage.removeItem('applied_coupon');
+            
+            // Update displays
+            updateDiscountDisplay(0);
+            
+            // Recalculate shipping if it was free shipping coupon
+            calculateShipping();
+            
+            showToast('Coupon removed', 'info');
+        }
+        
+        // Recalculate shipping (when coupon is removed)
+        function calculateShipping() {
+            // Get selected shipping method
+            const shippingMethod = document.querySelector('input[name="shipping_method"]:checked');
+            
+            if (shippingMethod) {
+                const shippingCost = parseFloat(shippingMethod.getAttribute('data-cost') || '0');
+                updateShippingDisplay(shippingCost);
+                updateOrderTotal();
+            } else {
+                // Default shipping calculation based on area/location
+                updateShippingDisplay(100, false, '3-5 business days');
+                updateOrderTotal();
+            }
         }
 
         // Update discount display
