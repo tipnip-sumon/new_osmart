@@ -17,9 +17,6 @@
     <link rel="stylesheet" href="{{ asset('assets/ecomus/css/swiper-bundle.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/ecomus/css/animate.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/ecomus/css/styles.css') }}" />
-
-    <!-- Custom Laravel Integration CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/ecomus/css/custom-laravel.css') }}">
     
     <!-- Toastr CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -64,7 +61,22 @@
         
         @include('layouts.ecomus.footer')
     </div>
+    <!-- /toolbar-bottom -->
 
+    <!-- Mobile Menu -->
+    @include('layouts.ecomus.mobile-menu')
+
+    <!-- Modal Search -->
+    @include('layouts.ecomus.search-modal')
+
+    <!-- Modal Login -->
+    @include('layouts.ecomus.login-modal')
+
+    <!-- Modal Shopping Cart -->
+    @include('layouts.ecomus.cart-modal')
+
+    <!-- Additional Product Modals -->
+    @include('layouts.ecomus.additional-modals')
     <!-- gotop -->
     <button id="goTop">
         <span class="border-progress"></span>
@@ -130,22 +142,6 @@
             </a>
         </div>
     </div>
-    <!-- /toolbar-bottom -->
-
-    <!-- Mobile Menu -->
-    @include('layouts.ecomus.mobile-menu')
-
-    <!-- Modal Search -->
-    @include('layouts.ecomus.search-modal')
-
-    <!-- Modal Login -->
-    @include('layouts.ecomus.login-modal')
-
-    <!-- Modal Shopping Cart -->
-    @include('layouts.ecomus.cart-modal')
-
-    <!-- Additional Product Modals -->
-    @include('layouts.ecomus.additional-modals')
 
     <!-- Javascript -->
     <script src="{{ asset('assets/ecomus/js/jquery.min.js') }}"></script>

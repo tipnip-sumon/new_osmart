@@ -20,7 +20,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/ecomus/css/styles.css') }}"/>
     
     <!-- Custom Laravel Integration CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/ecomus/css/custom-laravel.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('assets/ecomus/css/custom-laravel.css') }}"> --}}
     
     <!-- Toastr CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
