@@ -1,0 +1,339 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                <!-- Page Header -->
+                <div class="page-header d-lg-flex d-block">
+                    <div class="page-leftheader">
+                        <div class="page-title">Expenses</div>
+                    </div>
+                    <div class="page-rightheader">
+                        <div class="btn-list">
+                            <a  href="javascript:void(0);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#expensemodal">Add Expenses</a>
+                            <button  class="btn btn-light3" data-bs-toggle="tooltip" data-bs-placement="top" title="E-mail"> <i class="fe fe-mail"></i> </button>
+                            <button  class="btn btn-light3" data-bs-placement="top" data-bs-toggle="tooltip" title="Contact"> <i class="fe fe-phone-call"></i> </button>
+                            <button  class="btn btn-primary" data-bs-placement="top" data-bs-toggle="tooltip" title="Info"> <i class="fe fe-info"></i> </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Page Header Close -->
+
+                <!-- Start::row-1 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card custom-card">
+                            <div class="card-header  border-0">
+                                <h5 class="card-title">My Expenses Summary</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row mb-3 gap-1 gap-lg-0">
+                                    <div class="col-lg-6">
+                                        <div class="d-flex align-items-center">
+                                            <span>Show</span>
+                                            <div class="d-flex ms-2 mx-2">
+                                                <div class="form-group mb-0">
+                                                    <select name="quantity" id="select-countries17" class="form-control  wd-150" data-trigger>
+                                                        <option value="1" selected="">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <span>entries</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="float-end">
+                                            <input type="text" class="form-control" placeholder="search">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table  table-vcenter text-nowrap table-bordered border-bottom" id="emp-attendance">
+                                        <thead>
+                                            <tr>
+                                                <th class="border-bottom-0">#ID</th>
+                                                <th class="border-bottom-0">Title</th>
+                                                <th class="border-bottom-0">Purchase From</th>
+                                                <th class="border-bottom-0">Date</th>
+                                                <th class="border-bottom-0">Amount ($)</th>
+                                                <th class="border-bottom-0">Paid By</th>
+                                                <th class="border-bottom-0">Aprroval Status</th>
+                                                <th class="border-bottom-0">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>#01</td>
+                                                <td>Bike Services</td>
+                                                <td>ABC Service Center</td>
+                                                <td>01-10-2021</td>
+                                                <td class="fw-semibold">$678</td>
+                                                <td>Card</td>
+                                                <td><span class="badge bg-success">Approved</span></td>
+                                                <td>
+                                                    <div class="d-flex text-start">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                                            <i class="fe fe-eye  text-primary"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#02</td>
+                                                <td>Bike Services</td>
+                                                <td>ABC Service Center</td>
+                                                <td>01-10-2021</td>
+                                                <td class="fw-semibold">$678</td>
+                                                <td>Card</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div>
+                                                            <span class="badge bg-danger">Rejected </span>
+                                                        </div>
+                                                        <div class="mt-1 ms-1">
+                                                            <span class="fe fe-info" data-bs-toggle="tooltip" data-bs-placement="top" title="Duplicated Invoice"></span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex text-start">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                                            <i class="fe fe-eye  text-primary"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#03</td>
+                                                <td>Pens</td>
+                                                <td>Books stationery</td>
+                                                <td>11-12-2020</td>
+                                                <td class="fw-semibold">$12</td>
+                                                <td>Cash</td>
+                                                <td><span class="badge bg-success">Approved</span></td>
+                                                <td>
+                                                    <div class="d-flex text-start">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                                            <i class="fe fe-eye  text-primary"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#04</td>
+                                                <td>Mouse Pad</td>
+                                                <td>Aamzon</td>
+                                                <td>21-11-2020</td>
+                                                <td class="fw-semibold">$45</td>
+                                                <td>Online Payment</td>
+                                                <td><span class="badge bg-warning">Pending</span></td>
+                                                <td>
+                                                    <div class="d-flex text-start">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                                            <i class="fe fe-eye  text-primary"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#05</td>
+                                                <td>Data Connection</td>
+                                                <td>PhonePe</td>
+                                                <td>16-10-2020</td>
+                                                <td class="fw-semibold">$599</td>
+                                                <td>Online Payment</td>
+                                                <td><span class="badge bg-success">Approved</span></td>
+                                                <td>
+                                                    <div class="d-flex text-start">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                                            <i class="fe fe-eye  text-primary"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#06</td>
+                                                <td>Mobile Recharge</td>
+                                                <td>PhonePe</td>
+                                                <td>15-10-2020</td>
+                                                <td class="fw-semibold">$100</td>
+                                                <td>Online Payment</td>
+                                                <td><span class="badge bg-success">Approved</span></td>
+                                                <td>
+                                                    <div class="d-flex text-start">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                                            <i class="fe fe-eye  text-primary"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#07</td>
+                                                <td>Bike Fuel</td>
+                                                <td>Petrol Bunk</td>
+                                                <td>12-09-2020</td>
+                                                <td class="fw-semibold">$220</td>
+                                                <td>Card</td>
+                                                <td><span class="badge bg-warning">Pending</span></td>
+                                                <td>
+                                                    <div class="d-flex text-start">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                                            <i class="fe fe-eye  text-primary"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#08</td>
+                                                <td>Bike Fuel</td>
+                                                <td>Petrol Bunk</td>
+                                                <td>12-09-2020</td>
+                                                <td class="fw-semibold">$220</td>
+                                                <td>Card</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div>
+                                                            <span class="badge bg-danger">Rejected </span>
+                                                        </div>
+                                                        <div class="mt-1 ms-1">
+                                                            <span class="fe fe-info" data-bs-toggle="tooltip" data-bs-placement="top" title="Duplicated Invoice"></span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex text-start">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                                            <i class="fe fe-eye  text-primary"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-1 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+       
+			<!--Add expense Modal -->
+			<div class="modal fade"  id="expensemodal">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Add Expense</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="leave-types">
+								<div class="form-group mt-3">
+									<label class="form-label">Title:</label>
+									<input type="text" class="form-control" placeholder="text" value="">
+								</div>
+								<div class="form-group mt-3">
+									<label class="form-label">Purchase Place:</label>
+									<input type="text" class="form-control" placeholder="text" value="">
+								</div>
+								<div class="form-group mt-3">
+									<label class="form-label">Price ($):</label>
+									<input type="text" class="form-control" placeholder="$30" value="">
+								</div>
+                                <div class="leave-content active  mt-3" id="single">
+                                    <div class="form-group">
+                                        <label class="form-label">Date Range:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+                                    </div>
+                                </div>
+								<div class="form-group mt-3">
+									<div class="form-label">Upload Invoice</div>
+									<div class="form-group">
+											<input class="form-control" type="file">
+								</div>
+								</div>
+								<div class="form-group mt-3">
+									<label class="form-label">Note:</label>
+									<textarea class="form-control" rows="3">Some text here...</textarea>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<div class="ms-auto">
+								<a  href="javascript:void(0);" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</a>
+								<a  href="javascript:void(0);" class="btn btn-primary">Submit</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Add expense Modal  -->
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Date & Time Picker JS -->
+    <script src="../assets/libs/flatpickr/flatpickr.min.js"></script>
+
+    <!-- Default date picker js-->
+    <script src="../assets/js/default-flat-datepicker.js"></script>
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

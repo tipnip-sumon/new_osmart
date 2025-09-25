@@ -1,0 +1,93 @@
+Project Name: Dayone Bootstrap 5 Admin & Dashboard HTML5 Template
+
+Version : V.6
+
+Updated-date:  05-January-2024
+ 
+Updates :-     
+	1) Completely changed Folder Structure for Simplified Development and Production.
+	2) Converted from Boostrap-5.1.3 version to Boostrap-5.3.2 Version.
+	3) No jquery dependency.
+	4) All jQuery plugins have been removed and added new js plugins .
+	5) Added New Switcher.
+	6) Updated Header.
+	7) Added some Html Pages.
+	8) Documentation is updated.
+	9) Gulp is updated
+
+
+**********************************************************************************************************************************************
+
+----------------------------------------------------------------------
+1) Completely changed Folder Structure for Simplified Development and Production.
+----------------------------------------------------------------------
+	Here the project is divided into src and dist.
+	First, please understand the difference between the "src" and "dist" folders. Here, src stands for source and is the raw code before concatenation or some other compilation, which has been used to read or edit the code. dist stands for distribution, and this is the concatenated version that is actually used on production sites.
+	So here, only the dist folder is used for production, and src is used for development. So any changes made during development in the src folder need to be run the related "gulp" command to effect the same changes in the dist folder. Because the changes made in the src folder will reflect in the dist folder when you run the gulp command.
+	
+----------------------------------------------------------------------
+2) Converted from Boostrap-5.1.3 version to Boostrap-5.3.2 Version.
+----------------------------------------------------------------------
+	In the most recent release of dayone, we have upgraded the Bootstrap version to the latest iteration of v5.3.2.
+----------------------------------------------------------------------
+3) No jquery dependency
+----------------------------------------------------------------------
+	jQuery have been removed completely.
+----------------------------------------------------------------------
+4) All jQuery plugins have been removed and added js plugins 
+----------------------------------------------------------------------
+ 	All jQuery plugins have been removed and added  new js  plugins
+----------------------------------------------------------------------
+5) Added New Switcher
+----------------------------------------------------------------------
+	new switcher pages is added to dayone
+	In this switcher we have added new features like 
+
+	1) Single switch Rtl 
+	2) Single switch menus
+	3) Changing colors 
+	4) Dark Theme and many more 
+
+	for Detailed information please go through documentation.
+
+----------------------------------------------------------------------
+6) Updated Header.
+----------------------------------------------------------------------
+	Improved ui . So, replace complete header section in all html pages.
+----------------------------------------------------------------------
+7) Added some Html Pages.
+----------------------------------------------------------------------
+	New Html pages are added in dayone. please follow below
+	
+	Grid JS Tables
+	Google Maps
+	Apex charts ( all types of charts)
+	Button Group
+	Toasts
+	checkout
+	Wishlist
+	Offcanvas
+	Placeholders
+	Scrollspy
+	Swiper JS
+	Breakpoints
+	Gutters
+	Position
+	Helpers
+	Additional Content
+
+----------------------------------------------------------------------
+8) Documentation is updated
+----------------------------------------------------------------------
+	
+Documentation is Updated please go through it.
+
+----------------------------------------------------------------------
+9) Gulp is Updated
+----------------------------------------------------------------------
+	
+Gulp is Updated with many features like browser sync ,copy,rename, etc. so, replace gulp file.
+For more detailed information regarding gulp please follow documentation.
+
+Thanking you,
+@spruko.

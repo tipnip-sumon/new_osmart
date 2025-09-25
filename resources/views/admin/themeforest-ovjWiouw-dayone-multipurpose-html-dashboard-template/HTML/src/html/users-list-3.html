@@ -1,0 +1,487 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                @SPK@include("partials/page-header.html", {"title": "User-List 03"})
+
+                <!-- Start::row-1 -->
+                <div class="row flex-lg-nowrap">
+                    <div class="col-12 mb-3">
+                        <div class="e-panel card">
+                            <div class="card-body pb-2">
+                                <div class="row">
+                                    <div class="col mb-4">
+                                        <a  href="javascript:void(0);" class="btn btn-primary"><i class="fe fe-plus"></i> Add New User</a>
+                                    </div>
+                                    <div class="col col-auto mb-4">
+                                        <div class="form-group w-100">
+                                            <div class="input-icon">
+                                                <span class="input-icon-addon">
+                                                    <i class="fe fe-search"></i>
+                                                </span>
+                                                <input type="text" class="form-control" placeholder="Search User">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-4 col-lg-6">
+                                        <div class="card custom-card border p-0 shadow-none">
+                                            <div class="d-flex align-items-center p-3">
+                                                <img src="../assets/images/users/7.jpg" alt="" class="avatar avatar-lg avatar-rounded d-block cover-image">
+                                                <div class="wrapper ms-3">
+                                                    <p class="mb-0 mt-1 text-dark fw-semibold">Denis Rosenblum</p>
+                                                    <small class="text-muted">Project Manager</small>
+                                                </div>
+                                                <div class="float-end ms-auto">
+                                                    <div class="btn-group ms-3 mb-0">
+                                                        <a  href="javascript:void(0);" class="option-dots" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                                        <div class="dropdown-menu dropdown-menu-start">
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-edit me-2"></i> Edit</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-trash me-2"></i> Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body border-top">
+                                                <p class="text-muted">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                                                <div class="d-flex mb-3">
+                                                    <span class="icon-style-circle1 ri-message-2-line fs-18 flex-shrink-0"></span>
+                                                    <div class="h6 mb-0 ms-3 mt-1  text-break">denisrosenblum@gmail.com</div>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <span class="icon-style-circle1 ri-phone-line fs-18 flex-shrink-0"></span>
+                                                    <div class="h6 mb-0 ms-3 mt-1">+345 657 567</div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer">
+                                                <a  href="javascript:void(0);" class="btn btn-white btn-sm">Message</a>
+                                                <a  href="javascript:void(0);" class="btn btn-primary btn-sm">View Profile</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-6">
+                                        <div class="card custom-card border p-0 shadow-none">
+                                            <div class="d-flex align-items-center p-3">
+                                                <img src="../assets/images/users/6.jpg" alt="" class="avatar avatar-lg avatar-rounded d-block cover-image">
+                                                <div class="wrapper ms-3">
+                                                    <p class="mb-0 mt-1 text-dark fw-semibold">Harvey Mattos</p>
+                                                    <small class="text-muted">Develpoer</small>
+                                                </div>
+                                                <div class="float-end ms-auto">
+                                                    <div class="btn-group ms-3 mb-0">
+                                                        <a  href="javascript:void(0);" class="option-dots" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                                        <div class="dropdown-menu dropdown-menu-start">
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-edit me-2"></i> Edit</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-trash me-2"></i> Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body border-top">
+                                                <p class="text-muted">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                                                <div class="d-flex mb-3">
+                                                    <span class="icon-style-circle1 ri-message-2-line fs-18 flex-shrink-0"></span>
+                                                    <div class="h6 mb-0 ms-3 mt-1  text-break">harveymattos@gmail.com</div>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <span class="icon-style-circle1 ri-phone-line fs-18 flex-shrink-0"></span>
+                                                    <div class="h6 mb-0 ms-3 mt-1">+345 657 567</div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer">
+                                                <a  href="javascript:void(0);" class="btn btn-white btn-sm">Message</a>
+                                                <a  href="javascript:void(0);" class="btn btn-primary btn-sm">View Profile</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-6">
+                                        <div class="card custom-card border p-0 shadow-none">
+                                            <div class="d-flex align-items-center p-3">
+                                                <img src="../assets/images/users/5.jpg" alt="" class="avatar avatar-lg avatar-rounded d-block cover-image">
+                                                <div class="wrapper ms-3">
+                                                    <p class="mb-0 mt-1 text-dark fw-semibold">Catrice Doshier</p>
+                                                    <small class="text-muted">Assistant Manager</small>
+                                                </div>
+                                                <div class="float-end ms-auto">
+                                                    <div class="btn-group ms-3 mb-0">
+                                                        <a  href="javascript:void(0);" class="option-dots" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                                        <div class="dropdown-menu dropdown-menu-start">
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-edit me-2"></i> Edit</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-trash me-2"></i> Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body border-top">
+                                                <p class="text-muted">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                                                <div class="d-flex mb-3">
+                                                    <span class="icon-style-circle1 ri-message-2-line fs-18 flex-shrink-0"></span>
+                                                    <div class="h6 mb-0 ms-3 mt-1  text-break">catricedoshier@gmail.com</div>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <span class="icon-style-circle1 ri-phone-line fs-18 flex-shrink-0"></span>
+                                                    <div class="h6 mb-0 ms-3 mt-1">+345 657 567</div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer">
+                                                <a  href="javascript:void(0);" class="btn btn-white btn-sm">Message</a>
+                                                <a  href="javascript:void(0);" class="btn btn-primary btn-sm">View Profile</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-6">
+                                        <div class="card custom-card border p-0 shadow-none">
+                                            <div class="d-flex align-items-center p-3">
+                                                <img src="../assets/images/users/1.jpg" alt="" class="avatar avatar-lg avatar-rounded d-block cover-image">
+                                                <div class="wrapper ms-3">
+                                                    <p class="mb-0 mt-1 text-dark fw-semibold">Catherina Bamber</p>
+                                                    <small class="text-muted">Company Manager</small>
+                                                </div>
+                                                <div class="float-end ms-auto">
+                                                    <div class="btn-group ms-3 mb-0">
+                                                        <a  href="javascript:void(0);" class="option-dots" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                                        <div class="dropdown-menu dropdown-menu-start">
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-edit me-2"></i> Edit</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-trash me-2"></i> Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body border-top">
+                                                <p class="text-muted">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                                                <div class="d-flex mb-3">
+                                                    <span class="icon-style-circle1 ri-message-2-line fs-18 flex-shrink-0"></span>
+                                                    <div class="h6 mb-0 ms-3 mt-1  text-break">catherinabamber@gmail.com</div>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <span class="icon-style-circle1 ri-phone-line fs-18 flex-shrink-0"></span>
+                                                    <div class="h6 mb-0 ms-3 mt-1">+345 657 567</div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer">
+                                                <a  href="javascript:void(0);" class="btn btn-white btn-sm">Message</a>
+                                                <a  href="javascript:void(0);" class="btn btn-primary btn-sm">View Profile</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-6">
+                                        <div class="card custom-card border p-0 shadow-none">
+                                            <div class="d-flex align-items-center p-3">
+                                                <img src="../assets/images/users/8.jpg" alt="" class="avatar avatar-lg avatar-rounded d-block cover-image">
+                                                <div class="wrapper ms-3">
+                                                    <p class="mb-0 mt-1 text-dark fw-semibold">Margie Fitts</p>
+                                                    <small class="text-muted">It Manager</small>
+                                                </div>
+                                                <div class="float-end ms-auto">
+                                                    <div class="btn-group ms-3 mb-0">
+                                                        <a  href="javascript:void(0);" class="option-dots" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                                        <div class="dropdown-menu dropdown-menu-start">
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-edit me-2"></i> Edit</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-trash me-2"></i> Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body border-top">
+                                                <p class="text-muted">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                                                <div class="d-flex mb-3">
+                                                    <span class="icon-style-circle1 ri-message-2-line fs-18 flex-shrink-0"></span>
+                                                    <div class="h6 mb-0 ms-3 mt-1  text-break">margiefitts@gmail.com</div>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <span class="icon-style-circle1 ri-phone-line fs-18 flex-shrink-0"></span>
+                                                    <div class="h6 mb-0 ms-3 mt-1">+345 657 567</div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer">
+                                                <a  href="javascript:void(0);" class="btn btn-white btn-sm">Message</a>
+                                                <a  href="javascript:void(0);" class="btn btn-primary btn-sm">View Profile</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-6">
+                                        <div class="card custom-card border p-0 shadow-none">
+                                            <div class="d-flex align-items-center p-3">
+                                                <img src="../assets/images/users/5.jpg" alt="" class="avatar avatar-lg avatar-rounded d-block cover-image">
+                                                <div class="wrapper ms-3">
+                                                    <p class="mb-0 mt-1 text-dark fw-semibold">Dana Lott</p>
+                                                    <small class="text-muted">Hr Manager</small>
+                                                </div>
+                                                <div class="float-end ms-auto">
+                                                    <div class="btn-group ms-3 mb-0">
+                                                        <a  href="javascript:void(0);" class="option-dots" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                                        <div class="dropdown-menu dropdown-menu-start">
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-edit me-2"></i> Edit</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-trash me-2"></i> Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body border-top">
+                                                <p class="text-muted">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                                                <div class="d-flex mb-3">
+                                                    <span class="icon-style-circle1 ri-message-2-line fs-18 flex-shrink-0"></span>
+                                                    <div class="h6 mb-0 ms-3 mt-1  text-break">danalott@gmail.com</div>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <span class="icon-style-circle1 ri-phone-line fs-18 flex-shrink-0"></span>
+                                                    <div class="h6 mb-0 ms-3 mt-1">+345 657 567</div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer">
+                                                <a  href="javascript:void(0);" class="btn btn-white btn-sm">Message</a>
+                                                <a  href="javascript:void(0);" class="btn btn-primary btn-sm">View Profile</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-6">
+                                        <div class="card custom-card border p-0 shadow-none">
+                                            <div class="d-flex align-items-center p-3">
+                                                <img src="../assets/images/users/6.jpg" alt="" class="avatar avatar-lg avatar-rounded d-block cover-image">
+                                                <div class="wrapper ms-3">
+                                                    <p class="mb-0 mt-1 text-dark fw-semibold">Benedict Vallone</p>
+                                                    <small class="text-muted">Hr Recriuter</small>
+                                                </div>
+                                                <div class="float-end ms-auto">
+                                                    <div class="btn-group ms-3 mb-0">
+                                                        <a  href="javascript:void(0);" class="option-dots" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                                        <div class="dropdown-menu dropdown-menu-start">
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-edit me-2"></i> Edit</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-trash me-2"></i> Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body border-top">
+                                                <p class="text-muted">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                                                <div class="d-flex mb-3">
+                                                    <span class="icon-style-circle1 ri-message-2-line fs-18 flex-shrink-0"></span>
+                                                    <div class="h6 mb-0 ms-3 mt-1  text-break">benedictballone@gmail.com</div>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <span class="icon-style-circle1 ri-phone-line fs-18 flex-shrink-0"></span>
+                                                    <div class="h6 mb-0 ms-3 mt-1">+345 657 567</div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer">
+                                                <a  href="javascript:void(0);" class="btn btn-white btn-sm">Message</a>
+                                                <a  href="javascript:void(0);" class="btn btn-primary btn-sm">View Profile</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-6">
+                                        <div class="card custom-card border p-0 shadow-none">
+                                            <div class="d-flex align-items-center p-3">
+                                                <img src="../assets/images/users/8.jpg" alt="" class="avatar avatar-lg avatar-rounded d-block cover-image">
+                                                <div class="wrapper ms-3">
+                                                    <p class="mb-0 mt-1 text-dark fw-semibold">Robbie Ruder</p>
+                                                    <small class="text-muted">Ceo</small>
+                                                </div>
+                                                <div class="float-end ms-auto">
+                                                    <div class="btn-group ms-3 mb-0">
+                                                        <a  href="javascript:void(0);" class="option-dots" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                                        <div class="dropdown-menu dropdown-menu-start">
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-edit me-2"></i> Edit</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-trash me-2"></i> Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body border-top">
+                                                <p class="text-muted">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                                                <div class="d-flex mb-3">
+                                                    <span class="icon-style-circle1 ri-message-2-line fs-18 flex-shrink-0"></span>
+                                                    <div class="h6 mb-0 ms-3 mt-1  text-break">robbieruder@gmail.com</div>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <span class="icon-style-circle1 ri-phone-line fs-18 flex-shrink-0"></span>
+                                                    <div class="h6 mb-0 ms-3 mt-1">+345 657 567</div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer">
+                                                <a  href="javascript:void(0);" class="btn btn-white btn-sm">Message</a>
+                                                <a  href="javascript:void(0);" class="btn btn-primary btn-sm">View Profile</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-6">
+                                        <div class="card custom-card border p-0 shadow-none">
+                                            <div class="d-flex align-items-center p-3">
+                                                <img src="../assets/images/users/3.jpg" alt="" class="avatar avatar-lg avatar-rounded d-block cover-image">
+                                                <div class="wrapper ms-3">
+                                                    <p class="mb-0 mt-1 text-dark fw-semibold">Micaela Aultman</p>
+                                                    <small class="text-muted">Php developer</small>
+                                                </div>
+                                                <div class="float-end ms-auto">
+                                                    <div class="btn-group ms-3 mb-0">
+                                                        <a  href="javascript:void(0);" class="option-dots" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                                        <div class="dropdown-menu dropdown-menu-start">
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-edit me-2"></i> Edit</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-trash me-2"></i> Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body border-top">
+                                                <p class="text-muted">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                                                <div class="d-flex mb-3">
+                                                    <span class="icon-style-circle1 ri-message-2-line fs-18 flex-shrink-0"></span>
+                                                    <div class="h6 mb-0 ms-3 mt-1  text-break">micaelaaultman@gmail.com</div>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <span class="icon-style-circle1 ri-phone-line fs-18 flex-shrink-0"></span>
+                                                    <div class="h6 mb-0 ms-3 mt-1">+345 657 567</div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer">
+                                                <a  href="javascript:void(0);" class="btn btn-white btn-sm">Message</a>
+                                                <a  href="javascript:void(0);" class="btn btn-primary btn-sm">View Profile</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-6">
+                                        <div class="card custom-card border p-0 shadow-none">
+                                            <div class="d-flex align-items-center p-3">
+                                                <img src="../assets/images/users/4.jpg" alt="" class="avatar avatar-lg avatar-rounded d-block cover-image">
+                                                <div class="wrapper ms-3">
+                                                    <p class="mb-0 mt-1 text-dark fw-semibold">Jacquelynn Sapienza</p>
+                                                    <small class="text-muted">Web developer</small>
+                                                </div>
+                                                <div class="float-end ms-auto">
+                                                    <div class="btn-group ms-3 mb-0">
+                                                        <a  href="javascript:void(0);" class="option-dots" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                                        <div class="dropdown-menu dropdown-menu-start">
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-edit me-2"></i> Edit</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-trash me-2"></i> Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body border-top">
+                                                <p class="text-muted">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                                                <div class="d-flex mb-3">
+                                                    <span class="icon-style-circle1 ri-message-2-line fs-18 flex-shrink-0"></span>
+                                                    <div class="h6 mb-0 ms-3 mt-1  text-break">jacquelynnsapienza@gmail.com</div>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <span class="icon-style-circle1 ri-phone-line fs-18 flex-shrink-0"></span>
+                                                    <div class="h6 mb-0 ms-3 mt-1">+345 657 567</div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer">
+                                                <a  href="javascript:void(0);" class="btn btn-white btn-sm">Message</a>
+                                                <a  href="javascript:void(0);" class="btn btn-primary btn-sm">View Profile</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-6">
+                                        <div class="card custom-card border p-0 shadow-none">
+                                            <div class="d-flex align-items-center p-3">
+                                                <img src="../assets/images/users/9.jpg" alt="" class="avatar avatar-lg avatar-rounded d-block cover-image">
+                                                <div class="wrapper ms-3">
+                                                    <p class="mb-0 mt-1 text-dark fw-semibold">Elida Distefano</p>
+                                                    <small class="text-muted">Hr Manager</small>
+                                                </div>
+                                                <div class="float-end ms-auto">
+                                                    <div class="btn-group ms-3 mb-0">
+                                                        <a  href="javascript:void(0);" class="option-dots" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                                        <div class="dropdown-menu dropdown-menu-start">
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-edit me-2"></i> Edit</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-trash me-2"></i> Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body border-top">
+                                                <p class="text-muted">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                                                <div class="d-flex mb-3">
+                                                    <span class="icon-style-circle1 ri-message-2-line fs-18 flex-shrink-0"></span>
+                                                    <div class="h6 mb-0 ms-3 mt-1  text-break">elidadistefano@gmail.com</div>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <span class="icon-style-circle1 ri-phone-line fs-18 flex-shrink-0"></span>
+                                                    <div class="h6 mb-0 ms-3 mt-1">+345 657 567</div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer">
+                                                <a  href="javascript:void(0);" class="btn btn-white btn-sm">Message</a>
+                                                <a  href="javascript:void(0);" class="btn btn-primary btn-sm">View Profile</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-6">
+                                        <div class="card custom-card border p-0 shadow-none">
+                                            <div class="d-flex align-items-center p-3">
+                                                <img src="../assets/images/users/7.jpg" alt="" class="avatar avatar-lg avatar-rounded d-block cover-image">
+                                                <div class="wrapper ms-3">
+                                                    <p class="mb-0 mt-1 text-dark fw-semibold">Collin Bridgman</p>
+                                                    <small class="text-muted">web designer</small>
+                                                </div>
+                                                <div class="float-end ms-auto">
+                                                    <div class="btn-group ms-3 mb-0">
+                                                        <a  href="javascript:void(0);" class="option-dots" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                                        <div class="dropdown-menu dropdown-menu-start">
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-edit me-2"></i> Edit</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-trash me-2"></i> Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body border-top">
+                                                <p class="text-muted">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                                                <div class="d-flex mb-3">
+                                                    <span class="icon-style-circle1 ri-message-2-line fs-18 flex-shrink-0"></span>
+                                                    <div class="h6 mb-0 ms-3 mt-1  text-break">collinbridgman@gmail.com</div>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <span class="icon-style-circle1 ri-phone-line fs-18 flex-shrink-0"></span>
+                                                    <div class="h6 mb-0 ms-3 mt-1">+345 657 567</div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer">
+                                                <a  href="javascript:void(0);" class="btn btn-white btn-sm">Message</a>
+                                                <a  href="javascript:void(0);" class="btn btn-primary btn-sm">View Profile</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End::row-1 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

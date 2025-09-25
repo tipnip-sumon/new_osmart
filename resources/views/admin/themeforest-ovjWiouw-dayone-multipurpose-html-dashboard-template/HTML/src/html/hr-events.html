@@ -1,0 +1,258 @@
+@SPK@include("partials/mainhead.html")
+
+<!-- Full Calendar CSS -->
+<link rel="stylesheet" href="../assets/libs/fullcalendar/main.min.css">
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                <!-- Page Header -->
+                <div class="page-header d-lg-flex d-block">
+                    <div class="page-leftheader">
+                        <div class="page-title">Events</div>
+                    </div>
+                    <div class="page-rightheader">
+                        <div class="btn-list">
+                            <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#eventmodal" class="btn btn-primary">Add New Events</a>
+                            <button  class="btn btn-light3" data-bs-toggle="tooltip" data-bs-placement="top" title="E-mail"> <i class="fe fe-mail"></i> </button>
+                            <button  class="btn btn-light3" data-bs-placement="top" data-bs-toggle="tooltip" title="Contact"> <i class="fe fe-phone-call"></i> </button>
+                            <button  class="btn btn-primary" data-bs-placement="top" data-bs-toggle="tooltip" title="Info"> <i class="fe fe-info"></i> </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Page Header Close -->
+
+                <!-- Start::row-1 -->
+                <div class="row">
+                    <div class="col-md-12 col-xxl-4 col-xl-6">
+                        <div class="card custom-card">
+                            <div class="card-header border-bottom-0">
+                                <h4 class="card-title">Upcoming Events</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-4">
+                                    <div class="d-flex comming_holidays calendar-icon icons">
+                                        <span class="date_time bg-success-transparent rounded-3 me-3"><span class="date fs-20">22</span>
+                                            <span class="month fs-13">FEB</span>
+                                        </span>
+                                        <div class="me-3 mt-0 mt-sm-2 d-block">
+                                            <h6 class="mb-1 fw-medium">Anniversary</h6>
+                                            <span class="clearfix"></span>
+                                            <small>Office 3rd Anniversary on 22nd Feb</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <div class="d-flex comming_holidays calendar-icon icons">
+                                        <span class="date_time bg-purple-transparent rounded-3 me-3"><span class="date fs-20">10</span>
+                                            <span class="month fs-13">FEB</span>
+                                        </span>
+                                        <div class="me-3 mt-0 mt-sm-2 d-block">
+                                            <h6 class="mb-1 fw-medium">Vanessa James</h6>
+                                            <span class="clearfix"></span>
+                                            <small>Birthday on Feb 16</small>
+                                        </div>
+                                        <p class="float-end mb-0  ms-auto  my-auto">
+                                            <a class="btn btn-outline-secondary"  href="javascript:void(0);"><i class="ri-cake-2-fill me-2"></i>Wish Now</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <div class="d-flex comming_holidays calendar-icon icons">
+                                        <span class="date_time bg-orange-transparent rounded-3 me-3"><span class="date fs-20">18</span>
+                                            <span class="month fs-13">FEB</span>
+                                        </span>
+                                        <div class="me-3 mt-0 mt-sm-2 d-block">
+                                            <h6 class="mb-1 fw-medium">Trade Shows</h6>
+                                            <span class="clearfix"></span>
+                                            <small>Smart Device Trade Show</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <div class="d-flex comming_holidays calendar-icon icons">
+                                        <span class="date_time bg-warning-transparent rounded-3 me-3"><span class="date fs-20">06</span>
+                                            <span class="month fs-13">Mar</span>
+                                        </span>
+                                        <div class="me-3 mt-0 mt-sm-2 d-block">
+                                            <h6 class="mb-1 fw-medium">Holiday Party</h6>
+                                            <span class="clearfix"></span>
+                                            <small>SCreate a Cost-Effective Holiday Party Menu</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <div class="d-flex comming_holidays calendar-icon icons">
+                                        <span class="date_time bg-pink-transparent rounded-3 me-3"><span class="date fs-20">13</span>
+                                            <span class="month fs-13">MAR</span>
+                                        </span>
+                                        <div class="me-3 mt-0 mt-sm-2 d-block">
+                                            <h6 class="mb-1 fw-medium">Team-Building </h6>
+                                            <span class="clearfix"></span>
+                                            <small>Team Communication & Creative Innovation team members</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <div class="d-flex comming_holidays calendar-icon icons">
+                                        <span class="date_time bg-success-transparent rounded-3 me-3"><span class="date fs-20">24</span>
+                                            <span class="month fs-13">MAR</span>
+                                        </span>
+                                        <div class="me-3 mt-0 mt-sm-2 d-block">
+                                            <h6 class="mb-1 fw-medium">Anniversary</h6>
+                                            <span class="clearfix"></span>
+                                            <small>Faith Harris 3rd work  Anniversary</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <div class="d-flex comming_holidays calendar-icon icons">
+                                        <span class="date_time bg-purple-transparent rounded-3 me-3"><span class="date fs-20">10</span>
+                                            <span class="month fs-13">APR</span>
+                                        </span>
+                                        <div class="me-3 mt-0 mt-sm-2 d-block">
+                                            <h6 class="mb-1 fw-medium">Austin Bell</h6>
+                                            <span class="clearfix"></span>
+                                            <small>Birthday on Apr 16</small>
+                                        </div>
+                                        <p class="float-end mb-0  ms-auto  my-auto">
+                                            <a class="btn btn-outline-secondary"  href="javascript:void(0);"><i class="ri-cake-2-fill me-2"></i>Wish Now</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <div class="d-flex comming_holidays calendar-icon icons">
+                                        <span class="date_time bg-info-transparent rounded-3 me-3"><span class="date fs-20">25</span>
+                                            <span class="month fs-13">APR</span>
+                                        </span>
+                                        <div class="me-3 mt-0 mt-sm-2 d-block">
+                                            <h6 class="mb-1 fw-medium">Board Meeting</h6>
+                                            <span class="clearfix"></span>
+                                            <small>It will be held in meeting room</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <div class="d-flex comming_holidays calendar-icon icons">
+                                        <span class="date_time bg-purple-transparent rounded-3 me-3"><span class="date fs-20">01</span>
+                                            <span class="month fs-13">MAY</span>
+                                        </span>
+                                        <div class="me-3 mt-0 mt-sm-2 d-block">
+                                            <h6 class="mb-1 fw-medium">Maria Bower</h6>
+                                            <span class="clearfix"></span>
+                                            <small>Birthday on May 01</small>
+                                        </div>
+                                        <p class="float-end mb-0  ms-auto  my-auto">
+                                            <a class="btn btn-outline-secondary"  href="javascript:void(0);"><i class="ri-cake-2-fill me-2"></i>Wish Now</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="mb-0">
+                                    <div class="d-flex comming_holidays calendar-icon icons">
+                                        <span class="date_time bg-success-transparent rounded-3 me-3"><span class="date fs-20">21</span>
+                                            <span class="month fs-13">MAY</span>
+                                        </span>
+                                        <div class="me-3 mt-0 mt-sm-2 d-block">
+                                            <h6 class="mb-1 fw-medium">Max Wilson Anniversary</h6>
+                                            <span class="clearfix"></span>
+                                            <small>Max Wilson 1st work  Anniversary</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-xxl-8 col-xl-6">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div id="calendar1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-1 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+        <!--Add New Event Modal -->
+        <div class="modal fade"  id="eventmodal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Event</h5>
+                        <button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group mb-3">
+                            <label class="form-label">Event Title</label>
+                            <input type="text" class="form-control" placeholder="text" value="">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Event Date:</label>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                    <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Event Description</label>
+                            <textarea class="form-control" rows="3">Some text here...</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a  href="javascript:void(0);" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</a>
+                        <a  href="javascript:void(0);" class="btn btn-primary">Add</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Add New Event Modal  -->
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    <!-- Date & Time Picker JS -->
+    <script src="../assets/libs/flatpickr/flatpickr.min.js"></script>
+
+    <!-- Moment JS -->
+    <script src="../assets/libs/moment/moment.js"></script>
+
+    <!-- Fullcalendar JS -->
+    <script src="../assets/libs/fullcalendar/main.min.js"></script>
+
+    <!-- HR events Js-->
+    <script src="../assets/js/hr-events.js"></script>
+
+    <!-- Default date picker js-->
+    <script src="../assets/js/default-flat-datepicker.js"></script>
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

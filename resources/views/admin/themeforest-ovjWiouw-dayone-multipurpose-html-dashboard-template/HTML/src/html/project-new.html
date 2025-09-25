@@ -1,0 +1,217 @@
+@SPK@include("partials/mainhead.html")
+
+<link rel="stylesheet" href="../assets/libs/quill/quill.snow.css">
+<link rel="stylesheet" href="../assets/libs/quill/quill.bubble.css">
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                <!-- Page Header -->
+                <div class="page-header d-lg-flex d-block">
+                    <div class="page-leftheader">
+                        <div class="page-title">New Projects</div>
+                    </div>
+                    <div class="page-rightheader">
+                        <div class="btn-list">
+                            <button  class="btn btn-light3" data-bs-toggle="tooltip" data-bs-placement="top" title="E-mail"> <i class="fe fe-mail"></i> </button>
+                            <button  class="btn btn-light3" data-bs-placement="top" data-bs-toggle="tooltip" title="Contact"> <i class="fe fe-phone-call"></i> </button>
+                            <button  class="btn btn-primary" data-bs-placement="top" data-bs-toggle="tooltip" title="Info"> <i class="fe fe-info"></i> </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Page Header Close -->
+                
+                <!-- Start::row-2 -->
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 col-lg-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">project ID</label>
+                                            <input class="form-control" placeholder="Number">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">project Title</label>
+                                            <input class="form-control" placeholder="Text">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Department:</label>
+                                            <select class="form-control custom-select" data-trigger data-placeholder="Select Department">
+                                                <option value="1">Designing Department</option>
+                                                <option value="2">Development Department</option>
+                                                <option value="3">Marketing Department</option>
+                                                <option value="4">Human Resource Department</option>
+                                                <option value="5">Managers Department</option>
+                                                <option value="6">Application Department</option>
+                                                <option value="7">Support Department</option>
+                                                <option value="8">IT Department</option>
+                                                <option value="9">Technical Department</option>
+                                                <option value="10">Accounts Department</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">project Priority:</label>
+                                            <select class="form-control custom-select" data-trigger data-placeholder="Select Priority">
+                                                <option value="1">High</option>
+                                                <option value="2">Medium</option>
+                                                <option value="3">Low</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Client</label>
+                                            <select class="form-control custom-select" data-trigger data-placeholder="Select Priority">
+                                                <option value="1">Client 1</option>
+                                                <option value="2">Client 2</option>
+                                                <option value="3">Client 3</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">($)Price:</label>
+                                            <input class="form-control" placeholder="Price">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Assigned Team:</label>
+                                            <select class="form-control" data-trigger name="choices-multiple-default" id="choices-multiple-default" multiple>
+                                            <option value="">This is a placeholder</option>
+                                            <option value="Choice 1">Choice 1</option>
+                                            <option value="Choice 2">Choice 2</option>
+                                            <option value="Choice 3">Choice 3</option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="leave-content active" id="single">
+                                            <div class="form-group">
+                                                <label class="form-label">From:</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                                    <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="leave-content active" id="single1">
+                                            <div class="form-group">
+                                                <label class="form-label">TO:</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                                    <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Description:</label>
+                                    <div id="note"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Attachment:</label>
+                                    <div class="form-group">
+                                            <input class="form-control" type="file">
+                                    </div>
+                                </div>
+                                <div class="custom-controls-stacked d-md-flex">
+                                    <label class="form-label me-5">Work Status :</label>
+                                    <div class="form-check mb-0 me-4">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault0" id="flexRadioDefault01">
+                                        <label class="form-check-label" for="flexRadioDefault01">
+                                            Completed
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-0 me-4">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault0" id="flexRadioDefault02">
+                                        <label class="form-check-label" for="flexRadioDefault02">
+                                            Pending
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-0">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault0" id="flexRadioDefault03">
+                                        <label class="form-check-label" for="flexRadioDefault03">
+                                            On Progress
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="text-end">
+                                    <button  class="btn btn-danger me-2">Close</button>
+                                    <button  class="btn btn-success successful-notify">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Start::row-2 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+        
+
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    <!-- Date & Time Picker JS -->
+    <script src="../assets/libs/flatpickr/flatpickr.min.js"></script>
+
+    <!-- Default date picker js-->
+    <script src="../assets/js/default-flat-datepicker.js"></script>
+
+    <!-- Quill Editor JS -->
+    <script src="../assets/libs/quill/quill.min.js"></script>
+
+    <!-- Notifications JS -->
+    <script src="../assets/libs/awesome-notifications/index.var.js"></script>
+
+    <!-- Successful-notify JS -->
+    <script src="../assets/js/successful-notify.js"></script>
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- project new JS -->
+    <script src="../assets/js/project-new.js"></script>
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

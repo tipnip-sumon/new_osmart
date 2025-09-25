@@ -1,0 +1,253 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                @SPK@include("partials/page-header.html", {"title": "Tags"})
+
+                <!-- Start::row-1 -->
+                <div class="row">
+                    <div class="col-lg-6 col-md-12">
+                        <div class="card custom-card">
+                            <div class="card-header border-bottom-0">
+                                <h3 class="card-title">Default tag</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="tags">
+                                    <span class="tag">First tag</span>
+                                    <span class="tag">Second tag</span>
+                                    <span class="tag">Third tag</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <div class="card custom-card">
+                            <div class="card-header border-bottom-0">
+                                <h3 class="card-title">Link tag</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="tags">
+                                    <a  href="javascript:void(0);" class="tag">First tag</a>
+                                    <a  href="javascript:void(0);" class="tag">Second tag</a>
+                                    <a  href="javascript:void(0);" class="tag">Third tag</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-1 -->
+
+                <!-- Start::row-2 -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card custom-card">
+                            <div class="card-header border-bottom-0">
+                                <h3 class="card-title">Rounded tag</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="tags">
+                                    <span class="tag tag-rounded">First tag</span>
+                                    <span class="tag tag-rounded">Second tag</span>
+                                    <span class="tag tag-rounded">Third tag</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="card custom-card">
+                            <div class="card-header border-bottom-0">
+                                <h3 class="card-title">Color tag</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="tags">
+                                    <span class="tag tag-blue">Blue tag</span>
+                                    <span class="tag tag-azure">Azure tag</span>
+                                    <span class="tag tag-indigo">Indigo tag</span>
+                                    <span class="tag tag-purple">Purple tag</span>
+                                    <span class="tag tag-pink">Pink tag</span>
+                                    <span class="tag tag-red">Red tag</span>
+                                    <span class="tag tag-orange">Orange tag</span>
+                                    <span class="tag tag-yellow">Yellow tag</span>
+                                    <span class="tag tag-lime">Lime tag</span>
+                                    <span class="tag tag-green">Green tag</span>
+                                    <span class="tag tag-teal">Teal tag</span>
+                                    <span class="tag tag-cyan">Cyan tag</span>
+                                    <span class="tag tag-gray">Gray tag</span>
+                                    <span class="tag tag-gray-dark">Dark gray tag</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="card custom-card">
+                            <div class="card-header border-bottom-0">
+                                <h3 class="card-title">List of tags</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-wrap">
+                                    <p>You can create a list of tags with the <code class="highlighter-rouge">.tags</code> container.</p>
+                                    <div class="tags">
+                                        <span class="tag">First tag</span>
+                                        <span class="tag">Second tag</span>
+                                        <span class="tag">Third tag</span>
+                                    </div>
+                                    <p class="mt-4">If the list is very long, it will automatically wrap on multiple lines, while keeping all tags evenly spaced.</p>
+                                    <div class="tags">
+                                        <span class="tag">One</span>
+                                        <span class="tag">Two</span>
+                                        <span class="tag">Three</span>
+                                        <span class="tag">Four</span>
+                                        <span class="tag">Five</span>
+                                        <span class="tag">Six</span>
+                                        <span class="tag">Seven</span>
+                                        <span class="tag">Eight</span>
+                                        <span class="tag">Nine</span>
+                                        <span class="tag">Ten</span>
+                                        <span class="tag">Eleven</span>
+                                        <span class="tag">Twelve</span>
+                                        <span class="tag">Thirteen</span>
+                                        <span class="tag">Fourteen</span>
+                                        <span class="tag">Fifteen</span>
+                                        <span class="tag">Sixteen</span>
+                                        <span class="tag">Seventeen</span>
+                                        <span class="tag">Eighteen</span>
+                                        <span class="tag">Nineteen</span>
+                                        <span class="tag">Twenty</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="card custom-card">
+                            <div class="card-header border-bottom-0">
+                                <h3 class="card-title">Avatar tag</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="tags">
+                                    <span class="tag">
+                                        <img class="tag-avatar avatar" src="../assets/images/users/6.jpg" alt="">
+                                        Victoria
+                                    </span>
+                                    <span class="tag">
+                                        <img class="tag-avatar avatar" src="../assets/images/users/14.jpg" alt="">
+                                        Nathan
+                                    </span>
+                                    <span class="tag">
+                                        <img class="tag-avatar avatar" src="../assets/images/users/1.jpg" alt="">
+                                        Alice
+                                    </span>
+                                    <span class="tag">
+                                        <img class="tag-avatar avatar" src="../assets/images/users/4.jpg" alt="">
+                                        Rose
+                                    </span>
+                                    <span class="tag">
+                                        <img class="tag-avatar avatar" src="../assets/images/users/9.jpg" alt="">
+                                        Peter
+                                    </span>
+                                    <span class="tag">
+                                        <img class="tag-avatar avatar" src="../assets/images/users/12.jpg" alt="">
+                                        Wayne
+                                    </span>
+                                    <span class="tag">
+                                        <img class="tag-avatar avatar" src="../assets/images/users/7.jpg" alt="">
+                                        Michelle
+                                    </span>
+                                    <span class="tag">
+                                        <img class="tag-avatar avatar" src="../assets/images/users/11.jpg" alt="">
+                                        Debra
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="card custom-card">
+                            <div class="card-header border-bottom-0">
+                                <h3 class="card-title">Tag remove</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="tags">
+                                    <span class="tag overflow-hidden">
+                                        One
+                                        <a href="javascript:void(0)" class="tag-addon"><i class="fe fe-x"></i></a>
+                                    </span>
+                                    <span class="tag overflow-hidden">
+                                        Two
+                                        <a href="javascript:void(0)" class="tag-addon"><i class="fe fe-x"></i></a>
+                                    </span>
+                                    <span class="tag overflow-hidden">
+                                        Three
+                                        <a href="javascript:void(0)" class="tag-addon"><i class="fe fe-x"></i></a>
+                                    </span>
+                                    <span class="tag overflow-hidden">
+                                        Four
+                                        <a href="javascript:void(0)" class="tag-addon"><i class="fe fe-x"></i></a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="card custom-card">
+                            <div class="card-header border-bottom-0">
+                                <h3 class="card-title">Tag addons</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="tags">
+                                    <div class="tag overflow-hidden">
+                                        npm
+                                        <a  href="javascript:void(0);" class="tag-addon"><i class="fe fe-x"></i></a>
+                                    </div>
+                                    <div class="tag tag-danger overflow-hidden">
+                                        npm
+                                        <span class="tag-addon"><i class="fe fe-activity"></i></span>
+                                    </div>
+                                    <div class="tag overflow-hidden">
+                                        bundle
+                                        <span class="tag-addon tag-success">passing</span>
+                                    </div>
+                                    <span class="tag tag-dark text-white overflow-hidden">
+                                        CSS gzip size
+                                        <span class="tag-addon tag-warning">20.9 kB</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-2 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

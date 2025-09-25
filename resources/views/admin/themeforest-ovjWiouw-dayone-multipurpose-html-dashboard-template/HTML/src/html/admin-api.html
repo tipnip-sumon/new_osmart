@@ -1,0 +1,317 @@
+@SPK@include("partials/mainhead.html")
+
+<!-- color picker css -->
+<link rel="stylesheet" href="../assets/libs/@simonwep/pickr/themes/monolith.min.css">
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                @SPK@include("partials/page-header.html", {"title": "API Settings"})
+
+                <!-- Start::row-1 -->
+                <div class="row">
+                    <div class="col-md-12 col-xxl-3">
+                        <div class="card custom-card">
+                            <div class="nav flex-column admisetting-tabs" id="settings-tab" role="tablist" aria-orientation="vertical">
+                                <a class="nav-link active"  data-bs-toggle="pill" href="#tab-1" role="tab">
+                                    <i class="nav-icon las la-share-alt"></i>
+                                    <span>Social Settings</span>
+                                </a>
+                                <a class="nav-link"  data-bs-toggle="pill" href="#tab-2" role="tab">
+                                    <i class="nav-icon las la-credit-card"></i>
+                                    <span>Payment Settings</span>
+                                </a>
+                                <a class="nav-link"  data-bs-toggle="pill" href="#tab-3" role="tab">
+                                    <i class="nav-icon las la-envelope"></i>
+                                    <span>Email Settings</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-xxl-9">
+                        <div class="tab-content adminsetting-content" id="setting-tabContent">
+                            <div class="tab-pane fade show active" id="tab-1" role="tabpanel">
+                                <div class="card custom-card">
+                                    <div class="card-header  border-0">
+                                        <h4 class="card-title">Social Settings</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-xl-6">
+                                                <div class="card custom-card border">
+                                                    <div class="card-header justify-content-between">
+                                                        <h4 class="card-title">Google Login</h4>
+                                                        <div class="card-options">
+                                                            <div class="custom-switch">
+                                                                <div class="form-check form-check-md form-switch">
+                                                                    <input class="form-check-input" type="checkbox" role="switch">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="form-group">
+                                                            <label class="form-label">Callback URL <span class="clipboard-icon p-1 border rounded-2" data-clipboard-target="#social1"><i class="las la-clipboard"></i></span></label>
+                                                            <div class="bg-white border br-7" id="social1">
+                                                                <div class="p-3">
+                                                                    <span>https://www.doamin.com</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group mt-3">
+                                                            <label class="form-label">Client ID</label>
+                                                            <textarea rows="2" class="form-control" placeholder="something text here..."></textarea>
+                                                        </div>
+                                                        <div class="form-group mt-3">
+                                                            <label class="form-label">Secret</label>
+                                                            <textarea rows="2" class="form-control" placeholder="something text here..."></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6">
+                                                <div class="card custom-card border">
+                                                    <div class="card-header justify-content-between border-0">
+                                                        <h4 class="card-title">Facebook Login</h4>
+                                                        <div class="card-options">
+                                                            <div class="custom-switch">
+                                                                <div class="form-check form-check-md form-switch">
+                                                                    <input class="form-check-input" type="checkbox" role="switch">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="form-group">
+                                                            <label class="form-label">Callback URL <span class="clipboard-icon p-1 border rounded-2" data-clipboard-target="#social2"><i class="las la-clipboard"></i></span></label>
+                                                            <div class="bg-white border br-7" id="social2">
+                                                                <div class="p-3">
+                                                                    <span>https://www.doamin.com</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group mt-3">
+                                                            <label class="form-label">Client ID</label>
+                                                            <textarea rows="2" class="form-control" placeholder="something text here..."></textarea>
+                                                        </div>
+                                                        <div class="form-group mt-3">
+                                                            <label class="form-label">Secret</label>
+                                                            <textarea rows="2" class="form-control" placeholder="something text here..."></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a  href="javascript:void(0);" class="btn btn-success">Save Changes</a>
+                                        <a  href="javascript:void(0);" class="btn btn-danger">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab-2" role="tabpanel">
+                                <div class="card custom-card">
+                                    <div class="card-header  border-0">
+                                        <h4 class="card-title">Payment Settings</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-xl-3">
+                                                    <label class="form-label">Paypal</label>
+                                                </div>
+                                                <div class="col-xl-3 pe-0">
+                                                    <div class="custom-switch">
+                                                        <div class="form-check form-check-md form-switch">
+                                                            <input class="form-check-input" type="checkbox" role="switch" id="switch-md">
+                                                            <label class="form-check-label text-muted ms-2">Enable/Disable</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 ps-xl-0">
+                                                    <span class="d-block fs-12 text-muted">Ut enim ad minim veniam, quis nostrud exercitation</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="open-paypal d-none">
+                                            <div class="form-group mt-3">
+                                                <div class="row ">
+                                                    <div class="col-xl-3">
+                                                        <label class="form-label">Test Mode</label>
+                                                    </div>
+                                                    <div class="col-xl-3 pe-0">
+                                                        <div class="custom-switch">
+                                                            <div class="form-check form-check-md form-switch">
+                                                                <input class="form-check-input" type="checkbox" role="switch">
+                                                                <label class="form-check-label text-muted ms-2">Enable/Disable</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6 ps-xl-0">
+                                                        <span class="d-block fs-12 text-muted">Ut enim ad minim veniam, quis nostrud exercitation</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <div class="row mt-3">
+                                                    <div class="col-md-3">
+                                                        <label class="form-label mb-0 mt-2">Client ID</label>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <input type="text" class="form-control" placeholder="Client ID" value="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <label class="form-label mb-0 mt-2">Secret</label>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <input type="text" class="form-control" placeholder="Secret" value="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mt-3 mb-0">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <label class="form-label mb-0 mt-2">Currency</label>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <select data-placeholder="Choose Currency" class="form-control languages" data-trigger>
+                                                            <option value="">Choose Currency</option>
+                                                            <option value="1">US DOllar(USD)</option>
+                                                            <option value="2">European Euro (EUR)</option>
+                                                            <option value="3">Japanese Yen (JPY)</option>
+                                                            <option value="4">British Pound (GBP)</option>
+                                                            <option value="5">Swiss Franc (CHF)</option>
+                                                            <option value="6">Canadian Dollar (CAD)</option>
+                                                            <option value="7">Australian/New Zealand Dollar (AUD/NZD)</option>
+                                                            <option value="8">South African Rand (ZAR)</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a  href="javascript:void(0);" class="btn btn-success">Save Changes</a>
+                                        <a  href="javascript:void(0);" class="btn btn-danger">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab-3" role="tabpanel">
+                                <div class="card custom-card">
+                                    <div class="card-header  border-0">
+                                        <h4 class="card-title">Other Settings</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label">API Type</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <div class="custom-controls-stacked d-sm-flex">
+                                                        <div class="form-check me-4">
+                                                            <input type="radio" class="form-check-input" id="personal" name="example-radios3" value="option1" checked>
+                                                            <label class="form-check-label" for="personal">Personal</label>
+                                                        </div>
+                                                        <div class="form-check me-4">
+                                                            <input type="radio" class="form-check-input" id="oldtoken" name="example-radios3" value="option2">
+                                                            <label class="form-check-label" for="oldtoken">Old Token</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="enable-smtpemail d-none">
+                                            <div class="form-group mt-3">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <label class="form-label mb-0 mt-2">User Name</label>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <input type="text" class="form-control" placeholder="Name" value="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mt-3">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">API Token</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control" placeholder="Token" value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mt-3 mb-0">
+                                            <div class="row">
+                                                <div class="col-xl-3">
+                                                    <label class="form-label">Support Expiry</label>
+                                                </div>
+                                                <div class="col-xl-3 pe-0">
+                                                    <div class="custom-switch">
+                                                        <div class="form-check form-check-md form-switch">
+                                                            <input class="form-check-input" type="checkbox" role="switch">
+                                                            <label class="form-check-label text-muted ms-2">Enable/Disable</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 ps-xl-0">
+                                                    <span class="d-block fs-12 text-muted">Ut enim ad minim veniam, quis nostrud exercitation</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a  href="javascript:void(0);" class="btn btn-success">Save Changes</a>
+                                        <a  href="javascript:void(0);" class="btn btn-danger">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-1 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    <!-- Date & Time Picker JS -->
+    <script src="../assets/libs/flatpickr/flatpickr.min.js"></script>
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/super-admin.js"></script>
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

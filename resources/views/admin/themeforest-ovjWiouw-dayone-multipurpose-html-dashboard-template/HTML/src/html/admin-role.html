@@ -1,0 +1,824 @@
+@SPK@include("partials/mainhead.html")
+
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.bootstrap5.min.css">
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+               <!-- Page Header -->
+               <div class="page-header d-lg-flex d-block">
+                <div class="page-leftheader">
+                    <div class="page-title">Role Access</div>
+                </div>
+                <div class="page-rightheader">
+                    <div class="d-flex align-items-center flex-wrap my-auto end-content breadcrumb-end">
+                        <div class="d-lg-flex d-block">
+                            <div class="btn-list">
+                                <button  class="btn btn-light3" data-bs-toggle="tooltip" data-bs-placement="top" title="E-mail"> <i class="fe fe-mail"></i> </button>
+                                <button  class="btn btn-light3" data-bs-placement="top" data-bs-toggle="tooltip" title="Contact"> <i class="fe fe-phone-call"></i> </button>
+                                <button  class="btn btn-primary" data-bs-placement="top" data-bs-toggle="tooltip" title="Info"> <i class="fe fe-info"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Page Header Close -->
+            
+                <!-- Start::row-1 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Select Property:</label>
+                                            <input type="text" class="form-control" placeholder="Property">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Select Value:</label>
+                                            <select class="form-control custom-select" data-trigger data-placeholder="Select Employee">
+                                                <option value="" selected>Select Value</option>
+                                                <option value="1">Option 1</option>
+                                                <option value="2">Option 2</option>
+                                                <option value="3">Option 3</option>
+                                                <option value="4">Option 4</option>
+                                                <option value="5">Option 5</option>
+                                                <option value="6">Option 6</option>
+                                                <option value="7">Option 7</option>
+                                                <option value="8">Option 8</option>
+                                                <option value="9">Option 9</option>
+                                                <option value="10">Option 10</option>
+                                                <option value="11">Option 11</option>
+                                                <option value="12">Option 12</option>
+                                                <option value="13">Option 13</option>
+                                                <option value="14">Option 14</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 ">
+                                        <div class="form-group mt-2">
+                                            <label class="form-label"></label>
+                                            <a  href="javascript:void(0);" class="btn btn-primary d-grid">Search</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 ">
+                                        <div class="form-group mt-2">
+                                            <label class="form-label"></label>
+                                            <a  href="javascript:void(0);" class="btn btn-danger d-grid">Reset</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body border-top">
+                                <div class="row mb-3">
+                                    <div class="col-lg-6">
+                                        <div class="d-flex align-items-center">
+                                            <span>Show</span>
+                                            <div class="d-flex ms-2 mx-2">
+                                                <div class="form-group mt-2">
+                                                    <select name="quantity" id="select-countries17" class="form-control  wd-150" data-trigger>
+                                                        <option value="1" selected="">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <span>entries</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="float-end">
+                                            <input type="text" class="form-control" placeholder="search">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered text-nowrap">
+                                        <thead>
+                                        <tr>
+                                                <th>NO</th>
+                                                <th>Role Name</th>
+                                                <th class="text-center">SuperAdmin</th>
+                                                <th class="text-center">Admin</th>
+                                                <th class="text-center">HR</th>
+                                                <th class="text-center">Client</th>
+                                            </tr>
+                                        </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Admin Dashboard</td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-check text-success icon-style-circle bg-success-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-check text-success icon-style-circle bg-success-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-x text-danger icon-style-circle bg-danger-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-x text-danger icon-style-circle bg-danger-transparent"></span></a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>General Settings</td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon  role"><span class="fe fe-check text-success icon-style-circle bg-success-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-check text-success icon-style-circle bg-success-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-x text-danger icon-style-circle bg-danger-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-x text-danger icon-style-circle bg-danger-transparent"></span></a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>Modify</td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-check text-success icon-style-circle bg-success-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-check text-success icon-style-circle bg-success-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-x text-danger icon-style-circle bg-danger-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-x text-danger icon-style-circle bg-danger-transparent"></span></a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>4</td>
+                                                    <td>New Custom Field</td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-check text-success icon-style-circle bg-success-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-x text-danger icon-style-circle bg-danger-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-x text-danger icon-style-circle bg-danger-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-x text-danger icon-style-circle bg-danger-transparent"></span></a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>5</td>
+                                                    <td>Edit Custom Field</td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-check text-success icon-style-circle bg-success-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-x text-danger icon-style-circle bg-danger-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-x text-danger icon-style-circle bg-danger-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-x text-danger icon-style-circle bg-danger-transparent"></span></a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>6</td>
+                                                    <td>Email Templates</td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-check text-success icon-style-circle bg-success-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-x text-danger icon-style-circle bg-danger-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-x text-danger icon-style-circle bg-danger-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-x text-danger icon-style-circle bg-danger-transparent"></span></a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>7</td>
+                                                    <td>Security Settings</td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-check text-success icon-style-circle bg-success-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-x text-danger icon-style-circle bg-danger-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-x text-danger icon-style-circle bg-danger-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-x text-danger icon-style-circle bg-danger-transparent"></span></a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>8</td>
+                                                    <td>Modify Settings</td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-check text-success icon-style-circle bg-success-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-check text-success icon-style-circle bg-success-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-x text-danger icon-style-circle bg-danger-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-x text-danger icon-style-circle bg-danger-transparent"></span></a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>9</td>
+                                                    <td>Theme Settings</td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-check text-success icon-style-circle bg-success-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-check text-success icon-style-circle bg-success-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-x text-danger icon-style-circle bg-danger-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-x text-danger icon-style-circle bg-danger-transparent"></span></a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>10</td>
+                                                    <td>Modify Theme</td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-check text-success icon-style-circle bg-success-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-check text-success icon-style-circle bg-success-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-x text-danger icon-style-circle bg-danger-transparent"></span></a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a  href="javascript:void(0);" class="access-icon role"><span class="fe fe-x text-danger icon-style-circle bg-danger-transparent"></span></a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                    </table>
+                                </div>
+                                <!-- Start::pagination -->
+                                <nav class="mt-4">
+                                    <ul class="pagination justify-content-end mb-0">
+                                        <li class="page-item disabled"><a class="page-link" href="javascript:void(0);">Prev</a></li>
+                                        <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
+                                    </ul>
+                                </nav>
+                                <!-- End::pagination -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               <!--End::row-1 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+        <!--Clock-IN Modal -->
+        <div class="modal fade"  id="clockinmodal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><span class="fe fe-clock  me-1"></span>Clock In</h5>
+                        <button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="countdowntimer text-center">
+                            <div class="mt-3 d-flex justify-content-center fs-30 digital-clock"></div>
+                            <label class="form-label">Current Time</label>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">IP Address</label>
+                            <input type="text" class="form-control" placeholder="225.192.145.1" disabled="">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Working Form</label>
+                            <select name="projects"  class="form-control custom-select" data-trigger>
+                                <option value="0">Select</option>
+                                <option value="1">Office</option>
+                                <option value="2">Home</option>
+                                <option value="3">Others</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Note:</label>
+                            <textarea class="form-control" rows="3">Some text here...</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                        <button class="btn btn-primary">Clock In</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Clock-IN Modal  -->
+
+        <!--Apply Leaves Modal -->
+        <div class="modal fade"  id="newcompanymodal">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Job</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Position</label>
+									</div>
+									<div class="col-md-9">
+										<input type="text" class="form-control" placeholder="Name" value="">
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Job Type</label>
+									</div>
+									<div class="col-md-9">
+                                    <select class="form-control custom-select" data-trigger data-placeholder="Select Priority">
+                                        <option value="1">Full Time</option>
+                                        <option value="2">Part Time</option>
+                                        <option value="3">Freelancer</option>
+                                    </select>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Description</label>
+									</div>
+									<div class="col-md-9">
+										<textarea class="form-control" id="text-area1" rows="3"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Posted Date</label>
+									</div>
+									<div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Last Date To Apply</label>
+									</div>
+									<div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Close Date</label>
+									</div>
+									<div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+									</div>
+								</div>
+							</div>
+							<div class="row mt-3">
+								<div class="col-md-3">
+									<label class="form-label mb-0 mt-1">Status</label>
+								</div>
+								<div class="col-md-9">
+									<div class="custom-controls-stacked d-md-flex">
+										<label class="custom-control custom-radio success me-4">
+											<input type="radio" class="custom-control-input" name="example-radios1" value="option1">
+											<span class="custom-control-label">Active</span>
+										</label>
+										<label class="custom-control custom-radio success me-4">
+											<input type="radio" class="custom-control-input" name="example-radios1" value="option2">
+											<span class="custom-control-label">InActive</span>
+										</label>
+									</div>
+								</div>
+							</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button  class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                        <button  class="btn btn-success" >Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Apply Leaves Modal  -->
+
+        <!--Apply Leaves Modal -->
+        <div class="modal fade editjobtmodal">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Job</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Position</label>
+									</div>
+									<div class="col-md-9">
+										<input type="text" class="form-control" placeholder="Name" value="Senior PHP Developer">
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Job Type</label>
+									</div>
+									<div class="col-md-9">
+                                    <select class="form-control custom-select" data-trigger data-placeholder="Select Priority">
+                                        <option value="1">Full Time</option>
+                                        <option value="2">Part Time</option>
+                                        <option value="3">Freelancer</option>
+                                    </select>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Description</label>
+									</div>
+									<div class="col-md-9">
+										<textarea class="form-control" id="text-area" rows="3">Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur</textarea>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Posted Date</label>
+									</div>
+									<div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Last Date To Apply</label>
+									</div>
+									<div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Close Date</label>
+									</div>
+									<div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+									</div>
+								</div>
+							</div>
+							<div class="row mt-3">
+								<div class="col-md-3">
+									<label class="form-label mb-0 mt-1">Status</label>
+								</div>
+								<div class="col-md-9">
+									<div class="custom-controls-stacked d-md-flex">
+										<label class="custom-control custom-radio success me-4">
+											<input type="radio" class="custom-control-input" name="example-radios1" value="option1" checked>
+											<span class="custom-control-label">Active</span>
+										</label>
+										<label class="custom-control custom-radio success me-4">
+											<input type="radio" class="custom-control-input" name="example-radios1" value="option2">
+											<span class="custom-control-label">InActive</span>
+										</label>
+									</div>
+								</div>
+							</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button  class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                        <button  class="btn btn-success" >Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- Edit Company Modal -->
+        <div class="modal fade"  id="editmodal">
+            <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Package</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row ">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label">Package Name</label>
+                                    <select class="form-control custom-select" data-trigger data-placeholder="Select Priority">
+                                        <option label="Select Package"></option>
+                                        <option value="1" selected>Free</option>
+                                        <option value="2">Basic</option>
+                                        <option value="3">Premium</option>
+                                        <option value="4">Advanced</option>
+                                        <option value="5">Enterprise</option>
+                                        </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12  mt-3">
+                                <div class="form-group">
+                                    <label class="form-label">Package Type</label>
+                                    <select class="form-control custom-select" data-trigger data-placeholder="Select Priority">
+                                        <option label="Select Package"></option>
+									<option value="1" selected>Monthly</option>
+									<option value="2">Yearly</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row  mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Min Users</label>
+                                    <input class="form-control" placeholder="min" value="00">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Max Users</label>
+                                    <input class="form-control" placeholder="max" value="05">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label">Storage</label>
+                                    <select class="form-control custom-select" data-trigger data-placeholder="Select storage">
+                                        <option label="Select storage"></option>
+                                        <option value="1" selected>Limited</option>
+                                        <option value="2">Unlimited</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label">Description</label>
+                            <textarea rows="2" class="form-control" placeholder="something text here..."></textarea>
+                        </div>
+                        <div class="custom-controls-stacked d-md-flex mt-3">
+                            <label class="form-label me-5">Status :</label>
+                            <div class="form-check mb-0 me-4">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault11">
+                                <label class="form-check-label" for="flexRadioDefault11">
+                                    Active
+                                </label>
+                            </div>
+                            <div class="form-check mb-0">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault12">
+                                <label class="form-check-label" for="flexRadioDefault12">
+                                    InActive
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a  href="javascript:void(0);" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</a>
+                        <a  href="javascript:void(0);" class="btn btn-success">Updated</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Edit Company Modal  -->
+        
+        <!-- Edit Company Modal -->
+        <div class="modal fade"  id="addmodal">
+            <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Package</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row ">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label">Package Name</label>
+                                    <select class="form-control custom-select" data-trigger data-placeholder="Select Priority">
+                                        <option label="Select Package"></option>
+                                        <option value="1">Free</option>
+                                        <option value="2">Basic</option>
+                                        <option value="3">Premium</option>
+                                        <option value="4">Advanced</option>
+                                        <option value="5">Enterprise</option>
+                                        </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12  mt-3">
+                                <div class="form-group">
+                                    <label class="form-label">Package Type</label>
+                                    <select class="form-control custom-select" data-trigger data-placeholder="Select Priority">
+                                        <option label="Select Package"></option>
+									<option value="1">Monthly</option>
+									<option value="2">Yearly</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row  mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Min Users</label>
+                                    <input class="form-control" placeholder="min" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Max Users</label>
+                                    <input class="form-control" placeholder="max" value="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label">Storage</label>
+                                    <select class="form-control custom-select" data-trigger data-placeholder="Select storage">
+                                        <option label="Select storage"></option>
+                                        <option value="1">Limited</option>
+                                        <option value="2">Unlimited</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label">Description</label>
+                            <textarea rows="2" class="form-control" placeholder="something text here..."></textarea>
+                        </div>
+                        <div class="custom-controls-stacked d-md-flex mt-3">
+                            <label class="form-label me-5">Status :</label>
+                            <div class="form-check mb-0 me-4">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault0" id="flexRadioDefault01">
+                                <label class="form-check-label" for="flexRadioDefault01">
+                                    Active
+                                </label>
+                            </div>
+                            <div class="form-check mb-0">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault0" id="flexRadioDefault02">
+                                <label class="form-check-label" for="flexRadioDefault02">
+                                    InActive
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a  href="javascript:void(0);" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</a>
+                        <a  href="javascript:void(0);" class="btn btn-success">Updated</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Edit Company Modal  -->
+
+        <!-- Modal -->
+        <div class="modal fade"  id="remindermodal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Reminder</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="form-label">Project</label>
+                            <select class="form-control custom-select" data-trigger data-placeholder="Select Department">
+                                <option value="1">Project 01</option>
+                                <option value="2">Project 02</option>
+                                <option value="3">Project 03</option>
+                                <option value="4">Project 04</option>
+                                <option value="5">Project 05</option>
+                            </select>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label">Select Date</label>
+                            <div class="input-group">
+                                <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                <input type="text" class="form-control choose-date flatpickr-input" placeholder="DD-MM-YYYY" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label">Note:</label>
+                            <textarea class="form-control" rows="3">Some text here...</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button  class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                        <button  class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+    @SPK@include("partials/commonjs.html")
+    
+    <!-- Jquery Cdn -->
+
+    <!-- Datatables Cdn -->
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.6/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+    <!-- Admin role js-->
+    <script src="../assets/js/admin-role.js"></script>
+
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

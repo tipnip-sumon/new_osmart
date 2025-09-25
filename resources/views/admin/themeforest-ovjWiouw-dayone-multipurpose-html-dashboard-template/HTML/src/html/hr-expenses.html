@@ -1,0 +1,597 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                <!-- Page Header -->
+                <div class="page-header d-lg-flex d-block">
+                    <div class="page-leftheader">
+                        <div class="page-title">Expenses</div>
+                    </div>
+                    <div class="page-rightheader">
+                        <div class="btn-list">
+                            <a href="hr-attmark.html" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#addnoticemodal">Add New Expenses Item</a>
+                            <button  class="btn btn-light3" data-bs-toggle="tooltip" data-bs-placement="top" title="E-mail"> <i class="fe fe-mail"></i> </button>
+                            <button  class="btn btn-light3" data-bs-placement="top" data-bs-toggle="tooltip" title="Contact"> <i class="fe fe-phone-call"></i> </button>
+                            <button  class="btn btn-primary" data-bs-placement="top" data-bs-toggle="tooltip" title="Info"> <i class="fe fe-info"></i> </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Page Header Close -->
+
+                <!-- Start::row-1 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card custom-card">
+                            <div class="card-header border-bottom-0">
+                                <h4 class="card-title">Expense Summary</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row mb-3 gap-1 gap-lg-0">
+                                    <div class="col-lg-6">
+                                        <div class="d-flex align-items-center">
+                                            <span>Show</span>
+                                            <div class="d-flex ms-2 mx-2">
+                                                <div class="form-group mb-0">
+                                                    <select name="quantity" id="select-countries17" class="form-control  wd-150" data-trigger>
+                                                        <option value="1" selected="">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <span>entries</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="float-end">
+                                            <input type="text" class="form-control" placeholder="search">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table  table-vcenter text-nowrap table-bordered border-bottom">
+                                        <thead>
+                                            <tr>
+                                                <th class="border-bottom-0">#ID</th>
+                                                <th class="border-bottom-0">Employee</th>
+                                                <th class="border-bottom-0">Title</th>
+                                                <th class="border-bottom-0">Purchase From</th>
+                                                <th class="border-bottom-0">Date</th>
+                                                <th class="border-bottom-0">Amount ($)</th>
+                                                <th class="border-bottom-0">Paid By</th>
+                                                <th class="border-bottom-0">Aprroval Status</th>
+                                                <th class="border-bottom-0">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>#01</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2 avatar-rounded"> 
+                                                           <img src="../assets/images/users/1.jpg" alt="img"> 
+                                                       </span> 
+                                                       <h6 class="mb-0">Faith Harris</h6>
+                                                   </div>
+                                                </td>
+                                                <td>Bike Services</td>
+                                                <td>ABC Service Center</td>
+                                                <td>01-10-2021</td>
+                                                <td class="fw-medium">$678</td>
+                                                <td>Card</td>
+                                                <td><span class="badge bg-success">Approved</span></td>
+                                                <td>
+                                                    <div class="d-flex text-start">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Accept">
+                                                            <i class="fe fe-check text-success" ></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Rejected">
+                                                            <i class="fe fe-x text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#editexpensemodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#02</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2 avatar-rounded"> 
+                                                           <img src="../assets/images/users/9.jpg" alt="img"> 
+                                                       </span> 
+                                                       <h6 class="mb-0">Austin Bell</h6>
+                                                   </div>
+                                                </td>
+                                                <td>Bike Services</td>
+                                                <td>ABC Service Center</td>
+                                                <td>01-10-2021</td>
+                                                <td class="fw-medium">$678</td>
+                                                <td>Card</td>
+                                                <td><span class="badge bg-danger">Rejected </span></td>
+                                                <td>
+                                                    <div class="d-flex text-start">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Accept">
+                                                            <i class="fe fe-check text-success" ></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#editexpensemodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#03</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2 avatar-rounded"> 
+                                                           <img src="../assets/images/users/2.jpg" alt="img"> 
+                                                       </span> 
+                                                       <h6 class="mb-0">Maria Bower</h6>
+                                                   </div>
+                                                </td>
+                                                <td>Pens</td>
+                                                <td>Books stationery</td>
+                                                <td>11-12-2020</td>
+                                                <td class="fw-medium">$12</td>
+                                                <td>Cash</td>
+                                                <td><span class="badge bg-success">Approved</span></td>
+                                                <td>
+                                                    <div class="d-flex text-start">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Accept">
+                                                            <i class="fe fe-check text-success" ></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Rejected">
+                                                            <i class="fe fe-x text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#editexpensemodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#04</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2 avatar-rounded"> 
+                                                           <img src="../assets/images/users/10.jpg" alt="img"> 
+                                                       </span> 
+                                                       <h6 class="mb-0">Maria Bower</h6>
+                                                   </div>
+                                                </td>
+                                                <td>Mouse Pad</td>
+                                                <td>Aamzon</td>
+                                                <td>21-11-2020</td>
+                                                <td class="fw-medium">$45</td>
+                                                <td>Online Payment</td>
+                                                <td><span class="badge bg-warning">Pending</span></td>
+                                                <td>
+                                                    <div class="d-flex text-start">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Accept">
+                                                            <i class="fe fe-check text-success" ></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Rejected">
+                                                            <i class="fe fe-x text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#editexpensemodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#05</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2 avatar-rounded"> 
+                                                           <img src="../assets/images/users/3.jpg" alt="img"> 
+                                                       </span> 
+                                                       <h6 class="mb-0">Victoria Lyman</h6>
+                                                   </div>
+                                                </td>
+                                                <td>Data Connection</td>
+                                                <td>PhonePe</td>
+                                                <td>16-10-2020</td>
+                                                <td class="fw-medium">$599</td>
+                                                <td>Online Payment</td>
+                                                <td><span class="badge bg-success">Approved</span></td>
+                                                <td>
+                                                    <div class="d-flex text-start">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Accept">
+                                                            <i class="fe fe-check text-success" ></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Rejected">
+                                                            <i class="fe fe-x text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#editexpensemodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#06</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2 avatar-rounded"> 
+                                                           <img src="../assets/images/users/11.jpg" alt="img"> 
+                                                       </span> 
+                                                       <h6 class="mb-0">Adam Quinn</h6>
+                                                   </div>
+                                                </td>
+                                                <td>Mobile Recharge</td>
+                                                <td>PhonePe</td>
+                                                <td>15-10-2020</td>
+                                                <td class="fw-medium">$100</td>
+                                                <td>Online Payment</td>
+                                                <td><span class="badge bg-success">Approved</span></td>
+                                                <td>
+                                                    <div class="d-flex text-start">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Accept">
+                                                            <i class="fe fe-check text-success" ></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Rejected">
+                                                            <i class="fe fe-x text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#editexpensemodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#07</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2 avatar-rounded"> 
+                                                           <img src="../assets/images/users/4.jpg" alt="img"> 
+                                                       </span> 
+                                                       <h6 class="mb-0">Melanie Coleman</h6>
+                                                   </div>
+                                                </td>
+                                                <td>Bike Fuel</td>
+                                                <td>Petrol Bunk</td>
+                                                <td>12-09-2020</td>
+                                                <td class="fw-medium">$220</td>
+                                                <td>Card</td>
+                                                <td><span class="badge bg-warning">Pending</span></td>
+                                                <td>
+                                                    <div class="d-flex text-start">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Accept">
+                                                            <i class="fe fe-check text-success" ></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Rejected">
+                                                            <i class="fe fe-x text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#editexpensemodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#08</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2 avatar-rounded"> 
+                                                           <img src="../assets/images/users/12.jpg" alt="img"> 
+                                                       </span> 
+                                                       <h6 class="mb-0">Max Wilson</h6>
+                                                   </div>
+                                                </td>
+                                                <td>Bike Fuel</td>
+                                                <td>Petrol Bunk</td>
+                                                <td>12-09-2020</td>
+                                                <td class="fw-medium">$220</td>
+                                                <td>Card</td>
+                                                <td><span class="badge bg-danger">Rejected</span></td>
+                                                <td>
+                                                    <div class="d-flex text-start">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Accept">
+                                                            <i class="fe fe-check text-success" ></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#editexpensemodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- Start::pagination -->
+                                <nav class="mt-4">
+                                    <ul class="pagination justify-content-end mb-0">
+                                        <li class="page-item disabled"><a class="page-link" href="javascript:void(0);">Prev</a></li>
+                                        <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
+                                    </ul>
+                                </nav>
+                                <!-- End::pagination -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-1 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+        <!--Add expense Modal -->
+			<div class="modal fade"  id="addnoticemodal">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Add New Expense</h5>
+							<button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="leave-types">
+								<div class="form-group mb-3">
+									<label class="form-label">Title:</label>
+									<input type="text" class="form-control" placeholder="text">
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group mb-3">
+											<label class="form-label">Purchase Place:</label>
+											<input type="text" class="form-control" placeholder="text">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group mb-3">
+											<label class="form-label">Price ($):</label>
+											<input type="text" class="form-control" placeholder="Number">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group mb-3">
+											<label class="form-label">Date:</label>
+											<div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                                    <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                                </div>
+                                            </div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group mb-3">
+											<label class="form-label">Employee Name :</label>
+											<select name="attendance"  class="form-control custom-select" data-trigger data-placeholder="Select Employee">
+												<option value="">Select Employee</option>
+												<option value="1">Faith Harris</option>
+												<option value="2">Austin Bell</option>
+												<option value="3">Maria Bower</option>
+												<option value="4">Peter Hill</option>
+												<option value="5">Victoria Lyman</option>
+												<option value="6">Adam Quinn</option>
+												<option value="7">Melanie Coleman</option>
+												<option value="8">Max Wilson</option>
+												<option value="9">Amelia Russell</option>
+												<option value="10">Justin Metcalfe</option>
+												<option value="11">Ryan Young</option>
+												<option value="12">Jennifer Hardacre</option>
+												<option value="13">Justin Parr</option>
+												<option value="14">Julia Hodges</option>
+												<option value="15">Michael Sutherland</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="form-group mb-3">
+									<div class="form-label">Upload Invoice</div>
+									<div class="form-group">
+										<input class="form-control" type="file">
+								   </div>
+								</div>
+								<div class="form-group mb-3">
+									<label class="form-label">Note:</label>
+									<textarea class="form-control" rows="3">Some text here...</textarea>
+								</div>
+								<div class="form-group mb-0 d-flex">
+                                    <label class="form-label me-5">Status :</label>
+                                    <div class="form-check me-3">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                            id="approved2">
+                                        <label class="form-check-label" for="approved2">
+                                            Approved
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                            id="rejected3">
+                                        <label class="form-check-label" for="rejected3">
+                                            Rejected
+                                        </label>
+                                    </div>
+                                </div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<div class="ms-auto">
+								<a  href="javascript:void(0);" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</a>
+								<a  href="javascript:void(0);" class="btn btn-primary">Save</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Addexpense Modal  -->
+
+			<!--Edit expense Modal -->
+			<div class="modal fade"  id="editexpensemodal">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Edit Expense</h5>
+							<button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="leave-types">
+								<div class="form-group mb-3">
+									<label class="form-label">Title:</label>
+									<input type="text" class="form-control" placeholder="text" value="Bike Services">
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group mb-3">
+											<label class="form-label">Purchase Place:</label>
+											<input type="text" class="form-control" placeholder="text" value="ABC Service Center">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group mb-3">
+											<label class="form-label">Price ($):</label>
+											<input type="text" class="form-control" placeholder="Number" value="$678">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group mb-3">
+											<label class="form-label">Date:</label>
+											<div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                                    <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                                </div>
+                                            </div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group mb-3">
+											<label class="form-label">Employee Name :</label>
+											<select name="attendance"  class="form-control custom-select" data-trigger data-placeholder="Select Employee">
+												<option label="Select Employee"></option>
+												<option value="1" selected>Faith Harris</option>
+												<option value="2">Austin Bell</option>
+												<option value="3">Maria Bower</option>
+												<option value="4">Peter Hill</option>
+												<option value="5">Victoria Lyman</option>
+												<option value="6">Adam Quinn</option>
+												<option value="7">Melanie Coleman</option>
+												<option value="8">Max Wilson</option>
+												<option value="9">Amelia Russell</option>
+												<option value="10">Justin Metcalfe</option>
+												<option value="11">Ryan Young</option>
+												<option value="12">Jennifer Hardacre</option>
+												<option value="13">Justin Parr</option>
+												<option value="14">Julia Hodges</option>
+												<option value="15">Michael Sutherland</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="form-group mb-3">
+									<div class="form-label">Upload Invoice</div>
+									<div class="form-group">
+                                        <input class="form-control" type="file">
+                                    </div>
+								</div>
+								<div class="form-group mb-3">
+									<label class="form-label">Note:</label>
+									<textarea class="form-control" rows="3">Some text here...</textarea>
+								</div>
+								<div class="custom-controls-stacked d-md-flex">
+									<label class="form-label me-5">Status :</label>
+                                    <div class="form-check me-3">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                            id="approved1">
+                                        <label class="form-check-label" for="approved1">
+                                            Approved
+                                        </label>
+                                    </div>
+                                    <div class="form-check me-3">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                            id="rejected1">
+                                        <label class="form-check-label" for="rejected1">
+                                            Pending
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                            id="rejected2">
+                                        <label class="form-check-label" for="rejected2">
+                                            Rejected
+                                        </label>
+                                    </div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<div class="ms-auto">
+								<a href="javascript:void(0);" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</a>
+								<a href="javascript:void(0);" class="btn btn-primary">Update</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Editexpense Modal  -->
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    <!-- Date & Time Picker JS -->
+    <script src="../assets/libs/flatpickr/flatpickr.min.js"></script>
+
+    <!-- Default date picker js-->
+    <script src="../assets/js/default-flat-datepicker.js"></script>
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

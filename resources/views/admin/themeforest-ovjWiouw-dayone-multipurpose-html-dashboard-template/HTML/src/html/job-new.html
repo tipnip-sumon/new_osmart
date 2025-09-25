@@ -1,0 +1,260 @@
+@SPK@include("partials/mainhead.html")
+
+<link rel="stylesheet" href="../assets/libs/quill/quill.snow.css">
+<link rel="stylesheet" href="../assets/libs/quill/quill.bubble.css">
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                <!-- Page Header -->
+                @SPK@include("partials/page-header.html", {"title": "New Job"})
+                <!-- Page Header Close -->
+                
+                <!-- Start::row-2 -->
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 col-lg-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Company Name</label>
+                                            <input class="form-control" placeholder="Company Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Job Position</label>
+                                            <input class="form-control" placeholder="Job Position">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row gy-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Job Category</label>
+                                            <select class="form-control custom-select" data-trigger data-placeholder="Select Department">
+                                                <option value="">Select Job Category</option>
+                                                <option value="1">PHP Developer</option>
+                                                <option value="2">UX Designer</option>
+                                                <option value="3">UI Designer</option>
+                                                <option value="4">SEO Specialist</option>
+                                                <option value="5">Wordpress Developer</option>
+                                                <option value="6">Accountant</option>
+                                                <option value="7">Software Engineer</option>
+                                                <option value="7">Angular Developer</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Job Type:</label>
+                                            <select class="form-control custom-select" data-trigger data-placeholder="Select Department">
+                                                <option value="">Select Job Type</option>
+                                                <option value="1">Full-Time</option>
+                                                <option value="2">Part-Time</option>
+                                                <option value="3">Freelancer</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">No.of Vacancy</label>
+                                            <input class="form-control" placeholder="Vacancy">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Experiences</label>
+                                            <select class="form-control custom-select" data-trigger data-placeholder="Select Priority">
+                                                <option value="">Select Experience</option>
+                                                <option value="1">Fresher</option>
+                                                <option value="2">1 yr</option>
+                                                <option value="3">2 yrs</option>
+                                                <option value="3">3 yrs</option>
+                                                <option value="3">4 yrs</option>
+                                                <option value="3">5 yrs</option>
+                                                <option value="3">6 yrs</option>
+                                                <option value="3">7 yrs</option>
+                                                <option value="3">8 yrs</option>
+                                                <option value="3">9 yrs</option>
+                                                <option value="3">10 yrs</option>
+                                                <option value="3">10+ yrs</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mt-3">
+                                        <div class="leave-content active" id="single">
+                                            <div class="form-group">
+                                                <label class="form-label">Posted Date</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                                    <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <div class="leave-content active" id="single11">
+                                            <div class="form-group">
+                                                <label class="form-label">Last Date To Apply</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                                    <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <div class="leave-content active " id="single1">
+                                            <div class="form-group">
+                                                <label class="form-label">Close Date</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                                    <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Select Gender:</label>
+                                            <select class="form-control custom-select" data-trigger data-placeholder="Select Department">
+                                                <option value="">Select Gender</option>
+                                                <option value="1">Male</option>
+                                                <option value="2">Female</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Salary Form</label>
+                                            <input class="form-control" placeholder="$0.00">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Salary To</label>
+                                            <input class="form-control" placeholder="$0.00">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6  mt-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Enter City:</label>
+                                            <input class="form-control" placeholder="City">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6  mt-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Enter State:</label>
+                                            <input class="form-control" placeholder="State">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6  mt-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Enter Country:</label>
+                                            <input class="form-control" placeholder="Country">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6  mt-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Enter Education Level:</label>
+                                            <input class="form-control" placeholder="Education Level">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label class="form-label">Description:</label>
+                                    <div id="note"></div>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label class="form-label">Attachment:</label>
+                                    <div class="form-group">
+                                            <input class="form-control" type="file">
+                                    </div>
+                                </div>
+                                <div class="custom-controls-stacked d-md-flex mt-3">
+                                    <label class="form-label me-5">Status :</label>
+                                    <div class="form-check mb-0 me-4">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            Active
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-0">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+                                        <label class="form-check-label" for="flexRadioDefault3">
+                                            InActive
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="text-end">
+                                    <button  class="btn btn-danger me-2">Close</button>
+                                    <button  class="btn btn-success successful-notify">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Start::row-2 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+        
+
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    <!-- Date & Time Picker JS -->
+    <script src="../assets/libs/flatpickr/flatpickr.min.js"></script>
+
+    <!-- Default date picker js-->
+    <script src="../assets/js/default-flat-datepicker.js"></script>
+
+    <!-- Quill Editor JS -->
+    <script src="../assets/libs/quill/quill.min.js"></script>
+
+    <!-- Notifications JS -->
+    <script src="../assets/libs/awesome-notifications/index.var.js"></script>
+
+    <!-- Successful-notify JS -->
+    <script src="../assets/js/successful-notify.js"></script>
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- task view JS -->
+    <script src="../assets/js/task-new.js"></script>
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

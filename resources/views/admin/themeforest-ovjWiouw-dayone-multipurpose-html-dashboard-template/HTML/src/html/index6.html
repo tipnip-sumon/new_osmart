@@ -1,0 +1,1552 @@
+@SPK@include("partials/mainhead.html")
+
+<!-- Full Calendar CSS -->
+<link rel="stylesheet" href="../assets/libs/fullcalendar/main.min.css">
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+               <!-- Page Header -->
+               <div class="page-header d-lg-flex d-block">
+                <div class="page-leftheader">
+                    <div class="page-title">Recruiting<span class="fw-normal text-muted ms-2">Dashboard</span></div>
+                </div>
+                <div class="page-rightheader">
+                    <div class="d-flex align-items-center flex-wrap my-auto end-content breadcrumb-end">
+                        <div class="d-lg-flex d-block">
+                            <div class="btn-list">
+                                <button  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newtaskmodal"><i class="fe fe-plus fs-12 my-auto me-2"></i>Add New Job</button>
+                                <button  class="btn btn-light3" data-bs-toggle="tooltip" data-bs-placement="top" title="E-mail"> <i class="fe fe-mail"></i> </button>
+                                <button  class="btn btn-light3" data-bs-placement="top" data-bs-toggle="tooltip" title="Contact"> <i class="fe fe-phone-call"></i> </button>
+                                <button  class="btn btn-primary" data-bs-placement="top" data-bs-toggle="tooltip" title="Info"> <i class="fe fe-info"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Page Header Close -->
+
+                <!-- Start::row-1 -->
+                <div class="row">
+                    <div class="col-xxl-3 col-lg-6 col-md-12">
+                        <div class="card">
+                            <a  href="javascript:void(0);">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <div class="mt-0 text-start">
+                                                <span class="fs-16 fw-semibold">Total Openings</span>
+                                                <h3 class="mb-0 mt-1 text-primary  fs-25">2,548</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-5">
+                                            <div class="icon1 bg-primary my-auto  float-end"> <i class="fe fe-briefcase"></i> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-lg-6 col-md-12">
+                        <div class="card">
+                            <a  href="javascript:void(0);">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <div class="mt-0 text-start">
+                                                <span class="fs-16 fw-semibold">Interviews</span>
+                                                <h3 class="mb-0 mt-1 text-secondary fs-25">862</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-5">
+                                            <div class="icon1 bg-secondary my-auto  float-end"> <i class="fe fe-info"></i> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-lg-6 col-md-12">
+                        <div class="card">
+                            <a  href="javascript:void(0);">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <div class="mt-0 text-start">
+                                                <span class="fs-16 fw-semibold">Hired</span>
+                                                <h3 class="mb-0 mt-1 text-success fs-25">194</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-5">
+                                            <div class="icon1 bg-success my-auto  float-end"> <i class="fe fe-check"></i> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-lg-6 col-md-12">
+                        <div class="card">
+                            <a  href="javascript:void(0);">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <div class="mt-0 text-start">
+                                                <span class="fs-16 fw-semibold">Rejected</span>
+                                                <h3 class="mb-0 mt-1 text-danger fs-25">642</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-5">
+                                            <div class="icon1 bg-danger my-auto  float-end"> <i class="fe fe-x"></i> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-1 -->
+
+                <!-- Start::row-2 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="">
+                            <div class="card-header d-flex justify-content-between align-items-center mb-3 flex-wrap">
+                                <h4 class="card-title">Recent Published Jobs</h4>
+                                <div class="card-options d-flex mt-2">
+                                    <div class="btn-list">
+                                        <div class="btn btn-primary">Add Job</div>
+                                        <div class="btn btn-light3">View All</div>
+                                    </div>
+                                    <div class="dropdown"> <a  href="javascript:void(0);" class="btn btn-light3 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> Latest </a>
+                                        <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                                            <li class="dropdown-item"><a href="javascript:void(0);">Monthly</a></li>
+                                            <li class="dropdown-item"><a href="javascript:void(0);">Yearly</a></li>
+                                            <li class="dropdown-item"><a href="javascript:void(0);">Weekly</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xxl-3 col-lg-6 col-md-12">
+                                    <div class="card custom-card">
+                                        <div class="card-body">
+                                            <div class="d-flex">
+                                                <div class="task-img bg-light my-auto float-end">
+                                                    <img src="../assets/images/media/png/17.png" alt="img" class="">
+                                                </div>
+                                                <div class="ms-auto">
+                                                    <a class="btn btn-outline-light  text-muted"  href="javascript:void(0);" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fe fe-more-vertical"></i></a>
+                                                    <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                                                        <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-eye me-2"></i>View</a></li>
+                                                        <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-plus-circle me-2"></i>Add</a></li>
+                                                        <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-trash-2 me-2"></i>Remove</a></li>
+                                                        <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-settings me-2"></i>More</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="mt-0 text-start">
+                                                <a  href="javascript:void(0);" class="mb-0 mt-2 mb-1 fw-semibold fs-20">Adobe XD Designer</a>
+                                                <p class="text-muted mb-0">Fresher/Seniors</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="d-md-flex">
+                                                <div class="mb-md-0">
+                                                    <h6 class="mb-1 text-muted fs-16">Applications : <span class="fw-semibold fs-18 text-default">67</span><sup class="badge bg-md bg-primary-transparent ms-2 mt-2 fs-10 align-middle">2 New</sup></h6>
+                                                    <p class="fs-12 text-muted mb-0">Just Now</p>
+                                                </div>
+                                                <div class="ms-auto mt-1">
+                                                    <div class="task-btn bg-danger-transparent border-0 me-0 fw-semibold" data-bs-toggle="tooltip" data-bs-placement="top" title="Job Type">Full Time</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-lg-6 col-md-12">
+                                    <div class="card custom-card">
+                                        <div class="card-body">
+                                            <div class="d-flex">
+                                                <div class="task-img bg-light my-auto float-end">
+                                                    <img src="../assets/images/media/png/18.png" alt="img" class="">
+                                                </div>
+                                                <div class="ms-auto">
+                                                    <a class="btn btn-outline-light  text-muted"  href="javascript:void(0);" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fe fe-more-vertical"></i></a>
+                                                    <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                                                        <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-eye me-2"></i>View</a></li>
+                                                        <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-plus-circle me-2"></i>Add</a></li>
+                                                        <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-trash-2 me-2"></i>Remove</a></li>
+                                                        <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-settings me-2"></i>More</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="mt-0 text-start">
+                                                <a  href="javascript:void(0);" class="mb-0 mt-2 mb-1 fw-semibold fs-20">Web Designer</a>
+                                                <p class="text-muted mb-0">Senior/Developers</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="d-md-flex">
+                                                <div class="mb-md-0">
+                                                    <h6 class="mb-1 text-muted fs-16">Applications : <span class="fw-semibold fs-18 text-default">45</span><sup class="badge bg-md bg-primary-transparent ms-2 mt-2 fs-10 align-middle">6 New</sup></h6>
+                                                    <p class="fs-12 text-muted mb-0">05 Jan</p>
+                                                </div>
+                                                <div class="ms-auto mt-1">
+                                                    <div class="task-btn bg-warning-transparent border-0 me-0 fw-semibold" data-bs-toggle="tooltip" data-bs-placement="top" title="Job Type">Part Time</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-lg-6 col-md-12">
+                                    <div class="card custom-card">
+                                        <div class="card-body">
+                                            <div class="d-flex">
+                                                <div class="task-img bg-light my-auto float-end">
+                                                    <img src="../assets/images/media/png/19.png" alt="img" class="">
+                                                </div>
+                                                <div class="ms-auto">
+                                                    <a class="btn btn-outline-light  text-muted"  href="javascript:void(0);" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fe fe-more-vertical"></i></a>
+                                                    <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                                                        <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-eye me-2"></i>View</a></li>
+                                                        <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-plus-circle me-2"></i>Add</a></li>
+                                                        <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-trash-2 me-2"></i>Remove</a></li>
+                                                        <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-settings me-2"></i>More</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="mt-0 text-start">
+                                                <a  href="javascript:void(0);" class="mb-0 mt-2 mb-1 fw-semibold fs-20">Angular Developer</a>
+                                                <p class="text-muted mb-0">Junior/Developers</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="d-md-flex">
+                                                <div class="mb-md-0">
+                                                    <h6 class="mb-1 text-muted fs-16">Applications : <span class="fw-semibold fs-18 text-default">20</span><sup class="badge bg-md bg-primary-transparent ms-2 mt-2 fs-10 align-middle">6 New</sup></h6>
+                                                    <p class="fs-12 text-muted mb-0">1 Week Ago</p>
+                                                </div>
+                                                <div class="ms-auto mt-1">
+                                                    <div class="task-btn bg-primary-transparent border-0 me-0 fw-semibold" data-bs-toggle="tooltip" data-bs-placement="top" title="Job Type">Internship</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-lg-6 col-md-12">
+                                    <div class="card custom-card">
+                                        <div class="card-body">
+                                            <div class="d-flex">
+                                                <div class="task-img bg-light my-auto float-end">
+                                                    <img src="../assets/images/media/png/21.png" alt="img" class="">
+                                                </div>
+                                                <div class="ms-auto">
+                                                    <a class="btn btn-outline-light  text-muted"  href="javascript:void(0);" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fe fe-more-vertical"></i></a>
+                                                    <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                                                        <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-eye me-2"></i>View</a></li>
+                                                        <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-plus-circle me-2"></i>Add</a></li>
+                                                        <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-trash-2 me-2"></i>Remove</a></li>
+                                                        <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-settings me-2"></i>More</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="mt-0 text-start">
+                                                <a  href="javascript:void(0);" class="mb-0 mt-2 mb-1 fw-semibold fs-20">Jquery Developer</a>
+                                                <p class="text-muted mb-0">Senior/Developers</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="d-md-flex">
+                                                <div class="mb-md-0">
+                                                    <h6 class="mb-1 text-muted fs-16">Applications : <span class="fw-semibold fs-18 text-default">124</span><sup class="badge bg-md bg-primary-transparent ms-2 mt-2 fs-10 align-middle">15 New</sup></h6>
+                                                    <p class="fs-12 text-muted mb-0">1month Ago</p>
+                                                </div>
+                                                <div class="ms-auto mt-1">
+                                                    <div class="task-btn bg-danger-transparent border-0 me-0 fw-semibold" data-bs-toggle="tooltip" data-bs-placement="top" title="Job Type">Full Time</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               <!--End::row-2 -->
+
+                <!--Start::row-3-->
+                <div class="row">
+                    <div class="col-xxl-6 col-md-12 col-lg-12">
+                        <div class="card custom-card">
+                            <div class="card-header d-flex justify-content-between align-items-center border-0 responsive-header">
+                                <h4 class="card-title">Statistics</h4>
+                                <div class="card-options">
+                                    <div class="btn-list">
+                                        <a  href="javascript:void(0);" class="btn btn-outline-light text-dark d-flex  my-1 float-start"><span class="dot-label bg-primary me-2 my-auto"></span>Applications</a>
+                                        <a  href="javascript:void(0);" class="btn btn-outline-light text-dark d-flex  my-1 float-start"><span class="dot-label bg-light me-2 my-auto"></span>Shortlisted</a>
+                                        <a  href="javascript:void(0);" class="btn btn-outline-light  my-1" data-bs-toggle="dropdown" aria-expanded="false"> Select <i class="fe fe-chevron-down"></i> </a>
+                                        <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                                            <li class="dropdown-item"><a  href="javascript:void(0);">Monthly</a></li>
+                                            <li class="dropdown-item"><a  href="javascript:void(0);">Yearly</a></li>
+                                            <li class="dropdown-item"><a  href="javascript:void(0);">Weekly</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-wrapper">
+                                    <div id="statistics1"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-xl-6 col-md-12 col-lg-12">
+                        <div class="card custom-card">
+                            <div class="card-header d-flex justify-content-between border-bottom-0">
+                                <h4 class="card-title">Recent Activity</h4>
+                                <div class="card-options me-3">
+                                    <div class="dropdown"> <a  href="javascript:void(0);" class="btn ripple btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> View All </a>
+                                        <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                                            <li class="dropdown-item"><a  href="javascript:void(0);">Monthly</a></li>
+                                            <li class="dropdown-item"><a  href="javascript:void(0);">Yearly</a></li>
+                                            <li class="dropdown-item"><a  href="javascript:void(0);">Weekly</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body pt-0">
+                                <ul class="timeline">
+                                    <li class="ps-3 ms-3">
+                                        <a href="javascript:void(0);" class="fw-semibold fs-16 mb-2">
+                                            James Miller
+                                            <span class="fw-normal text-default">Sent you new job sent you new job appliction</span>
+                                        </a>
+                                        <p class="text-muted fs-12 mb-0"> 6 mins ago</p>
+                                    </li>
+                                    <li class="primary ps-3 ms-3">
+                                        <a href="javascript:void(0);" class="fw-semibold fs-16 mb-2">
+                                            Interview sheduled with "Anthony"
+                                            <span class="fw-normal text-default">tomorrow 10am</span>
+                                        </a>
+                                        <p class="text-muted fs-12 mb-0"> 10  mins ago</p>
+                                    </li>
+                                    <li class="pink ps-3 ms-3">
+                                        <a href="javascript:void(0);" class="fw-semibold fs-16 mb-2">
+                                            <span class="fw-normal text-default">Project manager Published new job</span>
+                                            PHP Developer
+                                        </a>
+                                        <p class="text-muted fs-12 mb-0"> 2  Hours ago</p>
+                                    </li>
+                                    <li class="success mb-0 pb-0 ps-3 ms-3">
+                                        <a href="javascript:void(0);" class="fw-semibold fs-16 mb-2">
+                                            Meeting sheduled
+                                            <span class="fw-normal text-default">tomorrow 1pm  new employees</span>
+                                        </a>
+                                        <p class="text-muted fs-12 mb-0"> 4  Hours ago</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-xl-6 col-md-12 col-lg-12">
+                        <div class="card custom-card chart-donut1">
+                            <div class="card-header  border-0">
+                                <h4 class="card-title">Overview</h4>
+                            </div>
+                            <div class="card-body px-1">
+                                <div id="overview" class="mx-auto apex-dount"></div>
+                                <div class="row pt-5  mx-auto">
+                                    <div class="col-md-6">
+                                        <div class="d-flex fw-semibold">
+                                            <span class="dot-label bg-primary me-2 my-auto"></span>Applications
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mt-3 mt-md-0">
+                                        <div class="d-flex fw-semibold">
+                                            <span class="dot-label bg-secondary me-2 my-auto"></span>Interviews
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <div class="d-flex fw-semibold">
+                                            <span class="dot-label bg-danger me-2 my-auto"></span>Reject
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <div class="d-flex fw-semibold">
+                                            <span class="dot-label bg-success me-2 my-auto"></span>Hired
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End::row-3 -->
+
+                <!--Start::row-4-->
+                <div class="row">
+                    <div class="col-xxl-8 col-md-12 col-lg-12">
+                        <div class="card custom-card">
+                            <div class="card-header d-flex justify-content-between border-bottom-0">
+                                <h4 class="card-title">Job Applictions</h4>
+                                <div class="card-options me-3">
+                                    <div class="dropdown"> <a  href="javascript:void(0);" class="btn ripple btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> See All </a>
+                                        <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                                            <li class="dropdown-item"><a  href="javascript:void(0);">Monthly</a></li>
+                                            <li class="dropdown-item"><a  href="javascript:void(0);">Yearly</a></li>
+                                            <li class="dropdown-item"><a  href="javascript:void(0);">Weekly</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-menu-heading jobtable-tabs table_tabs mt-2 p-0 ">
+                                <div class="tabs-menu1">
+                                    <!-- Tabs -->
+                                    <ul class="nav panel-tabs">
+                                        <li><a href="#tab5" class="active"  data-bs-toggle="tab">Applicant</a></li>
+                                        <li><a href="#tab6"  data-bs-toggle="tab">Interviews Status</a></li>
+                                        <li><a href="#tab7" data-bs-toggle="tab">Hired</a></li>
+                                        <li class="me-sm-4"><a href="#tab8" data-bs-toggle="tab">Rejected</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="panel-body tabs-menu-body table_tabs1 p-0 border-0">
+                                <div class="tab-content">
+                                    <div class="tab-pane border-0 p-0 active" id="tab5">
+                                        <div class="row my-3 px-3">
+                                            <div class="col-lg-6">
+                                                <div class="d-flex align-items-center">
+                                                    <span>Show</span>
+                                                    <div class="d-flex ms-2 mx-2">
+                                                        <div class="form-group mt-2">
+                                                            <select name="quantity" id="select-countries1" class="form-control  wd-150" data-trigger>
+                                                                <option value="1" selected="">10</option>
+                                                                <option value="2">25</option>
+                                                                <option value="3">50</option>
+                                                                <option value="4">100</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <span>entries</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="float-end">
+                                                    <input type="text" class="form-control" placeholder="search">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive jobdatatable">
+                                            <table class="table table-vcenter text-nowrap mb-0 custom-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Location</th>
+                                                        <th class="w-15p ">Interviewer</th>
+                                                        <th>Schedule</th>
+                                                        <th class="wd-25p ">Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/6.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Faith Harris</h6>
+                                                                    <p class="text-muted mb-0 fs-13">UI designer <span class="badge bg-md bg-danger-transparent ms-2 fs-10"> 5 Years</span></p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td><i class="fe fe-map-pin text-muted me-2"></i>USA</td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/12.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Berry Olivia</h6>
+                                                                    <p class="text-muted mb-0 fs-13">Ui Director</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td><span class="text-muted">10:30Am, Jun 16, 2020</span></td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Contact"><i class="fe fe-phone-call  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Mail"><i class="fe fe-mail  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/3.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">James Paige</h6>
+                                                                    <p class="text-muted mb-0 fs-13">HTML Developer <span class="badge bg-md bg-primary-transparent ms-2 fs-10"> 2 Years</span></p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td><i class="fe fe-map-pin text-muted me-2"></i>INDIA</td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/15.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Thomson Chapman</h6>
+                                                                    <p class="text-muted mb-0 fs-13">HTML Team Lead</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td><span class="text-muted">10:30Am, Jun 19, 2020</span></td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Contact"><i class="fe fe-phone-call  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Mail"><i class="fe fe-mail  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <span class="avatar avatar-md avatar-rounded me-2 bg-primary-transparent">L</span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Liam Miller</h6>
+                                                                    <p class="text-muted mb-0 fs-13">UX designer <span class="badge bg-md bg-success-transparent ms-2 fs-10">Fresher</span></p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td><i class="fe fe-map-pin text-muted me-2"></i>Germany</td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/8.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Diane Bailey</h6>
+                                                                    <p class="text-muted mb-0 fs-13">Ui Director</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td><span class="text-muted">10:30Am, Jun 02, 2020</span></td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Contact"><i class="fe fe-phone-call  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Mail"><i class="fe fe-mail  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/1.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Kimberly Berry</h6>
+                                                                    <p class="text-muted mb-0 fs-13">PHP Developer <span class="badge bg-md bg-primary-transparent ms-2 fs-10"> 3 Years</span></p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td><i class="fe fe-map-pin text-muted me-2"></i>USA</td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <span class="avatar avatar-md avatar-rounded me-2 bg-primary-transparent">J</span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Joe Howard</h6>
+                                                                    <p class="text-muted mb-0 fs-13">Senior Developer</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td><span class="text-muted">10:30Am, may 24, 2020</span></td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Contact"><i class="fe fe-phone-call  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Mail"><i class="fe fe-mail  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/2.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Bella Davidson</h6>
+                                                                    <p class="text-muted mb-0 fs-13">UI designer <span class="badge bg-md bg-warning-transparent ms-2 fs-10"> 4 Years</span></p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td><i class="fe fe-map-pin text-muted me-2"></i>Australia</td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/8.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Alan Miller</h6>
+                                                                    <p class="text-muted mb-0 fs-13">Ui Director</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td><span class="text-muted">10:30Am, may 12, 2020</span></td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Contact"><i class="fe fe-phone-call  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Mail"><i class="fe fe-mail  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane border-0 p-0" id="tab6">
+                                        <div class="row my-3 px-3">
+                                            <div class="col-lg-6">
+                                                <div class="d-flex align-items-center">
+                                                    <span>Show</span>
+                                                    <div class="d-flex ms-2 mx-2">
+                                                        <div class="form-group mt-2">
+                                                            <select name="quantity" id="select-countries2" class="form-control  wd-150" data-trigger>
+                                                                <option value="1" selected="">10</option>
+                                                                <option value="2">25</option>
+                                                                <option value="3">50</option>
+                                                                <option value="4">100</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <span>entries</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="float-end">
+                                                    <input type="text" class="form-control" placeholder="search">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive jobdatatable">
+                                            <table class="table table-vcenter text-nowrap mb-0 custom-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="border-bottom-0">Name</th>
+                                                        <th class="border-bottom-0">Status</th>
+                                                        <th class="border-bottom-0">Location</th>
+                                                        <th class="w-15p border-bottom-0">Interviewer</th>
+                                                        <th class="border-bottom-0">Schedule</th>
+                                                        <th class="wd-25p border-bottom-0">Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/6.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Faith Harris</h6>
+                                                                    <p class="text-muted mb-0 fs-13">UI designer <span class="badge bg-md bg-danger-transparent ms-2 fs-10"> 5 Years</span></p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <ul class="job-status">
+                                                                <li class="active"></li>
+                                                                <li></li>
+                                                                <li></li>
+                                                            </ul>
+                                                        </td>
+                                                        <td><i class="fe fe-map-pin text-muted me-2"></i>USA</td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/12.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Berry Olivia</h6>
+                                                                    <p class="text-muted mb-0 fs-13">Ui Director</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td><span class="text-muted">10:30Am, Jun 16, 2020</span></td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Contact"><i class="fe fe-phone-call  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Mail"><i class="fe fe-mail  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/3.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">James Paige</h6>
+                                                                    <p class="text-muted mb-0 fs-13">HTML Developer <span class="badge bg-md bg-primary-transparent ms-2 fs-10"> 2 Years</span></p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <ul class="job-status">
+                                                                <li class="completed"></li>
+                                                                <li class="completed"></li>
+                                                                <li class="active"></li>
+                                                            </ul>
+                                                        </td>
+                                                        <td><i class="fe fe-map-pin text-muted me-2"></i>INDIA</td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/15.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Thomson Chapman</h6>
+                                                                    <p class="text-muted mb-0 fs-13">HTML Team Lead</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td><span class="text-muted">10:30Am, Jun 19, 2020</span></td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Contact"><i class="fe fe-phone-call  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Mail"><i class="fe fe-mail  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md avatar-rounded me-2 bg-primary-transparent">L</span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Liam Miller</h6>
+                                                                    <p class="text-muted mb-0 fs-13">UX designer <span class="badge bg-md bg-success-transparent ms-2 fs-10">Fresher</span></p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <ul class="job-status">
+                                                                <li class="completed"></li>
+                                                                <li class="active"></li>
+                                                                <li></li>
+                                                            </ul>
+                                                        </td>
+                                                        <td><i class="fe fe-map-pin text-muted me-2"></i>Germany</td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/8.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Diane Bailey</h6>
+                                                                    <p class="text-muted mb-0 fs-13">Ui Director</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td><span class="text-muted">10:30Am, Jun 02, 2020</span></td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Contact"><i class="fe fe-phone-call  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Mail"><i class="fe fe-mail  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/1.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Kimberly Berry</h6>
+                                                                    <p class="text-muted mb-0 fs-13">PHP Developer <span class="badge bg-md bg-primary-transparent ms-2 fs-10"> 3 Years</span></p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <ul class="job-status">
+                                                                <li class="completed"></li>
+                                                                <li></li>
+                                                                <li></li>
+                                                            </ul>
+                                                        </td>
+                                                        <td><i class="fe fe-map-pin text-muted me-2"></i>USA</td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md avatar-rounded me-2 bg-primary-transparent">J</span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Joe Howard</h6>
+                                                                    <p class="text-muted mb-0 fs-13">Senior Developer</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td><span class="text-muted">10:30Am, may 24, 2020</span></td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Contact"><i class="fe fe-phone-call  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Mail"><i class="fe fe-mail  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/2.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Bella Davidson</h6>
+                                                                    <p class="text-muted mb-0 fs-13">UI designer <span class="badge bg-md bg-warning-transparent ms-2 fs-10"> 4 Years</span></p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <ul class="job-status">
+                                                                <li class="completed"></li>
+                                                                <li class="completed"></li>
+                                                                <li class="active"></li>
+                                                            </ul>
+                                                        </td>
+                                                        <td><i class="fe fe-map-pin text-muted me-2"></i>Australia</td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/8.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Alan Miller</h6>
+                                                                    <p class="text-muted mb-0 fs-13">Ui Director</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td><span class="text-muted">10:30Am, may 12, 2020</span></td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Contact"><i class="fe fe-phone-call  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Mail"><i class="fe fe-mail  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane  border-0 p-0" id="tab7">
+                                        <div class="row my-3 px-3">
+                                            <div class="col-lg-6">
+                                                <div class="d-flex align-items-center">
+                                                    <span>Show</span>
+                                                    <div class="d-flex ms-2 mx-2">
+                                                        <div class="form-group mt-2">
+                                                            <select name="quantity" id="select-countries3" class="form-control  wd-150" data-trigger>
+                                                                <option value="1" selected="">10</option>
+                                                                <option value="2">25</option>
+                                                                <option value="3">50</option>
+                                                                <option value="4">100</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <span>entries</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="float-end">
+                                                    <input type="text" class="form-control" placeholder="search">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive jobdatatable">
+                                            <table class="table table-vcenter text-nowrap mb-0 custom-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="border-bottom-0">Name</th>
+                                                        <th class="border-bottom-0">Location</th>
+                                                        <th class="w-15p border-bottom-0">Interviewer</th>
+                                                        <th class="border-bottom-0">Status</th>
+                                                        <th class="border-bottom-0">Schedule</th>
+                                                        <th class="wd-25p border-bottom-0">Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/6.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Faith Harris</h6>
+                                                                    <p class="text-muted mb-0 fs-13">UI designer <span class="badge bg-md bg-danger-transparent ms-2 fs-10"> 5 Years</span></p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td><i class="fe fe-map-pin text-muted me-2"></i>USA</td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/12.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Berry Olivia</h6>
+                                                                    <p class="text-muted mb-0 fs-13">Ui Director</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <span class="badge bg-success-transparent">Hired</span>
+                                                        </td>
+                                                        <td><span class="text-muted">10:30Am, Jun 16, 2020</span></td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Contact"><i class="fe fe-phone-call  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Mail"><i class="fe fe-mail  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/3.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">James Paige</h6>
+                                                                    <p class="text-muted mb-0 fs-13">HTML Developer <span class="badge bg-md bg-primary-transparent ms-2 fs-10"> 2 Years</span></p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td><i class="fe fe-map-pin text-muted me-2"></i>INDIA</td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/15.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Thomson Chapman</h6>
+                                                                    <p class="text-muted mb-0 fs-13">HTML Team Lead</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <span class="badge bg-success-transparent">Hired</span>
+                                                        </td>
+                                                        <td><span class="text-muted">10:30Am, Jun 19, 2020</span></td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Contact"><i class="fe fe-phone-call  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Mail"><i class="fe fe-mail  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md avatar-rounded me-2 bg-primary-transparent">L</span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Liam Miller</h6>
+                                                                    <p class="text-muted mb-0 fs-13">UX designer <span class="badge bg-md bg-success-transparent ms-2 fs-10">Fresher</span></p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td><i class="fe fe-map-pin text-muted me-2"></i>Germany</td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/8.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Diane Bailey</h6>
+                                                                    <p class="text-muted mb-0 fs-13">Ui Director</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <span class="badge bg-success-transparent">Hired</span>
+                                                        </td>
+                                                        <td><span class="text-muted">10:30Am, Jun 02, 2020</span></td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Contact"><i class="fe fe-phone-call  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Mail"><i class="fe fe-mail  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/1.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Kimberly Berry</h6>
+                                                                    <p class="text-muted mb-0 fs-13">PHP Developer <span class="badge bg-md bg-primary-transparent ms-2 fs-10"> 3 Years</span></p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td><i class="fe fe-map-pin text-muted me-2"></i>USA</td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md avatar-rounded me-2 bg-primary-transparent">J</span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Joe Howard</h6>
+                                                                    <p class="text-muted mb-0 fs-13">Senior Developer</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <span class="badge bg-success-transparent">Hired</span>
+                                                        </td>
+                                                        <td><span class="text-muted">10:30Am, may 24, 2020</span></td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Contact"><i class="fe fe-phone-call  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Mail"><i class="fe fe-mail  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/2.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Bella Davidson</h6>
+                                                                    <p class="text-muted mb-0 fs-13">UI designer <span class="badge bg-md bg-warning-transparent ms-2 fs-10"> 4 Years</span></p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td><i class="fe fe-map-pin text-muted me-2"></i>Australia</td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/8.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Alan Miller</h6>
+                                                                    <p class="text-muted mb-0 fs-13">Ui Director</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <span class="badge bg-success-transparent">Hired</span>
+                                                        </td>
+                                                        <td><span class="text-muted">10:30Am, may 12, 2020</span></td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Contact"><i class="fe fe-phone-call  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Mail"><i class="fe fe-mail  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane  border-0 p-0" id="tab8">
+                                        <div class="row my-3 px-3">
+                                            <div class="col-lg-6">
+                                                <div class="d-flex align-items-center">
+                                                    <span>Show</span>
+                                                    <div class="d-flex ms-2 mx-2">
+                                                        <div class="form-group mt-2">
+                                                            <select name="quantity" id="select-countries4" class="form-control  wd-150" data-trigger>
+                                                                <option value="1" selected="">10</option>
+                                                                <option value="2">25</option>
+                                                                <option value="3">50</option>
+                                                                <option value="4">100</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <span>entries</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="float-end">
+                                                    <input type="text" class="form-control" placeholder="search">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive jobdatatable">
+                                            <table class="table table-vcenter text-nowrap mb-0 custom-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="border-bottom-0">Name</th>
+                                                        <th class="border-bottom-0">Location</th>
+                                                        <th class="w-15p border-bottom-0">Interviewer</th>
+                                                        <th class="border-bottom-0">Status</th>
+                                                        <th class="border-bottom-0">Schedule</th>
+                                                        <th class="wd-25p border-bottom-0">Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/6.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Faith Harris</h6>
+                                                                    <p class="text-muted mb-0 fs-13">UI designer <span class="badge bg-md bg-danger-transparent ms-2 fs-10"> 5 Years</span></p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td><i class="fe fe-map-pin text-muted me-2"></i>USA</td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/12.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Berry Olivia</h6>
+                                                                    <p class="text-muted mb-0 fs-13">Ui Director</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <span class="badge bg-danger-transparent">Rejected</span>
+                                                        </td>
+                                                        <td><span class="text-muted">10:30Am, Jun 16, 2020</span></td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Contact"><i class="fe fe-phone-call  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Mail"><i class="fe fe-mail  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/3.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">James Paige</h6>
+                                                                    <p class="text-muted mb-0 fs-13">HTML Developer <span class="badge bg-md bg-primary-transparent ms-2 fs-10"> 2 Years</span></p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td><i class="fe fe-map-pin text-muted me-2"></i>INDIA</td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/15.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Thomson Chapman</h6>
+                                                                    <p class="text-muted mb-0 fs-13">HTML Team Lead</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <span class="badge bg-danger-transparent">Rejected</span>
+                                                        </td>
+                                                        <td><span class="text-muted">10:30Am, Jun 19, 2020</span></td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Contact"><i class="fe fe-phone-call  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Mail"><i class="fe fe-mail  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md avatar-rounded me-2 bg-primary-transparent">L</span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Liam Miller</h6>
+                                                                    <p class="text-muted mb-0 fs-13">UX designer <span class="badge bg-md bg-success-transparent ms-2 fs-10">Fresher</span></p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td><i class="fe fe-map-pin text-muted me-2"></i>Germany</td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/8.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Diane Bailey</h6>
+                                                                    <p class="text-muted mb-0 fs-13">Ui Director</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <span class="badge bg-danger-transparent">Rejected</span>
+                                                        </td>
+                                                        <td><span class="text-muted">10:30Am, Jun 02, 2020</span></td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Contact"><i class="fe fe-phone-call  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Mail"><i class="fe fe-mail  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/1.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Kimberly Berry</h6>
+                                                                    <p class="text-muted mb-0 fs-13">PHP Developer <span class="badge bg-md bg-primary-transparent ms-2 fs-10"> 3 Years</span></p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td><i class="fe fe-map-pin text-muted me-2"></i>USA</td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md avatar-rounded me-2 bg-primary-transparent">J</span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Joe Howard</h6>
+                                                                    <p class="text-muted mb-0 fs-13">Senior Developer</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <span class="badge bg-danger-transparent">Rejected</span>
+                                                        </td>
+                                                        <td><span class="text-muted">10:30Am, may 24, 2020</span></td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Contact"><i class="fe fe-phone-call  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Mail"><i class="fe fe-mail  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/2.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Bella Davidson</h6>
+                                                                    <p class="text-muted mb-0 fs-13">UI designer <span class="badge bg-md bg-warning-transparent ms-2 fs-10"> 4 Years</span></p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td><i class="fe fe-map-pin text-muted me-2"></i>Australia</td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <span class="avatar avatar-md me-2 avatar-rounded">
+                                                                    <img src="../assets/images/users/8.jpg" alt="img">
+                                                                </span>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-1 fs-16">Alan Miller</h6>
+                                                                    <p class="text-muted mb-0 fs-13">Ui Director</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <span class="badge bg-danger-transparent">Rejected</span>
+                                                        </td>
+                                                        <td><span class="text-muted">10:30Am, may 12, 2020</span></td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Contact"><i class="fe fe-phone-call  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Mail"><i class="fe fe-mail  text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-4 col-md-12 col-lg-12">
+                        <div class="card custom-card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h4 class="card-title">Calendar</h4>
+                            </div>
+                            <div class="card-body mx-auto">
+                                <div class="chart-wrapper ">
+                                    <div class="form-group calendar">
+                                        <input type="text" class="form-control" id="calendar" placeholder="Choose date">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End::row-4-->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+        <!--Clock-IN Modal -->
+        <div class="modal fade"  id="clockinmodal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><span class="fe fe-clock  me-1"></span>Clock In</h5>
+                        <button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="countdowntimer text-center">
+                            <div class="mt-3 d-flex justify-content-center fs-30 digital-clock"></div>
+                            <label class="form-label">Current Time</label>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">IP Address</label>
+                            <input type="text" class="form-control" placeholder="225.192.145.1" disabled="">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Working Form</label>
+                            <select name="projects"  class="form-control custom-select" data-trigger>
+                                <option value="0">Select</option>
+                                <option value="1">Office</option>
+                                <option value="2">Home</option>
+                                <option value="3">Others</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Note:</label>
+                            <textarea class="form-control" rows="3">Some text here...</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                        <button class="btn btn-primary">Clock In</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Clock-IN Modal  -->
+
+        <!--Apply Leaves Modal -->
+        <div class="modal fade"  id="newtaskmodal">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Task</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Position</label>
+									</div>
+									<div class="col-md-9">
+										<input type="text" class="form-control" placeholder="Name" value="">
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Job Type</label>
+									</div>
+									<div class="col-md-9">
+                                    <select class="form-control custom-select" data-trigger data-placeholder="Select Priority">
+                                        <option value="1">High</option>
+                                        <option value="2">Medium</option>
+                                        <option value="3">Low</option>
+                                    </select>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Description</label>
+									</div>
+									<div class="col-md-9">
+										<textarea class="form-control" id="text-area" rows="3"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Posted Date</label>
+									</div>
+									<div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Last Date To Apply</label>
+									</div>
+									<div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Close Date</label>
+									</div>
+									<div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+									</div>
+								</div>
+							</div>
+							<div class="row mt-3">
+								<div class="col-md-3">
+									<label class="form-label mb-0 mt-1">Status</label>
+								</div>
+								<div class="col-md-9">
+									<div class="custom-controls-stacked d-md-flex">
+										<label class="custom-control custom-radio success me-4">
+											<input type="radio" class="custom-control-input" name="example-radios1" value="option1">
+											<span class="custom-control-label">Active</span>
+										</label>
+										<label class="custom-control custom-radio success me-4">
+											<input type="radio" class="custom-control-input" name="example-radios1" value="option2">
+											<span class="custom-control-label">InActive</span>
+										</label>
+									</div>
+								</div>
+							</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button  class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                        <button  class="btn btn-success successful-notify">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Apply Leaves Modal  -->
+        
+
+			<!-- Modal -->
+			<div class="modal fade"  id="remindermodal">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Add New Reminder</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label class="form-label">Project</label>
+                                <select class="form-control custom-select" data-trigger data-placeholder="Select Department">
+									<option value="1">Project 01</option>
+									<option value="2">Project 02</option>
+									<option value="3">Project 03</option>
+									<option value="4">Project 04</option>
+									<option value="5">Project 05</option>
+                                </select>
+							</div>
+							<div class="form-group mt-3">
+								<label class="form-label">Select Date</label>
+                                <div class="input-group">
+                                    <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                    <input type="text" class="form-control choose-date flatpickr-input" placeholder="DD-MM-YYYY" readonly="readonly">
+                                </div>
+							</div>
+							<div class="form-group mt-3">
+								<label class="form-label">Note:</label>
+								<textarea class="form-control" rows="3">Some text here...</textarea>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button  class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+							<button  class="btn btn-primary">Save</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Modal -->
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    <!-- Apex Charts JS -->
+    <script src="../assets/libs/apexcharts/apexcharts.min.js"></script>
+
+    <!-- Chartjs Chart JS -->
+    <script src="../assets/libs/chart.js/chart.min.js"></script>
+
+    <!-- Date & Time Picker JS -->
+    <script src="../assets/libs/flatpickr/flatpickr.min.js"></script>
+
+    <!-- Default date picker js-->
+    <script src="../assets/js/default-flat-datepicker.js"></script> 
+
+    <!-- Index2 js-->
+    <script src="../assets/js/index6.js"></script>
+
+    <!-- Notifications JS -->
+    <script src="../assets/libs/awesome-notifications/index.var.js"></script>
+
+    <!-- Successful-notify JS -->
+    <script src="../assets/js/successful-notify.js"></script>
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

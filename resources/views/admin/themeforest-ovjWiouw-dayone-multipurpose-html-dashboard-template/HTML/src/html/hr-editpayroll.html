@@ -1,0 +1,394 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                <!-- Page Header -->
+                <div class="page-header d-lg-flex d-block">
+                    <div class="page-leftheader">
+                        <div class="page-title">Edit Payroll</div>
+                    </div>
+                    <div class="page-rightheader">
+                        <div class="btn-list">
+                            <a href="hr-addpayroll.html" class="btn btn-primary">Add New Payroll</a>
+                            <button  class="btn btn-secondary me-3" data-bs-toggle="modal" data-bs-target="#excelmodal">
+                                <i class="las la-file-excel"></i>  Download Monthly Excel Report
+                            </button>
+                            <button  class="btn btn-light3" data-bs-toggle="tooltip" data-bs-placement="top" title="E-mail"> <i class="fe fe-mail"></i> </button>
+                            <button  class="btn btn-light3" data-bs-placement="top" data-bs-toggle="tooltip" title="Contact"> <i class="fe fe-phone-call"></i> </button>
+                            <button  class="btn btn-primary" data-bs-placement="top" data-bs-toggle="tooltip" title="Info"> <i class="fe fe-info"></i> </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Page Header Close -->
+
+                <!-- Start::row-1 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Employee Name:</label>
+                                            <select name="attendance"  class="form-control custom-select" data-trigger data-placeholder="Select Employee">
+                                                <option value="">Select Employee</option>
+                                                <option value="1" selected>Faith Harris</option>
+                                                <option value="2">Austin Bell</option>
+                                                <option value="3">Maria Bower</option>
+                                                <option value="4">Peter Hill</option>
+                                                <option value="5">Victoria Lyman</option>
+                                                <option value="6">Adam Quinn</option>
+                                                <option value="7">Melanie Coleman</option>
+                                                <option value="8">Max Wilson</option>
+                                                <option value="9">Amelia Russell</option>
+                                                <option value="10">Justin Metcalfe</option>
+                                                <option value="11">Ryan Young</option>
+                                                <option value="12">Jennifer Hardacre</option>
+                                                <option value="13">Justin Parr</option>
+                                                <option value="14">Julia Hodges</option>
+                                                <option value="15">Michael Sutherland</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-lg-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Month:</label>
+                                            <select name="attendance"  class="form-control custom-select" data-trigger data-placeholder="Select Month">
+                                                <option value="">Select Month</option>
+                                                <option value="1" selected>January</option>
+                                                <option value="2">February</option>
+                                                <option value="3">March</option>
+                                                <option value="4">April</option>
+                                                <option value="5">May</option>
+                                                <option value="6">June</option>
+                                                <option value="7">July</option>
+                                                <option value="8">August</option>
+                                                <option value="9">September</option>
+                                                <option value="10">October</option>
+                                                <option value="11">November</option>
+                                                <option value="12">December</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-lg-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Year:</label>
+                                            <select name="attendance"  class="form-control custom-select" data-trigger data-placeholder="Select Year">
+                                                <option value="">Select Year</option>
+                                                <option value="1">2024</option>
+                                                <option value="2">2023</option>
+                                                <option value="3">2022</option>
+                                                <option value="4" selected>2021</option>
+                                                <option value="5">2020</option>
+                                                <option value="6">2019</option>
+                                                <option value="7">2018</option>
+                                                <option value="8">2017</option>
+                                                <option value="9">2016</option>
+                                                <option value="10">2015</option>
+                                                <option value="11">2014</option>
+                                                <option value="12">2013</option>
+                                                <option value="13">2012</option>
+                                                <option value="14">2011</option>
+                                                <option value="15">2019</option>
+                                                <option value="16">2010</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-lg-3">
+                                        <div class="form-group mt-2">
+                                            <label class="form-label"></label>
+                                            <a  href="javascript:void(0);" class="btn btn-primary d-grid">Search</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-1 -->
+
+                <!-- Start::row-2 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <h4 class="card-title">Salary Information</h4>
+                                <div class="form-group mb-3">
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-2">
+                                            <label class="form-label mb-0 mt-2">Basic Salary</label>
+                                        </div>
+                                        <div class="col-md-12 col-lg-8">
+                                            <input type="text" class="form-control" placeholder="0" value="$32,000">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-2">
+                                            <label class="form-label mb-0 mt-2">Expense Claim</label>
+                                        </div>
+                                        <div class="col-md-12 col-lg-8">
+                                            <input type="text" class="form-control" placeholder="0" value="0.00">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-2">
+                                            <label class="form-label me-5">Status :</label>
+                                        </div>
+                                        <div class="col-md-12 col-lg-8">
+                                            <div class="d-flex">
+                                                <div class="form-check me-3">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                                        id="paid">
+                                                    <label class="form-check-label" for="paid">
+                                                        Paid
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                                        id="unpaid">
+                                                    <label class="form-check-label" for="unpaid">
+                                                        Unpaid
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body border-top">
+                                <h4 class="card-title">Allowances</h4>
+                                <div class="form-group mb-3">
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-2">
+                                            <label class="form-label mb-0 mt-2">HRA Allowance</label>
+                                        </div>
+                                        <div class="col-md-12 col-lg-8">
+                                            <input type="text" class="form-control" placeholder="0" value="0.00">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-2">
+                                            <label class="form-label mb-0 mt-2">Conveyance</label>
+                                        </div>
+                                        <div class="col-md-12 col-lg-8">
+                                            <input type="text" class="form-control" placeholder="0" value="0.00">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-2">
+                                            <label class="form-label mb-0 mt-2">Medical Allowance</label>
+                                        </div>
+                                        <div class="col-md-12 col-lg-8">
+                                            <input type="text" class="form-control" placeholder="0" value="0.00">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-2">
+                                            <label class="form-label mb-0 mt-2">Bonus Allowance</label>
+                                        </div>
+                                        <div class="col-md-12 col-lg-8">
+                                            <input type="text" class="form-control" placeholder="0" value="0.00">
+                                        </div>
+                                        <div class="col-md-12 col-lg-2">
+                                            <a class="btn btn-primary btn-success text-fixed-white  mt-4 mt-lg-0"><i class="ri-add-fill me-1"></i>Add</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body border-top">
+                                <h4 class="card-title">Deduction</h4>
+                                <div class="form-group mb-3">
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-2">
+                                            <label class="form-label mb-0 mt-2">PF</label>
+                                        </div>
+                                        <div class="col-md-12 col-lg-8">
+                                            <input type="text" class="form-control" placeholder="0" value="0.00">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-2">
+                                            <label class="form-label mb-0 mt-2">Professional Tax</label>
+                                        </div>
+                                        <div class="col-md-12 col-lg-8">
+                                            <input type="text" class="form-control" placeholder="0" value="0.00">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-2">
+                                            <label class="form-label mb-0 mt-2">TDS</label>
+                                        </div>
+                                        <div class="col-md-12 col-lg-8">
+                                            <input type="text" class="form-control" placeholder="0" value="0.00">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-2">
+                                            <label class="form-label mb-0 mt-2">Loans & Others</label>
+                                        </div>
+                                        <div class="col-md-12 col-lg-8">
+                                            <input type="text" class="form-control" placeholder="0" value="0.00">
+                                        </div>
+                                        <div class="col-md-12 col-lg-2">
+                                            <a class="btn btn-primary btn-success text-fixed-white  mt-4 mt-lg-0"><i class="ri-add-fill me-1"></i>Add</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body border-top">
+                                <h4 class="card-title">Gross Salary</h4>
+                                <div class="form-group mb-3">
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-2">
+                                            <label class="form-label mb-0 mt-2">Total Allowances</label>
+                                        </div>
+                                        <div class="col-md-12 col-lg-8">
+                                            <input type="text" class="form-control" placeholder="0" value="0.00">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-2">
+                                            <label class="form-label mb-0 mt-2">Total Deduction</label>
+                                        </div>
+                                        <div class="col-md-12 col-lg-8">
+                                            <input type="text" class="form-control" placeholder="0" value="0.00">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-2">
+                                            <label class="form-label mb-0 mt-2">Net Salary</label>
+                                        </div>
+                                        <div class="col-md-12 col-lg-8">
+                                            <input type="text" class="form-control" placeholder="0" value="$32,000">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body border-top">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-2">
+                                    </div>
+                                    <div class="col-md-12 col-lg-8">
+                                        <a  href="javascript:void(0);" class="btn btn-primary">Save</a>
+                                        <a  href="javascript:void(0);" class="btn btn-danger">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End::row-2 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+        <!--Excel Modal -->
+			<div class="modal fade" id="excelmodal">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Select Month & Year</h5>
+							<button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="form-group mb-3">
+								<label class="form-label">Month:</label>
+								<select name="attendance"  class="form-control custom-select" data-trigger data-placeholder="Select Month">
+									<option value="">Select Month</option>
+									<option value="1">January</option>
+									<option value="2">February</option>
+									<option value="3">March</option>
+									<option value="4">April</option>
+									<option value="5">May</option>
+									<option value="6">June</option>
+									<option value="7">July</option>
+									<option value="8">August</option>
+									<option value="9">September</option>
+									<option value="10">October</option>
+									<option value="11">November</option>
+									<option value="12">December</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label class="form-label">Year:</label>
+								<select name="attendance"  class="form-control custom-select" data-trigger data-placeholder="Select Year">
+									<option value="">Select Year</option>
+									<option value="1">2024</option>
+									<option value="2">2023</option>
+									<option value="3">2022</option>
+									<option value="4">2021</option>
+									<option value="5">2020</option>
+									<option value="6">2019</option>
+									<option value="7">2018</option>
+									<option value="8">2017</option>
+									<option value="9">2016</option>
+									<option value="10">2015</option>
+									<option value="11">2014</option>
+									<option value="12">2013</option>
+									<option value="13">2012</option>
+									<option value="14">2011</option>
+									<option value="15">2019</option>
+									<option value="16">2010</option>
+								</select>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<a  href="javascript:void(0);" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</a>
+							<a  href="javascript:void(0);" class="btn btn-primary">Download</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Excel Modal  -->
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

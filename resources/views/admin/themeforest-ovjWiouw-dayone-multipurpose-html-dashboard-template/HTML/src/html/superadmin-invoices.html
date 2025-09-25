@@ -1,0 +1,793 @@
+@SPK@include("partials/mainhead.html")
+
+<!-- Full Calendar CSS -->
+<link rel="stylesheet" href="../assets/libs/fullcalendar/main.min.css">
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+               <!-- Page Header -->
+               <div class="page-header d-lg-flex d-block">
+                <div class="page-leftheader">
+                    <div class="page-title">Invoices</div>
+                </div>
+                <div class="page-rightheader">
+                    <div class="d-flex align-items-center flex-wrap my-auto end-content breadcrumb-end">
+                        <div class="d-lg-flex d-block">
+                            <div class="btn-list">
+                                <button  class="btn btn-light3" data-bs-toggle="tooltip" data-bs-placement="top" title="E-mail"> <i class="fe fe-mail"></i> </button>
+                                <button  class="btn btn-light3" data-bs-placement="top" data-bs-toggle="tooltip" title="Contact"> <i class="fe fe-phone-call"></i> </button>
+                                <button  class="btn btn-primary" data-bs-placement="top" data-bs-toggle="tooltip" title="Info"> <i class="fe fe-info"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Page Header Close -->
+            
+                <!-- Start::row-1 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card custom-card">
+                            <div class="card-header d-flex justify-content-between border-bottom-0">
+                                <h4 class="card-title">Invoices</h4>
+                            </div>
+                            <div class="card-body pt-0">
+                                <div class="row my-3 px-3">
+                                    <div class="col-lg-6">
+                                        <div class="d-flex align-items-center">
+                                            <span>Show</span>
+                                            <div class="d-flex ms-2 mx-2">
+                                                <div class="form-group mt-2">
+                                                    <select name="quantity" id="select-countries17" class="form-control  wd-150" data-trigger>
+                                                        <option value="1" selected="">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <span>entries</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="float-end">
+                                            <input type="text" class="form-control" placeholder="search">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive superinvoice-table">
+                                    <table class="table  table-vcenter text-nowrap table-bordered border-bottom" id="invoice-list">
+                                        <thead>
+                                            <tr>
+                                                <th class="border-bottom-0 w-5">#NO</th>
+                                                <th class="border-bottom-0">Company Name</th>
+                                                <th class="border-bottom-0">Package</th>
+                                                <th class="border-bottom-0">Invoice ID</th>
+                                                <th class="border-bottom-0">Amount</th>
+                                                <th class="border-bottom-0">Invoice Date</th>
+                                                <th class="border-bottom-0">Pay Date</th>
+                                                <th class="border-bottom-0">NextPay Date</th>
+                                                <th class="border-bottom-0">Status</th>
+                                                <th class="border-bottom-0">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>01</td>
+                                                <td><h6 class="mb-0 fs-14 fw-semibold">Abcd Pvt Ltd</h6></td>
+                                                <td>Basic</td>
+                                                <td>#INV-0478</td>
+                                                <td class="fw-semibold">$19.00</td>
+                                                <td>12-01-2021</td>
+                                                <td>14-02-2021</td>
+                                                <td>14-03-2021</td>
+                                                <td><span class="badge bg-success-transparent">Paid</span></td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="fe fe-file-text  text-primary"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Download"><i class="fe fe-download   text-success"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>02</td>
+                                                <td><h6 class="mb-0 fs-14 fw-semibold">Croport Pvt Ltd</h6></td>
+                                                <td>Premium</td>
+                                                <td>#INV-1245</td>
+                                                <td class="fw-semibold">$39.00</td>
+                                                <td>21-01-2021</td>
+                                                <td>15-02-2021</td>
+                                                <td>15-03-2021</td>
+                                                <td><span class="badge bg-danger-transparent">UnPaid</span></td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="fe fe-file-text  text-primary"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Download"><i class="fe fe-download   text-success"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>03</td>
+                                                <td><h6 class="mb-0 fs-14 fw-semibold">frecho Pvt Ltd</h6></td>
+                                                <td>Advanced</td>
+                                                <td>#INV-5280</td>
+                                                <td class="fw-semibold">$69.00</td>
+                                                <td>21-02-2021</td>
+                                                <td>28-02-2021</td>
+                                                <td>28-03-2021</td>
+                                                <td><span class="badge bg-success-transparent">Paid</span></td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="fe fe-file-text  text-primary"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Download"><i class="fe fe-download   text-success"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>04</td>
+                                                <td><h6 class="mb-0 fs-14 fw-semibold">kolit Pvt Ltd</h6></td>
+                                                <td>Enterprise</td>
+                                                <td>#INV-2876</td>
+                                                <td class="fw-semibold">$139.00</td>
+                                                <td>05-02-2021</td>
+                                                <td>10-02-2021</td>
+                                                <td>10-03-2021</td>
+                                                <td><span class="badge bg-success-transparent">Paid</span></td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="fe fe-file-text  text-primary"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Download"><i class="fe fe-download   text-success"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>05</td>
+                                                <td><h6 class="mb-0 fs-14 fw-semibold">Movck Pvt Ltd</h6></td>
+                                                <td>Basic</td>
+                                                <td>#INV-1986</td>
+                                                <td class="fw-semibold">$19.00</td>
+                                                <td>05-12-2020</td>
+                                                <td>10-12-2020</td>
+                                                <td>10-01-2021</td>
+                                                <td><span class="badge bg-danger-transparent">UnPaid</span></td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="fe fe-file-text  text-primary"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Download"><i class="fe fe-download   text-success"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>06</td>
+                                                <td><h6 class="mb-0 fs-14 fw-semibold">Loki Pvt Ltd</h6></td>
+                                                <td>Premium</td>
+                                                <td>#INV-2689</td>
+                                                <td class="fw-semibold">$39.00</td>
+                                                <td>11-11-2020</td>
+                                                <td>20-11-2020</td>
+                                                <td>20-12-2020</td>
+                                                <td><span class="badge bg-success-transparent">Paid</span></td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="fe fe-file-text  text-primary"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Download"><i class="fe fe-download   text-success"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>07</td>
+                                                <td><h6 class="mb-0 fs-14 fw-semibold">Kloki Pvt Ltd</h6></td>
+                                                <td>Advanced</td>
+                                                <td>#INV-0298</td>
+                                                <td class="fw-semibold">$69.00</td>
+                                                <td>12-10-2020</td>
+                                                <td>18-10-2020</td>
+                                                <td>18-11-2020</td>
+                                                <td><span class="badge bg-success-transparent">Paid</span></td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="fe fe-file-text  text-primary"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Download"><i class="fe fe-download   text-success"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>08</td>
+                                                <td><h6 class="mb-0 fs-14 fw-semibold">Gomalik Pvt Ltd</h6></td>
+                                                <td>Enterprise</td>
+                                                <td>#INV-7618</td>
+                                                <td class="fw-semibold">$139.00</td>
+                                                <td>12-07-2020</td>
+                                                <td>22-07-2020</td>
+                                                <td>22-08-2020</td>
+                                                <td><span class="badge bg-success-transparent">Paid</span></td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="fe fe-file-text  text-primary"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Download"><i class="fe fe-download   text-success"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>09</td>
+                                                <td><h6 class="mb-0 fs-14 fw-semibold">Mooke Pvt Ltd</h6></td>
+                                                <td>Basic</td>
+                                                <td>#INV-4920</td>
+                                                <td class="fw-semibold">$19.00</td>
+                                                <td>22-06-2020</td>
+                                                <td>25-06-2020</td>
+                                                <td>25-07-2020</td>
+                                                <td><span class="badge bg-danger-transparent">UnPaid</span></td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="fe fe-file-text  text-primary"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Download"><i class="fe fe-download   text-success"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>10</td>
+                                                <td><h6 class="mb-0 fs-14 fw-semibold">Kloki Pvt Ltd</h6></td>
+                                                <td>Premium</td>
+                                                <td>#INV-2109</td>
+                                                <td class="fw-semibold">$39.00</td>
+                                                <td>15-04-2020</td>
+                                                <td>28-04-2020</td>
+                                                <td>28-05-2020</td>
+                                                <td><span class="badge bg-success-transparent">Paid</span></td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="fe fe-file-text  text-primary"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Download"><i class="fe fe-download   text-success"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- Start::pagination -->
+                                <nav class="mt-4">
+                                    <ul class="pagination justify-content-end mb-0">
+                                        <li class="page-item disabled"><a class="page-link" href="javascript:void(0);">Prev</a></li>
+                                        <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
+                                    </ul>
+                                </nav>
+                                <!-- End::pagination -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               <!--End::row-1 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+        <!--Clock-IN Modal -->
+        <div class="modal fade"  id="clockinmodal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><span class="fe fe-clock  me-1"></span>Clock In</h5>
+                        <button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="countdowntimer text-center">
+                            <div class="mt-3 d-flex justify-content-center fs-30 digital-clock"></div>
+                            <label class="form-label">Current Time</label>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">IP Address</label>
+                            <input type="text" class="form-control" placeholder="225.192.145.1" disabled="">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Working Form</label>
+                            <select name="projects"  class="form-control custom-select" data-trigger>
+                                <option value="0">Select</option>
+                                <option value="1">Office</option>
+                                <option value="2">Home</option>
+                                <option value="3">Others</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Note:</label>
+                            <textarea class="form-control" rows="3">Some text here...</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                        <button class="btn btn-primary">Clock In</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Clock-IN Modal  -->
+
+        <!--Apply Leaves Modal -->
+        <div class="modal fade"  id="newcompanymodal">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Job</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Position</label>
+									</div>
+									<div class="col-md-9">
+										<input type="text" class="form-control" placeholder="Name" value="">
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Job Type</label>
+									</div>
+									<div class="col-md-9">
+                                    <select class="form-control custom-select" data-trigger data-placeholder="Select Priority">
+                                        <option value="1">Full Time</option>
+                                        <option value="2">Part Time</option>
+                                        <option value="3">Freelancer</option>
+                                    </select>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Description</label>
+									</div>
+									<div class="col-md-9">
+										<textarea class="form-control" id="text-area1" rows="3"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Posted Date</label>
+									</div>
+									<div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Last Date To Apply</label>
+									</div>
+									<div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Close Date</label>
+									</div>
+									<div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+									</div>
+								</div>
+							</div>
+							<div class="row mt-3">
+								<div class="col-md-3">
+									<label class="form-label mb-0 mt-1">Status</label>
+								</div>
+								<div class="col-md-9">
+									<div class="custom-controls-stacked d-md-flex">
+										<label class="custom-control custom-radio success me-4">
+											<input type="radio" class="custom-control-input" name="example-radios1" value="option1">
+											<span class="custom-control-label">Active</span>
+										</label>
+										<label class="custom-control custom-radio success me-4">
+											<input type="radio" class="custom-control-input" name="example-radios1" value="option2">
+											<span class="custom-control-label">InActive</span>
+										</label>
+									</div>
+								</div>
+							</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button  class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                        <button  class="btn btn-success" >Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Apply Leaves Modal  -->
+
+        <!--Apply Leaves Modal -->
+        <div class="modal fade editjobtmodal">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Job</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Position</label>
+									</div>
+									<div class="col-md-9">
+										<input type="text" class="form-control" placeholder="Name" value="Senior PHP Developer">
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Job Type</label>
+									</div>
+									<div class="col-md-9">
+                                    <select class="form-control custom-select" data-trigger data-placeholder="Select Priority">
+                                        <option value="1">Full Time</option>
+                                        <option value="2">Part Time</option>
+                                        <option value="3">Freelancer</option>
+                                    </select>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Description</label>
+									</div>
+									<div class="col-md-9">
+										<textarea class="form-control" id="text-area" rows="3">Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur</textarea>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Posted Date</label>
+									</div>
+									<div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Last Date To Apply</label>
+									</div>
+									<div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Close Date</label>
+									</div>
+									<div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+									</div>
+								</div>
+							</div>
+							<div class="row mt-3">
+								<div class="col-md-3">
+									<label class="form-label mb-0 mt-1">Status</label>
+								</div>
+								<div class="col-md-9">
+									<div class="custom-controls-stacked d-md-flex">
+										<label class="custom-control custom-radio success me-4">
+											<input type="radio" class="custom-control-input" name="example-radios1" value="option1" checked>
+											<span class="custom-control-label">Active</span>
+										</label>
+										<label class="custom-control custom-radio success me-4">
+											<input type="radio" class="custom-control-input" name="example-radios1" value="option2">
+											<span class="custom-control-label">InActive</span>
+										</label>
+									</div>
+								</div>
+							</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button  class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                        <button  class="btn btn-success" >Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- Edit Company Modal -->
+        <div class="modal fade"  id="editmodal">
+            <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Package</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row ">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label">Package Name</label>
+                                    <select class="form-control custom-select" data-trigger data-placeholder="Select Priority">
+                                        <option label="Select Package"></option>
+                                        <option value="1" selected>Free</option>
+                                        <option value="2">Basic</option>
+                                        <option value="3">Premium</option>
+                                        <option value="4">Advanced</option>
+                                        <option value="5">Enterprise</option>
+                                        </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12  mt-3">
+                                <div class="form-group">
+                                    <label class="form-label">Package Type</label>
+                                    <select class="form-control custom-select" data-trigger data-placeholder="Select Priority">
+                                        <option label="Select Package"></option>
+									<option value="1" selected>Monthly</option>
+									<option value="2">Yearly</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row  mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Min Users</label>
+                                    <input class="form-control" placeholder="min" value="00">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Max Users</label>
+                                    <input class="form-control" placeholder="max" value="05">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label">Storage</label>
+                                    <select class="form-control custom-select" data-trigger data-placeholder="Select storage">
+                                        <option label="Select storage"></option>
+                                        <option value="1" selected>Limited</option>
+                                        <option value="2">Unlimited</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label">Description</label>
+                            <textarea rows="2" class="form-control" placeholder="something text here..."></textarea>
+                        </div>
+                        <div class="custom-controls-stacked d-md-flex mt-3">
+                            <label class="form-label me-5">Status :</label>
+                            <div class="form-check mb-0 me-4">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault11">
+                                <label class="form-check-label" for="flexRadioDefault11">
+                                    Active
+                                </label>
+                            </div>
+                            <div class="form-check mb-0">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault12">
+                                <label class="form-check-label" for="flexRadioDefault12">
+                                    InActive
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a  href="javascript:void(0);" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</a>
+                        <a  href="javascript:void(0);" class="btn btn-success">Updated</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Edit Company Modal  -->
+        
+        <!-- Edit Company Modal -->
+        <div class="modal fade"  id="addmodal">
+            <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Package</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row ">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label">Package Name</label>
+                                    <select class="form-control custom-select" data-trigger data-placeholder="Select Priority">
+                                        <option label="Select Package"></option>
+                                        <option value="1">Free</option>
+                                        <option value="2">Basic</option>
+                                        <option value="3">Premium</option>
+                                        <option value="4">Advanced</option>
+                                        <option value="5">Enterprise</option>
+                                        </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12  mt-3">
+                                <div class="form-group">
+                                    <label class="form-label">Package Type</label>
+                                    <select class="form-control custom-select" data-trigger data-placeholder="Select Priority">
+                                        <option label="Select Package"></option>
+									<option value="1">Monthly</option>
+									<option value="2">Yearly</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row  mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Min Users</label>
+                                    <input class="form-control" placeholder="min" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Max Users</label>
+                                    <input class="form-control" placeholder="max" value="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label">Storage</label>
+                                    <select class="form-control custom-select" data-trigger data-placeholder="Select storage">
+                                        <option label="Select storage"></option>
+                                        <option value="1">Limited</option>
+                                        <option value="2">Unlimited</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label">Description</label>
+                            <textarea rows="2" class="form-control" placeholder="something text here..."></textarea>
+                        </div>
+                        <div class="custom-controls-stacked d-md-flex mt-3">
+                            <label class="form-label me-5">Status :</label>
+                            <div class="form-check mb-0 me-4">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault0" id="flexRadioDefault01">
+                                <label class="form-check-label" for="flexRadioDefault01">
+                                    Active
+                                </label>
+                            </div>
+                            <div class="form-check mb-0">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault0" id="flexRadioDefault02">
+                                <label class="form-check-label" for="flexRadioDefault02">
+                                    InActive
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a  href="javascript:void(0);" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</a>
+                        <a  href="javascript:void(0);" class="btn btn-success">Updated</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Edit Company Modal  -->
+
+        <!-- Modal -->
+        <div class="modal fade"  id="remindermodal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Reminder</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="form-label">Project</label>
+                            <select class="form-control custom-select" data-trigger data-placeholder="Select Department">
+                                <option value="1">Project 01</option>
+                                <option value="2">Project 02</option>
+                                <option value="3">Project 03</option>
+                                <option value="4">Project 04</option>
+                                <option value="5">Project 05</option>
+                            </select>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label">Select Date</label>
+                            <div class="input-group">
+                                <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                <input type="text" class="form-control choose-date flatpickr-input" placeholder="DD-MM-YYYY" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label">Note:</label>
+                            <textarea class="form-control" rows="3">Some text here...</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button  class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                        <button  class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+
+    <!-- Date & Time Picker JS -->
+    <script src="../assets/libs/flatpickr/flatpickr.min.js"></script>
+
+    <!-- Default date picker js-->
+    <script src="../assets/js/default-flat-datepicker.js"></script> 
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

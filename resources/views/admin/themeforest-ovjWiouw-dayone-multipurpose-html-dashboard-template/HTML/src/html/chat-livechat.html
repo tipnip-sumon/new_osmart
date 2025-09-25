@@ -1,0 +1,666 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                @SPK@include("partials/page-header.html", {"title": "Live Chat"})
+
+                <!-- Start::row-1 -->
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card overflow-hidden">
+									<div class="tile tile-alt mb-0 border-0" id="messages-main">
+										<div class="ms-menu">
+											<div class="tab-menu-heading border-top-0">
+												<div class="tabs-menu1 px-3">
+													<ul class="nav gap-1">
+														<li><a href="#tab-7" class="active" data-bs-toggle="tab">Chat</a></li>
+														<li><a href="#tab-8" data-bs-toggle="tab" class="">Contacts</a></li>
+													</ul>
+												</div>
+											</div>
+											<div class="tab-content">
+												<div class="tab-pane rounded-0 p-0 active border-0 border-top" id="tab-7">
+													<ul class="list-group lg-alt chat-conatct-list rounded-0" id="ChatList">
+														<li class="list-group-item d-flex p-3  mt-0 rounded-0">
+															<a  href="javascript:void(0);">
+																<div class="float-start pe-2 flex-shrink-0">
+                                                                    <span class="avatar avatar-md online avatar-rounded">
+                                                                        <img src="../assets/images/users/5.jpg" alt="img">
+                                                                    </span>
+																</div>
+																<div class="d-table-cell">
+																	<div class="list-group-item-heading  fw-semibold">Davil Parnell</div>
+																	<small class="list-group-item-text text-muted">Fierent fastidii recteque ad pro</small>
+																</div>
+																<span class="chat-time text-muted">2 mins</span>
+															</a>
+														</li>
+														<li class="list-group-item d-flex p-3 border-top mt-0">
+															<a  href="javascript:void(0);">
+																<div class="float-start pe-2 flex-shrink-0">
+                                                                    <span class="avatar avatar-md online avatar-rounded">
+                                                                        <img src="../assets/images/users/2.jpg" alt="img">
+                                                                    </span>
+																</div>
+																<div class="d-table-cell">
+																	<div class="list-group-item-heading  fw-semibold">Ann Watkinson</div>
+																	<small class="list-group-item-text text-muted">Cum sociis natoque penatibus </small>
+																</div>
+																<span class="chat-time text-muted">10 mins</span>
+															</a>
+														</li>
+														<li class="list-group-item d-flex p-3 border-top mt-0">
+															<a  href="javascript:void(0);">
+																<div class="float-start pe-2 flex-shrink-0">
+                                                                    <span class="avatar avatar-md online avatar-rounded">
+                                                                        <img src="../assets/images/users/7.jpg" alt="img">
+                                                                    </span>
+																</div>
+																<div class="d-table-cell">
+																	<div class="list-group-item-heading  fw-semibold">Marse Walter</div>
+																	<small class="list-group-item-text text-muted">Suspendisse sapien ligula</small>
+																</div>
+																<span class="chat-time text-muted">15 mins</span>
+															</a>
+														</li>
+														<li class="list-group-item d-flex p-3 border-top mt-0">
+															<a  href="javascript:void(0);">
+																<div class="lv-avatar float-start pe-2 flex-shrink-0">
+                                                                    <span class="avatar avatar-md online avatar-rounded">
+                                                                        <img src="../assets/images/users/3.jpg" alt="img">
+                                                                    </span>
+																</div>
+																<div class="d-table-cell">
+																	<div class="list-group-item-heading  fw-semibold">Jeremy Robbins</div>
+																	<small class="list-group-item-text text-muted">Phasellus porttitor tellus nec</small>
+																</div>
+																<span class="chat-time text-muted">30 mins</span>
+															</a>
+														</li>
+														<li class="list-group-item d-flex p-3 border-top mt-0">
+															<a  href="javascript:void(0);">
+																<div class="lv-avatar float-start pe-2 flex-shrink-0">
+                                                                    <span class="avatar avatar-md online avatar-rounded">
+                                                                        <img src="../assets/images/users/9.jpg" alt="img">
+                                                                    </span>
+																</div>
+																<div class="d-table-cell">
+																	<div class="list-group-item-heading  fw-semibold">Reginald Horace</div>
+																	<small class="list-group-item-text text-muted">Quisque consequat arcu eget</small>
+																</div>
+																<span class="chat-time text-muted">50 min</span>
+															</a>
+														</li>
+														<li class="list-group-item d-flex p-3 border-top mt-0">
+															<a  href="javascript:void(0);">
+																<div class="float-start pe-2 flex-shrink-0">
+                                                                    <span class="avatar avatar-md online avatar-rounded">
+                                                                        <img src="../assets/images/users/6.jpg" alt="img">
+                                                                    </span>
+																</div>
+																<div class="d-table-cell">
+																	<div class="list-group-item-heading  fw-semibold">Shark Henry</div>
+																	<small class="list-group-item-text text-muted">Nam lobortis odio et leo maximu</small>
+																</div>
+																<span class="chat-time text-muted">1 day</span>
+															</a>
+														</li>
+														<li class="list-group-item d-flex p-3 border-top mt-0">
+															<a  href="javascript:void(0);">
+																<div class="float-start pe-2 flex-shrink-0">
+                                                                    <span class="avatar avatar-md online avatar-rounded">
+                                                                        <img src="../assets/images/users/7.jpg" alt="img">
+                                                                    </span>
+																</div>
+																<div class="d-table-cell">
+																	<div class="list-group-item-heading  fw-semibold">Paul Van Dack</div>
+																	<small class="list-group-item-text text-muted">Nam posuere purus sed velit auctor sodales</small>
+																</div>
+																<span class="chat-time text-muted">2 days</span>
+															</a>
+														</li>
+														<li class="list-group-item d-flex p-3 border-top mt-0">
+															<a  href="javascript:void(0);">
+																<div class="lv-avatar float-start pe-2 flex-shrink-0">
+                                                                    <span class="avatar avatar-md online avatar-rounded">
+                                                                        <img src="../assets/images/users/5.jpg" alt="img">
+                                                                    </span>
+																</div>
+																<div class="d-table-cell">
+																	<div class="list-group-item-heading  fw-semibold">James Anderson</div>
+																	<small class="list-group-item-text text-muted">Vivamus imperdietsag</small>
+																</div>
+																<span class="chat-time text-muted">2 days</span>
+															</a>
+														</li>
+													</ul>
+												</div>
+												<div class="tab-pane p-0  border-0 border-top rounded-0" id="tab-8">
+													<ul class="list-group lg-alt chat-conatct-list rounded-0" id="ChatList2">
+														<li class="list-group-item d-flex p-3 mt-0">
+															<div class="float-start pe-2 flex-shrink-0">
+																<img src="../assets/images/users/5.jpg" alt="" class="avatar avatar-md avatar-rounded">
+															</div>
+															<div class="d-table-cell">
+																<div class="list-group-item-heading text-default fw-semibold">Davil Parnell</div>
+																<small class="list-group-item-text text-muted">davilparnell@gmail.com</small>
+															</div>
+															<div class="ms-auto">
+																<a data-bs-toggle="dropdown" class="option-dots"  href="javascript:void(0);">
+																	<span class="fe fe-more-vertical"></span>
+																</a>
+																<ul class="dropdown-menu dropdown-menu-end">
+																	<li><a class="dropdown-item" href="javascript:void(0);">Call</a></li>
+																	<li><a class="dropdown-item" href="javascript:void(0);">Videocall</a></li>
+																	<li><a class="dropdown-item" href="javascript:void(0);">New Message</a></li>
+																	<li><a class="dropdown-item" href="javascript:void(0);">Settings</a></li>
+																</ul>
+															</div>
+														</li>
+														<li class="list-group-item d-flex p-3 border-top mt-0">
+															<div class="float-start pe-2 flex-shrink-0">
+																<img src="../assets/images/users/2.jpg" alt="" class="avatar avatar-md avatar-rounded">
+															</div>
+															<div class="d-table-cell">
+																<div class="list-group-item-heading text-default fw-semibold">Ann Watkinson</div>
+																<small class="list-group-item-text text-muted">annwatkinso@gmail.com</small>
+															</div>
+															<div class="ms-auto">
+																<a data-bs-toggle="dropdown" class="option-dots"  href="javascript:void(0);">
+																	<span class="fe fe-more-vertical"></span>
+																</a>
+																<ul class="dropdown-menu dropdown-menu-end">
+																	<li><a class="dropdown-item" href="javascript:void(0);">Call</a></li>
+																	<li><a class="dropdown-item" href="javascript:void(0);">Videocall</a></li>
+																	<li><a class="dropdown-item" href="javascript:void(0);">New Message</a></li>
+																	<li><a class="dropdown-item" href="javascript:void(0);">Settings</a></li>
+																</ul>
+															</div>
+														</li>
+														<li class="list-group-item d-flex p-3 border-top mt-0">
+															<div class="float-start pe-2 flex-shrink-0">
+																<img src="../assets/images/users/7.jpg" alt="" class="avatar avatar-md avatar-rounded">
+															</div>
+															<div class="d-table-cell">
+																<div class="list-group-item-heading text-default fw-semibold">Marse Walter</div>
+																<small class="list-group-item-text text-muted">marsewalter@gmail.com</small>
+															</div>
+															<div class="ms-auto">
+																<a data-bs-toggle="dropdown" class="option-dots"  href="javascript:void(0);">
+																	<span class="fe fe-more-vertical"></span>
+																</a>
+																<ul class="dropdown-menu dropdown-menu-end">
+																	<li><a class="dropdown-item" href="javascript:void(0);">Call</a></li>
+																	<li><a class="dropdown-item" href="javascript:void(0);">Videocall</a></li>
+																	<li><a class="dropdown-item" href="javascript:void(0);">New Message</a></li>
+																	<li><a class="dropdown-item" href="javascript:void(0);">Settings</a></li>
+																</ul>
+															</div>
+														</li>
+														<li class="list-group-item d-flex p-3 border-top mt-0">
+															<div class="lv-avatar float-start pe-2 flex-shrink-0">
+																<img src="../assets/images/users/3.jpg" alt="" class="avatar avatar-md avatar-rounded">
+															</div>
+															<div class="d-table-cell">
+																<div class="list-group-item-heading text-default fw-semibold">Jeremy Robbins</div>
+																<small class="list-group-item-text text-muted">jeremyrobbins@gmail.com</small>
+															</div>
+															<div class="ms-auto">
+																<a data-bs-toggle="dropdown" class="option-dots"  href="javascript:void(0);">
+																	<span class="fe fe-more-vertical"></span>
+																</a>
+																<ul class="dropdown-menu dropdown-menu-end">
+																	<li><a class="dropdown-item" href="javascript:void(0);">Call</a></li>
+																	<li><a class="dropdown-item" href="javascript:void(0);">Videocall</a></li>
+																	<li><a class="dropdown-item" href="javascript:void(0);">New Message</a></li>
+																	<li><a class="dropdown-item" href="javascript:void(0);">Settings</a></li>
+																</ul>
+															</div>
+														</li>
+														<li class="list-group-item d-flex p-3 border-top mt-0">
+															<div class="lv-avatar float-start pe-2 flex-shrink-0">
+																<img src="../assets/images/users/9.jpg" alt="" class="avatar avatar-md avatar-rounded">
+															</div>
+															<div class="d-table-cell">
+																<div class="list-group-item-heading text-default fw-semibold">Reginald Horace</div>
+																<small class="list-group-item-text text-muted">reginaldhorace@gmail.com</small>
+															</div>
+															<div class="ms-auto">
+																<a data-bs-toggle="dropdown" class="option-dots"  href="javascript:void(0);">
+																	<span class="fe fe-more-vertical"></span>
+																</a>
+																<ul class="dropdown-menu dropdown-menu-end">
+																	<li><a class="dropdown-item" href="javascript:void(0);">Call</a></li>
+																	<li><a class="dropdown-item" href="javascript:void(0);">Videocall</a></li>
+																	<li><a class="dropdown-item" href="javascript:void(0);">New Message</a></li>
+																	<li><a class="dropdown-item" href="javascript:void(0);">Settings</a></li>
+																</ul>
+															</div>
+														</li>
+														<li class="list-group-item d-flex p-3 border-top mt-0">
+															<div class="float-start pe-2 flex-shrink-0">
+																<img src="../assets/images/users/6.jpg" alt="" class="avatar avatar-md avatar-rounded">
+															</div>
+															<div class="d-table-cell">
+																<div class="list-group-item-heading text-default fw-semibold">Shark Henry</div>
+																<small class="list-group-item-text text-muted">sharkhenry@gmail.com</small>
+															</div>
+															<div class="ms-auto">
+																<a data-bs-toggle="dropdown" class="option-dots"  href="javascript:void(0);">
+																	<span class="fe fe-more-vertical"></span>
+																</a>
+																<ul class="dropdown-menu dropdown-menu-end">
+																	<li><a class="dropdown-item" href="javascript:void(0);">Call</a></li>
+																	<li><a class="dropdown-item" href="javascript:void(0);">Videocall</a></li>
+																	<li><a class="dropdown-item" href="javascript:void(0);">New Message</a></li>
+																	<li><a class="dropdown-item" href="javascript:void(0);">Settings</a></li>
+																</ul>
+															</div>
+														</li>
+														<li class="list-group-item d-flex p-3 border-top mt-0">
+															<div class="float-start pe-2 flex-shrink-0">
+																<img src="../assets/images/users/7.jpg" alt="" class="avatar avatar-md avatar-rounded">
+															</div>
+															<div class="d-table-cell">
+																<div class="list-group-item-heading text-default fw-semibold">Paul Van Dack</div>
+																<small class="list-group-item-text text-muted">paulvandack@gmail.com</small>
+															</div>
+															<div class="ms-auto">
+																<a data-bs-toggle="dropdown" class="option-dots"  href="javascript:void(0);">
+																	<span class="fe fe-more-vertical"></span>
+																</a>
+																<ul class="dropdown-menu dropdown-menu-end">
+																	<li><a class="dropdown-item" href="javascript:void(0);">Call</a></li>
+																	<li><a class="dropdown-item" href="javascript:void(0);">Videocall</a></li>
+																	<li><a class="dropdown-item" href="javascript:void(0);">New Message</a></li>
+																	<li><a class="dropdown-item" href="javascript:void(0);">Settings</a></li>
+																</ul>
+															</div>
+														</li>
+														<li class="list-group-item d-flex p-3 border-top mt-0">
+															<div class="lv-avatar float-start pe-2 flex-shrink-0">
+																<img src="../assets/images/users/5.jpg" alt="" class="avatar avatar-md avatar-rounded">
+															</div>
+															<div class="d-table-cell">
+																<div class="list-group-item-heading text-default fw-semibold">James Anderson</div>
+																<small class="list-group-item-text text-muted">jamesanderson@gmail.com</small>
+															</div>
+															<div class="ms-auto">
+																<a data-bs-toggle="dropdown" class="option-dots"  href="javascript:void(0);">
+																	<span class="fe fe-more-vertical"></span>
+																</a>
+																<ul class="dropdown-menu dropdown-menu-end">
+																	<li><a class="dropdown-item" href="javascript:void(0);">Call</a></li>
+																	<li><a class="dropdown-item" href="javascript:void(0);">Videocall</a></li>
+																	<li><a class="dropdown-item" href="javascript:void(0);">New Message</a></li>
+																	<li><a class="dropdown-item" href="javascript:void(0);">Settings</a></li>
+																</ul>
+															</div>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div class="ms-body">
+											<div class="action-header clearfix border-bottom bg-transparent d-flex flex-wrap">
+												<div class="float-start hidden-xs d-flex chat-user mb-2 mb-sm-0">
+													<img src="../assets/images/users/16.jpg" alt="" class="avatar avatar-lg avatar-rounded me-2">
+													<div class="align-items-center mt-2">
+														<div class="fw-semibold">Abigali kelly</div>
+														<span class="w-2 h-2  bg-success d-inline-block me-1 rounded"></span> <small>active</small>
+													</div>
+												</div>
+												<ul class="ah-actions actions align-items-center d-flex gap-1 flex-wrap ms-auto">
+													<li>
+														<a  href="javascript:void(0);" class="option-dots border" data-bs-toggle="tooltip"  title="Call">
+															<span class="fe fe-phone-call"></span>
+														</a>
+													</li>
+													<li>
+														<a  href="javascript:void(0);" class="option-dots border" data-bs-toggle="tooltip"  title="Archive">
+															<span class="fe fe-folder-plus"></span>
+														</a>
+													</li>
+													<li>
+														<a  href="javascript:void(0);" class="option-dots border" data-bs-toggle="tooltip" title="Trash">
+															<span class="fe fe-trash-2"></span>
+														</a>
+													</li>
+													<li>
+														<a  href="javascript:void(0);" class="option-dots border" data-bs-toggle="tooltip" title="View Info">
+															<span class="fe fe-info"></span>
+													 	</a>
+													</li>
+													<li class="dropdown">
+														<a data-bs-toggle="dropdown" class="option-dots border"  href="javascript:void(0);">
+															<span class="fe fe-more-horizontal"></span>
+														</a>
+														<ul class="dropdown-menu dropdown-menu-start">
+															<li>
+                                                                <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
+															</li>
+															<li>
+                                                                <a class="dropdown-item" href="javascript:void(0);">Message Settings</a>
+															</li>
+														</ul>
+													</li>
+												</ul>
+											</div>
+											<div class="chat-body-style ps" id="ChatBody">
+												<div class="message-feed d-flex mt-0">
+													<div class="float-start pe-2 flex-shrink-0">
+														<img src="../assets/images/users/16.jpg" alt="" class="avatar avatar-md avatar-rounded">
+													</div>
+													<div class="">
+														<div class="mf-content">
+															Quisque consequat arcu eget odio cursus, ut tempor arcu vestibulum. Etiam ex arcu, porta a urna non, lacinia pellentesque orci. Proin semper sagittis erat, eget condimentum sapien viverra et.
+														</div>
+                                                        <small class="mf-date d-block"><i class="fe fe-clock"></i> 20/05/2020 at 09:00</small>
+													</div>
+												</div>
+												<div class="message-feed right">
+													<div class="float-end ps-2">
+														<img src="../assets/images/users/5.jpg" alt="" class="avatar avatar-md avatar-rounded">
+													</div>
+													<div class="media-body">
+														<div class="mf-content">
+															Mauris volutpat magna nibh, et condimentum est rutrum a. Nunc sed turpis mi. In eu massa a sem pulvinar lobortis.
+														</div>
+														<small class="mf-date"><i class="fe fe-clock"></i> 20/05/2020 at 09:30</small>
+													</div>
+												</div>
+												<div class="message-feed d-flex">
+													<div class="float-start pe-2 flex-shrink-0">
+														<img src="../assets/images/users/16.jpg" alt="" class="avatar avatar-md avatar-rounded">
+													</div>
+													<div class="">
+														<div class="mf-content">
+															Etiam ex arcumentum
+														</div>
+														<small class="mf-date"><i class="fe fe-clock"></i> 20/05/2020 at 09:33</small>
+													</div>
+												</div>
+												<div class="message-feed right">
+													<div class="float-end ps-2">
+														<img src="../assets/images/users/5.jpg" alt="" class="avatar avatar-md avatar-rounded">
+													</div>
+													<div class="media-body">
+														<div class="mf-content">
+															Etiam nec facilisis lacus. Nulla imperdiet augue ullamcorper dui ullamcorper, eu laoreet sem consectetur. Aenean et ligula risus. Praesent sed posuere sem. Cum sociis natoque penatibus et magnis dis parturient montes,
+														</div>
+														<small class="mf-date"><i class="fe fe-clock"></i> 20/05/2020 at 10:10</small>
+													</div>
+												</div>
+												<div class="message-feed d-flex">
+													<div class="float-start pe-2 flex-shrink-0">
+														<img src="../assets/images/users/16.jpg" alt="" class="avatar avatar-md avatar-rounded">
+													</div>
+													<div class="">
+														<div class="mf-content">
+															Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam ac tortor ut elit sodales varius. Mauris id ipsum id mauris malesuada tincidunt. Vestibulum elit massa, pulvinar at sapien sed, luctus vestibulum eros.
+														</div>
+														<small class="mf-date"><i class="fe fe-clock"></i> 20/05/2020 at 10:24</small>
+													</div>
+												</div>
+											</div>
+											<div class="msb-reply">
+												<textarea placeholder="What's on your mind..."></textarea>
+												<button><span class="fe fe-send"></span></button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+                <!--End::row-1 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+        
+        
+        <!-- Chat popup Icon -->
+		<a  href="javascript:void(0);" id="chat-popup" class="chat-popup-active stretched-link"><i class="fe fe-message-square"></i></a>
+
+		<!--Chat Popup-->
+		<div class="chat-message-popup card mb-4 animated">
+			<div class="popup-head">
+				<div class="row">
+					<div class="message-popup-left">
+						<div class="dropdown">
+							<a class="" href="" data-bs-toggle="dropdown"><i class="fe fe-more-horizontal text-fixed-white"></i></a>
+							<div class="dropdown-menu dropdown-menu-left dropdown-menu-arrow">
+								<a  href="javascript:void(0);" class="dropdown-item" >
+									<i class="fe fe-mail text-primary me-1"></i> Send Mail
+								</a>
+								<a class="dropdown-item"  href="javascript:void(0);">
+									<i class="fe fe-thumbs-up text-primary me-1"></i> Rate as Good
+								</a>
+								<a  href="javascript:void(0);" class="dropdown-item" >
+									<i class="fe fe-thumbs-down text-primary me-1"></i> Rate as Bad
+								</a>
+								<a  href="javascript:void(0);" class="dropdown-item" >
+									<i class="fe fe-settings text-primary me-1"></i> Settings
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="text-center font-weight-bold col-12 text-center">
+						Chat With Us
+					</div>
+					<div class="message-popup-right text-end">
+						<a class="card-options-fullscreen me-2"  href="javascript:void(0);" data-bs-toggle="card-fullscreen"><i class="fe fe-maximize text-fixed-white"></i></a>
+						<a class="popup-minimize-normal"  href="javascript:void(0);"><i class="fe fe-x text-fixed-white"></i></a>
+						<a class="popup-minimize stretched-link"  href="javascript:void(0);"><i class="fe fe-x text-fixed-white"></i></a>
+						<a class="popup-minimize-fullscreen"  href="javascript:void(0);"><i class="fe fe-x text-fixed-white"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="popup-chat-main-body">
+				<div class="user-header p-3 border-top border-bottom">
+					<div class="d-flex">
+						<div class="d-flex">
+							<img class="avatar avatar-md avatar-rounded me-2" src="../assets/images/users/16.jpg" alt="message user image">
+							<div>
+								<h6 class="mb-0 font-weight-bold">Abigali kelly</h6>
+								<span class="w-2 h-2 rounded-circle bg-success d-inline-block me-1"></span> <small>active</small>
+							</div>
+						</div>
+						<div class="ms-auto">
+							<div class="chat-message-header-icons mt-1 fs-20">
+								<a class="me-2" href=""><i class="fe fe-volume-2"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="popup-messages pt-0 chat-body-style">
+					<div class="direct-chat-messages">
+						<div class="chat-box-single-line">
+							<abbr class="timestamp">March 15th, 2021</abbr>
+						</div>
+						<div class="direct-chat-msg">
+							<div class="direct-chat-text">Hello. How are you today?<small class="time-text">10.00am</small></div>
+							<img class="direct-chat-img me-2" src="../assets/images/users/16.jpg" alt="message user image">
+						</div>
+						<div class="direct-chat-msg right">
+							<div class="direct-chat-text">
+								Yes
+								<small class="time-text">10.00am</small>
+							</div>
+							<div class="direct-chat-text">
+								I'm fine. Thanks for asking fine. Thanks for asking!
+								<small class="time-text">10.00am</small>
+							</div>
+							<img class="direct-chat-img" src="../assets/images/users/1.jpg" alt="message user image">
+						</div>
+						<div class="chat-box-single-line mt-5">
+							<abbr class="timestamp">March 16th, 2021</abbr>
+						</div>
+						<div class="direct-chat-msg">
+							<div class="direct-chat-text">Various versions have evolved over the years, sometimes<small class="time-text">10.00am</small></div>
+							<img class="direct-chat-img me-2" src="../assets/images/users/16.jpg" alt="message user image">
+						</div>
+						<div class="direct-chat-msg right">
+							<div class="direct-chat-text">
+								If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.
+								<small class="time-text">10.00am</small>
+							</div>
+							<img class="direct-chat-img" src="../assets/images/users/1.jpg" alt="message user image">
+						</div>
+						<div class="direct-chat-msg">
+							<div class="direct-chat-text">All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary<small class="time-text">10.00am</small></div>
+							<div class="direct-chat-text">making this the first true generator on the Internet<small class="time-text">10.00am</small></div>
+							<img class="direct-chat-img me-2" src="../assets/images/users/16.jpg" alt="message user image">
+						</div>
+						<div class="direct-chat-msg right">
+							<div class="direct-chat-text">
+								<img src="../assets/images/media/29.jpg" class="d-block" alt="img">
+								<small class="time-text">10.00am</small>
+							</div>
+							<img class="direct-chat-img" src="../assets/images/users/1.jpg" alt="message user image">
+						</div>
+						<div class="chat-box-single-line mt-5">
+							<abbr class="timestamp">March 16th, 2021</abbr>
+						</div>
+						<div class="direct-chat-msg">
+							<div class="direct-chat-text">Various versions have evolved over the years, sometimes<small class="time-text">10.00am</small></div>
+							<img class="direct-chat-img me-2" src="../assets/images/users/16.jpg" alt="message user image">
+						</div>
+						<div class="direct-chat-msg right">
+							<div class="direct-chat-text">
+								If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.
+								<small class="time-text">10.00am</small>
+							</div>
+							<img class="direct-chat-img" src="../assets/images/users/1.jpg" alt="message user image">
+						</div>
+						<div class="direct-chat-msg">
+							<div class="direct-chat-text"><iframe width="100" height="250" src="https://www.youtube.com/embed/kFjETSa9N7A"  allow="accelerometer; autoplay;" allowfullscreen></iframe><small class="time-text">10.00am</small></div>
+							<div class="direct-chat-text">All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary<small class="time-text">10.00am</small></div>
+							<img class="direct-chat-img me-2" src="../assets/images/users/16.jpg" alt="message user image">
+						</div>
+						<div class="direct-chat-msg right">
+							<div class="direct-chat-text">
+								<img src="../assets/images/media/30.jpg" class="d-block" alt="img">
+								<small class="time-text">10.00am</small>
+							</div>
+							<div class="direct-chat-text">All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary<small class="time-text">10.00am</small></div>
+							<img class="direct-chat-img me-2" src="../assets/images/users/16.jpg" alt="message user image">
+						</div>
+						<div class="direct-chat-msg">
+							<div class="direct-chat-text">making this the first true generator on the Internet<small class="time-text">10.00am</small></div>
+							<img class="direct-chat-img me-2" src="../assets/images/users/16.jpg" alt="message user image">
+						</div>
+						<div class="direct-chat-msg right">
+							<div class="direct-chat-text">
+								<div class="d-flex">
+									<i class="fe fe-file-text fs-40 op-2 text-muted d-block me-2"></i>
+									<div>
+										<div class="font-weight-bold fs-12">sampledemo.txt</div>
+										<span class="fs-12">4.5 kb</span>
+									</div>
+								</div>
+								<small class="time-text">10.00am</small>
+							</div>
+							<div class="direct-chat-text pb-6">
+								<div class="d-flex">
+									<div><img src="../assets/images/media/51.jpg" class="m-1 w-8 h-8 br-2" alt="img"></div>
+									<div><img src="../assets/images/media/52.jpg" class="m-1 w-8 h-8 br-2" alt="img"></div>
+								</div>
+								<div class="d-flex">
+									<div><img src="../assets/images/media/53.jpg" class="m-1 w-8 h-8 br-2" alt="img"></div>
+									<div class="relative"><img src="../assets/images/media/54.jpg" class="m-1 w-8 h-8 br-2" alt="img">
+										<div class="more-images">+10</div>
+									</div>
+								</div>
+								<small class="time-text">10.00am</small>
+							</div>
+							<img class="direct-chat-img" src="../assets/images/users/1.jpg" alt="message user image">
+						</div>
+					</div>
+				</div>
+				<div class="popup-messages-footer card-footer p-0">
+					<textarea id="status_message" placeholder="Type a message..." rows="10" cols="40" name="message" class="form-control"></textarea>
+					<div class="chat-footer-icons">
+						<a class=""  href="javascript:void(0);"><i class="fe fe-paperclip text-muted"></i></a>
+						<a class=""  href="javascript:void(0);"><i class="fe fe-send text-muted"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="popup-end-chat-main-body">
+				<div class="p-4">
+					<div class="section-end-chat text-center chat-content">
+						<h2 class="font-weight-bold">End Chat?</h2>
+						<p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary</p>
+						<div class="mt-6">
+							<a class="btn btn-primary end-chat-button px-5"  href="javascript:void(0);">Conform End Chat</a>
+						</div>
+						<div class="mt-3">
+							<a class="btn btn-link text-primary goback-chat btn-sm"  href="javascript:void(0);"><i class="fe fe-arrow-left"></i> Go Back</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="rating-chat-main-body">
+				<div class="p-4">
+					<div class="text-start">
+						<h3 class="font-weight-bold fs-20">Thank you for Contacting Us</h3>
+						<h6>Please rate our supportive team in the following areas </h6>
+						<form class="mt-3">
+							<div class="mt-0">
+								<label>What is your best reason for your score</label>
+								<div class="star-ratings start-ratings-main mb-3 clearfix">
+									<div class="stars stars-example-fontawesome star-sm">
+										<select class="rating-fontawesome" name="rating">
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4" selected>4</option>
+											<option value="5">5</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="mt-3">
+								<label>What is your best reason for your score</label>
+								<textarea class="form-control" rows="5" cols="50"></textarea>
+							</div>
+							<a class="btn btn-success px-5 mt-4 btn-chat-close"  href="javascript:void(0);">Submit your Review</a>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--Chat Popup-->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Internal livechat JS -->
+    <script src="../assets/js/livechat.js"></script>
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

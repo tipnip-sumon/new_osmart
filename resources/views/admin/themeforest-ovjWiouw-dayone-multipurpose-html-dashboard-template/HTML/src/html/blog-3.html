@@ -1,0 +1,136 @@
+@SPK@include("partials/mainhead.html")
+
+<link rel="stylesheet" href="../assets/libs/quill/quill.snow.css">
+<link rel="stylesheet" href="../assets/libs/quill/quill.bubble.css">
+<link rel="stylesheet" href="../assets/libs/filepond/filepond.min.css">
+<link rel="stylesheet" href="../assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.css">
+<link rel="stylesheet" href="../assets/libs/filepond-plugin-image-edit/filepond-plugin-image-edit.min.css">
+<link rel="stylesheet" href="../assets/libs/dropzone/dropzone.css">
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                @SPK@include("partials/page-header.html", {"title": "Blog 03"})
+
+                <!-- Start::row-1 -->
+                <div class="row row-sm">
+                    <div class="col-lg-12 col-md-12 col-md-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="form-group mb-3">
+                                    <label class="form-label fw-medium">Title</label>
+                                    <input type="text" class="form-control" value="Title">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="form-label fw-medium">Category</label>
+                                    <select class="form-control select2 form-select" data-trigger>
+                                        <option>Select</option>
+                                        <option value="1">Fashion</option>
+                                        <option value="2">Life Style</option>
+                                        <option value="3">Science</option>
+                                        <option value="4">Health</option>
+                                        <option value="5">Humanities</option>
+                                        <option value="6">Business</option>
+                                        <option value="7">Marketing</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-3 gx-4">
+                                    <label class="form-label fw-medium">Type</label>
+                                    <div class="d-md-flex ad-post-details">
+                                        <div class="form-check me-3">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                                id="flexRadioDefault1">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                Image
+                                            </label>
+                                        </div>
+                                        <div class="form-check me-3">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                                id="flexRadioDefault2" checked>
+                                            <label class="form-check-label" for="flexRadioDefault2">
+                                                Video
+                                            </label>
+                                        </div>
+                                        <div class="form-check me-3">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                                id="flexRadioDefault3">
+                                            <label class="form-check-label" for="flexRadioDefault3">
+                                                Audio
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                                id="flexRadioDefault4">
+                                            <label class="form-check-label" for="flexRadioDefault4">
+                                                Text
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ql-wrapper ql-wrapper-demo mb-3">
+                                    <div class="ql-wrapper ql-wrapper-demo mb-3">
+                                        <label class="fw-medium form-label">Product Description</label>
+                                        <div id="editor"></div>
+                                    </div>
+                                </div>
+                                <label class="form-label fw-medium">Upload File</label>
+                                <div class="p-4 border rounded-6 mb-4 form-group">
+                                    <div>
+                                        <form data-single="true" method="post" action="https://httpbin.org/post" class="dropzone"></form>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-0">
+                                    <label class="form-label fw-medium">Upload Video URL</label>
+                                    <input type="text" class="form-control" placeholder="https://videos.com" value="https://www.youtube.com/embed/tMWkeBIohBs">
+                                </div>
+                            </div>
+                            <div class="card-footer mb-1">
+                                <a href="javascript:void(0)" class="btn btn-primary">Post</a>
+                                <a href="javascript:void(0)" class="btn btn-danger">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-1 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Quill Editor JS -->
+    <script src="../assets/libs/quill/quill.min.js"></script>
+
+    <!-- Dropzone JS -->
+    <script src="../assets/libs/dropzone/dropzone-min.js"></script>
+
+    <!-- Blog Post JS -->
+    <script src="../assets/js/blog-03.js"></script>
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

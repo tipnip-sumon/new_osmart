@@ -1,0 +1,350 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                @SPK@include("partials/page-header.html", {"title": "Invoice List"})
+
+                <!-- Start::row-1 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col mb-4">
+                                        <a  href="javascript:void(0);" class="btn btn-primary"><i class="fe fe-plus"></i> Add New Invoice</a>
+                                    </div>
+                                    <div class="col col-auto mb-4">
+                                        <div class="form-group w-100">
+                                            <div class="input-icon">
+                                                <span class="input-icon-addon">
+                                                    <i class="fe fe-search"></i>
+                                                </span>
+                                                <input type="text" class="form-control" placeholder="Search Invoice">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="e-table">
+                                    <div class="table-responsive table-lg">
+                                        <table class="table card-table table-vcenter text-nowrap border" id="example1">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Invoice</th>
+                                                    <th>Amount</th>
+                                                    <th>Generate Date</th>
+                                                    <th>Due Date</th>
+                                                    <th>Bill to</th>
+                                                    <th>Options</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="align-middle w-5">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
+                                                            <label class="form-check-label" for="flexCheckDefault1"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="d-flex flex-wrap">
+                                                            <img src="../assets/images/media/files/2.png" alt="img" class="w-5 h-5 me-2">
+                                                            <div class="mt-1">
+                                                                <a class="btn-link"  href="javascript:void(0);">INVOICE #23543</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-nowrap align-middle"><span class="fw-semibold">$230</span></td>
+                                                    <td class="text-nowrap align-middle"><span>10 Jan 2020</span></td>
+                                                    <td class="text-nowrap align-middle">
+                                                        25 Jan 2020
+                                                    </td>
+                                                    <td class="text-nowrap align-middle">
+                                                        Daneil Robert
+                                                    </td>
+                                                    <td>
+                                                        <div class="">
+                                                            <a  href="javascript:void(0);" class="btn btn-light" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fe fe-chevron-down"></i></a>
+                                                            <div class="dropdown-menu">
+                                                                <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-eye me-2"></i> View</a>
+                                                                <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-share me-2"></i> Send</a>
+                                                                <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-edit me-2"></i> Edit</a>
+                                                                <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-trash me-2"></i> Delete</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="align-middle w-5">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
+                                                            <label class="form-check-label" for="flexCheckDefault2"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="d-flex flex-wrap">
+                                                            <img src="../assets/images/media/files/2.png" alt="img" class="w-5 h-5 me-2">
+                                                            <div class="mt-1">
+                                                                <a class="btn-link"  href="javascript:void(0);">INVOICE #43245</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-nowrap align-middle"><span class="fw-semibold">$640</span></td>
+                                                    <td class="text-nowrap align-middle"><span>10 Jan 2020</span></td>
+                                                    <td class="text-nowrap align-middle">
+                                                        25 Jan 2020
+                                                    </td>
+                                                    <td class="text-nowrap align-middle">
+                                                        Daneil Robert
+                                                    </td>
+                                                    <td>
+                                                        <a  href="javascript:void(0);" class="btn btn-light" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fe fe-chevron-down"></i></a>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-eye me-2"></i> View</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-share me-2"></i> Send</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-edit me-2"></i> Edit</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-trash me-2"></i> Delete</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="align-middle w-5">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3">
+                                                            <label class="form-check-label" for="flexCheckDefault3"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="d-flex flex-wrap">
+                                                            <img src="../assets/images/media/files/2.png" alt="img" class="w-5 h-5 me-2">
+                                                            <div class="mt-1">
+                                                                <a class="btn-link"  href="javascript:void(0);">INVOICE #54323</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-nowrap align-middle"><span class="fw-semibold">$241</span></td>
+                                                    <td class="text-nowrap align-middle"><span>10 Jan 2020</span></td>
+                                                    <td class="text-nowrap align-middle">
+                                                        25 Jan 2020
+                                                    </td>
+                                                    <td class="text-nowrap align-middle">
+                                                        Daneil Robert
+                                                    </td>
+                                                    <td>
+                                                        <a  href="javascript:void(0);" class="btn btn-light" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fe fe-chevron-down"></i></a>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-eye me-2"></i> View</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-share me-2"></i> Send</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-edit me-2"></i> Edit</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-trash me-2"></i> Delete</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="align-middle w-5">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault4">
+                                                            <label class="form-check-label" for="flexCheckDefault4"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="d-flex flex-wrap">
+                                                            <img src="../assets/images/media/files/2.png" alt="img" class="w-5 h-5 me-2">
+                                                            <div class="mt-1">
+                                                                <a class="btn-link"  href="javascript:void(0);">INVOICE #52345</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-nowrap align-middle"><span class="fw-semibold">$543</span></td>
+                                                    <td class="text-nowrap align-middle"><span>10 Jan 2020</span></td>
+                                                    <td class="text-nowrap align-middle">
+                                                        25 Jan 2020
+                                                    </td>
+                                                    <td class="text-nowrap align-middle">
+                                                        Daneil Robert
+                                                    </td>
+                                                    <td>
+                                                        <a  href="javascript:void(0);" class="btn btn-light" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fe fe-chevron-down"></i></a>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-eye me-2"></i> View</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-share me-2"></i> Send</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-edit me-2"></i> Edit</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-trash me-2"></i> Delete</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="align-middle w-5">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault5">
+                                                            <label class="form-check-label" for="flexCheckDefault5"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="d-flex flex-wrap">
+                                                            <img src="../assets/images/media/files/2.png" alt="img" class="w-5 h-5 me-2">
+                                                            <div class="mt-1">
+                                                                <a class="btn-link"  href="javascript:void(0);">INVOICE #65343</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-nowrap align-middle"><span class="fw-semibold">$654</span></td>
+                                                    <td class="text-nowrap align-middle"><span>10 Jan 2020</span></td>
+                                                    <td class="text-nowrap align-middle">
+                                                        25 Jan 2020
+                                                    </td>
+                                                    <td class="text-nowrap align-middle">
+                                                        Daneil Robert
+                                                    </td>
+                                                    <td>
+                                                        <a  href="javascript:void(0);" class="btn btn-light" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fe fe-chevron-down"></i></a>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-eye me-2"></i> View</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-share me-2"></i> Send</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-edit me-2"></i> Edit</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-trash me-2"></i> Delete</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="align-middle w-5">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault6">
+                                                            <label class="form-check-label" for="flexCheckDefault6"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="d-flex flex-wrap">
+                                                            <img src="../assets/images/media/files/2.png" alt="img" class="w-5 h-5 me-2">
+                                                            <div class="mt-1">
+                                                                <a class="btn-link"  href="javascript:void(0);">INVOICE #23654</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-nowrap align-middle"><span class="fw-semibold">$523</span></td>
+                                                    <td class="text-nowrap align-middle"><span>10 Jan 2020</span></td>
+                                                    <td class="text-nowrap align-middle">
+                                                        25 Jan 2020
+                                                    </td>
+                                                    <td class="text-nowrap align-middle">
+                                                        Daneil Robert
+                                                    </td>
+                                                    <td>
+                                                        <a  href="javascript:void(0);" class="btn btn-light" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fe fe-chevron-down"></i></a>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-eye me-2"></i> View</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-share me-2"></i> Send</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-edit me-2"></i> Edit</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-trash me-2"></i> Delete</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="align-middle w-5">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault7">
+                                                            <label class="form-check-label" for="flexCheckDefault7"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="d-flex flex-wrap">
+                                                            <img src="../assets/images/media/files/2.png" alt="img" class="w-5 h-5 me-2">
+                                                            <div class="mt-1">
+                                                                <a class="btn-link"  href="javascript:void(0);">INVOICE #53245</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-nowrap align-middle"><span class="fw-semibold">$324</span></td>
+                                                    <td class="text-nowrap align-middle"><span>10 Jan 2020</span></td>
+                                                    <td class="text-nowrap align-middle">
+                                                        25 Jan 2020
+                                                    </td>
+                                                    <td class="text-nowrap align-middle">
+                                                        Daneil Robert
+                                                    </td>
+                                                    <td>
+                                                        <a  href="javascript:void(0);" class="btn btn-light" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fe fe-chevron-down"></i></a>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-eye me-2"></i> View</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-share me-2"></i> Send</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-edit me-2"></i> Edit</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-trash me-2"></i> Delete</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="align-middle w-5">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault8">
+                                                            <label class="form-check-label" for="flexCheckDefault8"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="d-flex flex-wrap">
+                                                            <img src="../assets/images/media/files/2.png" alt="img" class="w-5 h-5 me-2">
+                                                            <div class="mt-1">
+                                                                <a class="btn-link"  href="javascript:void(0);">INVOICE #34234</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-nowrap align-middle"><span class="fw-semibold">$543</span></td>
+                                                    <td class="text-nowrap align-middle"><span>10 Jan 2020</span></td>
+                                                    <td class="text-nowrap align-middle">
+                                                        25 Jan 2020
+                                                    </td>
+                                                    <td class="text-nowrap align-middle">
+                                                        Daneil Robert
+                                                    </td>
+                                                    <td>
+                                                        <a  href="javascript:void(0);" class="btn btn-light" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fe fe-chevron-down"></i></a>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-eye me-2"></i> View</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-share me-2"></i> Send</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-edit me-2"></i> Edit</a>
+                                                            <a class="dropdown-item"  href="javascript:void(0);"><i class="fe fe-trash me-2"></i> Delete</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-1 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

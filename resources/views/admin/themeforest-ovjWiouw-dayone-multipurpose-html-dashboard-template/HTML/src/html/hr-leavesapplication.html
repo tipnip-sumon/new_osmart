@@ -1,0 +1,705 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                @SPK@include("partials/page-header.html", {"title": "Leaves Applications"})
+
+                <!-- Start::row-1 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card custom-card">
+                            <div class="card-header border-bottom-0 justify-content-between">
+                                <h5 class="card-title">Recent Earned Leave Applications</h5>
+                                <div class="card-options">
+                                    <a href="hr-recentleaves.html" class="btn btn-primary">View All</a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-xxl-3 col-lg-6 col-md-12">
+                                        <div class="card border p-0 shadow-none">
+                                            <div class="card-header border-0">
+                                                <h3 class="card-title">Earned Leave Request</h3>
+                                                <div class="ms-auto">
+                                                    <span class="badge badge-md bg-warning-transparent">3 days left</span>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex p-3">
+                                                <div>
+                                                    <span class="avatar avatar-lg">
+                                                        <img src="../assets/images/users/1.jpg" class="rounded-circle cover-image" alt="">
+                                                    </span>
+                                                </div>
+                                                <div class="ps-3 lh-1">
+                                                    <h5 class="mb-0 mt-1 text-dark fs-18">Faith Harris</h5>
+                                                    <p class="text-muted fs-12 mt-1 mb-0">Designing <span class="my-auto fs-9 fw-normal  ms-1 me-1 text-black-20">/</span> Web Designer</p>
+                                                </div>
+                                            </div>
+                                            <div class="card-body pt-2 bg-light">
+                                                <div class="mt-3 mb-3">
+                                                    <div class="h5 mb-1">
+                                                        <span class="fe fe-calendar"></span> : 16-01-2021
+                                                        <span class="badge badge-md bg-primary-transparent">1 day</span>
+                                                    </div>
+                                                    <small class="text-muted fs-11">Applied On: 05-01-2021 On<span class="fw-medium"> 5 weeks ago</span></small>
+                                                </div>
+                                                <div class="progress progress-sm mb-2 progress-animate" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+                                                    <div class="progress-bar bg-success" style="width: 70%">
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-end justify-content-between mb-0">
+                                                    <h6 class="fs-12 mb-0">Remaining Leaves</h6>
+                                                    <h6 class="fw-bold fs-12 mb-0">15</h6>
+                                                </div>
+                                            </div>
+                                            <div class="p-4">
+                                                <label class="form-label">Reason:</label>
+                                                <p class="text-muted leave-text">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                                            </div>
+                                            <div class="card-footer p-0 border-top-0">
+                                                <div class="btn-group w-100 leaves-btns">
+                                                    <a  href="javascript:void(0);" class="btn btn-lg btn-outline-light w-50 text-success rounded-0 border-bottom-0 border-end-0 border-start-0">Accept</a>
+                                                    <a  href="javascript:void(0);" class="btn btn-lg btn-outline-light w-55 text-danger rounded-0 border-bottom-0 border-end-0">Reject</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xxl-3 col-lg-6 col-md-12">
+                                        <div class="card border p-0 shadow-none">
+                                            <div class="card-header border-0">
+                                                <h3 class="card-title">Earned Leave Request</h3>
+                                                <div class="ms-auto">
+                                                    <span class="badge badge-md bg-warning-transparent">5 days left</span>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex p-3">
+                                                <div>
+                                                    <span class="avatar avatar-lg">
+                                                        <img src="../assets/images/users/9.jpg" class="rounded-circle cover-image" alt="">
+                                                    </span>
+                                                </div>
+                                                <div class="ps-3 lh-1">
+                                                    <h5 class="mb-0 mt-1 text-dark fs-18">Austin Bell</h5>
+                                                    <p class="text-muted fs-12 mt-1 mb-0">Development <span class="my-auto fs-9 fw-normal  ms-1 me-1 text-black-20">/</span> Angular Developer</p>
+                                                </div>
+                                            </div>
+                                            <div class="card-body pt-2 bg-light">
+                                                <div class="mt-3 mb-3">
+                                                    <div class="h5 mb-1">
+                                                        <span class="fe fe-calendar"></span> : 14-01-2021<span class="text-muted leave-to">To</span>15-01-2021
+                                                        <span class="badge badge-md bg-primary-transparent">2 days</span>
+                                                    </div>
+                                                    <small class="text-muted fs-11">Applied On: 13-01-2021 On<span class="fw-medium"> 3 weeks ago</span></small>
+                                                </div>
+                                                <div class="progress progress-sm mb-2 progress-animate" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+                                                    <div class="progress-bar bg-success" style="width: 60%">
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-end justify-content-between mb-0">
+                                                    <h6 class="fs-12 mb-0">Remaining Leaves</h6>
+                                                    <h6 class="fw-bold fs-12 mb-0">18</h6>
+                                                </div>
+                                            </div>
+                                            <div class="p-4">
+                                                <label class="form-label">Reason:</label>
+                                                <p class="text-muted leave-text">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                                            </div>
+                                            <div class="card-footer p-0 border-top-0">
+                                                <div class="btn-group w-100 leaves-btns">
+                                                    <a  href="javascript:void(0);" class="btn btn-lg btn-outline-light w-50 text-success rounded-0 border-bottom-0 border-end-0 border-start-0">Accept</a>
+                                                    <a  href="javascript:void(0);" class="btn btn-lg btn-outline-light w-55 text-danger rounded-0 border-bottom-0 border-end-0">Reject</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xxl-3 col-lg-6 col-md-12">
+                                        <div class="card border p-0 shadow-none">
+                                            <div class="card-header border-0">
+                                                <h3 class="card-title">Earned Leave Request</h3>
+                                                <div class="ms-auto">
+                                                    <span class="badge badge-md bg-warning-transparent">5 days left</span>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex p-3">
+                                                <div>
+                                                    <span class="avatar avatar-lg">
+                                                        <img src="../assets/images/users/2.jpg" class="rounded-circle cover-image" alt="">
+                                                    </span>
+                                                </div>
+                                                <div class="ps-3 lh-1">
+                                                    <h5 class="mb-0 mt-1 text-dark fs-18">Maria Bower</h5>
+                                                    <p class="text-muted fs-12 mt-1 mb-0">Marketing  <span class="my-auto fs-9 fw-normal  ms-1 me-1 text-black-20">/</span> Marketing analyst</p>
+                                                </div>
+                                            </div>
+                                            <div class="card-body pt-2 bg-light">
+                                                <div class="mt-3 mb-3">
+                                                    <div class="h5 mb-1">
+                                                        <span class="fe fe-calendar"></span> : 21-01-2021<span class="text-muted leave-to">To</span>27-01-2021
+                                                        <span class="badge badge-md bg-primary-transparent">7 days</span>
+                                                    </div>
+                                                    <small class="text-muted fs-11">Applied On: 11-01-2021 On<span class="fw-medium"> 3 weeks ago</span></small>
+                                                </div>
+                                                <div class="progress progress-sm mb-2 progress-animate" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                                                    <div class="progress-bar bg-success" style="width: 80%">
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-end justify-content-between mb-0">
+                                                    <h6 class="fs-12 mb-0">Remaining Leaves</h6>
+                                                    <h6 class="fw-bold fs-12 mb-0">10</h6>
+                                                </div>
+                                            </div>
+                                            <div class="p-4">
+                                                <label class="form-label">Reason:</label>
+                                                <p class="text-muted leave-text">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                                            </div>
+                                            <div class="card-footer p-0 border-top-0">
+                                                <div class="btn-group w-100 leaves-btns">
+                                                    <a  href="javascript:void(0);" class="btn btn-lg btn-outline-light w-50 text-success rounded-0 border-bottom-0 border-end-0 border-start-0">Accept</a>
+                                                    <a  href="javascript:void(0);" class="btn btn-lg btn-outline-light w-55 text-danger rounded-0 border-bottom-0 border-end-0">Reject</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xxl-3 col-lg-6 col-md-12">
+                                        <div class="card border p-0 shadow-none">
+                                            <div class="card-header border-0">
+                                                <h3 class="card-title">Earned Leave Request</h3>
+                                                <div class="ms-auto">
+                                                    <span class="badge badge-md bg-warning-transparent">1 day left</span>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex p-3">
+                                                <div>
+                                                    <span class="avatar avatar-lg">
+                                                        <img src="../assets/images/users/10.jpg" class="rounded-circle cover-image" alt="">
+                                                    </span>
+                                                </div>
+                                                <div class="ps-3 lh-1">
+                                                    <h5 class="mb-0 mt-1 text-dark fs-18">Peter Hill</h5>
+                                                    <p class="text-muted fs-12 mt-1 mb-0">IT  <span class="my-auto fs-9 fw-normal  ms-1 me-1 text-black-20">/</span> Testor</p>
+                                                </div>
+                                            </div>
+                                            <div class="card-body pt-2 bg-light">
+                                                <div class="mt-3 mb-3">
+                                                    <div class="h5 mb-1">
+                                                        <span class="fe fe-calendar"></span> : 05-01-2021
+                                                        <span class="badge badge-md bg-primary-transparent">1 day</span>
+                                                    </div>
+                                                    <small class="text-muted fs-11">Applied On: 12-12-2020 On<span class="fw-medium"> 3 weeks ago</span></small>
+                                                </div>
+                                                <div class="progress progress-sm mb-2 progress-animate" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                                                    <div class="progress-bar bg-success" style="width: 75%">
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-end justify-content-between mb-0">
+                                                    <h6 class="fs-12 mb-0">Remaining Leaves</h6>
+                                                    <h6 class="fw-bold fs-12 mb-0">12</h6>
+                                                </div>
+                                            </div>
+                                            <div class="p-4">
+                                                <label class="form-label">Reason:</label>
+                                                <p class="text-muted leave-text">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                                            </div>
+                                            <div class="card-footer p-0 border-top-0">
+                                                <div class="btn-group w-100 leaves-btns">
+                                                    <a  href="javascript:void(0);" class="btn btn-lg btn-outline-light w-50 text-success rounded-0 border-bottom-0 border-end-0 border-start-0">Accept</a>
+                                                    <a  href="javascript:void(0);" class="btn btn-lg btn-outline-light w-55 text-danger rounded-0 border-bottom-0 border-end-0">Reject</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-1 -->
+
+                <!-- Start::row-2 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card custom-card">
+                            <div class="card-header  border-0">
+                                <h5 class="card-title">Leaves Summary</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="d-flex align-items-center">
+                                            <span>Show</span>
+                                            <div class="d-flex ms-2 mx-2">
+                                                <div class="form-group">
+                                                    <select name="quantity" id="select-countries17" class="form-control  wd-150" data-trigger>
+                                                        <option value="1" selected="">10</option>
+                                                        <option value="2">25</option>
+                                                        <option value="3">50</option>
+                                                        <option value="4">100</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <span>entries</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="float-end">
+                                            <input type="text" class="form-control" placeholder="search">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-vcenter text-nowrap table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th class="border-bottom-0 w-5">#Emp ID</th>
+                                                <th class="border-bottom-0 w-5">Emp Name</th>
+                                                <th class="border-bottom-0">Leave Type</th>
+                                                <th class="border-bottom-0">From</th>
+                                                <th class="border-bottom-0">To</th>
+                                                <th class="border-bottom-0">Days</th>
+                                                <th class="border-bottom-0">Reason</th>
+                                                <th class="border-bottom-0">Applied on</th>
+                                                <th class="border-bottom-0">Status</th>
+                                                <th class="border-bottom-0">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>#2987</th>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2 avatar-rounded"> 
+                                                           <img src="../assets/images/users/1.jpg" alt="img"> 
+                                                       </span> 
+                                                       <h6 class="mb-0">Faith Harris</h6>
+                                                   </div>
+                                                </td>
+                                                <td>Casual Leave</td>
+                                                <td>16-01-2021</td>
+                                                <td>16-01-2021</td>
+                                                <td class="fw-medium">1 Day</td>
+                                                <td>Personal</td>
+                                                <td>05-01-2021</td>
+                                                <td>
+                                                    <span class="badge bg-primary">New</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex text-start">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Accept">
+                                                            <i class="fe fe-check text-success" ></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Rejected">
+                                                            <i class="fe fe-x text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#leaveapplictionmodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>#4987</th>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2 avatar-rounded"> 
+                                                           <img src="../assets/images/users/9.jpg" alt="img"> 
+                                                       </span> 
+                                                       <h6 class="mb-0">Austin Bell</h6>
+                                                   </div>
+                                                </td>
+                                                <td>Sick Leave</td>
+                                                <td>14-01-2021</td>
+                                                <td>15-01-2021</td>
+                                                <td class="fw-medium">2 Days</td>
+                                                <td>Going to Hospital</td>
+                                                <td>13-01-2021</td>
+                                                <td>
+                                                    <span class="badge bg-success">Approved</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex text-start">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#leaveapplictionmodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>#6729</th>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2 avatar-rounded"> 
+                                                           <img src="../assets/images/users/2.jpg" alt="img"> 
+                                                       </span> 
+                                                       <h6 class="mb-0">Maria Bower</h6>
+                                                   </div>
+                                                </td>
+                                                <td>Casual Leave</td>
+                                                <td>21-01-2021</td>
+                                                <td>27-01-2021</td>
+                                                <td class="fw-medium">7 Days</td>
+                                                <td>Going to Family Trip</td>
+                                                <td>11-01-2021</td>
+                                                <td>
+                                                    <span class="badge bg-warning">Pending</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex text-start">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Accept">
+                                                            <i class="fe fe-check text-success" ></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Rejected">
+                                                            <i class="fe fe-x text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#leaveapplictionmodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>#2098</th>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2 avatar-rounded"> 
+                                                           <img src="../assets/images/users/10.jpg" alt="img"> 
+                                                       </span> 
+                                                       <h6 class="mb-0">Peter Hill</h6>
+                                                   </div>
+                                                </td>
+                                                <td>Casual Leave</td>
+                                                <td>05-01-2021</td>
+                                                <td>05-01-2021</td>
+                                                <td class="fw-medium">1 Days</td>
+                                                <td>Personal</td>
+                                                <td>12-12-2020</td>
+                                                <td>
+                                                    <span class="badge bg-success">Approved</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex text-start">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#leaveapplictionmodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>#1025</th>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2 avatar-rounded"> 
+                                                           <img src="../assets/images/users/3.jpg" alt="img"> 
+                                                       </span> 
+                                                       <h6 class="mb-0">Victoria Lyman</h6>
+                                                   </div>
+                                                </td>
+                                                <td>Medical Leave</td>
+                                                <td>22-01-2021</td>
+                                                <td>22-01-2021</td>
+                                                <td class="fw-medium">1 Days</td>
+                                                <td>Take Rest</td>
+                                                <td>21-01-2021</td>
+                                                <td>
+                                                    <span class="badge bg-success">Approved</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex text-start">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#leaveapplictionmodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>#3262</th>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2 avatar-rounded"> 
+                                                           <img src="../assets/images/users/11.jpg" alt="img"> 
+                                                       </span> 
+                                                       <h6 class="mb-0">Adam Quinn</h6>
+                                                   </div>
+                                                </td>
+                                                <td>Casual Leave</td>
+                                                <td>18-01-2021</td>
+                                                <td>19-01-2021</td>
+                                                <td class="fw-medium">2 Days</td>
+                                                <td>Going to my Hometown</td>
+                                                <td>10-01-2021</td>
+                                                <td>
+                                                    <span class="badge bg-warning">Pending</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex text-start">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Accept">
+                                                            <i class="fe fe-check text-success" ></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Rejected">
+                                                            <i class="fe fe-x text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#leaveapplictionmodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>#3489</th>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2 avatar-rounded"> 
+                                                           <img src="../assets/images/users/4.jpg" alt="img"> 
+                                                       </span> 
+                                                       <h6 class="mb-0">Melanie Coleman</h6>
+                                                   </div>
+                                                </td>
+                                                <td>Casual Leave</td>
+                                                <td>11-01-2021</td>
+                                                <td>11-01-2021</td>
+                                                <td class="fw-medium">1st Half Day</td>
+                                                <td>Going to Hosiptal</td>
+                                                <td>11-01-2021</td>
+                                                <td>
+                                                    <span class="badge bg-danger">Rejected</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex text-start">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Accept">
+                                                            <i class="fe fe-check text-success" ></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#leaveapplictionmodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>#3698</th>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2 avatar-rounded"> 
+                                                           <img src="../assets/images/users/12.jpg" alt="img"> 
+                                                       </span> 
+                                                       <h6 class="mb-0">Max Wilson</h6>
+                                                   </div>
+                                                </td>
+                                                <td>Medical Leave</td>
+                                                <td>09-01-2021</td>
+                                                <td>09-01-20211</td>
+                                                <td class="fw-medium">1 Day</td>
+                                                <td>Going to Hosiptal</td>
+                                                <td>08-01-2021</td>
+                                                <td>
+                                                    <span class="badge bg-success">Approved</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex text-start">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#leaveapplictionmodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>#5612</th>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2 avatar-rounded"> 
+                                                           <img src="../assets/images/users/5.jpg" alt="img"> 
+                                                       </span> 
+                                                       <h6 class="mb-0">Amelia Russell</h6>
+                                                   </div>
+                                                </td>
+                                                <td>Casual Leave</td>
+                                                <td>08-01-2021</td>
+                                                <td>07-01-2021</td>
+                                                <td class="fw-medium">2 Days</td>
+                                                <td>Personal</td>
+                                                <td>25-12-2020</td>
+                                                <td>
+                                                    <span class="badge bg-success">Approved</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex text-start">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#leaveapplictionmodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>#0245</th>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2 avatar-rounded"> 
+                                                           <img src="../assets/images/users/13.jpg" alt="img"> 
+                                                       </span> 
+                                                       <h6 class="mb-0">Justin Metcalfe</h6>
+                                                   </div>
+                                                </td>
+                                                <td>Casual Leave</td>
+                                                <td>21-12-2020</td>
+                                                <td>21-12-2020</td>
+                                                <td class="fw-medium">1 Day</td>
+                                                <td>Personal</td>
+                                                <td>19-12-2020</td>
+                                                <td>
+                                                    <span class="badge bg-danger">Rejected</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex text-start">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Accept">
+                                                            <i class="fe fe-check text-success" ></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#leaveapplictionmodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                 <!-- Start::pagination -->
+                                 <nav class="mt-4">
+                                    <ul class="pagination justify-content-end mb-0">
+                                        <li class="page-item disabled"><a class="page-link" href="javascript:void(0);">Prev</a></li>
+                                        <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
+                                    </ul>
+                                </nav>
+                                <!-- End::pagination -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Start::row-2 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+        <!-- Leave Appliction Modal -->
+			<div class="modal fade"  id="leaveapplictionmodal">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Leave Application</h5>
+							<button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label class="form-label">Leave Letter:</label>
+								<textarea class="form-control" rows="13">Hi Sir/Madam.
+
+	I am Faith Harris. I request you to grant me leave for 1day (16-01-2021) because some personal reason. I would back at work on 17-0-2021.
+
+
+Thanking you.
+
+Your's faithfully,
+Faith Harris
+
+								</textarea>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<a  href="javascript:void(0);" class="btn btn-success" data-bs-dismiss="modal">Accept</a>
+							<a  href="javascript:void(0);" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#replymodal" data-bs-dismiss="modal">Rejected</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--  Leave Appliction Modal  -->
+
+			<!-- Reason Appliction Modal -->
+			<div class="modal fade"  id="replymodal">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Reply</h5>
+							<button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label class="form-label">Reason:</label>
+								<textarea class="form-control" rows="5" placeholder="Some text here..."></textarea>
+							</div>
+						</div>
+						<div class="modal-footer d-flex">
+							<div>
+								<a  href="javascript:void(0);" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#leaveapplictionmodal" data-bs-dismiss="modal"><i class="feather feather-arrow-left me-1"></i>Back</a>
+							</div>
+							<div class="ms-auto">
+								<a  href="javascript:void(0);" class="btn btn-outline-primary" data-bs-dismiss="modal">close</a>
+								<a  href="javascript:void(0);" class="btn btn-primary" data-bs-dismiss="modal">Submit</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--  Reason Appliction Modal  -->
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

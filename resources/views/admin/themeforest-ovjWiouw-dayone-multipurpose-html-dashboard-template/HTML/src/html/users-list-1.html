@@ -1,0 +1,427 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                @SPK@include("partials/page-header.html", {"title": "User-List 01"})
+
+                <!-- Start::row-1 -->
+                <div class="row flex-lg-nowrap">
+                    <div class="col-12 mb-3">
+                        <div class="e-panel card">
+                            <div class="card-body">
+                                <div class="e-table">
+                                    <div class="table-responsive table-lg mt-3">
+                                        <table class="table table-bordered border-top text-nowrap" id="example1">
+                                            <thead>
+                                                <tr>
+                                                    <th class="align-top border-bottom-0 wd-5"></th>
+                                                    <th class="border-bottom-0 w-20">User</th>
+                                                    <th class="border-bottom-0 w-15">Date of joining</th>
+                                                    <th class="border-bottom-0 w-30">Performance</th>
+                                                    <th class="border-bottom-0 w-10">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="align-middle">
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="form-check-input" name="example-checkbox2" value="option2">
+                                                            <span class="custom-control-label"></span>
+                                                        </label>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="d-flex gap-1 flex-wrap">
+                                                            <img src="../assets/images/users/2.jpg" alt="" class="avatar avatar-rounded avatar-md d-block">
+                                                            <div class="ms-2 mt-1">
+                                                                <h6 class="mb-0 fw-semibold">Nam Guy</h6>
+                                                                <small class="">web designer</small>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-nowrap align-middle"><span>09 Dec 2017</span></td>
+                                                    <td class="text-nowrap align-middle">
+                                                        <div class="float-end"><h6 class="mb-2 ms-4 fw-semibold">30%</h6></div>
+                                                        <div class="progress progress-sm mb-0 mt-1">
+                                                            <div class="progress-bar bg-primary" style="width: 30%"></div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="btn-group align-top">
+                                                            <button class="btn btn-sm btn-white"  >Edit</button>
+                                                            <button class="btn btn-sm btn-white" ><span class="fe fe-trash-2 text-muted fs-16"></span></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="align-middle">
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="form-check-input" name="example-checkbox2" value="option2">
+                                                            <span class="custom-control-label"></span>
+                                                        </label>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="d-flex gap-1 flex-wrap">
+                                                            <img src="../assets/images/users/1.jpg" alt="" class="avatar avatar-rounded avatar-md d-block">
+                                                            <div class="ms-2 mt-1">
+                                                                <h6 class="mb-0 fw-semibold">Tracy Lindahl</h6>
+                                                                <small class="">web developer</small>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-nowrap align-middle"><span>27 Jan 2018</span></td>
+                                                    <td class="text-nowrap align-middle">
+                                                        <div class="float-end"><h6 class="mb-2 ms-4 fw-semibold">82%</h6></div>
+                                                        <div class="progress progress-sm mb-0 mt-1">
+                                                            <div class="progress-bar bg-primary" style="width: 82%"></div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="btn-group align-top">
+                                                            <button class="btn btn-sm btn-white"  >Edit</button>
+                                                            <button class="btn btn-sm btn-white" ><span class="fe fe-trash-2 text-muted fs-16"></span></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="align-middle">
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="form-check-input" name="example-checkbox2" value="option2">
+                                                            <span class="custom-control-label"></span>
+                                                        </label>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="d-flex gap-1 flex-wrap">
+                                                            <img src="../assets/images/users/3.jpg" alt="" class="avatar avatar-rounded avatar-md d-block">
+                                                            <div class="ms-2 mt-1">
+                                                                <h6 class="mb-0 fw-semibold">Breana Millis</h6>
+                                                                <small class="">Php developer</small>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-nowrap align-middle"><span>09 Dec 2017</span></td>
+                                                    <td class="text-nowrap align-middle">
+                                                        <div class="float-end"><h6 class="mb-2 ms-4 fw-semibold">68%</h6></div>
+                                                        <div class="progress progress-sm mb-0 mt-1">
+                                                            <div class="progress-bar bg-primary" style="width: 68%"></div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="btn-group align-top">
+                                                            <button class="btn btn-sm btn-white"  >Edit</button>
+                                                            <button class="btn btn-sm btn-white" ><span class="fe fe-trash-2 text-muted fs-16"></span></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="align-middle">
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="form-check-input" name="example-checkbox2" value="option2">
+                                                            <span class="custom-control-label"></span>
+                                                        </label>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="d-flex gap-1 flex-wrap">
+                                                            <img src="../assets/images/users/4.jpg" alt="" class="avatar avatar-rounded avatar-md d-block">
+                                                            <div class="ms-2 mt-1">
+                                                                <h6 class="mb-0 fw-semibold">Antwan Tramel</h6>
+                                                                <small class="">Hr Manager</small>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-nowrap align-middle"><span>20 Jan 2018</span></td>
+                                                    <td class="text-nowrap align-middle">
+                                                        <div class="float-end"><h6 class="mb-2 ms-4 fw-semibold">78%</h6></div>
+                                                        <div class="progress progress-sm mb-0 mt-1">
+                                                            <div class="progress-bar bg-primary" style="width: 78%"></div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="btn-group align-top">
+                                                            <button class="btn btn-sm btn-white"  >Edit</button>
+                                                            <button class="btn btn-sm btn-white" ><span class="fe fe-trash-2 text-muted fs-16"></span></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="align-middle">
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="form-check-input" name="example-checkbox2" value="option2">
+                                                            <span class="custom-control-label"></span>
+                                                        </label>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="d-flex gap-1 flex-wrap">
+                                                            <img src="../assets/images/users/5.jpg" alt="" class="avatar avatar-rounded avatar-md d-block">
+                                                            <div class="ms-2 mt-1">
+                                                                <h6 class="mb-0 fw-semibold">Geraldine Arpin</h6>
+                                                                <small class="">Recriuter</small>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-nowrap align-middle"><span>13 Jan 2018</span></td>
+                                                    <td class="text-nowrap align-middle">
+                                                        <div class="float-end"><h6 class="mb-2 ms-4 fw-semibold">45%</h6></div>
+                                                        <div class="progress progress-sm mb-0 mt-1">
+                                                            <div class="progress-bar bg-primary" style="width: 45%"></div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="btn-group align-top">
+                                                            <button class="btn btn-sm btn-white"  >Edit</button>
+                                                            <button class="btn btn-sm btn-white"><span class="fe fe-trash-2 text-muted fs-16"></span></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="align-middle">
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="form-check-input" name="example-checkbox2" value="option2">
+                                                            <span class="custom-control-label"></span>
+                                                        </label>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="d-flex gap-1 flex-wrap">
+                                                            <img src="../assets/images/users/6.jpg" alt="" class="avatar avatar-rounded avatar-md d-block">
+                                                            <div class="ms-2 mt-1">
+                                                                <h6 class="mb-0 fw-semibold">Clement Niehaus</h6>
+                                                                <small class="">Ceo</small>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-nowrap align-middle"><span>	25 Jan 2018</span></td>
+                                                    <td class="text-nowrap align-middle">
+                                                        <div class="float-end"><h6 class="mb-2 ms-4 fw-semibold">60%</h6></div>
+                                                        <div class="progress progress-sm mb-0 mt-1">
+                                                            <div class="progress-bar bg-primary" style="width: 60%"></div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="btn-group align-top">
+                                                            <button class="btn btn-sm btn-white"  >Edit</button>
+                                                            <button class="btn btn-sm btn-white" ><span class="fe fe-trash-2 text-muted fs-16"></span></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="align-middle">
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="form-check-input" name="example-checkbox2" value="option2">
+                                                            <span class="custom-control-label"></span>
+                                                        </label>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="d-flex gap-1 flex-wrap">
+                                                            <img src="../assets/images/users/7.jpg" alt="" class="avatar avatar-rounded avatar-md d-block">
+                                                            <div class="ms-2 mt-1">
+                                                                <h6 class="mb-0 fw-semibold">Melinda Mayers</h6>
+                                                                <small class="">Director</small>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-nowrap align-middle"><span>12 Jan 2018</span></td>
+                                                    <td class="text-nowrap align-middle">
+                                                        <div class="float-end"><h6 class="mb-2 ms-4 fw-semibold">55%</h6></div>
+                                                        <div class="progress progress-sm mb-0 mt-1">
+                                                            <div class="progress-bar bg-primary" style="width: 55%"></div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="btn-group align-top">
+                                                            <button class="btn btn-sm btn-white"  >Edit</button>
+                                                            <button class="btn btn-sm btn-white" ><span class="fe fe-trash-2 text-muted fs-16"></span></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="align-middle">
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="form-check-input" name="example-checkbox2" value="option2">
+                                                            <span class="custom-control-label"></span>
+                                                        </label>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="d-flex gap-1 flex-wrap">
+                                                            <img src="../assets/images/users/8.jpg" alt="" class="avatar avatar-rounded avatar-md d-block">
+                                                            <div class="ms-2 mt-1">
+                                                                <h6 class="mb-0 fw-semibold">Willodean Monson</h6>
+                                                                <small class="">web designer</small>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-nowrap align-middle"><span>27 Jan 2018</span></td>
+                                                    <td class="text-nowrap align-middle">
+                                                        <div class="float-end"><h6 class="mb-2 ms-4 fw-semibold">45%</h6></div>
+                                                        <div class="progress progress-sm mb-0 mt-1">
+                                                            <div class="progress-bar bg-primary" style="width: 45%"></div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="btn-group align-top">
+                                                            <button class="btn btn-sm btn-white"  >Edit</button>
+                                                            <button class="btn btn-sm btn-white" ><span class="fe fe-trash-2 text-muted fs-16"></span></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="align-middle">
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="form-check-input" name="example-checkbox2" value="option2">
+                                                            <span class="custom-control-label"></span>
+                                                        </label>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="d-flex gap-1 flex-wrap">
+                                                            <img src="../assets/images/users/9.jpg" alt="" class="avatar avatar-rounded avatar-md d-block">
+                                                            <div class="ms-2 mt-1">
+                                                                <h6 class="mb-0 fw-semibold">Brenton Moncada</h6>
+                                                                <small class="">web developer</small>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-nowrap align-middle"><span>12 Dec 2017</span></td>
+                                                    <td class="text-nowrap align-middle">
+                                                        <div class="float-end"><h6 class="mb-2 ms-4 fw-semibold">40%</h6></div>
+                                                        <div class="progress progress-sm mb-0 mt-1">
+                                                            <div class="progress-bar bg-primary" style="width: 40%"></div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="btn-group align-top">
+                                                            <button class="btn btn-sm btn-white"  >Edit</button>
+                                                            <button class="btn btn-sm btn-white" ><span class="fe fe-trash-2 text-muted fs-16"></span></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="align-middle">
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="form-check-input" name="example-checkbox2" value="option2">
+                                                            <span class="custom-control-label"></span>
+                                                        </label>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="d-flex gap-1 flex-wrap">
+                                                            <img src="../assets/images/users/10.jpg" alt="" class="avatar avatar-rounded avatar-md d-block">
+                                                            <div class="ms-2 mt-1">
+                                                                <h6 class="mb-0 fw-semibold">Cyndy Kirschbaum</h6>
+                                                                <small class="">web designer</small>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-nowrap align-middle"><span>10 Dec 2017</span></td>
+                                                    <td class="text-nowrap align-middle">
+                                                        <div class="float-end"><h6 class="mb-2 ms-4 fw-semibold">80%</h6></div>
+                                                        <div class="progress progress-sm mb-0 mt-1">
+                                                            <div class="progress-bar bg-primary" style="width: 80%"></div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="btn-group align-top">
+                                                            <button class="btn btn-sm btn-white"  >Edit</button>
+                                                            <button class="btn btn-sm btn-white" ><span class="fe fe-trash-2 text-muted fs-16"></span></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="align-middle">
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="form-check-input" name="example-checkbox2" value="option2">
+                                                            <span class="custom-control-label"></span>
+                                                        </label>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="d-flex gap-1 flex-wrap">
+                                                            <img src="../assets/images/users/11.jpg" alt="" class="avatar avatar-rounded avatar-md d-block">
+                                                            <div class="ms-2 mt-1">
+                                                                <h6 class="mb-0 fw-semibold">Renna Spino</h6>
+                                                                <small class="">Hr Manager</small>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-nowrap align-middle"><span>	03 Dec 2017</span></td>
+                                                    <td class="text-nowrap align-middle">
+                                                        <div class="float-end"><h6 class="mb-2 ms-4 fw-semibold">70%</h6></div>
+                                                        <div class="progress progress-sm mb-0 mt-1">
+                                                            <div class="progress-bar bg-primary" style="width: 70%"></div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="btn-group align-top">
+                                                            <button class="btn btn-sm btn-white"  >Edit</button>
+                                                            <button class="btn btn-sm btn-white" ><span class="fe fe-trash-2 text-muted fs-16"></span></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="align-middle">
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="form-check-input" name="example-checkbox2" value="option2">
+                                                            <span class="custom-control-label"></span>
+                                                        </label>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="d-flex gap-1 flex-wrap">
+                                                            <img src="../assets/images/users/12.jpg" alt="" class="avatar avatar-rounded avatar-md d-block">
+                                                            <div class="ms-2 mt-1">
+                                                                <h6 class="mb-0 fw-semibold">Freeman Kozlowski</h6>
+                                                                <small class="">web developer</small>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-nowrap align-middle"><span>09 Dec 2017</span></td>
+                                                    <td class="text-nowrap align-middle">
+                                                        <div class="float-end"><h6 class="mb-2 ms-4 fw-semibold">65%</h6></div>
+                                                        <div class="progress progress-sm mb-0 mt-1">
+                                                            <div class="progress-bar bg-primary" style="width: 65%"></div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="btn-group align-top">
+                                                            <button class="btn btn-sm btn-white"  >Edit</button>
+                                                            <button class="btn btn-sm btn-white" ><span class="fe fe-trash-2 text-muted fs-16"></span></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End::row-1 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

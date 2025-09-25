@@ -1,0 +1,14 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="60" cy="60" r="60" fill="url(#gradient-affiliate)"/>
+<circle cx="60" cy="45" r="20" fill="white" opacity="0.9"/>
+<path d="M25 95C25 80 40 70 60 70C80 70 95 80 95 95V105C95 107.5 92.5 110 90 110H30C27.5 110 25 107.5 25 105V95Z" fill="white" opacity="0.9"/>
+<!-- Affiliate network/link icon -->
+<circle cx="78" cy="38" r="8" fill="#F59E0B" stroke="white" stroke-width="1"/>
+<path d="M74 34L82 42M74 42L82 34" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+<defs>
+<linearGradient id="gradient-affiliate" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" style="stop-color:#F59E0B;stop-opacity:1" />
+<stop offset="100%" style="stop-color:#D97706;stop-opacity:1" />
+</linearGradient>
+</defs>
+</svg>

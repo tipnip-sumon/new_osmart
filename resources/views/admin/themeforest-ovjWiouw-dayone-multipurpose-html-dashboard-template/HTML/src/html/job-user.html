@@ -1,0 +1,187 @@
+@SPK@include("partials/mainhead.html")
+
+<link rel="stylesheet" href="../assets/libs/quill/quill.snow.css">
+<link rel="stylesheet" href="../assets/libs/quill/quill.bubble.css">
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                <!-- Page Header -->
+                @SPK@include("partials/page-header.html", {"title": "User Profile"})
+                <!-- Page Header Close -->
+                
+                <!-- Start::row-1 -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card custom-card">
+                                <div class="card-body">
+                                    <div class="row mb-4">
+                                        <div class="col-lg-8">
+                                            <div class="profile-pic mb-0">
+                                                <div class="d-md-flex">
+                                                    <span class="avatar avatar-xxl me-2 avatar-rounded">
+                                                        <img src="../assets/images/users/6.jpg" alt="img">
+                                                    </span>
+                                                    <div class="ms-1">
+                                                        <a class="text-dark"  href="javascript:void(0);">
+                                                        <h4 class="mt-3 mb-1 fw-semibold">Faith Harris</h4></a> <span class="text-muted">PHP Developer</span><br>
+                                                        <small class="text-muted">3 Yrs Experience</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+                                            <a class="btn btn-primary" href=""><i class="fe fe-download"></i> Download Resume</a>
+                                        </div>
+                                    </div>
+                                    <h5 class="mb-3 fw-semibold">Description</h5>
+                                    <div class="table-responsive job-user">
+                                        <table class="table row table-borderless w-100 m-0 text-nowrap">
+                                            <tbody class="col-lg-12 col-xl-6 p-0">
+                                                <tr>
+                                                    <td><span class="fw-semibold">Full Name :</span> Faith Harris</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="fw-semibold">Resume Title :</span> Searching For PHP Developer Position</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="fw-semibold">Current Designation :</span> PHP Developer</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="fw-semibold">Annual Salary :</span> $5.7Lacs</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="fw-semibold">Current Company :</span> Info Tech Pvt Ltd</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="fw-semibold">Experience :</span> 3 Yrs</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="fw-semibold">Location :</span> USA</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="fw-semibold">Preferred Location :</span> USA</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="fw-semibold">Qualification :</span> B.Tech(CSE)</td>
+                                                </tr>
+                                            </tbody>
+                                            <tbody class="col-lg-12 col-xl-6 p-0  border-top-0">
+                                                <tr>
+                                                    <td><span class="fw-semibold">Languages :</span> English, German, Spanish.</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="fw-semibold">Email :</span> faith@gmail.com</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="fw-semibold">Phone :</span> +125 254 3562</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="fw-semibold">Industry :</span>  It Software/ Developer</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="fw-semibold">Date Of Birth :</span> 17 December 1990</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="fw-semibold">Gender :</span> Female</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="fw-semibold">Marital Status :</span> Unmarried</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="fw-semibold">Permanent Address :</span> USA</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="fw-semibold">Zip code :</span> 625417</td>
+                                                </tr>
+                                            </tbody>
+                                            <tbody class="p-0">
+                                                <tr>
+                                                    <td><span class="fw-semibold">Key Skills :</span> Effective leadership and management, Good communication, Planning and research skills, Resilience, Self-management, Teamwork and interpersonal skills, Relevant work experience</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <h5 class="mb-4 mt-5 fw-semibold">Employment Details</h5>
+                                    <div>
+                                        <i class='bx bx-caret-right'></i> Currently Working at <span class="fw-semibold">Info Tech Pvt Ltd</span>
+                                    </div>
+                                    <div>
+                                        <i class='bx bx-caret-right'></i> 3 Yrs Of Working Experience in <span class="fw-semibold">Info Tech Pvt Ltd</span>
+                                    </div>
+                                    <h5 class="mb-4 mt-3 fw-semibold">IT Skills</h5>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered border-top mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Skill Name</th>
+                                                    <th>Version</th>
+                                                    <th>Last Used</th>
+                                                    <th>Experience</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">PHP Developer</th>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>3 yrs</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="btn-list">
+                                        <a class="btn btn-primary"  href="javascript:void(0);"><i class="fe fe-download"></i> Download Resume</a>
+                                        <a class="btn btn-warning"  href="javascript:void(0);"><i class="si si-share me-1"></i> Share Profile</a>
+                                        <a class="btn btn-success"  href="javascript:void(0);"><i class="si si-call-in me-1"></i>Contact</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- Start::row-1 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+        
+
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    <!-- Date & Time Picker JS -->
+    <script src="../assets/libs/flatpickr/flatpickr.min.js"></script>
+
+    <!-- Default date picker js-->
+    <script src="../assets/js/default-flat-datepicker.js"></script>
+
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

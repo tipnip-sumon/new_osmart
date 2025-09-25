@@ -1,0 +1,631 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                @SPK@include("partials/page-header.html", {"title": "Add Employee"})
+
+                <!-- Start::row-1 -->
+                <div class="row">
+                    <div class="col-xxl-3 col-md-12 col-lg-12">
+                        <div class="card box-widget widget-user custom-card">
+                            <div class="card-body text-center">
+                                <div class="widget-user-image mx-auto text-center">
+                                    <img  class="avatar avatar-xxl avatar-rounded rounded-circle" alt="img" src="../assets/images/users/1.jpg">
+                                </div>
+                                <div class="pro-user mt-3">
+                                    <h5 class="pro-user-username text-dark mb-1 fs-16">Faith Harris</h5>
+                                    <h6 class="pro-user-desc text-muted fs-12 mb-1">Web Designer</h6>
+                                </div>
+                                <!--Start:: employee ratings -->
+                                <i class="ri-star-s-fill text-warning align-middle fs-16"></i>
+                                <i class="ri-star-s-fill text-warning align-middle fs-16"></i>
+                                <i class="ri-star-s-fill text-warning align-middle fs-16"></i>
+                                <i class="ri-star-s-fill text-warning align-middle fs-16"></i>
+                                <i class="ri-star-half-s-fill text-warning align-middle fs-16"></i>
+                                <!-- End:: employee ratings -->
+                            </div>
+                            <div class="card-footer p-0">
+                                <div class="row mx-0">
+                                    <div class="col-4 text-center py-3 border-end">
+                                        <h5 class="fs-12 fw-medium mb-3">January</h5>
+                                        <h5 class="mb-2">
+                                            <span class="fs-18 text-success">22</span>
+                                            <span class="my-auto fs-9 fw-normal ms-1 me-1">/</span>
+                                            <span class="fs-18 fw-medium text-dark">31</span>
+                                        </h5>
+                                        <h5 class="fs-12 mb-0">Attendance</h5>
+                                    </div>
+                                    <div class="col-4  py-3 text-center border-end">
+                                        <h5 class="fs-12 fw-medium mb-3">Year-2021</h5>
+                                        <h5 class="mb-2">
+                                            <span class="fs-18 text-orange">0</span>
+                                            <span class="my-auto fs-9 fw-normal ms-1 me-1">/</span>
+                                            <span class="fs-18 fw-medium text-dark">41</span>
+                                        </h5>
+                                        <h5 class="fs-12 mb-0">Leaves</h5>
+                                    </div>
+                                    <div class="col-4 text-center py-3">
+                                        <h5 class="fs-12 fw-medium mb-3">Year-2021</h5>
+                                        <h5 class="mb-2">
+                                            <span class="fs-18 text-primary">0</span>
+                                        </h5>
+                                        <h5 class="fs-12 mb-0">Awards</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card custom-card">
+                            <div class="card-header">
+                                <h3 class="card-title">Statistics-2021</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row justify-content-evenly">
+                                    <div class="col-auto pe-0 text-center">
+                                        <div id="attendance"></div>
+                                        <h6 class="fs-14 fw-medium">Attendance</h6>
+                                    </div>
+                                    <div class="col-auto pe-0 text-center">
+                                        <div id="projects1"></div>
+                                        <h6 class="fs-14 fw-medium">Projects</h6>
+                                    </div>
+                                    <div class="col-auto pe-0 text-center">
+                                        <div id="performance"></div>
+                                        <h6 class="fs-14 fw-medium">Performance</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex align-items-end justify-content-between">
+                                    <h6 class="">This Week</h6>
+                                    <h6 class="fw-bold mb-1">0</h6>
+                                </div>
+                                <div class="progress progress-sm progress-animate mb-4" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar bg-danger" style="width: 0%">
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-end justify-content-between">
+                                    <h6 class="">This Month</h6>
+                                    <h6 class="fw-bold mb-1">0</h6>
+                                </div>
+                                <div class="progress progress-sm progress-animate mb-4" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar bg-info" style="width: 0%">
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-end justify-content-between">
+                                    <h6 class="">This Year</h6>
+                                    <h6 class="fw-bold mb-1">0</h6>
+                                </div>
+                                <div class="progress progress-sm progress-animate" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar bg-warning" style="width: 0%">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-9 col-md-12 col-lg-12">
+                        <div class="tab-menu-heading hremp-tabs p-0 border-0">
+                            <div class="tabs-menu1">
+                                <!-- Tabs -->
+                                <ul class="nav panel-tabs">
+                                    <li class="ms-sm-4"><a href="#tab5" class="active"  data-bs-toggle="tab">Personal Details</a></li>
+                                    <li><a href="#tab6"  data-bs-toggle="tab">Company Details</a></li>
+                                    <li><a href="#tab7" data-bs-toggle="tab">Bank Details</a></li>
+                                    <li><a href="#tab8" data-bs-toggle="tab">Upload Documents</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body tabs-menu-body hremp-tabs1 p-0 card custom-card">
+                            <div class="tab-content">
+                                <div class="tab-pane border-0 active" id="tab5">
+                                    <div>
+                                        <h4 class="mb-4 fw-bold">Basic</h4>
+                                        <div class="form-group mb-3 ">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">User Name</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <input type="text" class="form-control mb-md-0 mb-5"  placeholder="First Name">
+                                                            <span class="text-muted"></span>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="text" class="form-control"  placeholder="Last Name">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3 ">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">Father Name</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control"  placeholder="Name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">Contact Number</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control"  placeholder="Phone Number">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">Emergency Contact Number 01</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control"  placeholder="Contact Number01">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">Emergency Contact Number 02</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control"  placeholder="Contact Number02">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3 ">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">Date Of Birth</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control choose-date" placeholder="DD-MM-YYY">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3 ">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label">Gender</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <div class="custom-controls-stacked d-md-flex">
+                                                        <div class="form-check me-4">
+                                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                                                id="flexRadioDefault1" checked="">
+                                                            <label class="form-check-label" for="flexRadioDefault2">
+                                                                Male    
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                                                id="flexRadioDefault2">
+                                                            <label class="form-check-label" for="flexRadioDefault2">
+                                                               Female   
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">Marital Status</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <select name="projects"  class="form-control custom-select" data-trigger>
+                                                        <option value="0">Select</option>
+                                                        <option value="1">Single</option>
+                                                        <option value="2">Married</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">Blood Group</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <select name="projects"  class="form-control custom-select" data-trigger>
+                                                        <option value="0">Select Group</option>
+                                                        <option value="0">A+</option>
+                                                        <option value="1">B+</option>
+                                                        <option value="2">O+</option>
+                                                        <option value="3">AB+</option>
+                                                        <option value="4">A-</option>
+                                                        <option value="5">B-</option>
+                                                        <option value="6">O-</option>
+                                                        <option value="7">AB-</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3 ">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">Email</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control"  placeholder="email">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">Present Address</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <textarea rows="3" class="form-control" placeholder="Address1"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">Permanent Address</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <textarea rows="3" class="form-control" placeholder="Address2"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-label mb-0 mt-2">Upload Photo</div>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <div class="form-group">
+                                                        <input class="form-control" type="file">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h4 class="my-4 mt-7 fw-bold">Account Login</h4>
+                                        <div class="form-group mb-3">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">Employee Email</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control"  placeholder="employee email">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">Password</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="password" class="form-control"  placeholder="password">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3 mt-7">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label">Email Notification:</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <div class="form-check form-check-md form-switch">
+                                                        <input class="form-check-input" type="checkbox" role="switch" id="switch-md1">
+                                                        <label class="form-check-label mt-0 custom-switch-description" for="switch-md">On/Off</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane border-0" id="tab6">
+                                    <div>
+                                        <div class="form-group mb-3">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">Employee ID</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control"  placeholder="#ID">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">Department</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control"  placeholder="Department">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">Designation</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control"  placeholder="Designation">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">Date Of Joining</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control choose-date"  placeholder="DD-MM-YYYY">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">Resignation Date</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control choose-date"  placeholder="DD-MM-YYYY">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">Termination Date</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control choose-date"  placeholder="DD-MM-YYYY">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">Credit Leaves
+                                                        <span class="form-help" data-bs-toggle="tooltip" data-bs-placement="top" title="Unused leaves for the Employee">?</span>
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control"  placeholder="0">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h4 class="my-4 font-weight-bold">Salary</h4>
+                                        <div class="form-group mb-3">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">Type</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <select class="form-control custom-select" data-trigger>
+                                                        <option value="">Select Type</option>
+                                                        <option value="0">Full-Time</option>
+                                                        <option value="1">Part-Time</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">Salary</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control"  placeholder="$Salary">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mt-7">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label">Status:</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <div class="form-check form-check-md form-switch">
+                                                        <input class="form-check-input" type="checkbox" role="switch"
+                                                            id="switch-md" checked>
+                                                        <label class="form-check-label mt-0 custom-switch-description" for="switch-md">Active/Inactive</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane border-0" id="tab7">
+                                    <div>
+                                        <div class="form-group mb-3">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">Account Holder</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control"  placeholder="Name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">Account Number</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control"  placeholder="Number">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">Bank Name</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control"  placeholder="Name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">Branch Location</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control"  placeholder="Location">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">Bank Code (IFSC)
+                                                        <span class="form-help" data-bs-toggle="tooltip" data-bs-placement="top" title="Bank Identify Number in your Country">?</span>
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control"  placeholder="Code">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label mb-0 mt-2">Tax Payer ID (PAN)
+                                                        <span class="form-help" data-bs-toggle="tooltip" data-bs-placement="top" title="Taxpayer Identification Number Used in your Country">?</span>
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control"  placeholder="ID No">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane border-0" id="tab8">
+                                    <div>
+                                        <div class="form-group mb-4">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-label mb-0 mt-2">Resume</div>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input class="form-control" type="file">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-4">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-label mb-0 mt-2">ID Proof</div>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input class="form-control" type="file">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-4">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-label mb-0 mt-2">Offer Letter</div>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input class="form-control" type="file">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-4">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-label mb-0 mt-2">Joining Letter</div>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input class="form-control" type="file">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-4">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-label mb-0 mt-2">Agreement Letter</div>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input class="form-control" type="file">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-4">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-label mb-0 mt-2">Experience Letter</div>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input class="form-control" type="file">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer text-end">
+                                    <a  href="javascript:void(0);" class="btn btn-primary">Updated</a>
+                                    <a  href="javascript:void(0);" class="btn btn-danger">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-1 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    <!-- Rater JS -->
+    <script src="../assets/libs/rater-js/index.js"></script>
+
+    <!-- Date & Time Picker JS -->
+    <script src="../assets/libs/flatpickr/flatpickr.min.js"></script>
+
+    <!-- Default date picker js-->
+    <script src="../assets/js/default-flat-datepicker.js"></script>
+
+    <!-- Apex Charts JS -->
+    <script src="../assets/libs/apexcharts/apexcharts.min.js"></script>
+
+    <!-- Emplpoyee Rating Js-->
+    <script src="../assets/js/hr-addemployee.js"></script>
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

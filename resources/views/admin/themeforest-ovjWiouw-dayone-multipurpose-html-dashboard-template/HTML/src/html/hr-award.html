@@ -1,0 +1,694 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                <!-- Page Header -->
+                <div class="page-header d-lg-flex d-block">
+                    <div class="page-leftheader">
+                        <div class="page-title">Award</div>
+                    </div>
+                    <div class="page-rightheader">
+                        <div class="btn-list">
+                            <a href="hr-attmark.html" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addawardmodal">Add New Award</a>
+                            <button  class="btn btn-light3" data-bs-toggle="tooltip" data-bs-placement="top" title="E-mail"> <i class="fe fe-mail"></i> </button>
+                            <button  class="btn btn-light3" data-bs-placement="top" data-bs-toggle="tooltip" title="Contact"> <i class="fe fe-phone-call"></i> </button>
+                            <button  class="btn btn-primary" data-bs-placement="top" data-bs-toggle="tooltip" title="Info"> <i class="fe fe-info"></i> </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Page Header Close -->
+
+                <!-- Start::row-1 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    <div class="col-lg-6">
+                                        <div class="d-flex align-items-center">
+                                            <span>Show</span>
+                                            <div class="d-flex ms-2 mx-2">
+                                                <div class="form-group mt-2">
+                                                    <select name="quantity" id="select-countries17" class="form-control  wd-150" data-trigger>
+                                                        <option value="1" selected="">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <span>entries</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="float-end">
+                                            <input type="text" class="form-control" placeholder="search">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table  table-vcenter text-nowrap table-bordered border-bottom">
+                                        <thead>
+                                            <tr>
+                                                <th class="border-bottom-0 w-5">No</th>
+                                                <th class="border-bottom-0 w-5">#Emp ID</th>
+                                                <th class="border-bottom-0">Emp Name</th>
+                                                <th class="border-bottom-0">Designation</th>
+                                                <th class="border-bottom-0 text-center w-10">Attendance</th>
+                                                <th class="border-bottom-0">Award Type</th>
+                                                <th class="border-bottom-0">Gift Type</th>
+                                                <th class="border-bottom-0">Date</th>
+                                                <th class="border-bottom-0">Award Information</th>
+                                                <th class="border-bottom-0">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>01</td>
+                                                <td>#2987</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="avatar me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/1.jpg" alt="img">
+                                                        </div>
+                                                        <div>
+                                                            <div class="lh-1">
+                                                                <h6 class="mb-1">Faith Harris</h6>
+                                                            </div>
+                                                            <div class="lh-1">
+                                                                <span
+                                                                    class="fs-12 text-muted">faith@gmail.com</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>Web Designer</td>
+                                                <td>
+                                                    <div id="award-chart1"></div>
+                                                </td>
+                                                <td class="fe-medium">Employee of the Month Award</td>
+                                                <td><span class="badge bg-primary-transparent">Cash</span></td>
+                                                <td>01-02-2021</td>
+                                                <td>Congratulations</td>
+                                                <td>
+                                                    <a class="btn btn-primary btn-icon"  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#editawardmodal">
+                                                        <i class="fe fe-edit" data-bs-toggle="tooltip" data-original-title="View/Edit"></i>
+                                                    </a>
+                                                    <a class="btn btn-danger btn-icon" data-bs-toggle="tooltip" data-original-title="Delete"><i class="fe fe-trash-2"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>02</td>
+                                                <td>#4987</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="avatar me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/9.jpg" alt="img">
+                                                        </div>
+                                                        <div>
+                                                            <div class="lh-1">
+                                                                <h6 class="mb-1">Austin Bell</h6>
+                                                            </div>
+                                                            <div class="lh-1">
+                                                                <span
+                                                                    class="fs-12 text-muted">austin@gmail.com</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>Angular Developer</td>
+                                                <td>
+                                                    <div id="award-chart2"></div>
+                                                </td>
+                                                <td class="fe-medium">Best Team Player Award</td>
+                                                <td><span class="badge bg-orange-transparent">Trophy</span></td>
+                                                <td>15-01-2021</td>
+                                                <td>Congratulations</td>
+                                                <td>
+                                                    <a class="btn btn-primary btn-icon"  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#editawardmodal">
+                                                        <i class="fe fe-edit" data-bs-toggle="tooltip" data-original-title="View/Edit"></i>
+                                                    </a>
+                                                    <a class="btn btn-danger btn-icon" data-bs-toggle="tooltip" data-original-title="Delete"><i class="fe fe-trash-2"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>03</td>
+                                                <td>#6729</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="avatar me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/2.jpg" alt="img">
+                                                        </div>
+                                                        <div>
+                                                            <div class="lh-1">
+                                                                <h6 class="mb-1">Maria Bower</h6>
+                                                            </div>
+                                                            <div class="lh-1">
+                                                                <span
+                                                                    class="fs-12 text-muted">maria@gmail.com</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>Marketing analyst</td>
+                                                <td>
+                                                    <div id="award-chart3"></div>
+                                                </td>
+                                                <td class="fe-medium">Best Attendance Award</td>
+                                                <td><span class="badge bg-success-transparent">Momento</span></td>
+                                                <td>13-12-2020</td>
+                                                <td>Congratulations</td>
+                                                <td>
+                                                    <a class="btn btn-primary btn-icon"  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#editawardmodal">
+                                                        <i class="fe fe-edit" data-bs-toggle="tooltip" data-original-title="View/Edit"></i>
+                                                    </a>
+                                                    <a class="btn btn-danger btn-icon" data-bs-toggle="tooltip" data-original-title="Delete"><i class="fe fe-trash-2"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>04</td>
+                                                <td>#2098</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="avatar me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/10.jpg" alt="img">
+                                                        </div>
+                                                        <div>
+                                                            <div class="lh-1">
+                                                                <h6 class="mb-1">Peter Hill</h6>
+                                                            </div>
+                                                            <div class="lh-1">
+                                                                <span
+                                                                    class="fs-12 text-muted">peter@gmail.com</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>Testor</td>
+                                                <td>
+                                                    <div id="award-chart4"></div>
+                                                </td>
+                                                <td class="fe-medium">Most Improved Performer</td>
+                                                <td><span class="badge bg-orange-transparent">Trophy</span></td>
+                                                <td>05-11-2020</td>
+                                                <td>Congratulations</td>
+                                                <td>
+                                                    <a class="btn btn-primary btn-icon"  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#editawardmodal">
+                                                        <i class="fe fe-edit" data-bs-toggle="tooltip" data-original-title="View/Edit"></i>
+                                                    </a>
+                                                    <a class="btn btn-danger btn-icon" data-bs-toggle="tooltip" data-original-title="Delete"><i class="fe fe-trash-2"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>05</td>
+                                                <td>#1025</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="avatar me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/3.jpg" alt="img">
+                                                        </div>
+                                                        <div>
+                                                            <div class="lh-1">
+                                                                <h6 class="mb-1">Victoria Lyman</h6>
+                                                            </div>
+                                                            <div class="lh-1">
+                                                                <span
+                                                                    class="fs-12 text-muted">victoria@gmail.com</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>General Manager</td>
+                                                <td>
+                                                    <div id="award-chart5"></div>
+                                                </td>
+                                                <td class="fe-medium">The Motivator</td>
+                                                <td><span class="badge bg-success-transparent">Momento</span></td>
+                                                <td>21-09-2020</td>
+                                                <td>Congratulations</td>
+                                                <td>
+                                                    <a class="btn btn-primary btn-icon"  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#editawardmodal">
+                                                        <i class="fe fe-edit" data-bs-toggle="tooltip" data-original-title="View/Edit"></i>
+                                                    </a>
+                                                    <a class="btn btn-danger btn-icon" data-bs-toggle="tooltip" data-original-title="Delete"><i class="fe fe-trash-2"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>06</td>
+                                                <td>#3262</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="avatar me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/11.jpg" alt="img">
+                                                        </div>
+                                                        <div>
+                                                            <div class="lh-1">
+                                                                <h6 class="mb-1">Adam Quinn</h6>
+                                                            </div>
+                                                            <div class="lh-1">
+                                                                <span
+                                                                    class="fs-12 text-muted">adam@gmail.com</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>Accountant</td>
+                                                <td>
+                                                    <div id="award-chart6"></div>
+                                                </td>
+                                                <td class="fe-medium">Stand out Performer</td>
+                                                <td><span class="badge bg-primary-transparent">Cash</span></td>
+                                                <td>18-08-2020</td>
+                                                <td>Congratulations</td>
+                                                <td>
+                                                    <a class="btn btn-primary btn-icon"  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#editawardmodal">
+                                                        <i class="fe fe-edit" data-bs-toggle="tooltip" data-original-title="View/Edit"></i>
+                                                    </a>
+                                                    <a class="btn btn-danger btn-icon" data-bs-toggle="tooltip" data-original-title="Delete"><i class="fe fe-trash-2"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>07</td>
+                                                <td>#3489</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="avatar me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/4.jpg" alt="img">
+                                                        </div>
+                                                        <div>
+                                                            <div class="lh-1">
+                                                                <h6 class="mb-1">Melanie Coleman</h6>
+                                                            </div>
+                                                            <div class="lh-1">
+                                                                <span
+                                                                    class="fs-12 text-muted">melanie@gmail.com</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>App Designer</td>
+                                                <td>
+                                                    <div id="award-chart7"></div>
+                                                </td>
+                                                <td class="fe-medium">Work Anniversary Award</td>
+                                                <td><span class="badge bg-orange-transparent">Trophy</span></td>
+                                                <td>15-07-2020</td>
+                                                <td>Congratulations</td>
+                                                <td>
+                                                    <a class="btn btn-primary btn-icon"  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#editawardmodal">
+                                                        <i class="fe fe-edit" data-bs-toggle="tooltip" data-original-title="View/Edit"></i>
+                                                    </a>
+                                                    <a class="btn btn-danger btn-icon" data-bs-toggle="tooltip" data-original-title="Delete"><i class="fe fe-trash-2"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>08</td>
+                                                <td>#3698</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="avatar me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/12.jpg" alt="img">
+                                                        </div>
+                                                        <div>
+                                                            <div class="lh-1">
+                                                                <h6 class="mb-1">Max Wilson</h6>
+                                                            </div>
+                                                            <div class="lh-1">
+                                                                <span
+                                                                    class="fs-12 text-muted">max@gmail.com</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>PHP Developer</td>
+                                                <td>
+                                                    <div id="award-chart8"></div>
+                                                </td>
+                                                <td class="fe-medium">Most Creative Award</td>
+                                                <td><span class="badge bg-success-transparent">Momento</span></td>
+                                                <td>12-05-2020</td>
+                                                <td>Congratulations</td>
+                                                <td>
+                                                    <a class="btn btn-primary btn-icon"  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#editawardmodal">
+                                                        <i class="fe fe-edit" data-bs-toggle="tooltip" data-original-title="View/Edit"></i>
+                                                    </a>
+                                                    <a class="btn btn-danger btn-icon" data-bs-toggle="tooltip" data-original-title="Delete"><i class="fe fe-trash-2"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>09</td>
+                                                <td>#5612</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="avatar me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/5.jpg" alt="img">
+                                                        </div>
+                                                        <div>
+                                                            <div class="lh-1">
+                                                                <h6 class="mb-1">Amelia Russell</h6>
+                                                            </div>
+                                                            <div class="lh-1">
+                                                                <span
+                                                                    class="fs-12 text-muted">amelia@gmail.com</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>UX Designer</td>
+                                                <td>
+                                                    <div id="award-chart9"></div>
+                                                </td>
+                                                <td class="fe-medium">Character Award</td>
+                                                <td><span class="badge bg-orange-transparent">Trophy</span></td>
+                                                <td>22-04-2020</td>
+                                                <td>Congratulations</td>
+                                                <td>
+                                                    <a class="btn btn-primary btn-icon"  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#editawardmodal">
+                                                        <i class="fe fe-edit" data-bs-toggle="tooltip" data-original-title="View/Edit"></i>
+                                                    </a>
+                                                    <a class="btn btn-danger btn-icon" data-bs-toggle="tooltip" data-original-title="Delete"><i class="fe fe-trash-2"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>10</td>
+                                                <td>#0245</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="avatar me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/13.jpg" alt="img">
+                                                        </div>
+                                                        <div>
+                                                            <div class="lh-1">
+                                                                <h6 class="mb-1">Justin Metcalfe</h6>
+                                                            </div>
+                                                            <div class="lh-1">
+                                                                <span
+                                                                    class="fs-12 text-muted">justin@gmail.com</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>Web Designer</td>
+                                                <td>
+                                                    <div id="award-chart10"></div>
+                                                </td>
+                                                <td class="fe-medium">Sales Award</td>
+                                                <td><span class="badge bg-primary-transparent">Cash</span></td>
+                                                <td>05-03-2020</td>
+                                                <td>Congratulations</td>
+                                                <td>
+                                                    <a class="btn btn-primary btn-icon"  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#editawardmodal">
+                                                        <i class="fe fe-edit" data-bs-toggle="tooltip" data-original-title="View/Edit"></i>
+                                                    </a>
+                                                    <a class="btn btn-danger btn-icon" data-bs-toggle="tooltip" data-original-title="Delete"><i class="fe fe-trash-2"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>11</td>
+                                                <td>#3467</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="avatar me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/6.jpg" alt="img">
+                                                        </div>
+                                                        <div>
+                                                            <div class="lh-1">
+                                                                <h6 class="mb-1">Sophie Anderson</h6>
+                                                            </div>
+                                                            <div class="lh-1">
+                                                                <span
+                                                                    class="fs-12 text-muted">faith@gmail.com</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>Java Developer</td>
+                                                <td>
+                                                    <div id="award-chart11"></div>
+                                                </td>
+                                                <td class="fe-medium">Customer Service Award</td>
+                                                <td><span class="badge bg-orange-transparent">Trophy</span></td>
+                                                <td>15-01-2020</td>
+                                                <td>Congratulations</td>
+                                                <td>
+                                                    <a class="btn btn-primary btn-icon"  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#editawardmodal">
+                                                        <i class="fe fe-edit" data-bs-toggle="tooltip" data-original-title="View/Edit"></i>
+                                                    </a>
+                                                    <a class="btn btn-danger btn-icon" data-bs-toggle="tooltip" data-original-title="Delete"><i class="fe fe-trash-2"></i></a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- Start::pagination -->
+                                <nav class="mt-4">
+                                    <ul class="pagination justify-content-end mb-0">
+                                        <li class="page-item disabled"><a class="page-link" href="javascript:void(0);">Prev</a></li>
+                                        <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
+                                    </ul>
+                                </nav>
+                                <!-- End::pagination -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-1 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+        <!-- End AddAward Modal -->
+			<div class="modal fade"  id="addawardmodal">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Award Details</h5>
+							<button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group mb-3">
+										<label class="form-label">Employee ID</label>
+										<input type="text" class="form-control" placeholder="ID">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group mb-3">
+										<label class="form-label">Employee Name</label>
+										<input type="text" class="form-control" placeholder="Name">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group mb-3">
+										<label class="form-label">Employee Email</label>
+										<input type="text" class="form-control" placeholder="Email">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group mb-3">
+										<label class="form-label">Designation</label>
+										<input type="text" class="form-control" placeholder="Designation">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group mb-3">
+										<label class="form-label">Award Types</label>
+										<select name="projects"  class="form-control custom-select" data-trigger data-placeholder="Choose One">
+											<option value="">Choose One</option>
+											<option value="1">Employee of the Month Award</option>
+											<option value="2">Work Anniversary Award</option>
+											<option value="3">Teamwork Award</option>
+											<option value="4">Sales Award</option>
+											<option value="5">Most Creative Award</option>
+											<option value="6">Leadership Award</option>
+											<option value="7">Character Award</option>
+											<option value="8">Innovation Award</option>
+											<option value="9">Customer Service Award</option>
+											<option value="10">Top Performer Award</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group mb-3">
+										<label class="form-label">Gift Types</label>
+										<select name="projects"  class="form-control custom-select" data-trigger data-placeholder="Choose One">
+											<option value="">Choose One</option>
+											<option value="1">Cash</option>
+											<option value="2">Trophy</option>
+											<option value="3">Momento</option>
+											<option value="4">Others</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label">Date:</label>
+								<div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                        <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                    </div>
+                                </div>
+							</div>
+							<div class="form-group">
+								<label class="form-label">Award Description:</label>
+								<textarea class="form-control" rows="3" placeholder="enter the description"></textarea>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<div class="ms-auto">
+								<a  href="javascript:void(0);" class="btn btn-outline-primary" data-bs-dismiss="modal">close</a>
+								<a  href="javascript:void(0);" class="btn btn-primary">Save</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End AddAward Modal  -->
+
+			<!-- End EditAward Modal -->
+			<div class="modal fade"  id="editawardmodal">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Award Details</h5>
+							<button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group mb-3">
+										<label class="form-label">Employee ID</label>
+										<input type="text" class="form-control" placeholder="ID" value="#2987">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group mb-3">
+										<label class="form-label">Employee Name</label>
+										<input type="text" class="form-control" placeholder="Name" value="Faith Harris">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group mb-3">
+										<label class="form-label">Employee Email</label>
+										<input type="text" class="form-control" placeholder="Email" value="faith@gmail.com">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group mb-3">
+										<label class="form-label">Designation</label>
+										<input type="text" class="form-control" placeholder="Designation" value="Web Designer">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group mb-3">
+										<label class="form-label">Award Types</label>
+										<select name="projects"  class="form-control custom-select" data-trigger data-placeholder="Choose One">
+											<option value="">Choose One</option>
+											<option value="1" selected>Employee of the Month Award</option>
+											<option value="2">Work Anniversary Award</option>
+											<option value="3">Teamwork Award</option>
+											<option value="4">Sales Award</option>
+											<option value="5">Most Creative Award</option>
+											<option value="6">Leadership Award</option>
+											<option value="7">Character Award</option>
+											<option value="8">Innovation Award</option>
+											<option value="9">Customer Service Award</option>
+											<option value="10">Top Performer Award</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group mb-3">
+										<label class="form-label">Gift Types</label>
+										<select name="projects"  class="form-control custom-select" data-trigger data-placeholder="Choose One">
+											<option value="">Choose One</option>
+											<option value="1" selected>Cash</option>
+											<option value="2">Trophy</option>
+											<option value="3">Momento</option>
+											<option value="4">Others</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label">Date:</label>
+								<div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                        <input type="text" class="form-control choose-date" placeholder="22-09-2023">
+                                    </div>
+                                </div>
+							</div>
+							<div class="form-group">
+								<label class="form-label">Award Description:</label>
+								<textarea class="form-control" rows="3" placeholder="enter the description">Congratulations</textarea>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<div class="ms-auto">
+								<a  href="javascript:void(0);" class="btn btn-outline-primary" data-bs-dismiss="modal">close</a>
+								<a  href="javascript:void(0);" class="btn btn-primary">Save</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End EditAward Modal  -->
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    <!-- Apex Charts JS -->
+    <script src="../assets/libs/apexcharts/apexcharts.min.js"></script>
+
+    <!-- Date & Time Picker JS -->
+    <script src="../assets/libs/flatpickr/flatpickr.min.js"></script>
+
+    <!-- Default date picker js-->
+    <script src="../assets/js/default-flat-datepicker.js"></script> 
+
+    <!-- HR award Js-->
+    <script src="../assets/js/hr-award.js"></script>
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

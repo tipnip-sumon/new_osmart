@@ -1,0 +1,170 @@
+@SPK@include("partials/mainhead.html")
+
+<!-- Full Calendar CSS -->
+<link rel="stylesheet" href="../assets/libs/fullcalendar/main.min.css">
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                @SPK@include("partials/page-header.html", {"title": "Apply Leaves"})
+
+                <!-- Start::row-1 -->
+                <div class="row">
+                    <div class="col-xxl-4 col-md-12 col-lg-12">
+                        <div class="card custom-card">
+                            <div class="card-header  border-0">
+                                <h4 class="card-title">Apply Leaves</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="leave-types">
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">Leaves Dates</label>
+                                        <select name="projects"  class="form-control custom-select" data-trigger>
+                                            <option value="single">Single Leaves</option>
+                                            <option value="multiple">Multiple Leaves</option>
+                                        </select>
+                                    </div>
+                                    <div class="leave-content">
+                                        <div class="form-group mb-3">
+                                            <label class="form-label">Date Range:</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-text"> <i class="fe fe-calendar"></i> </div>
+                                                    <input type="text" class="form-control choose-date" placeholder="19 Feb 2020">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">Leaves Types</label>
+                                        <select name="projects"  class="form-control custom-select" data-trigger data-placeholder="Select">
+                                            <option value="">Select</option>
+                                            <option value="1">Half Day Leave</option>
+                                            <option value="2">Casual Leaves</option>
+                                            <option value="3">Sick Leaves</option>
+                                            <option value="4">Maternity Leaves</option>
+                                            <option value="5">Paternity Leaves</option>
+                                            <option value="6">Annual Leaves</option>
+                                            <option value="6">Unpaid Leaves</option>
+                                            <option value="8">Other Leaves</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Reason:</label>
+                                        <textarea class="form-control" rows="2">Some text here...</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="d-flex align-items-center flex-wrap">
+                                    <div>
+                                        <label class="mb-0 fw-medium text-dark">Selected Days:</label>
+                                        <span class="badge bg-danger badge-pill ms-2">2</span>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <a  href="javascript:void(0);" class="btn btn-outline-primary my-1">Close</a>
+                                        <a  href="javascript:void(0);" class="btn btn-primary my-1">Submit</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-4 col-lg-12 col-md-12">
+                        <div class="card custom-card">
+                            <div class="card-header border-0">
+                                <h4 class="card-title">Calendar</h4>
+                            </div>
+                            <div class="card-body">
+                                <div id="leave-calendar"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-4 col-md-12 col-lg-12">
+                        <div class="card custom-card">
+                            <div class="card-header  border-0">
+                                <h4 class="card-title">Leaves Overview</h4>
+                            </div>
+                            <div class="card-body px-2">
+                                <div id="leavesoverview" class="mx-auto pt-2"></div>
+                                <div class="row pt-3 mx-auto text-center justify-content-center">
+                                    <div class="col-lg-10 col-md-12 mx-auto d-block">
+                                        <div class="row justify-content-center mx-0">
+                                            <div class="col-md-6">
+                                                <div class="d-flex fw-semibold">
+                                                    <span class="dot-label bg-primary me-2 my-auto flex-shrink-0"></span>Casual Leaves
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mt-3 mt-md-0">
+                                                <div class="d-flex fw-semibold">
+                                                    <span class="dot-label bg-danger me-2 my-auto flex-shrink-0"></span>Sick Leaves
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mt-3">
+                                                <div class="d-flex fw-semibold">
+                                                    <span class="dot-label bg-secondary me-2 my-auto flex-shrink-0"></span>Gifted Leaves
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mt-3">
+                                                <div class="d-flex fw-semibold">
+                                                    <span class="dot-label bg-success me-2 my-auto flex-shrink-0"></span>Remaining Leaves
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-1 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    <!-- Apex Charts JS -->
+    <script src="../assets/libs/apexcharts/apexcharts.min.js"></script>
+
+    <!-- Moment JS -->
+    <script src="../assets/libs/moment/moment.js"></script>
+
+    <!-- Fullcalendar JS -->
+    <script src="../assets/libs/fullcalendar/main.min.js"></script>
+
+    <!-- Date & Time Picker JS -->
+    <script src="../assets/libs/flatpickr/flatpickr.min.js"></script>
+
+    <!-- Default date picker js-->
+    <script src="../assets/js/default-flat-datepicker.js"></script>
+
+    <!-- Default date picker js-->
+    <script src="../assets/js/employee-leaves.js"></script>
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

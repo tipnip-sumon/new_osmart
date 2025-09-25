@@ -1,0 +1,2162 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                <!-- Page Header -->
+                <div class="page-header d-lg-flex d-block">
+                    <div class="page-leftheader">
+                        <div class="page-title">Attendance List</div>
+                    </div>
+                    <div class="page-rightheader">
+                        <div class="btn-list">
+                            <a href="hr-attmark.html" class="btn btn-primary">Mark Attendance</a>
+                            <button  class="btn btn-light3" data-bs-toggle="tooltip" data-bs-placement="top" title="E-mail"> <i class="fe fe-mail"></i> </button>
+                            <button  class="btn btn-light3" data-bs-placement="top" data-bs-toggle="tooltip" title="Contact"> <i class="fe fe-phone-call"></i> </button>
+                            <button  class="btn btn-primary" data-bs-placement="top" data-bs-toggle="tooltip" title="Info"> <i class="fe fe-info"></i> </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Page Header Close -->
+
+                <!-- Start::row-1 -->
+                <div class="hrattview-buttons">
+                    <a  href="javascript:void(0);" class="active ms-sm-4">Attendance Overview</a>
+                    <a href="hr-attuser.html" class="">Attendance By User</a>
+                </div>
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 col-lg-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Employee Name:</label>
+                                            <select class="form-control custom-select" data-trigger data-placeholder="Select Employee">
+                                                <option value="">Select Employee</option>
+                                                <option value="1">Faith Harris</option>
+                                                <option value="2">Austin Bell</option>
+                                                <option value="3">Maria Bower</option>
+                                                <option value="4">Peter Hill</option>
+                                                <option value="5">Victoria Lyman</option>
+                                                <option value="6">Adam Quinn</option>
+                                                <option value="7">Melanie Coleman</option>
+                                                <option value="8">Max Wilson</option>
+                                                <option value="9">Amelia Russell</option>
+                                                <option value="10">Justin Metcalfe</option>
+                                                <option value="11">Ryan Young</option>
+                                                <option value="12">Jennifer Hardacre</option>
+                                                <option value="13">Justin Parr</option>
+                                                <option value="14">Julia Hodges</option>
+                                                <option value="15">Michael Sutherland</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Month:</label>
+                                            <select class="form-control custom-select" data-trigger data-placeholder="Select Month">
+                                                <option value="">Select Month</option>
+                                                <option value="1">January</option>
+                                                <option value="2">February</option>
+                                                <option value="3">March</option>
+                                                <option value="4">April</option>
+                                                <option value="5">May</option>
+                                                <option value="6">June</option>
+                                                <option value="7">July</option>
+                                                <option value="8">August</option>
+                                                <option value="9">September</option>
+                                                <option value="10">October</option>
+                                                <option value="11">November</option>
+                                                <option value="12">December</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Year:</label>
+                                            <select class="form-control custom-select" data-trigger data-placeholder="Select Year">
+                                                <option value="">Select Year</option>
+                                                <option value="1">2024</option>
+                                                <option value="2">2023</option>
+                                                <option value="3">2022</option>
+                                                <option value="4">2021</option>
+                                                <option value="5">2020</option>
+                                                <option value="6">2019</option>
+                                                <option value="7">2018</option>
+                                                <option value="8">2017</option>
+                                                <option value="9">2016</option>
+                                                <option value="10">2015</option>
+                                                <option value="11">2014</option>
+                                                <option value="12">2013</option>
+                                                <option value="13">2012</option>
+                                                <option value="14">2011</option>
+                                                <option value="15">2019</option>
+                                                <option value="16">2010</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="form-group mt-2">
+                                            <label class="form-label"></label>
+                                            <a  href="javascript:void(0);" class="btn btn-primary d-grid">Search</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body border-top">
+                                <div class="d-flex my-4 align-items-start">
+                                    <div class="me-3">
+                                        <label class="form-label">Note:</label>
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-2">
+                                        <span class="badge bg-success-transparent me-2"><i class="fe fe-check-circle text-success fs-12 align-middle"></i> ---> Present</span>
+                                        <span class="badge bg-danger-transparent me-2"><i class="fe fe-x-circle text-danger fs-12 align-middle"></i> ---> Absent</span>
+                                        <span class="badge bg-warning-transparent me-2"><i class="ri-star-fill text-warning fs-12 align-middle"></i> ---> Holiday</span>
+                                        <span class="badge bg-orange-transparent me-2"><i class="ri-contrast-fill text-orange fs-12 align-middle"></i>  ---> Half Day</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-2 gap-2 gap-lg-0">
+                                    <div class="col-lg-6">
+                                        <div class="d-flex align-items-center">
+                                            <span>Show</span>
+                                            <div class="d-flex ms-2 mx-2">
+                                                <div class="form-group mb-0">
+                                                    <select name="quantity" id="select-countries17" class="form-control  wd-150" data-trigger>
+                                                        <option value="1" selected="">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <span>entries</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="float-end">
+                                            <input type="text" class="form-control" placeholder="search">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive hr-attlist">
+                                    <table class="table mb-0 text-nowrap text-md-nowrap table-bordered border custom-table" id="hr-attendance">
+                                        <thead>
+                                            <tr>
+                                                <th class="border-bottom-0">Employee Name</th>
+                                                <th class="border-bottom-0 w-5">1</th>
+                                                <th class="border-bottom-0 w-5">2</th>
+                                                <th class="border-bottom-0 w-5">3</th>
+                                                <th class="border-bottom-0 w-5">4</th>
+                                                <th class="border-bottom-0 w-5">5</th>
+                                                <th class="border-bottom-0 w-5">6</th>
+                                                <th class="border-bottom-0 w-5">7</th>
+                                                <th class="border-bottom-0 w-5">8</th>
+                                                <th class="border-bottom-0 w-5">9</th>
+                                                <th class="border-bottom-0 w-5">10</th>
+                                                <th class="border-bottom-0 w-5">11</th>
+                                                <th class="border-bottom-0 w-5">12</th>
+                                                <th class="border-bottom-0 w-5">13</th>
+                                                <th class="border-bottom-0 w-5">14</th>
+                                                <th class="border-bottom-0 w-5">15</th>
+                                                <th class="border-bottom-0 w-5">16</th>
+                                                <th class="border-bottom-0 w-5">17</th>
+                                                <th class="border-bottom-0 w-5">18</th>
+                                                <th class="border-bottom-0 w-5">19</th>
+                                                <th class="border-bottom-0 w-5">20</th>
+                                                <th class="border-bottom-0 w-5">21</th>
+                                                <th class="border-bottom-0 w-5">22</th>
+                                                <th class="border-bottom-0 w-5">23</th>
+                                                <th class="border-bottom-0 w-5">24</th>
+                                                <th class="border-bottom-0 w-5">25</th>
+                                                <th class="border-bottom-0 w-5">26</th>
+                                                <th class="border-bottom-0 w-5">27</th>
+                                                <th class="border-bottom-0 w-5">28</th>
+                                                <th class="border-bottom-0 w-5">29</th>
+                                                <th class="border-bottom-0 w-5">30</th>
+                                                <th class="border-bottom-0 w-5">31</th>
+                                                <th class="border-bottom-0">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2 avatar-rounded"> 
+                                                           <img src="../assets/images/users/1.jpg" alt="img"> 
+                                                       </span> 
+                                                       <h6 class="mb-0">Sukuro Kim </h6>
+                                                   </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning " data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#halfpresentmodal" class="hr-listmodal">
+                                                            <span class="ri-contrast-fill text-orange "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning " data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="fe fe-x-circle text-danger "></span></td>
+                                                <td><span class="fe fe-x-circle text-danger "></span></td>
+                                                <td><span class="fe fe-x-circle text-danger "></span></td>
+                                                <td><span class="fe fe-x-circle text-danger "></span></td>
+                                                <td><span class="ri-star-fill text-warning " data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning " data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Republic Day"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h6 class="mb-0">
+                                                        <span class="text-primary">21</span>
+                                                        <span class="my-auto font-weight-normal text-muted">/</span>
+                                                        <span class="">31</span>
+                                                    </h6>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2 avatar-rounded"> 
+                                                           <img src="../assets/images/users/9.jpg" alt="img"> 
+                                                       </span> 
+                                                       <h6 class="mb-0">Amelia Russell</h6>
+                                                   </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#halfpresentmodal" class="hr-listmodal">
+                                                            <span class="ri-contrast-fill text-orange "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#halfpresentmodal" class="hr-listmodal">
+                                                            <span class="ri-contrast-fill text-orange "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#halfpresentmodal" class="hr-listmodal">
+                                                            <span class="ri-contrast-fill text-orange "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Republic Day"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h6 class="mb-0">
+                                                        <span class="text-primary">24</span>
+                                                        <span class="my-auto font-weight-normal text-muted">/</span>
+                                                        <span class="">31</span>
+                                                    </h6>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2 avatar-rounded"> 
+                                                           <img src="../assets/images/users/2.jpg" alt="img"> 
+                                                       </span> 
+                                                       <h6 class="mb-0">Maria Bower</h6>
+                                                   </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td><span class="fe fe-x-circle text-danger"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#halfpresentmodal" class="hr-listmodal">
+                                                            <span class="ri-contrast-fill text-orange "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="fe fe-x-circle text-danger"></span></td>
+                                                <td><span class="fe fe-x-circle text-danger"></span></td>
+                                                <td><span class="fe fe-x-circle text-danger"></span></td>
+                                                <td><span class="fe fe-x-circle text-danger"></span></td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="fe fe-x-circle text-danger"></span></td>
+                                                <td><span class="fe fe-x-circle text-danger"></span></td>
+                                                <td><span class="fe fe-x-circle text-danger"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Republic Day"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h6 class="mb-0">
+                                                        <span class="text-primary">17</span>
+                                                        <span class="my-auto font-weight-normal text-muted">/</span>
+                                                        <span class="">31</span>
+                                                    </h6>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2 avatar-rounded"> 
+                                                           <img src="../assets/images/users/10.jpg" alt="img"> 
+                                                       </span> 
+                                                       <h6 class="mb-0">Peter Hill</h6>
+                                                   </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#halfpresentmodal" class="hr-listmodal">
+                                                            <span class="ri-contrast-fill text-orange "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Republic Day"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h6 class="mb-0">
+                                                        <span class="text-primary">25</span>
+                                                        <span class="my-auto font-weight-normal text-muted">/</span>
+                                                        <span class="">31</span>
+                                                    </h6>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2 avatar-rounded"> 
+                                                           <img src="../assets/images/users/3.jpg" alt="img"> 
+                                                       </span> 
+                                                       <h6 class="mb-0">Victoria Layman</h6>
+                                                   </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Republic Day"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h6 class="mb-0">
+                                                        <span class="text-primary">26</span>
+                                                        <span class="my-auto font-weight-normal text-muted">/</span>
+                                                        <span class="">31</span>
+                                                    </h6>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2 avatar-rounded"> 
+                                                           <img src="../assets/images/users/11.jpg" alt="img"> 
+                                                       </span> 
+                                                       <h6 class="mb-0">Adam Quinn</h6>
+                                                   </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="fe fe-x-circle text-danger"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="fe fe-x-circle text-danger"></span></td>
+                                                <td><span class="fe fe-x-circle text-danger"></span></td>
+                                                <td><span class="fe fe-x-circle text-danger"></span></td>
+                                                <td><span class="fe fe-x-circle text-danger"></span></td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="fe fe-x-circle text-danger"></span></td>
+                                                <td><span class="fe fe-x-circle text-danger"></span></td>
+                                                <td><span class="fe fe-x-circle text-danger"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Republic Day"></span></td>
+                                                <td><span class="fe fe-x-circle text-danger"></span></td>
+                                                <td><span class="fe fe-x-circle text-danger"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h6 class="mb-0">
+                                                        <span class="text-primary">16</span>
+                                                        <span class="my-auto font-weight-normal text-muted">/</span>
+                                                        <span class="">31</span>
+                                                    </h6>
+                                                </td>
+                                            </tr>
+                                            <tr> 
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2 avatar-rounded"> 
+                                                           <img src="../assets/images/users/4.jpg" alt="img"> 
+                                                       </span> 
+                                                       <h6 class="mb-0">Malane Coleman</h6>
+                                                   </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#halfpresentmodal" class="hr-listmodal">
+                                                            <span class="ri-contrast-fill text-orange "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="fe fe-x-circle text-danger"></span></td>
+                                                <td><span class="fe fe-x-circle text-danger"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h6 class="mb-0">
+                                                        <span class="text-primary">23</span>
+                                                        <span class="my-auto font-weight-normal text-muted">/</span>
+                                                        <span class="">31</span>
+                                                    </h6>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2 avatar-rounded"> 
+                                                           <img src="../assets/images/users/12.jpg" alt="img"> 
+                                                       </span> 
+                                                       <h6 class="mb-0">Max Wilson</h6>
+                                                   </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#halfpresentmodal" class="hr-listmodal">
+                                                            <span class="ri-contrast-fill text-orange "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="fe fe-x-circle text-danger"></span></td>
+                                                <td><span class="fe fe-x-circle text-danger"></span></td>
+                                                <td><span class="fe fe-x-circle text-danger"></span></td>
+                                                <td><span class="fe fe-x-circle text-danger"></span></td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Republic Day"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h6 class="mb-0">
+                                                        <span class="text-primary">21</span>
+                                                        <span class="my-auto font-weight-normal text-muted">/</span>
+                                                        <span class="">31</span>
+                                                    </h6>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2 avatar-rounded"> 
+                                                           <img src="../assets/images/users/5.jpg" alt="img"> 
+                                                       </span> 
+                                                       <h6 class="mb-0">Amelia Russell</h6>
+                                                   </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#halfpresentmodal" class="hr-listmodal">
+                                                            <span class="ri-contrast-fill text-orange "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="fe fe-x-circle text-danger"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><span class="ri-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Republic Day"></span></td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="hr-listd">
+                                                        <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#presentmodal" class="hr-listmodal">
+                                                            <span class="fe fe-check-circle text-success "></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h6 class="mb-0">
+                                                        <span class="text-primary">24</span>
+                                                        <span class="my-auto font-weight-normal text-muted">/</span>
+                                                        <span class="">31</span>
+                                                    </h6>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- Start::pagination -->
+                                <nav class="mt-4">
+                                    <ul class="pagination justify-content-end mb-0">
+                                        <li class="page-item disabled"><a class="page-link" href="javascript:void(0);">Prev</a></li>
+                                        <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
+                                    </ul>
+                                </nav>
+                                <!-- End::pagination -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-1 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+        <!--Present Modal -->
+        <div class="modal fade"  id="presentmodal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Attendance Details</h5>
+                        <button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row my-4">
+                            <div class="col-md-4">
+                                <div class="pt-5 text-center">
+                                    <h6 class="mb-1 fs-16 fw-medium">09:30 AM</h6>
+                                    <small class="text-muted fs-14">Clock In</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="attendance-details2"></div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="pt-5 text-center">
+                                    <h6 class="mb-1 fs-16 fw-medium"> 06:30 PM</h6>
+                                    <small class="text-muted fs-14">Clock Out</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">IP Address</label>
+                            <input type="text" class="form-control" placeholder="225.192.145.1" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Working Form</label>
+                            <select name="projects"  class="form-control custom-select" data-trigger disabled data-placeholder="Select">
+                                <option value="">Select</option>
+                                <option value="1" selected>Office</option>
+                                <option value="2">Home</option>
+                                <option value="3">Others</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a  href="javascript:void(0);" class="btn btn-outline-primary" data-bs-dismiss="modal">close</a>
+                        <a  href="javascript:void(0);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editmodal" data-bs-dismiss="modal">Edit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Present Modal  -->
+
+        <!--Edit Modal -->
+        <div class="modal fade"  id="editmodal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Attendance Details</h5>
+                        <button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Clock In</label>
+                                    <div class="input-group">
+                                        <div class="input-group-text text-muted"> <i class="ri-time-line"></i> </div>
+                                        <input type="text" class="form-control time-picker" value="9:30 AM">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-check-lg form-switch mt-4">
+                                    <input class="form-check-input" type="checkbox" role="switch"
+                                        id="switch-md1">
+                                    <label class="form-check-label" for="switch-md1">Late</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Clock Out</label>
+                                    <div class="input-group">
+                                        <div class="input-group-text text-muted"> <i class="ri-time-line"></i> </div>
+                                        <input type="text" class="form-control time-picker" value="06:30 PM">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-check-lg form-switch mt-4">
+                                    <input class="form-check-input" type="checkbox" role="switch"
+                                        id="switch-md2"> 
+                                    <label class="form-check-label" for="switch-md2">half Day</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">IP Address</label>
+                            <input type="text" class="form-control" placeholder="225.192.145.1" disabled>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Working Form</label>
+                            <select name="projects"  class="form-control custom-select" data-trigger disabled data-placeholder="Select">
+                                <option value="">Select</option>
+                                <option value="1" selected>Office</option>
+                                <option value="2">Home</option>
+                                <option value="3">Others</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer d-flex">
+                        <div>
+                            <a  href="javascript:void(0);" class="btn btn-light"  data-bs-toggle="modal" data-bs-target="#presentmodal" data-bs-dismiss="modal"><i class="feather feather-arrow-left me-1"></i>Back</a>
+                        </div>
+                        <div class="ms-auto">
+                            <a  href="javascript:void(0);" class="btn btn-outline-primary" data-bs-dismiss="modal">close</a>
+                            <a  href="javascript:void(0);" class="btn btn-primary">Save</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Edit Modal  -->
+
+        <!--HalfPresent Modal -->
+        <div class="modal fade"  id="halfpresentmodal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Attendance Details <span class="badge bg-orange">Half Day</span></h5>
+                        <button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row my-4">
+                            <div class="col-md-4">
+                                <div class="pt-5 text-center">
+                                    <h6 class="mb-1 fs-16 fw-medium">09:30 AM</h6>
+                                    <small class="text-muted fs-14">Clock In</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="attendance-details"></div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="pt-5 text-center">
+                                    <h6 class="mb-1 fs-16 fw-medium"> 01:30 PM</h6>
+                                    <small class="text-muted fs-14">Clock Out</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">IP Address</label>
+                            <input type="text" class="form-control" placeholder="225.192.145.1" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Working Form</label>
+                            <select name="projects"  class="form-control custom-select" data-trigger disabled data-placeholder="Select">
+                                <option value="">Select</option>
+                                <option value="1" selected>Office</option>
+                                <option value="2">Home</option>
+                                <option value="3">Others</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a  href="javascript:void(0);" class="btn btn-outline-primary" data-bs-dismiss="modal">close</a>
+                        <a  href="javascript:void(0);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#halfdayeditmodal" data-bs-dismiss="modal">Edit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Present Modal  -->
+
+        <!--Halfday Edit Modal -->
+        <div class="modal fade"  id="halfdayeditmodal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Attendance Details <span class="badge bg-orange">Half Day</span></h5>
+                        <button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Clock In</label>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-time-line"></i> </div>
+                                            <input type="text" class="form-control time-picker" value="9:30 AM">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-check-lg form-switch mt-4">
+                                    <input class="form-check-input" type="checkbox" role="switch"
+                                        id="switch-md3">
+                                    <label class="form-check-label" for="switch-md3">Late</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Clock Out</label>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-time-line"></i> </div>
+                                            <input type="text" class="form-control time-picker" value="01:30 PM">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-check-lg form-switch mt-4">
+                                    <input class="form-check-input" type="checkbox" role="switch"
+                                        id="switch-md">
+                                    <label class="form-check-label" for="switch-md">half Day</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">IP Address</label>
+                            <input type="text" class="form-control" placeholder="225.192.145.1" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Working Form</label>
+                            <select name="projects"  class="form-control custom-select" data-trigger disabled data-placeholder="Select">
+                                <option value="">Select</option>
+                                <option value="1" selected>Office</option>
+                                <option value="2">Home</option>
+                                <option value="3">Others</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer d-flex">
+                        <div>
+                            <a  href="javascript:void(0);" class="btn btn-light"  data-bs-toggle="modal" data-bs-target="#halfpresentmodal" data-bs-dismiss="modal"><i class="feather feather-arrow-left me-1"></i>Back</a>
+                        </div>
+                        <div class="ms-auto">
+                            <a  href="javascript:void(0);" class="btn btn-outline-primary" data-bs-dismiss="modal">close</a>
+                            <a  href="javascript:void(0);" class="btn btn-primary">Save</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Edit Modal  -->
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    <!-- Apex Charts JS -->
+    <script src="../assets/libs/apexcharts/apexcharts.min.js"></script>
+
+    <!-- Date & Time Picker JS -->
+    <script src="../assets/libs/flatpickr/flatpickr.min.js"></script>
+
+    <!-- Hr add-emplpoyee Js-->
+    <script src="../assets/js/hr-attlist.js"></script>
+
+    <!-- Default date picker js-->
+    <script src="../assets/js/default-flat-datepicker.js"></script>
+
+    <!-- Default time picker js-->
+    <script src="../assets/js/default-flat-timepicker.js"></script>
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

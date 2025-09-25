@@ -1,0 +1,833 @@
+@SPK@include("partials/mainhead.html")
+
+<!-- Full Calendar CSS -->
+<link rel="stylesheet" href="../assets/libs/fullcalendar/main.min.css">
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+               <!-- Page Header -->
+               <div class="page-header d-lg-flex d-block">
+                <div class="page-leftheader">
+                    <div class="page-title">Job Applications</div>
+                </div>
+                <div class="page-rightheader">
+                    <div class="d-flex align-items-center flex-wrap my-auto end-content breadcrumb-end">
+                        <div class="d-lg-flex d-block">
+                            <div class="btn-list">
+                                <button  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newtaskmodal"><i class="fe fe-plus fs-12 my-auto me-2"></i>Add New Job</button>
+                                <button  class="btn btn-light3" data-bs-toggle="tooltip" data-bs-placement="top" title="E-mail"> <i class="fe fe-mail"></i> </button>
+                                <button  class="btn btn-light3" data-bs-placement="top" data-bs-toggle="tooltip" title="Contact"> <i class="fe fe-phone-call"></i> </button>
+                                <button  class="btn btn-primary" data-bs-placement="top" data-bs-toggle="tooltip" title="Info"> <i class="fe fe-info"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Page Header Close -->
+            
+                <!-- Start::row-1 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card custom-card">
+                            <div class="card-header d-flex justify-content-between border-bottom-0">
+                                <h4 class="card-title">Job Applications</h4>
+                            </div>
+                            <div class="card-body pt-0">
+                                <div class="row my-3 px-3">
+                                    <div class="col-lg-6">
+                                        <div class="d-flex align-items-center">
+                                            <span>Show</span>
+                                            <div class="d-flex ms-2 mx-2">
+                                                <div class="form-group mt-2">
+                                                    <select name="quantity" id="select-countries17" class="form-control  wd-150" data-trigger>
+                                                        <option value="1" selected="">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <span>entries</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="float-end">
+                                            <input type="text" class="form-control" placeholder="search">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table  table-vcenter text-nowrap table-bordered border-bottom" id="job-applictaion">
+                                        <thead>
+                                            <tr>
+                                                <th class="border-bottom-0">No</th>
+                                                <th class="border-bottom-0">Position</th>
+                                                <th class="border-bottom-0">Name</th>
+                                                <th class="border-bottom-0">Email</th>
+                                                <th class="border-bottom-0">Phone Number</th>
+                                                <th class="border-bottom-0">Applied On</th>
+                                                <th class="border-bottom-0">Submitted By</th>
+                                                <th class="border-bottom-0">Status</th>
+                                                <th class="border-bottom-0">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>01</td>
+                                                <td>
+                                                    <a  href="javascript:void(0);">Senior PHP Developer</a>
+                                                </td>
+                                                <td>Faith Harris</td>
+                                                <td>faith@gmail.com</td>
+                                                <td>+9685321475</td>
+                                                <td>25-01-2021</td>
+                                                <td>Faith Harris</td>
+                                                <td>
+                                                    <span class="badge bg-warning">Pending</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Accept">
+                                                            <i class="fe fe-check text-success" ></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Rejected">
+                                                            <i class="fe fe-x text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target=".jobapplictionmodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns" data-bs-toggle="tooltip" data-bs-placement="top" title="Download Resume">
+                                                            <i class="fe fe-download  text-secondary"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>02</td>
+                                                <td>
+                                                    <a  href="javascript:void(0);">Fresher Web Designer</a>
+                                                </td>
+                                                <td>Austin Bell</td>
+                                                <td>austin@gmail.com</td>
+                                                <td>+8653217950</td>
+                                                <td>20-02-2021</td>
+                                                <td>Austin Bell</td>
+                                                <td>
+                                                    <span class="badge bg-primary">Selected</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Rejected">
+                                                            <i class="fe fe-x text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target=".jobapplictionmodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns" data-bs-toggle="tooltip" data-bs-placement="top" title="Download Resume">
+                                                            <i class="fe fe-download  text-secondary"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>03</td>
+                                                <td>
+                                                    <a  href="javascript:void(0);">Senior Web Developer</a>
+                                                </td>
+                                                <td>Maria Bower</td>
+                                                <td>maria@gmail.com</td>
+                                                <td>+9563258417</td>
+                                                <td>28-02-2021</td>
+                                                <td>Maria Bower</td>
+                                                <td>
+                                                    <span class="badge bg-danger">Rejected</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Accept">
+                                                            <i class="fe fe-check text-success" ></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target=".jobapplictionmodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns" data-bs-toggle="tooltip" data-bs-placement="top" title="Download Resume">
+                                                            <i class="fe fe-download  text-secondary"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>04</td>
+                                                <td>
+                                                    <a  href="javascript:void(0);">Fresher UI Designer</a>
+                                                </td>
+                                                <td>Peter Hill</td>
+                                                <td>peter@gmail.com</td>
+                                                <td>+8563249751</td>
+                                                <td>19-01-2021</td>
+                                                <td>Peter Hill</td>
+                                                <td>
+                                                    <span class="badge bg-primary">Selected</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Rejected">
+                                                            <i class="fe fe-x text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target=".jobapplictionmodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns" data-bs-toggle="tooltip" data-bs-placement="top" title="Download Resume">
+                                                            <i class="fe fe-download  text-secondary"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>05</td>
+                                                <td>
+                                                    <a  href="javascript:void(0);">SEO Specialist</a>
+                                                </td>
+                                                <td>Victoria Lyman</td>
+                                                <td>victoria@gmail.com</td>
+                                                <td>+9635826432</td>
+                                                <td>19-03-2021</td>
+                                                <td>Victoria Lyman</td>
+                                                <td>
+                                                    <span class="badge bg-warning">Pending</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Accept">
+                                                            <i class="fe fe-check text-success" ></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Rejected">
+                                                            <i class="fe fe-x text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target=".jobapplictionmodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns" data-bs-toggle="tooltip" data-bs-placement="top" title="Download Resume">
+                                                            <i class="fe fe-download  text-secondary"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>06</td>
+                                                <td>
+                                                    <a  href="javascript:void(0);">Senior Worpress Developer</a>
+                                                </td>
+                                                <td>Adam Quinn</td>
+                                                <td>adam@gmail.com</td>
+                                                <td>+9685231572</td>
+                                                <td>17-01-2021</td>
+                                                <td>Adam Quinn</td>
+                                                <td>
+                                                    <span class="badge bg-primary">Selected</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Rejected">
+                                                            <i class="fe fe-x text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target=".jobapplictionmodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns" data-bs-toggle="tooltip" data-bs-placement="top" title="Download Resume">
+                                                            <i class="fe fe-download  text-secondary"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>07</td>
+                                                <td>
+                                                    <a  href="javascript:void(0);">Senior Accountant</a>
+                                                </td>
+                                                <td>Melanie Coleman</td>
+                                                <td>melanie@gmail.com</td>
+                                                <td>+8635291470</td>
+                                                <td>21-02-2021</td>
+                                                <td>Melanie Coleman</td>
+                                                <td>
+                                                    <span class="badge bg-primary">Selected</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Rejected">
+                                                            <i class="fe fe-x text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target=".jobapplictionmodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns" data-bs-toggle="tooltip" data-bs-placement="top" title="Download Resume">
+                                                            <i class="fe fe-download  text-secondary"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>08</td>
+                                                <td>
+                                                    <a  href="javascript:void(0);">Fresher Angular Developer</a>
+                                                </td>
+                                                <td>Max Wilson</td>
+                                                <td>max@gmail.com</td>
+                                                <td>+9986357240</td>
+                                                <td>30-03-2021</td>
+                                                <td>Max Wilson</td>
+                                                <td>
+                                                    <span class="badge bg-primary">Selected</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Rejected">
+                                                            <i class="fe fe-x text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target=".jobapplictionmodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns" data-bs-toggle="tooltip" data-bs-placement="top" title="Download Resume">
+                                                            <i class="fe fe-download  text-secondary"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>09</td>
+                                                <td>
+                                                    <a  href="javascript:void(0);">Senior Angular Developer</a>
+                                                </td>
+                                                <td>Amelia Russell</td>
+                                                <td>amelia@gmail.com</td>
+                                                <td>+9356982472</td>
+                                                <td>04-04-2021</td>
+                                                <td>Amelia Russell</td>
+                                                <td>
+                                                    <span class="badge bg-warning">Pending</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Accept">
+                                                            <i class="fe fe-check text-success" ></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Rejected">
+                                                            <i class="fe fe-x text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target=".jobapplictionmodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns" data-bs-toggle="tooltip" data-bs-placement="top" title="Download Resume">
+                                                            <i class="fe fe-download  text-secondary"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>10</td>
+                                                <td>
+                                                    <a  href="javascript:void(0);">Fresher Web Designer</a>
+                                                </td>
+                                                <td>Justin Metcalfe</td>
+                                                <td>justin@gmail.com</td>
+                                                <td>+9685321475</td>
+                                                <td>17-02-2021</td>
+                                                <td>Justin Metcalfe</td>
+                                                <td>
+                                                    <span class="badge bg-danger">Rejected</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Accept">
+                                                            <i class="fe fe-check text-success" ></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target=".jobapplictionmodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns" data-bs-toggle="tooltip" data-bs-placement="top" title="Download Resume">
+                                                            <i class="fe fe-download  text-secondary"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>11</td>
+                                                <td>
+                                                    <a  href="javascript:void(0);">Senior Web Developer</a>
+                                                </td>
+                                                <td>Sophie Anderson</td>
+                                                <td>sophie@gmail.com</td>
+                                                <td>+8674231566</td>
+                                                <td>22-02-2021</td>
+                                                <td>Sophie Anderson</td>
+                                                <td>
+                                                    <span class="badge bg-primary">Selected</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Rejected">
+                                                            <i class="fe fe-x text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target=".jobapplictionmodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns" data-bs-toggle="tooltip" data-bs-placement="top" title="Download Resume">
+                                                            <i class="fe fe-download  text-secondary"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>12</td>
+                                                <td>
+                                                    <a  href="javascript:void(0);">Senior Worpress Developer</a>
+                                                </td>
+                                                <td>Ryan Young</td>
+                                                <td>ryan@gmail.com</td>
+                                                <td>+9685321475</td>
+                                                <td>18-03-2021</td>
+                                                <td>Ryan Young</td>
+                                                <td>
+                                                    <span class="badge bg-warning">Pending</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Accept">
+                                                            <i class="fe fe-check text-success" ></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Rejected">
+                                                            <i class="fe fe-x text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target=".jobapplictionmodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns" data-bs-toggle="tooltip" data-bs-placement="top" title="Download Resume">
+                                                            <i class="fe fe-download  text-secondary"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>13</td>
+                                                <td>
+                                                    <a  href="javascript:void(0);">Fresher Angular Developer</a>
+                                                </td>
+                                                <td>Jennifer Hardacre</td>
+                                                <td>jennifer@gmail.com</td>
+                                                <td>+9635826432</td>
+                                                <td>19-03-2021</td>
+                                                <td>Jennifer Hardacre</td>
+                                                <td>
+                                                    <span class="badge bg-danger">Rejected</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Accept">
+                                                            <i class="fe fe-check text-success" ></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target=".jobapplictionmodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns" data-bs-toggle="tooltip" data-bs-placement="top" title="Download Resume">
+                                                            <i class="fe fe-download  text-secondary"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>14</td>
+                                                <td>
+                                                    <a  href="javascript:void(0);">Senior PHP Developer</a>
+                                                </td>
+                                                <td>Justin Parr</td>
+                                                <td>justin@gmail.com</td>
+                                                <td>+9685321475</td>
+                                                <td>20-03-2021</td>
+                                                <td>Justin Parr</td>
+                                                <td>
+                                                    <span class="badge bg-primary">Selected</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Rejected">
+                                                            <i class="fe fe-x text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target=".jobapplictionmodal">
+                                                            <i class="fe fe-eye  text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="view"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                            <i class="fe fe-trash-2 text-danger"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns" data-bs-toggle="tooltip" data-bs-placement="top" title="Download Resume">
+                                                            <i class="fe fe-download  text-secondary"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- Start::pagination -->
+                                <nav class="mt-4">
+                                    <ul class="pagination justify-content-end mb-0">
+                                        <li class="page-item disabled"><a class="page-link" href="javascript:void(0);">Prev</a></li>
+                                        <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
+                                    </ul>
+                                </nav>
+                                <!-- End::pagination -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               <!--End::row-1 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+        <!--Clock-IN Modal -->
+        <div class="modal fade"  id="clockinmodal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><span class="fe fe-clock  me-1"></span>Clock In</h5>
+                        <button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="countdowntimer text-center">
+                            <div class="mt-3 d-flex justify-content-center fs-30 digital-clock"></div>
+                            <label class="form-label">Current Time</label>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">IP Address</label>
+                            <input type="text" class="form-control" placeholder="225.192.145.1" disabled="">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Working Form</label>
+                            <select name="projects"  class="form-control custom-select" data-trigger>
+                                <option value="0">Select</option>
+                                <option value="1">Office</option>
+                                <option value="2">Home</option>
+                                <option value="3">Others</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Note:</label>
+                            <textarea class="form-control" rows="3">Some text here...</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                        <button class="btn btn-primary">Clock In</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Clock-IN Modal  -->
+
+        <!--Apply Leaves Modal -->
+        <div class="modal fade"  id="newtaskmodal">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Job</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Position</label>
+									</div>
+									<div class="col-md-9">
+										<input type="text" class="form-control" placeholder="Name" value="">
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Job Type</label>
+									</div>
+									<div class="col-md-9">
+                                    <select class="form-control custom-select" data-trigger data-placeholder="Select Priority">
+                                        <option value="1">Full Time</option>
+                                        <option value="2">Part Time</option>
+                                        <option value="3">Freelancer</option>
+                                    </select>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Description</label>
+									</div>
+									<div class="col-md-9">
+										<textarea class="form-control" id="text-area" rows="3"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Posted Date</label>
+									</div>
+									<div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Last Date To Apply</label>
+									</div>
+									<div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Close Date</label>
+									</div>
+									<div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+									</div>
+								</div>
+							</div>
+							<div class="row mt-3">
+								<div class="col-md-3">
+									<label class="form-label mb-0 mt-1">Status</label>
+								</div>
+								<div class="col-md-9">
+									<div class="custom-controls-stacked d-md-flex">
+										<label class="custom-control custom-radio success me-4">
+											<input type="radio" class="custom-control-input" name="example-radios1" value="option1">
+											<span class="custom-control-label">Active</span>
+										</label>
+										<label class="custom-control custom-radio success me-4">
+											<input type="radio" class="custom-control-input" name="example-radios1" value="option2">
+											<span class="custom-control-label">InActive</span>
+										</label>
+									</div>
+								</div>
+							</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button  class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                        <button  class="btn btn-success successful-notify">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Apply Leaves Modal  -->
+
+			<!-- Edit Job Modal -->
+			<div class="modal fade jobapplictionmodal"  >
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Job Application</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="table-responsive">
+								<table class="table mb-0 table-borderless">
+									<tbody>
+										<tr>
+											<td class="form-label mb-0">Position</td>
+											<td>:</td>
+											<td>Senior PHP Developer</td>
+										</tr>
+										<tr>
+											<td class="form-label mb-0">Name</td>
+											<td>:</td>
+											<td>Faith Harris/td>
+										</tr>
+										<tr>
+											<td class="form-label mb-0">Email</td>
+											<td>:</td>
+											<td>faith@gmail.com</td>
+										</tr>
+										<tr>
+											<td class="form-label mb-0">Phone Number</td>
+											<td>:</td>
+											<td>+9685321475</td>
+										</tr>
+										<tr>
+											<td class="form-label mb-0">Applied On</td>
+											<td>:</td>
+											<td>25-01-2021</td>
+										</tr>
+										<tr>
+											<td class="form-label mb-0">Status</td>
+											<td>:</td>
+											<td>
+												<span class="badge bg-warning">Pending</span>
+											</td>
+										</tr>
+										<tr>
+											<td class="form-label mb-0">Description</td>
+											<td>:</td>
+											<td>
+												<p class="mb-0">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit. </p>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="3">
+												<a  href="javascript:void(0);" class="btn btn-primary">View Resume</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button  class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Edit Job Modal -->
+        
+        
+
+        <!-- Modal -->
+        <div class="modal fade"  id="remindermodal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Reminder</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="form-label">Project</label>
+                            <select class="form-control custom-select" data-trigger data-placeholder="Select Department">
+                                <option value="1">Project 01</option>
+                                <option value="2">Project 02</option>
+                                <option value="3">Project 03</option>
+                                <option value="4">Project 04</option>
+                                <option value="5">Project 05</option>
+                            </select>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label">Select Date</label>
+                            <div class="input-group">
+                                <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                <input type="text" class="form-control choose-date flatpickr-input" placeholder="DD-MM-YYYY" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label">Note:</label>
+                            <textarea class="form-control" rows="3">Some text here...</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button  class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                        <button  class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+
+    <!-- Date & Time Picker JS -->
+    <script src="../assets/libs/flatpickr/flatpickr.min.js"></script>
+
+    <!-- Default date picker js-->
+    <script src="../assets/js/default-flat-datepicker.js"></script>
+
+    <!-- Notifications JS -->
+    <script src="../assets/libs/awesome-notifications/index.var.js"></script>
+
+    <!-- Successful-notify JS -->
+    <script src="../assets/js/successful-notify.js"></script>
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

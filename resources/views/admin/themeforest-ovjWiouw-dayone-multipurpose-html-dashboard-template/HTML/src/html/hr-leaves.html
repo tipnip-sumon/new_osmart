@@ -1,0 +1,206 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                <!-- Page Header -->
+                <div class="page-header d-lg-flex d-block">
+                    <div class="page-leftheader">
+                        <div class="page-title">Leave settings</div>
+                    </div>
+                    <div class="page-rightheader">
+                        <div class="btn-list">
+                            <a href="hr-attmark.html" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addleavemodal">Add Leave Type</a>
+                            <button  class="btn btn-light3" data-bs-toggle="tooltip" data-bs-placement="top" title="E-mail"> <i class="fe fe-mail"></i> </button>
+                            <button  class="btn btn-light3" data-bs-placement="top" data-bs-toggle="tooltip" title="Contact"> <i class="fe fe-phone-call"></i> </button>
+                            <button  class="btn btn-primary" data-bs-placement="top" data-bs-toggle="tooltip" title="Info"> <i class="fe fe-info"></i> </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Page Header Close -->
+
+                <!-- Start::row-1 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card custom-card">
+                            <div class="card-header  border-0">
+                                <h5 class="card-title">Leaves Types</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table  table-vcenter text-nowrap table-bordered border-bottom" id="hr-leavestypes">
+                                        <thead>
+                                            <tr>
+                                                <th class="border-bottom-0">Leaves Type</th>
+                                                <th class="border-bottom-0 text-center">No.of Leaves</th>
+                                                <th class="border-bottom-0">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Casual Leaves</td>
+                                                <td class="text-center fw-semibold">14</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1"  data-bs-toggle="modal" data-bs-target="#editleavemodal"><i class="fe fe-eye primary text-primary"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Sick Leaves</td>
+                                                <td class="text-center fw-semibold">07</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1"  data-bs-toggle="modal" data-bs-target="#editleavemodal"><i class="fe fe-eye primary text-primary"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Maternity Leaves</td>
+                                                <td class="text-center fw-semibold">20</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1"  data-bs-toggle="modal" data-bs-target="#editleavemodal"><i class="fe fe-eye primary text-primary"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Paternity Leaves</td>
+                                                <td class="text-center fw-semibold">00</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1"  data-bs-toggle="modal" data-bs-target="#editleavemodal"><i class="fe fe-eye primary text-primary"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Annual Leaves</td>
+                                                <td class="text-center fw-semibold">00</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1"  data-bs-toggle="modal" data-bs-target="#editleavemodal"><i class="fe fe-eye primary text-primary"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Unpaid Leaves</td>
+                                                <td class="text-center fw-semibold">00</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1"  data-bs-toggle="modal" data-bs-target="#editleavemodal"><i class="fe fe-eye primary text-primary"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Other Leaves</td>
+                                                <td class="text-center fw-semibold">00</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1"  data-bs-toggle="modal" data-bs-target="#editleavemodal"><i class="fe fe-eye primary text-primary"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-1 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+        <!-- Add leave Modal -->
+        <div class="modal fade"  id="addleavemodal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Leaves</h5>
+                        <button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group mb-3">
+                            <label class="form-label">Type Of Leaves</label>
+                            <input class="form-control" placeholder="Text">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Number Of Days</label>
+                            <input class="form-control" type="number" placeholder="Numbers">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button  class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                        <button  class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Add leave Modal -->
+
+        <!-- Add leave Modal -->
+        <div class="modal fade"  id="editleavemodal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Leaves</h5>
+                        <button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group mb-3">
+                            <label class="form-label">Type Of Leaves</label>
+                            <input class="form-control" placeholder="Text">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Number Of Days</label>
+                            <input class="form-control" type="number" placeholder="Numbers">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button  class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                        <button  class="btn btn-primary">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Add leave Modal -->
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

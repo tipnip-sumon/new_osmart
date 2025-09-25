@@ -1,0 +1,281 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                @SPK@include("partials/page-header.html", {"title": "Product Details"})
+
+                <!-- Start::row-1 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card custom-card">
+                            <div class="card-body p-0">
+                                <div class="row no-gutter">
+                                    <div class="col-xl-6 border-end">
+                                        <div class="row product-slider">
+                                            <div class="product-carousel py-4">
+                                                <div id="carousel" class="carousel slide" data-bs-ride="false">
+                                                    <div class="carousel-inner">
+                                                        <div class="carousel-item active"><img src="../assets/images/ecommerce/png/5.png" alt="img" class="img-fluid mx-auto d-block">
+                                                        </div>
+                                                        <div class="carousel-item"> <img src="../assets/images/ecommerce/png/6.png" alt="img" class="img-fluid mx-auto d-block">
+                                                        </div>
+                                                        <div class="carousel-item"> <img src="../assets/images/ecommerce/png/4.png" alt="img" class="img-fluid mx-auto d-block">
+                                                        </div>
+                                                        <div class="carousel-item"> <img src="../assets/images/ecommerce/png/3.png" alt="img" class="img-fluid mx-auto d-block">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="carousel-slider">
+                                                <div id="thumbcarousel" class="carousel slide" data-bs-interval="false">
+                                                    <div class="carousel-inner">
+                                                        <ul class="carousel-item active p-0 flex-wrap justify-content-center">
+                                                            <li data-bs-target="#carousel" data-bs-slide-to="0" class="thumb active my-2"><img src="../assets/images/ecommerce/png/5.png" alt="img"></li>
+                                                            <li data-bs-target="#carousel" data-bs-slide-to="1" class="thumb my-2"><img src="../assets/images/ecommerce/png/6.png" alt="img"></li>
+                                                            <li data-bs-target="#carousel" data-bs-slide-to="2" class="thumb my-2"><img src="../assets/images/ecommerce/png/4.png" alt="img"></li>
+                                                            <li data-bs-target="#carousel" data-bs-slide-to="3" class="thumb my-2"><img src="../assets/images/ecommerce/png/3.png" alt="img"></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <div class="card-body">
+                                            <h4 class="product-title">Mens T-shirt</h4>
+                                            <div class="rating mb-3">
+                                                <span class="ri-star-fill text-warning"></span>
+                                                <span class="ri-star-fill text-warning"></span>
+                                                <span class="ri-star-fill text-warning"></span>
+                                                <span class="ri-star-fill text-warning"></span>
+                                                <span class="ri-star-fill text-warning"></span>
+                                                <span class="fs-13 text-muted ms-1">41 reviews</span>
+                                            </div>
+                                            <p class="product-description">Suspendisse quos? Tempus cras iure temporibus? Eu laudantium cubilia sem sem! Repudiandae et! Massa senectus enim minim sociosqu delectus posuere.</p>
+                                            <h6 class="price">Current Price: <span class="h3 ms-2">$450</span></h6>
+                                            <p class="text-muted"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
+                                            <div class="">
+                                                <label class="form-label">Description:</label>
+                                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
+                                                <p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized .</p>
+                                                <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system.</p>
+                                            </div>
+                                            <div class="sizes d-md-flex mt-5">
+                                                <label class="form-label me-4">Sizes:</label>
+                                                <div class="form-check me-3">
+                                                    <input class="form-check-input" type="radio" name="Radio" id="Radio-sm" checked>
+                                                    <label class="form-check-label" for="Radio-sm">
+                                                        Small
+                                                    </label>
+                                                </div>
+                                                <div class="form-check me-3">
+                                                    <input class="form-check-input" type="radio" name="Radio" id="Radio-sm1">
+                                                    <label class="form-check-label" for="Radio-sm1">
+                                                        Medium
+                                                    </label>
+                                                </div>
+                                                <div class="form-check me-3">
+                                                    <input class="form-check-input" type="radio" name="Radio" id="Radio-sm2">
+                                                    <label class="form-check-label" for="Radio-sm2">
+                                                        Extra-Large
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="Radio" id="Radio-sm3">
+                                                    <label class="form-check-label" for="Radio-sm3">
+                                                        Extra-Large
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="colors d-sm-flex me-3 mt-2">
+                                                <label class="form-label me-4">Colors:</label>
+                                                <div class="d-flex ms-lg-4 flex-wrap">
+                                                    <div class="me-2">
+                                                        <label class="colorinput">
+                                                            <input name="color" type="radio" value="blue" class="colorinput-input" checked="">
+                                                            <span class="colorinput-color bg-blue"></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="me-2">
+                                                        <label class="colorinput">
+                                                            <input name="color" type="radio" value="lime" class="colorinput-input">
+                                                            <span class="colorinput-color bg-yellow"></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="me-2">
+                                                        <label class="colorinput">
+                                                            <input name="color" type="radio" value="red" class="colorinput-input">
+                                                            <span class="colorinput-color bg-teal"></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="me-2">
+                                                        <label class="colorinput">
+                                                            <input name="color" type="radio" value="pink" class="colorinput-input">
+                                                            <span class="colorinput-color bg-pink"></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="me-2">
+                                                        <label class="colorinput">
+                                                            <input name="color" type="radio" value="orange" class="colorinput-input">
+                                                            <span class="colorinput-color bg-success"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="btn-list mt-4">
+                                                <a href="javascript:void(0);" class="add-to-cart btn btn-danger" >Buy Now</a>
+                                                <a href="cart.html" class="add-to-cart btn btn-success" >ADD TO CART</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card custom-card">
+                            <div class="card-header  border-0">
+                                <div class="card-title">Specifications</div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table mb-0 border-top table-bordered text-nowrap">
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Type</th>
+                                                <td>Watches</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Sleeve</th>
+                                                <td>Half Sleeve</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Fit</th>
+                                                <td>Regular</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Fabric</th>
+                                                <td>Poly-Cotton</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Style Code</th>
+                                                <td>RGJ-29761</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Ideal For</th>
+                                                <td>Men</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Brand Color</th>
+                                                <td>Light Blue</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card custom-card">
+                            <div class="card-header  border-0">
+                                <div class="card-title">Reviews</div>
+                            </div>
+                            <div class="card-body">
+                                <div class="card shadow-none border">
+                                    <div class="d-sm-flex p-4">
+                                        <div class="flex-shrink-0 me-3">
+                                            <a  href="javascript:void(0);"><img class="media-object avatar avatar-lg avatar-rounded" alt="64x64" src="../assets/images/users/16.jpg"> </a>
+                                        </div>
+                                        <div class="media-body flex-fill">
+                                            <h5 class="mt-1 mb-1 fw-medium">Have you using update version</h5>
+                                            <small class="text-muted"><i class="fe fe-calendar"></i> Jan 21 2021 <i class=" ms-3 fe fe-clock-o"></i> 13:00</small>
+                                            <p class="fs-13 mb-2 mt-1">
+                                               Lorem ipsum dolor sit amet, quis Neque porro quisquam est, nostrud exercitation ullamco laboris   commodo consequat.
+                                            </p>
+                                            <a  href="javascript:void(0);" class="me-2 mt-1"><span class="badge bg-light"><i class="fe fe-message-circle"></i> Comment</span></a>
+                                            <a  href="javascript:void(0);" class="me-2 mt-1"><span class="badge bg-light"><i class="fe fe-reply"></i> Reply</span></a>
+                                            <div class="sub-media d-sm-flex mt-5">
+                                                <div class="flex-shrink-0 me-3">
+                                                    <a  href="javascript:void(0);"><img class="media-object avatar avatar-lg avatar-rounded" alt="64x64" src="../assets/images/users/1.jpg"> </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h5 class="mt-1 mb-1 fw-medium">Yes, sir</h5>
+                                                    <small class="text-muted"><i class="fe fe-calendar"></i> Jan 22 2021 <i class=" ms-3 fe fe-clock-o"></i> 09:00</small>
+                                                    <p class="fs-13 mb-2 mt-1">
+                                                       Lorem ipsum dolor sit amet, quis Neque porro quisquam est, nostrud exercitation ullamco laboris   commodo consequat.
+                                                    </p>
+                                                    <a  href="javascript:void(0);" class="me-2 mt-1"><span class="badge bg-light"><i class="fe fe-message-circle"></i> Comment</span></a>
+                                                    <a  href="javascript:void(0);" class="me-2 mt-1"><span class="badge bg-light"><i class="fe fe-reply"></i> Reply</span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card shadow-none border">
+                                    <div class="d-sm-flex p-4">
+                                        <div class="flex-shrink-0 me-3">
+                                            <a  href="javascript:void(0);"><img class="media-object avatar avatar-lg avatar-rounded" alt="64x64" src="../assets/images/users/11.jpg"> </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h5 class="mt-1 mb-1 fw-medium">Send the related data</h5>
+                                            <small class="text-muted"><i class="fe fe-calendar"></i> Dec 10 2020 <i class=" ms-3 fe fe-clock-o"></i> 06:00</small>
+                                            <p class="fs-13 mb-2 mt-1">
+                                               Lorem ipsum dolor sit amet, quis Neque porro quisquam est, nostrud exercitation ullamco laboris   commodo consequat.
+                                            </p>
+                                            <a  href="javascript:void(0);" class="me-2 mt-1"><span class="badge bg-light"><i class="fe fe-message-circle"></i> Comment</span></a>
+                                            <a  href="javascript:void(0);" class="me-2 mt-1"><span class="badge bg-light"><i class="fe fe-reply"></i> Reply</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card custom-card">
+                            <div class="card-header  border-0">
+                                <div class="card-title">Comments</div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group mb-3">
+                                    <input type="text" class="form-control" id="name1" placeholder="Your Name">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input type="email" class="form-control" id="email" placeholder="Email Address">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <textarea class="form-control" name="example-textarea-input" rows="6" placeholder="Write Comment"></textarea>
+                                </div>
+                                <a  href="javascript:void(0);" class="btn btn-primary">Send Reply</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-1 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

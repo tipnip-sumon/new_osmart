@@ -1,0 +1,839 @@
+@SPK@include("partials/mainhead.html")
+
+<link rel="stylesheet" href="../assets/libs/quill/quill.snow.css">
+<link rel="stylesheet" href="../assets/libs/quill/quill.bubble.css">
+
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                <!-- Page Header -->
+                <div class="page-header d-lg-flex d-block">
+                    <div class="page-leftheader">
+                        <div class="page-title">Task View</div>
+                    </div>
+                    <div class="page-rightheader">
+                        <div class="btn-list">
+                            <button  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newtaskmodal"><i class="fe fe-plus fs-12 my-auto me-2"></i>Create New Task</button>
+                            <button  class="btn btn-light3" data-bs-toggle="tooltip" data-bs-placement="top" title="E-mail"> <i class="fe fe-mail"></i> </button>
+                            <button  class="btn btn-light3" data-bs-placement="top" data-bs-toggle="tooltip" title="Contact"> <i class="fe fe-phone-call"></i> </button>
+                            <button  class="btn btn-primary" data-bs-placement="top" data-bs-toggle="tooltip" title="Info"> <i class="fe fe-info"></i> </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Page Header Close -->
+
+                <!-- Start::row-1 -->
+                <div class="row">
+                    <div class="col-xxl-3 col-md-12 col-lg-12">
+                        <div class="card custom-card">
+                            <div class="card-header d-flex justify-content-between border-bottom-0">
+                                <div class="card-title">Assigned To</div>
+                                <div class="ms-auto">
+                                    <a  href="javascript:void(0);" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#recurringmodal">Recurring</a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <div class="widget-user-image mx-auto text-center">
+                                        <img  class="avatar avatar-xxl avatar-rounded rounded-circle" alt="img" src="../assets/images/users/1.jpg">
+                                    </div>
+                                    <div class="pro-user mt-3">
+                                        <h5 class="pro-user-username text-dark mb-1 fs-16">Faith Harris</h5>
+                                        <h6 class="pro-user-desc text-muted fs-12">Web Designer</h6>
+                                    </div>
+                                </div>
+                                <div class="table-responsive mt-4">
+                                    <table class="table mb-0 table-borderless">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <span class="w-50">Department</span>
+                                                </td>
+                                                <td>:</td>
+                                                <td>
+                                                    <span class="fw-semibold">Designing</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span class="w-50">Start Date</span>
+                                                </td>
+                                                <td>:</td>
+                                                <td>
+                                                    <span class="fw-semibold">12-02-2021</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span class="w-50">Deadline</span>
+                                                </td>
+                                                <td>:</td>
+                                                <td>
+                                                    <span class="fw-semibold">16-06-2021</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span class="w-50">Priority</span>
+                                                </td>
+                                                <td>:</td>
+                                                <td>
+                                                    <span class="badge bg-danger-transparent">High</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span class="w-50">Work Status</span>
+                                                </td>
+                                                <td>:</td>
+                                                <td>
+                                                    <span class="badge bg-warning">On hold</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="d-flex align-items-end justify-content-between mt-4">
+                                    <h6 class="">Project Status</h6>
+                                    <h6 class="font-weight-bold mb-1">30%</h6>
+                                </div>
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar bg-success w-30"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-9 col-md-12 col-lg-12">
+                        <div class="tab-menu-heading hremp-tabs p-0 border-0 task-view-tabs">
+                            <div class="tabs-menu1">
+                                <!-- Tabs -->
+                                <ul class="nav panel-tabs">
+                                    <li class="ms-sm-4"><a href="#tab5" class="active"  data-bs-toggle="tab">Details</a></li>
+                                    <li><a href="#tab6"  data-bs-toggle="tab">Sub Task</a></li>
+                                    <li><a href="#tab7" data-bs-toggle="tab">Comment</a></li>
+                                    <li><a href="#tab8" data-bs-toggle="tab">Note</a></li>
+                                    <li><a href="#tab9" data-bs-toggle="tab">Attachments</a></li>
+                                    <li><a href="#tab10" data-bs-toggle="tab">FAQS</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body tabs-menu-body hremp-tabs1 p-0 card custom-card">
+                            <div class="tab-content">
+                                <div class="tab-pane border-0 active" id="tab5">
+                                    <div class="">
+                                        <h5 class="mb-4 fw-semibold">Description</h5>
+                                        <div class="main-profile-bio mb-0">
+                                            <span class="fs-14 mt-2 text-muted">Mobile App Ui Designing and Prototyping
+                                                It is a long established fact that a reader will be distracted by the readable content of a page when looking
+                                            </span>
+                                            <p>simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy  when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries nchanged.</p>
+                                            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+                                            <p class="mb-0">pleasure rationally encounter but because pursue consequences that are extremely painful.occur in which toil and pain can procure him some great pleasure.. <a href="">More</a></p>
+                                            <p>simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy  when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries nchanged.</p>
+                                            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+                                            <p class="mb-0">pleasure rationally encounter but because pursue consequences that are extremely painful.occur in which toil and pain can procure him some great pleasure.. <a href="">More</a></p>
+                                            <p>simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy  when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries nchanged.</p>
+                                            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+                                            <p>pleasure rationally encounter but because pursue consequences that are extremely painful.occur in which toil and pain can procure him some great pleasure.. <a href="">More</a></p>
+                                            <h5 class="mb-4 mt-5 fw-semibold">Attachments</h5>
+                                            <div class="row attachments-doc">
+                                                <div class="col-md-12 col-xxl-4 col-xl-12">
+                                                    <div class="list-group-item  align-items-center  mb-2 mt-2 rounded-2">
+                                                        <div class="d-sm-flex flex-wrap">
+                                                            <img src="../assets/images/media/files/attachments/2.png" alt="img" class="avatar bg-transparent avatar-xl">
+                                                            <a  href="javascript:void(0);" class="fw-semibold fs-14 mt-4">document.pdf<span class="text-muted ms-2">(23 KB)</span></a>
+                                                            <div class="ms-auto d-flex mt-4 text-end">
+                                                                <a  href="javascript:void(0);" class="action-btns1"><i class="fe fe-download-cloud text-primary"></i></a>
+                                                                <a  href="javascript:void(0);" class="action-btns1  me-0"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-xxl-4 col-xl-12">
+                                                    <div class="list-group-item  align-items-center  mb-2 mt-2 rounded-2">
+                                                        <div class="d-sm-flex flex-wrap">
+                                                            <img src="../assets/images/media/files/attachments/4.png" alt="img" class="avatar bg-transparent avatar-xl">
+                                                            <a  href="javascript:void(0);" class="fw-semibold fs-14 mt-4">Project<span class="text-muted ms-2">(578.6MB)</span></a>
+                                                            <div class="ms-auto d-flex mt-4 text-end">
+                                                                <a  href="javascript:void(0);" class="action-btns1"><i class="fe fe-download-cloud text-primary"></i></a>
+                                                                <a  href="javascript:void(0);" class="action-btns1 me-0"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-xxl-4 col-xl-12">
+                                                    <div class="list-group-item  align-items-center  mb-2 mt-2 rounded-2">
+                                                        <div class="d-sm-flex flex-wrap">
+                                                            <img src="../assets/images/media/files/attachments/3.png" alt="img" class="avatar bg-transparent avatar-xl">
+                                                            <a  href="javascript:void(0);" class="fw-semibold fs-14 mt-4">files.doc<span class="text-muted ms-2">(2.67 KB)</span></a>
+                                                            <div class="ms-auto d-flex mt-4 text-end">
+                                                                <a  href="javascript:void(0);" class="action-btns1"><i class="fe fe-download-cloud text-primary"></i></a>
+                                                                <a  href="javascript:void(0);" class="action-btns1 me-0"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane border-0" id="tab6">
+                                    <div class="">
+                                        <div class="pt-4 pb-4 text-end">
+                                            <a  href="javascript:void(0);" class="btn btn-primary">Add Task</a>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="card border p-0 shadow-none">
+                                                    <div class="card-header border-0">
+                                                        <span class="badge badge-md bg-primary-transparent">Today task</span>
+                                                        <div class="ms-auto">
+                                                            <a  href="javascript:void(0);" class="" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                <i class="fe fe-more-horizontal text-primary fs-18"></i>
+                                                            </a>
+                                                            <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                                                                <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-eye me-2"></i>View</a></li>
+                                                                <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-plus-circle me-2"></i>Add</a></li>
+                                                                <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-send me-2"></i>Send</a></li>
+                                                                <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-edit-2 me-2"></i>Edit</a></li>
+                                                                <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-trash-2 me-2"></i>Remove</a></li>
+                                                                <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-settings me-2"></i>More</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body pt-0">
+                                                        <h5 class="fs-14 mt-3 mb-1 text-capitalize">Jquery Issues Fixed</h5>
+                                                        <p class="fs-13 mt-2 text-muted">
+                                                            That a reader will be distracted by the readable content of a page when looking
+                                                        </p>
+                                                        <p class="fs-13 text-muted"><i class="fe fe-clock  me-2"></i>Dead line 6:00 Pm</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card border p-0 shadow-none">
+                                                    <div class="card-header border-0">
+                                                        <span class="badge badge-md bg-danger-transparent">Pending task</span>
+                                                        <div class="ms-auto">
+                                                            <a  href="javascript:void(0);" class="" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                <i class="fe fe-more-horizontal text-primary fs-18"></i>
+                                                            </a>
+                                                            <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                                                                <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-eye me-2"></i>View</a></li>
+                                                                <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-plus-circle me-2"></i>Add</a></li>
+                                                                <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-send me-2"></i>Send</a></li>
+                                                                <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-edit-2 me-2"></i>Edit</a></li>
+                                                                <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-trash-2 me-2"></i>Remove</a></li>
+                                                                <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-settings me-2"></i>More</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body pt-0">
+                                                        <h5 class="fs-14 mt-3 mb-1 text-capitalize">HTML Updated</h5>
+                                                        <p class="fs-13 mt-2 text-muted">
+                                                            That a reader will be distracted by the readable content of a page when looking
+                                                        </p>
+                                                        <p class="fs-13 text-muted"><i class="fe fe-clock  me-2"></i>Dead Line 2:30 Pm</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card border p-0 shadow-none">
+                                                    <div class="card-header border-0">
+                                                        <span class="badge badge-md bg-success-transparent">Completed task</span>
+                                                        <div class="ms-auto">
+                                                            <a  href="javascript:void(0);" class="" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                <i class="fe fe-more-horizontal text-primary fs-18"></i>
+                                                            </a>
+                                                            <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                                                                <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-eye me-2"></i>View</a></li>
+                                                                <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-plus-circle me-2"></i>Add</a></li>
+                                                                <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-send me-2"></i>Send</a></li>
+                                                                <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-edit-2 me-2"></i>Edit</a></li>
+                                                                <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-trash-2 me-2"></i>Remove</a></li>
+                                                                <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-settings me-2"></i>More</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body pt-0">
+                                                        <h5 class="fs-14 mt-3 mb-1 text-capitalize">HTML Updated</h5>
+                                                        <p class="fs-13 mt-2 text-muted">
+                                                            That a reader will be distracted by the readable content of a page when looking
+                                                        </p>
+                                                        <p class="fs-13 text-muted"><i class="fe fe-clock  me-2"></i>Dec 02 2019</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane border-0" id="tab7">
+                                    <div class="">
+                                        <div class="pt-4 pb-4 text-end">
+                                            <a  href="javascript:void(0);" class="btn btn-primary">Add Comment</a>
+                                        </div>
+                                        <div class="card shadow-none border">
+                                            <div class="d-sm-flex p-4">
+                                                <div class="d-flex me-3">
+                                                    <div class="avatar me-2 avatar-rounded">
+                                                        <img src="../assets/images/users/13.jpg" alt="img">
+                                                    </div>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h5 class="mt-1 mb-1 fw-semibold">Have you using update version</h5>
+                                                    <small class="text-muted"><i class="fe fe-calendar"></i> Jan 21 2021 <i class=" ms-3 fe fe-clock"></i> 13:00</small>
+                                                    <p class="fs-13 mb-2 mt-1">
+                                                        Lorem ipsum dolor sit amet, quis Neque porro quisquam est, nostrud exercitation ullamco laboris   commodo consequat.
+                                                    </p>
+                                                    <a  href="javascript:void(0);" class="me-2 mt-1"><span class="badge bg-light text-dark"><i class="fe fe-message-circle"></i> Comment</span></a>
+                                                    <a  href="javascript:void(0);" class="me-2 mt-1"><span class="badge bg-light text-dark"><i class="fa fa-reply"></i> Reply</span></a>
+                                                    <div class="sub-media d-sm-flex mt-4">
+                                                        <div class="d-flex me-3">
+                                                            <div class="avatar me-2 avatar-rounded">
+                                                                <img src="../assets/images/users/10.jpg" alt="img">
+                                                            </div>
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <h5 class="mt-1 mb-1 fw-semibold">Yes, sir</h5>
+                                                            <small class="text-muted"><i class="fe fe-calendar"></i> Jan 22 2021 <i class=" ms-3 fe fe-clock"></i> 09:00</small>
+                                                            <p class="fs-13 mb-2 mt-1">
+                                                                Lorem ipsum dolor sit amet, quis Neque porro quisquam est, nostrud exercitation ullamco laboris   commodo consequat.
+                                                            </p>
+                                                            <a  href="javascript:void(0);" class="me-2 mt-1"><span class="badge bg-light text-dark"><i class="fe fe-message-circle"></i> Comment</span></a>
+                                                            <a  href="javascript:void(0);" class="me-2 mt-1"><span class="badge bg-light text-dark"><i class="fa fa-reply"></i> Reply</span></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card shadow-none border">
+                                            <div class="d-sm-flex p-4">
+                                                <div class="d-flex me-3">
+                                                    <div class="avatar me-2 avatar-rounded">
+                                                        <img src="../assets/images/users/1.jpg" alt="img">
+                                                    </div>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h5 class="mt-1 mb-1 fw-semibold">Send the related data</h5>
+                                                    <small class="text-muted"><i class="fe fe-calendar"></i> Dec 10 2020 <i class=" ms-3 fe fe-clock"></i> 06:00</small>
+                                                    <p class="fs-13 mb-2 mt-1">
+                                                        Lorem ipsum dolor sit amet, quis Neque porro quisquam est, nostrud exercitation ullamco laboris   commodo consequat.
+                                                    </p>
+                                                    <a  href="javascript:void(0);" class="me-2 mt-1"><span class="badge bg-light text-dark" ><i class="fe fe-message-circle"></i> Comment</span></a>
+                                                    <a  href="javascript:void(0);" class="me-2 mt-1"><span class="badge bg-light text-dark"><i class="fa fa-reply"></i> Reply</span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane border-0" id="tab8">
+                                    <div class="">
+                                        <div class="note-content">
+                                            <div class="form-group">
+                                                <label class="form-label">Title</label>
+                                                <input class="form-control" placeholder="text">
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <label class="form-label">Note:</label>
+                                                <div id="note"></div>
+                                            </div>
+                                            <div class="text-end mt-2">
+                                                <a  href="javascript:void(0);" class="btn btn-primary">Submit</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane border-0" id="tab9">
+                                    <div class="">
+                                        <div class="attachments-doc">
+                                            <div class="row">
+                                                <div class="col-md-12 col-xxl-4 col-xl-12">
+                                                    <div class="list-group-item  align-items-center  mb-2 mt-2 rounded-2">
+                                                        <div class="d-sm-flex flex-wrap">
+                                                            <img src="../assets/images/media/files/attachments/2.png" alt="img" class="avatar bg-transparent avatar-xl me-2">
+                                                            <a  href="javascript:void(0);" class="fw-semibold fs-14 mt-4">document.pdf<span class="text-muted ms-2">(23 KB)</span></a>
+                                                            <div class="ms-auto d-flex mt-4 text-end">
+                                                                <a  href="javascript:void(0);" class="action-btns1"><i class="fe fe-download-cloud text-primary"></i></a>
+                                                                <a  href="javascript:void(0);" class="action-btns1  me-0"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-xxl-4 col-xl-12">
+                                                    <div class="list-group-item  align-items-center  mb-2 mt-2 rounded-2">
+                                                        <div class="d-sm-flex flex-wrap">
+                                                            <img src="../assets/images/media/files/attachments/4.png" alt="img" class="avatar bg-transparent avatar-xl me-2">
+                                                            <a  href="javascript:void(0);" class="fw-semibold fs-14 mt-4">Project<span class="text-muted ms-2">(578.6MB)</span></a>
+                                                            <div class="ms-auto d-flex mt-4 text-end">
+                                                                <a  href="javascript:void(0);" class="action-btns1"><i class="fe fe-download-cloud text-primary"></i></a>
+                                                                <a  href="javascript:void(0);" class="action-btns1 me-0"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-xxl-4 col-xl-12">
+                                                    <div class="list-group-item  align-items-center  mb-2 mt-2 rounded-2">
+                                                        <div class="d-sm-flex flex-wrap">
+                                                            <img src="../assets/images/ecommerce/1.jpg" alt="img" class="avatar bg-transparent avatar-xl me-2">
+                                                            <a  href="javascript:void(0);" class="fw-semibold fs-14 mt-4">image.jpg<span class="text-muted ms-2">(2.67 KB)</span></a>
+                                                            <div class="ms-auto d-flex mt-4 text-end">
+                                                                <a  href="javascript:void(0);" class="action-btns1"><i class="fe fe-download-cloud text-primary"></i></a>
+                                                                <a  href="javascript:void(0);" class="action-btns1 me-0"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-5">
+                                                <div class="col-md-12 col-xxl-4 col-xl-12">
+                                                    <div class="list-group-item  align-items-center  mb-2 mt-2 rounded-2">
+                                                        <div class="d-sm-flex flex-wrap">
+                                                            <img src="../assets/images/media/files/attachments/3.png" alt="img" class="avatar bg-transparent avatar-xl me-2">
+                                                            <a  href="javascript:void(0);" class="fw-semibold fs-14 mt-4">files.doc<span class="text-muted ms-2">(23 KB)</span></a>
+                                                            <div class="ms-auto d-flex mt-4 text-end">
+                                                                <a  href="javascript:void(0);" class="action-btns1"><i class="fe fe-download-cloud text-primary"></i></a>
+                                                                <a  href="javascript:void(0);" class="action-btns1  me-0"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-xxl-4 col-xl-12">
+                                                    <div class="list-group-item  align-items-center  mb-2 mt-2 rounded-2">
+                                                        <div class="d-sm-flex flex-wrap">
+                                                            <img src="../assets/images/media/files/attachments/1.png" alt="img" class="avatar bg-transparent avatar-xl me-2">
+                                                            <a  href="javascript:void(0);" class="fw-semibold fs-14 mt-4">style.css<span class="text-muted ms-2">(176 KB)</span></a>
+                                                            <div class="ms-auto d-flex mt-4 text-end">
+                                                                <a  href="javascript:void(0);" class="action-btns1"><i class="fe fe-download-cloud text-primary"></i></a>
+                                                                <a  href="javascript:void(0);" class="action-btns1  me-0"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-xxl-4 col-xl-12">
+                                                    <div class="list-group-item  align-items-center  mb-2 mt-2 rounded-2">
+                                                        <div class="d-sm-flex flex-wrap">
+                                                            <img src="../assets/images/media/files/attachments/5.png" alt="img" class="avatar bg-transparent avatar-xl me-2">
+                                                            <a  href="javascript:void(0);" class="fw-semibold fs-14 mt-4">index.html<span class="text-muted ms-2">(176 KB)</span></a>
+                                                            <div class="ms-auto d-flex mt-4 text-end">
+                                                                <a  href="javascript:void(0);" class="action-btns1"><i class="fe fe-download-cloud text-primary"></i></a>
+                                                                <a  href="javascript:void(0);" class="action-btns1  me-0"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-5">
+                                                <div class="col-md-12 col-xl-4">
+                                                    <div class="list-group-item  align-items-center text-center rounded-2">
+                                                        <a  href="javascript:void(0);" class="text-center fs-28 text-success">
+                                                            <i class="fe fe-plus-circle"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane border-0" id="tab10">
+                                    <div class="">
+                                        <div class="accordion accordion-customicon1 accordions-items-seperate" id="accordioncustomicon1Example">
+                                            <div class="row">
+                                                <div class="col-xl-10">
+                                                    <div class="accordion-item">
+                                                        <h2 class="accordion-header" id="headingcustomicon1One">
+                                                            <button class="accordion-button  bg-light2" type="button" data-bs-toggle="collapse"
+                                                                data-bs-target="#collapsecustomicon1One" aria-expanded="true"
+                                                                aria-controls="collapsecustomicon1One">
+                                                                Have you insert form validations Page? 
+                                                            </button>
+                                                        </h2>
+                                                        <div id="collapsecustomicon1One" class="accordion-collapse collapse show"
+                                                            aria-labelledby="headingcustomicon1One"
+                                                            data-bs-parent="#accordioncustomicon1Example">
+                                                            <div class="accordion-body">
+                                                                <strong>This is the first item's accordion body.</strong> It is shown by
+                                                                default, until the collapse plugin adds the appropriate classes that we
+                                                                use to style each element. These classes control the overall appearance,
+                                                                as well as the showing and hiding via CSS transitions. You can modify
+                                                                any of this with custom CSS or overriding our default variables. It's
+                                                                also worth noting that just about any HTML can go within the
+                                                                <code>.accordion-body</code>, though the transition does limit overflow.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-xl-2">
+                                                    <div class="d-flex mt-2 text-end">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="fe fe-edit-2 text-primary"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1 me-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-3">
+                                                <div class="col-xl-10">
+                                                    <div class="accordion-item">
+                                                        <h2 class="accordion-header" id="headingcustomicon1Two">
+                                                            <button class="accordion-button  bg-light2 collapsed" type="button"
+                                                                data-bs-toggle="collapse" data-bs-target="#collapsecustomicon1Two"
+                                                                aria-expanded="false" aria-controls="collapsecustomicon1Two">
+                                                                Have you made Responsiveness? 
+                                                            </button>
+                                                        </h2>
+                                                        <div id="collapsecustomicon1Two" class="accordion-collapse collapse"
+                                                            aria-labelledby="headingcustomicon1Two"
+                                                            data-bs-parent="#accordioncustomicon1Example">
+                                                            <div class="accordion-body">
+                                                                <strong>This is the first item's accordion body.</strong> It is shown by
+                                                                default, until the collapse plugin adds the appropriate classes that we
+                                                                use to style each element. These classes control the overall appearance,
+                                                                as well as the showing and hiding via CSS transitions. You can modify
+                                                                any of this with custom CSS or overriding our default variables. It's
+                                                                also worth noting that just about any HTML can go within the
+                                                                <code>.accordion-body</code>, though the transition does limit overflow.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-xl-2">
+                                                    <div class="d-flex mt-2 text-end">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="fe fe-edit-2 text-primary"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1 me-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-3">
+                                                <div class="col-xl-10">
+                                                    <div class="accordion-item">
+                                                        <h2 class="accordion-header" id="headingcustomicon1Three">
+                                                            <button class="accordion-button  bg-light2 collapsed" type="button"
+                                                                data-bs-toggle="collapse" data-bs-target="#collapsecustomicon1Three"
+                                                                aria-expanded="false" aria-controls="collapsecustomicon1Three">
+                                                                Have you using Bootstrap?
+                                                            </button>
+                                                        </h2>
+                                                        <div id="collapsecustomicon1Three" class="accordion-collapse collapse"
+                                                            aria-labelledby="headingcustomicon1Three"
+                                                            data-bs-parent="#accordioncustomicon1Example">
+                                                            <div class="accordion-body">
+                                                                <strong>This is the first item's accordion body.</strong> It is shown by
+                                                                default, until the collapse plugin adds the appropriate classes that we
+                                                                use to style each element. These classes control the overall appearance,
+                                                                as well as the showing and hiding via CSS transitions. You can modify
+                                                                any of this with custom CSS or overriding our default variables. It's
+                                                                also worth noting that just about any HTML can go within the
+                                                                <code>.accordion-body</code>, though the transition does limit overflow.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-xl-2">
+                                                    <div class="d-flex mt-2 text-end">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="fe fe-edit-2 text-primary"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1 me-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-3">
+                                                <div class="col-xl-10">
+                                                    <div class="accordion-item">
+                                                        <h2 class="accordion-header" id="headingcustomicon1Four">
+                                                            <button class="accordion-button  bg-light2 collapsed" type="button"
+                                                                data-bs-toggle="collapse" data-bs-target="#collapsecustomicon1Four"
+                                                                aria-expanded="false" aria-controls="collapsecustomicon1Four">
+                                                                Have you insert live chat? 
+                                                            </button>
+                                                        </h2>
+                                                        <div id="collapsecustomicon1Four" class="accordion-collapse collapse"
+                                                            aria-labelledby="headingcustomicon1Four"
+                                                            data-bs-parent="#accordioncustomicon1Example">
+                                                            <div class="accordion-body">
+                                                                <strong>This is the first item's accordion body.</strong> It is shown by
+                                                                default, until the collapse plugin adds the appropriate classes that we
+                                                                use to style each element. These classes control the overall appearance,
+                                                                as well as the showing and hiding via CSS transitions. You can modify
+                                                                any of this with custom CSS or overriding our default variables. It's
+                                                                also worth noting that just about any HTML can go within the
+                                                                <code>.accordion-body</code>, though the transition does limit overflow.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-xl-2">
+                                                    <div class="d-flex mt-2 text-end">
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="fe fe-edit-2 text-primary"></i></a>
+                                                        <a  href="javascript:void(0);" class="action-btns1 me-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-4"> 
+                                                    <a href="javascript:void(0);" class="btn btn-primary" data-bs-toggle="modal"
+                                                        data-bs-target="#addfaqmodal">
+                                                        <i class="fe fe-plus fs-15 my-auto me-2 d-inline-block"></i>Add Faq</a> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-1 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+        
+        <!--Apply Leaves Modal -->
+        <div class="modal fade"  id="newtaskmodal">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Task</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Task ID</label>
+                                    <input class="form-control" placeholder="Number">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Task Title</label>
+                                    <input class="form-control" placeholder="Text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Department:</label>
+                                    <select class="form-control custom-select" data-trigger data-placeholder="Select Department">
+                                        <option value="1">Designing Department</option>
+                                        <option value="2">Development Department</option>
+                                        <option value="3">Marketing Department</option>
+                                        <option value="4">Human Resource Department</option>
+                                        <option value="5">Managers Department</option>
+                                        <option value="6">Application Department</option>
+                                        <option value="7">Support Department</option>
+                                        <option value="8">IT Department</option>
+                                        <option value="9">Technical Department</option>
+                                        <option value="10">Accounts Department</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Assign To:</label>
+                                    <select class="form-control custom-select" data-trigger data-placeholder="Select Department">
+                                        <option value="1">Faith Harris</option>
+                                        <option value="2">Austin Bell</option>
+                                        <option value="3">Maria Bower</option>
+                                        <option value="4">Peter Hill</option>
+                                        <option value="5">Adam Quinn</option>
+                                        <option value="6">Victoria Lyman</option>
+                                        <option value="7">Melanie Coleman</option>
+                                        <option value="8">Justin Metcalfe</option>
+                                        <option value="9">Ryan Young</option>
+                                        <option value="10">Jennifer Hardacre</option>
+                                        <option value="12">Jennifer Hardacre</option>
+                                        <option value="13">Justin Parr</option>
+                                        <option value="14">Julia Hodges</option>
+                                        <option value="15">Michael Sutherland</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Task Priority:</label>
+                            <select class="form-control custom-select" data-trigger data-placeholder="Select Priority">
+                                <option value="1">High</option>
+                                <option value="2">Medium</option>
+                                <option value="3">Low</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="leave-content active mb-3 mb-md-0" id="single">
+                                    <div class="form-group">
+                                        <label class="form-label">From:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="leave-content active" id="single1">
+                                    <div class="form-group">
+                                        <label class="form-label">TO:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Description:</label>
+                            <textarea class="form-control" id="text-area" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Attachment:</label>
+                            <div class="form-group">
+                                    <input class="form-control" type="file">
+                            </div>
+                        </div>
+                        <div class="custom-controls-stacked d-md-flex">
+                            <label class="form-label me-5">Work Status :</label>
+                            <div class="form-check mb-0 me-4">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Completed
+                                </label>
+                            </div>
+                            <div class="form-check mb-0 me-4">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    Pending
+                                </label>
+                            </div>
+                            <div class="form-check mb-0">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+                                <label class="form-check-label" for="flexRadioDefault3">
+                                    On Progress
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button  class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                        <button  class="btn btn-success successful-notify">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Apply Leaves Modal  -->
+        
+			<!--Recurring Modal -->
+			<div class="modal fade"  id="recurringmodal">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Recurring</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="form-label">Form:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="form-label">To:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="form-label">Description:</label>
+								<textarea rows="3" class="form-control" placeholder="Description"></textarea>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<a  href="javascript:void(0);" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</a>
+							<a  href="javascript:void(0);" class="btn btn-primary successful-notify" >Submit</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Recurring Modal  -->
+
+			<!--Add faq Modal -->
+			<div class="modal fade"  id="addfaqmodal">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Ask FAQS</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<input type="text" class="form-control" id="name1" placeholder="enter Faq">
+							</div>
+							<div class="form-group">
+								<textarea class="form-control" name="example-textarea-input" rows="6" placeholder="description"></textarea>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<a  href="javascript:void(0);" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</a>
+							<a  href="javascript:void(0);" class="btn btn-primary" >Submit</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Add faq Modal  -->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    <!-- Rater JS -->
+    <script src="../assets/libs/rater-js/index.js"></script>
+
+    <!-- Date & Time Picker JS -->
+    <script src="../assets/libs/flatpickr/flatpickr.min.js"></script>
+
+    <!-- Default date picker js-->
+    <script src="../assets/js/default-flat-datepicker.js"></script>
+
+    <!-- Quill Editor JS -->
+    <script src="../assets/libs/quill/quill.min.js"></script>
+
+    <!-- task view JS -->
+    <script src="../assets/js/task-view.js"></script>
+
+    <!-- Notifications JS -->
+    <script src="../assets/libs/awesome-notifications/index.var.js"></script>
+
+    <!-- Successful-notify JS -->
+    <script src="../assets/js/successful-notify.js"></script>
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

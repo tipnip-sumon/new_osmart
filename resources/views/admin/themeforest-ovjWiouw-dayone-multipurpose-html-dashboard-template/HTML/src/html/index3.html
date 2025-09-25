@@ -1,0 +1,1415 @@
+@SPK@include("partials/mainhead.html")
+
+<!-- Full Calendar CSS -->
+<link rel="stylesheet" href="../assets/libs/fullcalendar/main.min.css">
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+               <!-- Page Header -->
+               <div class="page-header d-lg-flex d-block">
+                <div class="page-leftheader">
+                    <div class="page-title">Task<span class="fw-normal text-muted ms-2">Dashboard</span></div>
+                </div>
+                <div class="page-rightheader">
+                    <div class="d-flex align-items-center flex-wrap my-auto end-content breadcrumb-end">
+                        <div class="d-lg-flex d-block">
+                            <div class="btn-list">
+                                <button  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newtaskmodal"><i class="fe fe-plus fs-12 my-auto me-2"></i>Create New Task</button>
+                                <button  class="btn btn-light3" data-bs-toggle="tooltip" data-bs-placement="top" title="E-mail"> <i class="fe fe-mail"></i> </button>
+                                <button  class="btn btn-light3" data-bs-placement="top" data-bs-toggle="tooltip" title="Contact"> <i class="fe fe-phone-call"></i> </button>
+                                <button  class="btn btn-primary" data-bs-placement="top" data-bs-toggle="tooltip" title="Info"> <i class="fe fe-info"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Page Header Close -->
+
+                <!-- Start::row-1 -->
+                <div class="row">
+                    <div class="col-xl-3 col-lg-6 col-md-12">
+                        <div class="card custom-card">
+                            <a  href="javascript:void(0);">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <div class="mt-0 text-start">
+                                                <span class="fs-16 fw-semibold">All Task's</span>
+                                                <h3 class="mb-0 mt-1 text-danger  fs-25">1254</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-5">
+                                            <div class="icon1 bg-danger my-auto  float-end"> <i class="fe fe-briefcase"></i> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-md-12">
+                        <div class="card custom-card">
+                            <a  href="javascript:void(0);">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <div class="mt-0 text-start">
+                                                <span class="fs-16 fw-semibold">My Task</span>
+                                                <h3 class="mb-0 mt-1 text-primary  fs-25">42</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-5">
+                                            <div class="icon1 bg-primary my-auto  float-end"> <i class="fe fe-briefcase"></i> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-md-12">
+                        <div class="card custom-card">
+                            <a  href="javascript:void(0);">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <div class="mt-0 text-start">
+                                                <span class="fs-16 fw-semibold">Pending Tasks</span>
+                                                <h3 class="mb-0 mt-1 text-secondary fs-25">11</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-5">
+                                            <div class="icon1 bg-secondary my-auto  float-end"> <i class="fe fe-info"></i> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-md-12">
+                        <a  href="javascript:void(0);">
+                            <div class="card custom-card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <div class="mt-0 text-start">
+                                                <span class="fs-16 fw-semibold">Completed Tasks</span>
+                                                <h3 class="mb-0 mt-1 text-success fs-25">38</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-5">
+                                            <div class="icon1 bg-success my-auto  float-end"> <i class="fe fe-check"></i> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!--End::row-1 -->
+
+                <!-- Start::row-2 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="">
+                            <div class="card-header d-sm-flex justify-content-between align-items-center mb-3 mt-3 pb-2">
+                                <h4 class="card-title">Today Task Updates</h4>
+                                <div class="card-options d-flex mt-2 mt-sm-0">
+                                    <div class="btn-list me-1">
+                                        <div class="btn btn-primary">Add Task</div>
+                                        <div class="btn btn-light3">View All</div>
+                                    </div>
+                                    <div class="dropdown"> <a  href="javascript:void(0);" class="btn btn-light3 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> Latest </a>
+                                        <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                                            <li><a  href="javascript:void(0);" class="dropdown-item">Monthly</a></li>
+                                            <li><a  href="javascript:void(0);" class="dropdown-item">Yearly</a></li>
+                                            <li><a  href="javascript:void(0);" class="dropdown-item">Weekly</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-12">
+                                    <div class="card custom-card">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-9">
+                                                    <div class="mt-0 text-start">
+                                                        <h4 class="mb-0 mt-1 mb-2 fw-semibold">Design Updated</h4>
+                                                        <p class="fs-14 fw-semibold text-muted mb-2">Designing Department</p>
+                                                        <span class="fs-14 mt-2 text-muted">Mobile App Ui Designing and Prototyping</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="task-img bg-light my-auto float-end">
+                                                        <img src="../assets/images/media/png/17.png" alt="img">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="d-md-flex flex-wrap">
+                                                <div class="d-flex mb-3 mb-md-0">
+                                                    <div class="avatar-list-stacked">
+                                                        <span class="avatar avatar-md me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/8.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-md me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/2.jpg" alt="img">
+                                                        </span>
+                                                        <a class="avatar bg-primary avatar-rounded text-fixed-white" href="javascript:void(0);">
+                                                            +6
+                                                        </a>
+                                                    </div>
+                                                    <div class="">
+                                                        <div id="attendance"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="ms-auto mt-3 mt-sm-0">
+                                                    <div class="d-flex">
+                                                        <div class="task-btn border-danger text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Project Priority">High</div>
+                                                        <a class="btn btn-outline-light  text-muted"  href="javascript:void(0);" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fe fe-more-vertical"></i></a>
+                                                        <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                                                            <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-eye me-2"></i>View</a></li>
+                                                            <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-plus-circle me-2"></i>Add</a></li>
+                                                            <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-trash-2 me-2"></i>Remove</a></li>
+                                                            <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-download-cloud me-2"></i>Download</a></li>
+                                                            <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-settings me-2"></i>More</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-12">
+                                    <div class="card custom-card">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-9">
+                                                    <div class="mt-0 text-start">
+                                                        <h4 class="mb-0 mt-1 mb-2 fw-semibold">HTML Code Updated</h4>
+                                                        <p class="fs-14 fw-semibold text-muted mb-2">HTML Designing Department</p>
+                                                        <span class="fs-14 mt-2 text-muted">Updated Version 4.2.10 and Minor issues fixed</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="task-img bg-light my-auto float-end">
+                                                        <img src="../assets/images/media/png/18.png" alt="img">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="d-md-flex flex-wrap">
+                                                <div class="d-flex mb-3 mb-md-0">
+                                                    <div class="avatar-list-stacked">
+                                                        <span class="avatar avatar-md me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/8.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-md me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/2.jpg" alt="img">
+                                                        </span>
+                                                        <a class="avatar bg-primary avatar-rounded text-fixed-white" href="javascript:void(0);">
+                                                            +4
+                                                        </a>
+                                                    </div>
+                                                    <div class="">
+                                                        <div id="attendanc2"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="ms-auto mt-3 mt-sm-0">
+                                                    <div class="d-flex">
+                                                        <div class="task-btn border-success text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Project Priority">Low</div>
+                                                        <a class="btn btn-outline-light  text-muted"  href="javascript:void(0);" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fe fe-more-vertical"></i></a>
+                                                        <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                                                            <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-eye me-2"></i>View</a></li>
+                                                            <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-plus-circle me-2"></i>Add</a></li>
+                                                            <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-trash-2 me-2"></i>Remove</a></li>
+                                                            <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-download-cloud me-2"></i>Download</a></li>
+                                                            <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-settings me-2"></i>More</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-12">
+                                    <div class="card custom-card">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-9">
+                                                    <div class="mt-0 text-start">
+                                                        <h4 class="mb-0 mt-1 mb-2 fw-semibold">Angular Issues fixed</h4>
+                                                        <p class="fs-14 fw-semibold text-muted mb-2">Angular  Department</p>
+                                                        <span class="fs-14 mt-2 text-muted">Old Template Angular Version Updated</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="task-img bg-light my-auto float-end">
+                                                        <img src="../assets/images/media/png/19.png" alt="img">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="d-md-flex flex-wrap">
+                                                <div class="d-flex mb-3 mb-md-0">
+                                                     <div class="avatar-list-stacked">
+                                                    <span class="avatar avatar-md me-2 avatar-rounded">
+                                                        <img src="../assets/images/users/2.jpg" alt="img">
+                                                    </span>
+                                                    <span class="avatar avatar-md me-2 avatar-rounded">
+                                                        <img src="../assets/images/users/8.jpg" alt="img">
+                                                    </span>
+                                                    <a class="avatar bg-primary avatar-rounded text-fixed-white" href="javascript:void(0);">
+                                                        +8
+                                                    </a>
+                                                </div>
+                                                <div class="">
+                                                    <div id="attendance3"></div>
+                                                </div>
+                                                </div>
+                                                <div class="ms-auto mt-3 mt-sm-0">
+                                                    <div class="d-flex">
+                                                        <div class="task-btn border-warning text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Project Priority">Medium</div>
+                                                        <a class="btn btn-outline-light  text-muted"  href="javascript:void(0);" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fe fe-more-vertical"></i></a>
+                                                        <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                                                            <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-eye me-2"></i>View</a></li>
+                                                            <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-plus-circle me-2"></i>Add</a></li>
+                                                            <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-trash-2 me-2"></i>Remove</a></li>
+                                                            <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-download-cloud me-2"></i>Download</a></li>
+                                                            <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-settings me-2"></i>More</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-12">
+                                    <div class="card custom-card">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-9">
+                                                    <div class="mt-0 text-start">
+                                                        <h4 class="mb-0 mt-1 mb-2 fw-semibold">Responsive Issues fixed</h4>
+                                                        <p class="fs-14 fw-semibold text-muted mb-2">Online Services and Live Chart</p>
+                                                        <span class="fs-14 mt-2 text-muted">Comapny Online Services & Support</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="task-img bg-light my-auto float-end">
+                                                        <img src="../assets/images/media/png/20.png" alt="img">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="d-md-flex flex-wrap">
+                                                <div class="d-flex mb-3 mb-md-0">
+                                                     <div class="avatar-list-stacked">
+                                                    <span class="avatar avatar-md me-2 avatar-rounded">
+                                                        <img src="../assets/images/users/4.jpg" alt="img">
+                                                    </span>
+                                                    <span class="avatar avatar-md me-2 avatar-rounded">
+                                                        <img src="../assets/images/users/13.jpg" alt="img">
+                                                    </span>
+                                                    <a class="avatar bg-primary avatar-rounded text-fixed-white" href="javascript:void(0);">
+                                                        +3
+                                                    </a>
+                                                </div>
+                                                <div class="">
+                                                    <div id="attendance4"></div>
+                                                </div>
+                                                </div>
+                                                <div class="ms-auto mt-3 mt-sm-0">
+                                                    <div class="d-flex">
+                                                        <div class="task-btn border-success text-success"  data-bs-toggle="tooltip" data-bs-placement="top" title="Project Priority">High</div>
+                                                        <a class="btn btn-outline-light  text-muted"  href="javascript:void(0);" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fe fe-more-vertical"></i></a>
+                                                        <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                                                            <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-eye me-2"></i>View</a></li>
+                                                            <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-plus-circle me-2"></i>Add</a></li>
+                                                            <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-trash-2 me-2"></i>Remove</a></li>
+                                                            <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-download-cloud me-2"></i>Download</a></li>
+                                                            <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-settings me-2"></i>More</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               <!--End::row-2 -->
+
+                <!--Start::row-3-->
+                <div class="row">
+                    <div class="col-xxl-6 col-md-12 col-lg-12">
+                        <div class="card custom-card">
+                            <div class="card-header d-flex justify-content-between align-items-center border-0 responsive-header">
+                                <h4 class="card-title">Task Report</h4>
+                                <div class="card-options">
+                                    <div class="btn-list">
+                                        <a  href="javascript:void(0);" class="btn btn-outline-light text-dark d-flex  my-1 float-start"><span class="dot-label bg-primary me-2 my-auto"></span>On going</a>
+                                        <a  href="javascript:void(0);" class="btn btn-outline-light text-dark d-flex  my-1 float-start"><span class="dot-label bg-secondary me-2 my-auto"></span>Completed</a>
+                                        <a  href="javascript:void(0);" class="btn btn-outline-light  my-1" data-bs-toggle="dropdown" aria-expanded="false"> Year <i class="fe fe-chevron-down"></i> </a>
+                                        <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                                            <li><a  href="javascript:void(0);"  class="dropdown-item">Monthly</a></li>
+                                            <li><a  href="javascript:void(0);"  class="dropdown-item">Yearly</a></li>
+                                            <li><a  href="javascript:void(0);"  class="dropdown-item">Weekly</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-wrapper">
+                                    <div id="balance"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-6 col-md-12 col-lg-12">
+                        <div class="card custom-card overflow-hidden">
+                            <div class="card-header d-flex justify-content-between border-bottom-0">
+                                <h4 class="card-title">Tasks</h4>
+                                <div class="card-options me-3">
+                                    <div class="dropdown"> <a  href="javascript:void(0);" class="btn ripple btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> See All </a>
+                                        <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                                            <li><a  href="javascript:void(0);" class="dropdown-item">Monthly</a></li>
+                                            <li><a  href="javascript:void(0);" class="dropdown-item">Yearly</a></li>
+                                            <li><a  href="javascript:void(0);" class="dropdown-item">Weekly</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-menu-heading table_tabs mt-2 p-0 ">
+                                <div class="tabs-menu1">
+                                    <!-- Tabs -->
+                                    <ul class="nav panel-tabs">
+                                        <li class="ms-sm-4"><a href="#tab5" class="active"  data-bs-toggle="tab">Today Tasks</a></li>
+                                        <li><a href="#tab6"  data-bs-toggle="tab">Pending Tasks</a></li>
+                                        <li><a href="#tab7" data-bs-toggle="tab">Completed Tasks</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="panel-body tabs-menu-body table_tabs1 p-0 border-0">
+                                <div class="tab-content">
+                                    <div class="tab-pane border-0 p-0 active" id="tab5">
+                                        <div class="table-responsive recent_jobs p-0 card-body">
+                                            <table class="table mg-b-0 text-nowrap">
+                                                <tbody>
+                                                    <tr class="border-bottom">
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <div class="table_img rounded-circle bg-light me-3">
+                                                                    <img src="../assets/images/media/png/17.png" alt="img" class="">
+                                                                </div>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-0 fs-13 fw-semibold">Adobe Xd Ui Design</h6>
+                                                                    <div class="clearfix"></div>
+                                                                    <small class="text-muted">Ui Designing And Prototype</small>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-start fs-13 text-muted"><i class="fe fe-clock  me-2"></i>Dead line 6:00 Pm</td>
+                                                        <td>
+                                                            <div  class="text-start d-flex">
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="fe fe-edit-3 primary text-primary"></i></a>
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Send"><i class="fe fe-send primary text-primary"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="border-bottom">
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <div class="table_img rounded-circle bg-light me-3">
+                                                                    <span class="fe fe-users text-primary ms-1"></span>
+                                                                </div>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-0 fs-13 fw-semibold">Client meeting</h6>
+                                                                    <div class="clearfix"></div>
+                                                                    <small class="text-muted">Ui Team and Team lead</small>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-start fs-13 text-muted"><i class="fe fe-clock  me-2"></i>11:30 Am</td>
+                                                        <td>
+                                                            <div  class="text-start d-flex">
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="fe fe-edit-3 primary text-primary"></i></a>
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Send"><i class="fe fe-send primary text-primary"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="border-bottom">
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <div class="table_img rounded-circle bg-light me-3">
+                                                                    <img src="../assets/images/media/png/18.png" alt="img" class="">
+                                                                </div>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-0 fs-13 fw-semibold">HTML Updated</h6>
+                                                                    <div class="clearfix"></div>
+                                                                    <small class="text-muted">4.2.3 New Version Updated</small>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-start fs-13 text-muted"><i class="fe fe-clock  me-2"></i>Dead Line 2:30 Pm</td>
+                                                        <td>
+                                                            <div  class="text-start d-flex">
+
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="fe fe-edit-3 primary text-primary"></i></a>
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Send"><i class="fe fe-send primary text-primary"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="border-bottom">
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <div class="table_img rounded-circle bg-light me-3">
+                                                                    <span class="fe fe-trending-up text-primary"></span>
+                                                                </div>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-0 fs-13 fw-semibold">Project Updated</h6>
+                                                                    <div class="clearfix"></div>
+                                                                    <small class="text-muted">Senior Protoyper</small>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-start fs-13 text-muted"><i class="fe fe-clock  me-2"></i>Dead Line 6:00 Pm</td>
+                                                        <td>
+                                                            <div  class="text-start d-flex">
+
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="fe fe-edit-3 primary text-primary"></i></a>
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Send"><i class="fe fe-send primary text-primary"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <div class="table_img rounded-circle bg-light me-3">
+                                                                    <img src="../assets/images/media/png/11.png" alt="img" class="">
+                                                                </div>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-0 fs-13 fw-semibold">Jquery Issues Fixed</h6>
+                                                                    <div class="clearfix"></div>
+                                                                    <small class="text-muted">Some add-on events changed</small>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-start fs-13 text-muted"><i class="fe fe-clock  me-2"></i>Dead Line 6:00 Pm</td>
+                                                        <td>
+                                                            <div  class="text-start d-flex">
+
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="fe fe-edit-3 primary text-primary"></i></a>
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Send"><i class="fe fe-send primary text-primary"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane border-0 p-0" id="tab6">
+                                        <div class="table-responsive recent_jobs p-0 card-body">
+                                            <table class="table mg-b-0 text-nowrap">
+                                                <tbody>
+                                                    <tr class="border-bottom">
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <div class="table_img rounded-circle bg-light me-3">
+                                                                    <img src="../assets/images/media/png/17.png" alt="img" class="">
+                                                                </div>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-0 fs-13 fw-semibold">Adobe Xd Ui Design</h6>
+                                                                    <div class="clearfix"></div>
+                                                                    <small class="text-muted">Ui Designing And Prototype</small>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-start fs-13 text-muted"><i class="fe fe-clock  me-2"></i>Dead line 6:00 Pm</td>
+                                                        <td class="text-start"><span class="task-btn border-orange text-orange">On going</span></td>
+                                                        <td>
+                                                            <div  class="text-start d-flex">
+
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="fe fe-edit-3 primary text-primary"></i></a>
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Send"><i class="fe fe-send primary text-primary"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="border-bottom">
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <div class="table_img rounded-circle bg-light me-3">
+                                                                    <span class="fe fe-users text-primary ms-1"></span>
+                                                                </div>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-0 fs-13 fw-semibold">Client meeting</h6>
+                                                                    <div class="clearfix"></div>
+                                                                    <small class="text-muted">Ui Team and Team lead</small>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-start fs-13 text-muted"><i class="fe fe-clock  me-2"></i>11:30 Am</td>
+                                                        <td class="text-start"><span class="task-btn border-orange text-orange">On going</span></td>
+                                                        <td>
+                                                            <div  class="text-start d-flex">
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="fe fe-edit-3 primary text-primary"></i></a>
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Send"><i class="fe fe-send primary text-primary"></i></a>
+
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="border-bottom">
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <div class="table_img rounded-circle bg-light me-3">
+                                                                    <img src="../assets/images/media/png/18.png" alt="img" class="">
+                                                                </div>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-0 fs-13 fw-semibold">HTML Updated</h6>
+                                                                    <div class="clearfix"></div>
+                                                                    <small class="text-muted">4.2.3 New Version Updated</small>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-start fs-13 text-muted"><i class="fe fe-clock  me-2"></i>Dead Line 2:30 Pm</td>
+                                                        <td class="text-start"><span class="task-btn border-orange text-orange">On going</span></td>
+                                                        <td>
+                                                            <div  class="text-start d-flex">
+
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="fe fe-edit-3 primary text-primary"></i></a>
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Send"><i class="fe fe-send primary text-primary"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="border-bottom">
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <div class="table_img rounded-circle bg-light me-3">
+                                                                    <span class="fe fe-trending-up text-primary"></span>
+                                                                </div>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-0 fs-13 fw-semibold">Project Updated</h6>
+                                                                    <div class="clearfix"></div>
+                                                                    <small class="text-muted">Senior Protoyper</small>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-start fs-13 text-muted"><i class="fe fe-clock  me-2"></i>Dead Line 6:00 Pm</td>
+                                                        <td class="text-start"><span class="task-btn border-orange text-orange">On going</span></td>
+                                                        <td>
+                                                            <div  class="text-start d-flex">
+
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="fe fe-edit-3 primary text-primary"></i></a>
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Send"><i class="fe fe-send primary text-primary"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <div class="table_img rounded-circle bg-light me-3">
+                                                                    <img src="../assets/images/media/png/11.png" alt="img" class="">
+                                                                </div>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-0 fs-13 fw-semibold">Jquery Issues Fixed</h6>
+                                                                    <div class="clearfix"></div>
+                                                                    <small class="text-muted">Some add-on events changed</small>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-start fs-13 text-muted"><i class="fe fe-clock  me-2"></i>Dead Line 6:00 Pm</td>
+                                                        <td class="text-start"><span class="task-btn border-orange text-orange">On going</span></td>
+                                                        <td>
+                                                            <div  class="text-start d-flex">
+
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="fe fe-edit-3 primary text-primary"></i></a>
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Send"><i class="fe fe-send primary text-primary"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane  border-0 p-0" id="tab7">
+                                        <div class="table-responsive recent_jobs p-0 card-body">
+                                            <table class="table mg-b-0 text-nowrap">
+                                                <tbody>
+                                                    <tr class="border-bottom">
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <div class="table_img rounded-circle bg-light me-3">
+                                                                    <img src="../assets/images/media/png/17.png" alt="img" class="">
+                                                                </div>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-0 fs-13 fw-semibold">Adobe Xd Ui Design</h6>
+                                                                    <div class="clearfix"></div>
+                                                                    <small class="text-muted">Ui Designing And Prototype</small>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-start fs-13 text-muted"><i class="fe fe-calendar  me-2"></i>Nov 15 2019</td>
+                                                        <td class="text-start"><span class="task-btn bg-success text-fixed-white border-success">Completed</span></td>
+                                                        <td>
+                                                            <div  class="text-start d-flex">
+
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="fe fe-eye primary text-primary"></i></a>
+                                                                <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fe fe-more-vertical text-primary"></i></a>
+                                                                <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                                                                    <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-eye me-2"></i>View</a></li>
+                                                                    <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-plus-circle me-2"></i>Add</a></li>
+                                                                    <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-trash-2 me-2"></i>Remove</a></li>
+                                                                    <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-settings me-2"></i>More</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="border-bottom">
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <div class="table_img rounded-circle bg-light me-3">
+                                                                    <span class="fe fe-users text-primary ms-1"></span>
+                                                                </div>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-0 fs-13 fw-semibold">Client meeting</h6>
+                                                                    <div class="clearfix"></div>
+                                                                    <small class="text-muted">Ui Team and Team lead</small>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-start fs-13 text-muted"><i class="fe fe-calendar  me-2"></i>Nov 22 2019</td>
+                                                        <td class="text-start"><span class="task-btn bg-success text-fixed-white border-success">Completed</span></td>
+                                                        <td>
+                                                        <div  class="text-start d-flex">
+
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="fe fe-eye primary text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fe fe-more-vertical text-primary"></i></a>
+                                                            <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                                                                <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-eye me-2"></i>View</a></li>
+                                                                <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-plus-circle me-2"></i>Add</a></li>
+                                                                <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-trash-2 me-2"></i>Remove</a></li>
+                                                                <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-settings me-2"></i>More</a></li>
+                                                            </ul>
+                                                        </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="border-bottom">
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <div class="table_img rounded-circle bg-light me-3">
+                                                                    <img src="../assets/images/media/png/18.png" alt="img" class="">
+                                                                </div>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-0 fs-13 fw-semibold">HTML Updated</h6>
+                                                                    <div class="clearfix"></div>
+                                                                    <small class="text-muted">4.2.3 New Version Updated</small>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-start fs-13 text-muted"><i class="fe fe-calendar  me-2"></i>Dec 02 2019</td>
+                                                        <td class="text-start"><span class="task-btn bg-success text-fixed-white border-success">Completed</span></td>
+                                                        <td>
+                                                        <div  class="text-start d-flex">
+
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="fe fe-eye primary text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fe fe-more-vertical text-primary"></i></a>
+                                                            <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                                                                <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-eye me-2"></i>View</a></li>
+                                                                <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-plus-circle me-2"></i>Add</a></li>
+                                                                <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-trash-2 me-2"></i>Remove</a></li>
+                                                                <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-settings me-2"></i>More</a></li>
+                                                            </ul>
+                                                        </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="border-bottom">
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <div class="table_img rounded-circle bg-light me-3">
+                                                                    <span class="fe fe-trending-up text-primary"></span>
+                                                                </div>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-0 fs-13 fw-semibold">Project Updated</h6>
+                                                                    <div class="clearfix"></div>
+                                                                    <small class="text-muted">Senior Protoyper</small>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-start fs-13 text-muted"><i class="fe fe-calendar  me-2"></i>Dec 15 2019</td>
+                                                        <td class="text-start"><span class="task-btn bg-success text-fixed-white border-success">Completed</span></td>
+                                                        <td>
+                                                        <div  class="text-start d-flex">
+
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="fe fe-eye primary text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fe fe-more-vertical text-primary"></i></a>
+                                                            <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                                                                <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-eye me-2"></i>View</a></li>
+                                                                <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-plus-circle me-2"></i>Add</a></li>
+                                                                <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-trash-2 me-2"></i>Remove</a></li>
+                                                                <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-settings me-2"></i>More</a></li>
+                                                            </ul>
+                                                        </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <div class="table_img rounded-circle bg-light me-3">
+                                                                    <img src="../assets/images/media/png/11.png" alt="img" class="">
+                                                                </div>
+                                                                <div class="me-3 mt-0 mt-sm-2 d-block">
+                                                                    <h6 class="mb-0 fs-13 fw-semibold">Jquery Issues Fixed</h6>
+                                                                    <div class="clearfix"></div>
+                                                                    <small class="text-muted">Some add-on events changed</small>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-start fs-13 text-muted"><i class="fe fe-calendar  me-2"></i>25 Dec 2019</td>
+                                                        <td class="text-start"><span class="task-btn text-fixed-white bg-success border-success">Completed</span></td>
+                                                        <td>
+                                                        <div  class="text-start d-flex">
+
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="fe fe-eye primary text-primary"></i></a>
+                                                            <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fe fe-more-vertical text-primary"></i></a>
+                                                            <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                                                                <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-eye me-2"></i>View</a></li>
+                                                                <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-plus-circle me-2"></i>Add</a></li>
+                                                                <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-trash-2 me-2"></i>Remove</a></li>
+                                                                <li class="dropdown-item"><a  href="javascript:void(0);"><i class="fe fe-settings me-2"></i>More</a></li>
+                                                            </ul>
+                                                        </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End::row-3 -->
+
+                <!--Start::row-4-->
+                <div class="row">
+                    <div class="col-xl-4 col-md-12 col-lg-12">
+                        <div class="card custom-card">
+                            <div class="card-header d-flex justify-content-between align-items-center ">
+                                <h4 class="card-title">Activity</h4>
+                                <div class="card-options">
+                                    <div class="btn-list">
+                                        <a class="remind-icon text-dark me-2"  href="javascript:void(0);">
+                                            <i class="fe fe-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body pt-2">
+                                <ul class="timeline ">
+                                    <li>
+                                        <a href="javascript:void(0);" class="fw-semibold fs-16 ms-3">@Liam Hodges Completed Task</a>
+                                        <a  href="javascript:void(0);" class="text-muted float-end fs-13">Just Now</a>
+                                        <p class="mb-0 pb-0 text-muted fs-14 ms-3 mt-1">Today Evening 6:30 Pm</p>
+                                    </li>
+                                    <li class="primary mt-6">
+                                        <a href="javascript:void(0);" class="fw-semibold fs-16 ms-3">@Html Department Team</a>
+                                        <a  href="javascript:void(0);" class="text-muted float-end fs-13">10 min ago</a>
+                                        <p class="mb-0 pb-0 text-muted fs-14 ms-3 mt-1">Versions updates and issues Fixed</p>
+                                    </li>
+                                    <li class="pink mt-6">
+                                        <a href="javascript:void(0);" class="fw-semibold fs-16 ms-3">Team Meeting</a>
+                                        <a  href="javascript:void(0);" class="text-muted float-end fs-13">45 min ago</a>
+                                        <p class="mb-0 pb-0 text-muted fs-14  ms-3 mt-1">Designing Team Meeting Completed</p>
+                                    </li>
+                                    <li class="success mb-0 pb-0 mt-6">
+                                        <a href="javascript:void(0);" class="fw-semibold fs-16 ms-3">Updated Employees Payslips</a>
+                                        <a  href="javascript:void(0);" class="text-muted float-end fs-13">2 Hour ago</a>
+                                        <p class="mb-0 pb-0 text-muted fs-14  ms-3 mt-1">1 April 2020 to 1 feb 2021</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-12 col-md-12">
+                        <div class="card custom-card">
+                            <div class="card-header d-flex justify-content-between align-items-center border-0 responsive-header">
+                                <h4 class="card-title">Reminders</h4>
+                                <div class="card-options">
+                                    <div class="btn-list">
+                                        <a class="remind-icon text-dark me-2"  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#remindermodal">
+                                            <i class="fe fe-plus"></i>
+                                        </a>
+                                        <a class="remind-icon text-dark"  href="javascript:void(0);">
+                                            <i class="fe fe-bell"></i><span class="icon-dot bg-orange"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body pt-4">
+                                <div class="mb-3">
+                                    <div class="list-group-item d-md-flex p-0 pb-1 align-items-center border-0">
+                                        <div class="d-flex">
+                                            <div class="comming_holidays calendar-icon icons">
+                                                <span class="date_time bg-pink-transparent bradius me-3"><span class="date fs-20">19</span>
+                                                    <span class="month fs-13">FEB</span>
+                                                </span>
+                                            </div>
+                                            <div class="mt-1">
+                                                <h6 class="mb-1 fw-semibold fs-16">Designing <span  class="font-weight-normal">Work Deadline</span></h6>
+                                                <span class="clearfix"></span>
+                                                <span class="fs-14 text-muted">mobile App ui Design</span>
+                                            </div>
+                                        </div>
+                                        <p class="text-muted  mb-0 fs-13 ms-auto ps-8 ps-md-0">2 days to left</p>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="list-group-item d-md-flex  pb-1 p-0 align-items-center border-0">
+                                        <div class="d-flex">
+                                            <div class="comming_holidays calendar-icon icons">
+                                                <span class="date_time bg-success-transparent bradius me-3"><span class="date fs-20">18</span>
+                                                    <span class="month fs-13">FEB</span>
+                                                </span>
+                                            </div>
+                                            <div class="mt-1">
+                                                <h6 class="mb-1 fw-semibold fs-16"><span  class="font-weight-normal">making the first</span> generator </h6>
+                                                <span class="clearfix"></span>
+                                                <span class="fs-14 text-muted">mobile App ui Design</span>
+                                            </div>
+                                        </div>
+                                        <p class="text-muted  mb-0 fs-13 ms-auto ps-8 ps-md-0">5 days to left</p>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="list-group-item d-md-flex pb-1 p-0 align-items-center border-0">
+                                        <div class="d-flex">
+                                            <div class="comming_holidays calendar-icon icons">
+                                                <span class="date_time bg-orange-transparent bradius me-3"><span class="date fs-20">16</span>
+                                                    <span class="month fs-13">FEB</span>
+                                                </span>
+                                            </div>
+                                            <div class="mt-1">
+                                                <h6 class="mb-1 fw-semibold fs-16">Max Jones</h6>
+                                                <span class="clearfix"></span>
+                                                <span class="fs-14 text-muted">marketing seminar</span>
+                                            </div>
+                                        </div>
+                                        <p class="text-muted  mb-0 fs-13 ms-auto ps-8 ps-md-0">8 days to left</p>
+                                    </div>
+                                </div>
+                                <div class="mb-0">
+                                    <div class="list-group-item d-md-flex pb-1 p-0 align-items-center border-0">
+                                        <div class="d-flex">
+                                            <div class="comming_holidays calendar-icon icons">
+                                                <span class="date_time bg-info-transparent bradius me-3"><span class="date fs-20">28</span>
+                                                    <span class="month fs-13">JAN</span>
+                                                </span>
+                                            </div>
+                                            <div class="mt-1">
+                                                <h6 class="mb-1 fw-semibold fs-16">Dinner Party <span  class="font-weight-normal">Office Week Off</span></h6>
+                                                <span class="clearfix"></span>
+                                                <span class="fs-14 text-muted">Sat Day</span>
+                                            </div>
+                                        </div>
+                                        <p class="text-muted  mb-0 fs-13 ms-auto ps-8 ps-md-0">15 days to left</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-12 col-lg-12">
+                        <div class="card custom-card chart-donut1">
+                            <div class="card-header  border-0">
+                                <h4 class="card-title">Advanced Task Status</h4>
+                            </div>
+                            <div class="card-body">
+                                <div id="employees" class="mx-auto apex-dount"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End::row-4-->
+
+                <!--Start::row-5-->
+                <div class="row">
+                    <div class="col-xl-4 col-md-12 col-lg-12">
+                        <div class="card custom-card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h4 class="card-title">Time Spent on Task</h4>
+                                <div class="card-options me-3">
+                                    <div class="dropdown"> <a  href="javascript:void(0);" class="btn ripple btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> See All <i class="feather feather-chevron-down"></i> </a>
+                                        <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                                            <li><a  href="javascript:void(0);" class="dropdown-item">Monthly</a></li>
+                                            <li><a  href="javascript:void(0);" class="dropdown-item">Yearly</a></li>
+                                            <li><a  href="javascript:void(0);" class="dropdown-item">Weekly</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body pt-0">
+                                <div class="chart-wrapper ">
+                                    <div id="spenttask" class=""></div>
+                                </div>
+                                <div class="pt-2  d-flex mx-auto text-center justify-content-center ">
+                                    <div class="d-flex me-5"><span class="dot-label bg-primary bg-opacity-20 me-2 my-auto"></span>Working Hours</div>
+                                    <div class="d-flex"><span class="dot-label bg-primary  me-2 my-auto"></span>Work</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-8 col-md-12 col-lg-12">
+                        <div class="card custom-card overflow-hidden">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h4 class="card-title">Tasks Summary</h4>
+                                <div class="card-options me-3">
+                                    <div class="dropdown"> <a  href="javascript:void(0);" class="btn ripple btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> View All <i class="feather feather-chevron-down"></i> </a>
+                                        <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                                            <li><a  href="javascript:void(0);" class="dropdown-item" >Monthly</a></li>
+                                            <li><a  href="javascript:void(0);" class="dropdown-item">Yearly</a></li>
+                                            <li><a  href="javascript:void(0);" class="dropdown-item">Weekly</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body pt-2 p-0">
+                                <div class="table-responsive card-table-one ">
+                                    <table class="table table-vcenter text-nowrap custom-table mb-0" id="tasktable">
+                                        <thead>
+                                            <tr>
+                                                <th class="">Task</th>
+                                                <th class="">Start Date</th>
+                                                <th class="">Work Status</th>
+                                                <th class="w-5p"></th>
+                                                <th class="">Deadline</th>
+                                                <th class="">Team Status</th>
+                                                <th class="wd-25p">E-mail</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><span class="text-dark fw-semibold">Mobile Application</span></td>
+                                                <td>14 Jun 2020</td>
+                                                <td>
+                                                    <div class="progress progress-sm">
+                                                        <div class="progress-bar bg-primary w-55"></div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="text-primary fs-15">57%</span></td>
+                                                <td>16 Jun 2020</td>
+                                                <td>
+                                                    <div class="avatar-list-stacked">
+                                                        <span class="avatar avatar-md me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/8.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-md me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/2.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-md me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/3.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-md me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/4.jpg" alt="img">
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                                <td><span class="text-primary">Active</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="text-dark fw-semibold">Delelopment</span></td>
+                                                <td>14 Jun 2020</td>
+                                                <td>
+                                                    <div class="progress progress-sm ">
+                                                        <div class="progress-bar bg-primary w-30"></div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="text-primary fs-15">34%</span></td>
+                                                <td>16 Jun 2020</td>
+                                                <td>
+                                                    <div class="avatar-list-stacked">
+                                                        <span class="avatar avatar-md me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/8.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-md me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/2.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-md me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/3.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-md me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/4.jpg" alt="img">
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                                <td><span class="text-primary">Active</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="text-dark fw-semibold">version Updated</span></td>
+                                                <td>13 Jun 2020</td>
+                                                <td>
+                                                    <div class="progress progress-sm ">
+                                                        <div class="progress-bar bg-success w-100"></div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="text-success fs-15">100%</span></td>
+                                                <td>22 Jun 2020</td>
+                                                <td>
+                                                    <div class="avatar-list-stacked">
+                                                        <span class="avatar avatar-md me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/8.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-md me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/2.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-md me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/3.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-md me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/4.jpg" alt="img">
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                                <td><span class="text-success">Done</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="text-dark fw-semibold">Psd Template</span></td>
+                                                <td>12 Jun 2020</td>
+                                                <td>
+                                                    <div class="progress progress-sm">
+                                                        <div class="progress-bar bg-orange w-50"></div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="text-orange fs-15">50%</span></td>
+                                                <td>22 Jun 2020</td>
+                                                <td>
+                                                    <div class="avatar-list-stacked">
+                                                        <span class="avatar avatar-md me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/8.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-md me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/2.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-md me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/3.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-md me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/4.jpg" alt="img">
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                                <td><span class="text-orange">Pending</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="text-dark fw-semibold">Development</span></td>
+                                                <td>12 Jun 2020</td>
+                                                <td>
+                                                    <div class="progress progress-sm">
+                                                        <div class="progress-bar bg-warning w-80"></div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="text-warning fs-15">82%</span></td>
+                                                <td>22 Jun 2020</td>
+                                                <td>
+                                                    <div class="avatar-list-stacked">
+                                                        <span class="avatar avatar-md me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/8.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-md me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/2.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-md me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/3.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-md me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/4.jpg" alt="img">
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                                <td><span class="text-warning">Hold</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-5-->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+        <!--Clock-IN Modal -->
+        <div class="modal fade"  id="clockinmodal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><span class="fe fe-clock  me-1"></span>Clock In</h5>
+                        <button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="countdowntimer text-center">
+                            <div class="mt-3 d-flex justify-content-center fs-30 digital-clock"></div>
+                            <label class="form-label">Current Time</label>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">IP Address</label>
+                            <input type="text" class="form-control" placeholder="225.192.145.1" disabled="">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Working Form</label>
+                            <select name="projects"  class="form-control custom-select" data-trigger>
+                                <option value="0">Select</option>
+                                <option value="1">Office</option>
+                                <option value="2">Home</option>
+                                <option value="3">Others</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Note:</label>
+                            <textarea class="form-control" rows="3">Some text here...</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                        <button class="btn btn-primary">Clock In</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Clock-IN Modal  -->
+
+        <!--Apply Leaves Modal -->
+        <div class="modal fade"  id="newtaskmodal">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Task</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Task ID</label>
+                                    <input class="form-control" placeholder="Number">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Task Title</label>
+                                    <input class="form-control" placeholder="Text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row gy-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Department:</label>
+                                    <select class="form-control custom-select" data-trigger data-placeholder="Select Department">
+                                        <option value="1">Designing Department</option>
+                                        <option value="2">Development Department</option>
+                                        <option value="3">Marketing Department</option>
+                                        <option value="4">Human Resource Department</option>
+                                        <option value="5">Managers Department</option>
+                                        <option value="6">Application Department</option>
+                                        <option value="7">Support Department</option>
+                                        <option value="8">IT Department</option>
+                                        <option value="9">Technical Department</option>
+                                        <option value="10">Accounts Department</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Assign To:</label>
+                                    <select class="form-control custom-select" data-trigger data-placeholder="Select Department">
+                                        <option value="1">Faith Harris</option>
+                                        <option value="2">Austin Bell</option>
+                                        <option value="3">Maria Bower</option>
+                                        <option value="4">Peter Hill</option>
+                                        <option value="5">Adam Quinn</option>
+                                        <option value="6">Victoria Lyman</option>
+                                        <option value="7">Melanie Coleman</option>
+                                        <option value="8">Justin Metcalfe</option>
+                                        <option value="9">Ryan Young</option>
+                                        <option value="10">Jennifer Hardacre</option>
+                                        <option value="12">Jennifer Hardacre</option>
+                                        <option value="13">Justin Parr</option>
+                                        <option value="14">Julia Hodges</option>
+                                        <option value="15">Michael Sutherland</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label">Task Priority:</label>
+                            <select class="form-control custom-select" data-trigger data-placeholder="Select Priority">
+                                <option value="1">High</option>
+                                <option value="2">Medium</option>
+                                <option value="3">Low</option>
+                            </select>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="leave-content active  mt-3" id="single">
+                                    <div class="form-group">
+                                        <label class="form-label">From:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="leave-content active  mt-3" id="single1">
+                                    <div class="form-group">
+                                        <label class="form-label">TO:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label">Description:</label>
+                            <textarea class="form-control" id="text-area" rows="3"></textarea>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label">Attachment:</label>
+                            <div class="form-group">
+                                    <input class="form-control" type="file">
+                            </div>
+                        </div>
+                        <div class="custom-controls-stacked d-md-flex mt-3">
+                            <label class="form-label me-5">Work Status :</label>
+                            <div class="form-check mb-0 me-4">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault13">
+                                <label class="form-check-label" for="flexRadioDefault13">
+                                    Completed
+                                </label>
+                            </div>
+                            <div class="form-check mb-0 me-4">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault11">
+                                <label class="form-check-label" for="flexRadioDefault11">
+                                    Pending
+                                </label>
+                            </div>
+                            <div class="form-check mb-0">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault12">
+                                <label class="form-check-label" for="flexRadioDefault12">
+                                    On Progress
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button  class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                        <button  class="btn btn-success successful-notify">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Apply Leaves Modal  -->
+        
+
+			<!-- Modal -->
+			<div class="modal fade"  id="remindermodal">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Add New Reminder</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label class="form-label">Project</label>
+                                <select class="form-control custom-select" data-trigger data-placeholder="Select Department">
+									<option value="1">Project 01</option>
+									<option value="2">Project 02</option>
+									<option value="3">Project 03</option>
+									<option value="4">Project 04</option>
+									<option value="5">Project 05</option>
+                                </select>
+							</div>
+							<div class="form-group mt-3">
+								<label class="form-label">Select Date</label>
+                                <div class="input-group">
+                                    <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                    <input type="text" class="form-control choose-date flatpickr-input" placeholder="DD-MM-YYYY" readonly="readonly">
+                                </div>
+							</div>
+							<div class="form-group mt-3">
+								<label class="form-label">Note:</label>
+								<textarea class="form-control" rows="3">Some text here...</textarea>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button  class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+							<button  class="btn btn-primary">Save</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Modal -->
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    <!-- Apex Charts JS -->
+    <script src="../assets/libs/apexcharts/apexcharts.min.js"></script>
+
+    <!-- Chartjs Chart JS -->
+    <script src="../assets/libs/chart.js/chart.min.js"></script>
+
+    <!-- Date & Time Picker JS -->
+    <script src="../assets/libs/flatpickr/flatpickr.min.js"></script>
+
+    <!-- Default date picker js-->
+    <script src="../assets/js/default-flat-datepicker.js"></script> 
+
+    <!-- Index2 js-->
+    <script src="../assets/js/index3.js"></script>
+
+    <!-- Notifications JS -->
+    <script src="../assets/libs/awesome-notifications/index.var.js"></script>
+
+    <!-- Successful-notify JS -->
+    <script src="../assets/js/successful-notify.js"></script>
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

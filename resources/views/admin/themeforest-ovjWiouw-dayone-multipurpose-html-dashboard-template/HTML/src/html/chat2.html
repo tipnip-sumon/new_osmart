@@ -1,0 +1,390 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                @SPK@include("partials/page-header.html", {"title": "Chat 02"})
+
+                <!-- Start::row-1 -->
+                <div class="card">
+                    <div class="row no-gutters">
+                        <div class="col-lg-5 col-xl-4">
+                            <div class="overflow-hidden mb-5 mb-lg-0">
+                                <div class="card-body p-0">
+                                    <div class="main-content-left main-content-left-chat">
+                                        <div class="p-3 border-bottom">
+                                            <div class="input-group">
+                                                <input class="form-control" placeholder="Search friends..." type="text">
+                                                <button class="btn btn-primary" >
+                                                    <span class="input-group-btn"><i class="fa fa-search"></i></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="main-chat-contacts-wrapper ">
+                                            <label class="form-label mb-2 fs-13">Active Contacts (28)</label>
+                                            <div class="main-chat-contacts main-chat-contacts-slider ps-0" id="chatActiveContacts">
+                                                <div class="text-center flex-shrink-0">
+                                                    <div class="main-img-user online me-2"><img alt="" src="../assets/images/users/12.jpg" class="avatar avatar-md rounded-circle w-100"></div><small>Kecia</small>
+                                                </div>
+                                                <div class="text-center flex-shrink-0">
+                                                    <div class="main-img-user online me-2"><img alt="" src="../assets/images/users/2.jpg" class="avatar avatar-md rounded-circle w-100"></div><small>Copp</small>
+                                                </div>
+                                                <div class="text-center flex-shrink-0">
+                                                    <div class="main-img-user online me-2"><img alt="" src="../assets/images/users/14.jpg" class="avatar avatar-md rounded-circle w-100"></div><small>Edwina</small>
+                                                </div>
+                                                <div class="text-center flex-shrink-0">
+                                                    <div class="main-img-user online me-2"><img alt="" src="../assets/images/users/2.jpg" class="avatar avatar-md rounded-circle w-100"></div><small>Uriarte</small>
+                                                </div>
+                                                <div class="text-center flex-shrink-0">
+                                                    <div class="main-img-user online me-2"><img alt="" src="../assets/images/users/8.jpg" class="avatar avatar-md rounded-circle w-100"></div><small>Ambrose</small>
+                                                </div>
+                                                <div class="text-center flex-shrink-0">
+                                                    <div class="main-img-user online me-2"><img alt="" src="../assets/images/users/3.jpg" class="avatar avatar-md rounded-circle w-100"></div><small>Cawthon</small>
+                                                </div>
+                                                <div class="text-center flex-shrink-0">
+                                                    <div class="main-img-user online me-2"><img alt="" src="../assets/images/users/11.jpg" class="avatar avatar-md rounded-circle w-100"></div><small>Celesta</small>
+                                                </div>
+                                                <div class="text-center flex-shrink-0">
+                                                    <div class="main-img-user online me-2"><img alt="" src="../assets/images/users/1.jpg" class="avatar avatar-md rounded-circle w-100"></div><small>Briones</small>
+                                                </div>
+                                                <div class="text-center flex-shrink-0">
+                                                    <div class="avatar avatar-md bg-primary text-fixed-white avatar-rounded">
+                                                        20+
+                                                    </div><small class="d-block mx-auto">More</small>
+                                                </div>
+                                            </div><!-- main-active-contacts -->
+                                        </div><!-- main-chat-active-contacts -->
+                                        <div class="main-chat-list" id="ChatList">
+                                            <div class="media new">
+                                                <div class="main-img-user online">
+                                                    <img alt="" src="../assets/images/users/2.jpg" class="avatar avatar-md rounded-circle"><span>2</span>
+                                                </div>
+                                                <div class="media-body">
+                                                    <div class="media-contact-name">
+                                                        <span>Melodi Maul</span> <span>2 hours</span>
+                                                    </div>
+                                                    <p>culpa qui officia deserunt...</p>
+                                                </div>
+                                            </div>
+                                            <div class="media new">
+                                                <div class="main-img-user">
+                                                    <img alt="" src="../assets/images/users/8.jpg" class="avatar avatar-md rounded-circle"><span>1</span>
+                                                </div>
+                                                <div class="media-body">
+                                                    <div class="media-contact-name">
+                                                        <span>Lourdes Eiland</span> <span>3 hours</span>
+                                                    </div>
+                                                    <p>Et harum quidem rerum facilis est</p>
+                                                </div>
+                                            </div>
+                                            <div class="media selected">
+                                                <div class="main-img-user online"><img alt="" src="../assets/images/users/3.jpg" class="avatar avatar-md rounded-circle"></div>
+                                                <div class="media-body">
+                                                    <div class="media-contact-name">
+                                                        <span>Zofia Mccutcheon</span> <span>10 hours</span>
+                                                    </div>
+                                                    <p>Nam libero tempore, cum soluta nobis </p>
+                                                </div>
+                                            </div>
+                                            <div class="media">
+                                                <div class="main-img-user"><img alt="" src="../assets/images/users/13.jpg" class="avatar avatar-md rounded-circle"></div>
+                                                <div class="media-body">
+                                                    <div class="media-contact-name">
+                                                        <span>Erlinda Leeder</span> <span>2 days</span>
+                                                    </div>
+                                                    <p>omnis voluptas assumenda est</p>
+                                                </div>
+                                            </div>
+                                            <div class="media">
+                                                <div class="main-img-user"><img alt="" src="../assets/images/users/14.jpg" class="avatar avatar-md rounded-circle"></div>
+                                                <div class="media-body">
+                                                    <div class="media-contact-name">
+                                                        <span>Randy Booze</span> <span>2 days</span>
+                                                    </div>
+                                                    <p>Temporibus autem quibusdam et </p>
+                                                </div>
+                                            </div>
+                                            <div class="media new">
+                                                <div class="main-img-user">
+                                                    <img alt="" src="../assets/images/users/2.jpg" class="avatar avatar-md rounded-circle"> <span>1</span>
+                                                </div>
+                                                <div class="media-body">
+                                                    <div class="media-contact-name">
+                                                        <span>Camelia Kimber</span> <span>3 days</span>
+                                                    </div>
+                                                    <p>saepe eveniet ut et voluptates </p>
+                                                </div>
+                                            </div>
+                                            <div class="media">
+                                                <div class="main-img-user"><img alt="" src="../assets/images/users/7.jpg" class="avatar avatar-md rounded-circle"></div>
+                                                <div class="media-body">
+                                                    <div class="media-contact-name">
+                                                        <span>Jerome Vowell</span> <span>4 days</span>
+                                                    </div>
+                                                    <p>reiciendis voluptatibus maiores </p>
+                                                </div>
+                                            </div>
+                                            <div class="media">
+                                                <div class="main-img-user"><img alt="" src="../assets/images/users/5.jpg" class="avatar avatar-md rounded-circle"></div>
+                                                <div class="media-body">
+                                                    <div class="media-contact-name">
+                                                        <span>Regine Mccrystal</span> <span>5 days</span>
+                                                    </div>
+                                                    <p>we denounce with righteous indignation</p>
+                                                </div>
+                                            </div>
+                                            <div class="media">
+                                                <div class="main-img-user"><img alt="" src="../assets/images/users/6.jpg" class="avatar avatar-md rounded-circle"></div>
+                                                <div class="media-body">
+                                                    <div class="media-contact-name">
+                                                        <span>Nigel Knarr</span> <span>5 days</span>
+                                                    </div>
+                                                    <p>certain circumstances and owing to the claims</p>
+                                                </div>
+                                            </div>
+                                            <div class="media">
+                                                <div class="main-img-user"><img alt="" src="../assets/images/users/12.jpg" class="avatar avatar-md rounded-circle"></div>
+                                                <div class="media-body">
+                                                    <div class="media-contact-name">
+                                                        <span>Marva Constante</span> <span>5 days</span>
+                                                    </div>
+                                                    <p>Mae cenas tempus, tellus eget co ndimen</p>
+                                                </div>
+                                            </div>
+                                            <div class="media">
+                                                <div class="main-img-user"><img alt="" src="../assets/images/users/6.jpg" class="avatar avatar-md rounded-circle"></div>
+                                                <div class="media-body">
+                                                    <div class="media-contact-name">
+                                                        <span>Twila Hammers</span> <span>6 days</span>
+                                                    </div>
+                                                    <p>certain circumstances and owing to the claims</p>
+                                                </div>
+                                            </div>
+                                            <div class="media">
+                                                <div class="main-img-user"><img alt="" src="../assets/images/users/7.jpg" class="avatar avatar-md rounded-circle"></div>
+                                                <div class="media-body">
+                                                    <div class="media-contact-name">
+                                                        <span>Vertie Raap</span> <span>6 days</span>
+                                                    </div>
+                                                    <p>certain circumstances and owing to the claims </p>
+                                                </div>
+                                            </div>
+                                            <div class="media">
+                                                <div class="main-img-user"><img alt="" src="../assets/images/users/8.jpg" class="avatar avatar-md rounded-circle"></div>
+                                                <div class="media-body">
+                                                    <div class="media-contact-name">
+                                                        <span>Cory Gardenhire</span> <span>7 days</span>
+                                                    </div>
+                                                    <p>certain circumstances and owing to the claims...</p>
+                                                </div>
+                                            </div>
+                                        </div><!-- main-chat-list -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-8 col-lg-7">
+                            <div class="border-start">
+                                <div class="main-content-body main-content-body-chat">
+                                    <div class="main-chat-header p-3">
+                                        <div class="main-img-user"><img alt="" src="../assets/images/users/16.jpg" class="avatar avatar-md rounded-circle"></div>
+                                        <div class="main-chat-msg-name">
+                                            <h6>Abigali kelly</h6><small>Last seen: 1 minute ago</small>
+                                        </div>
+                                        <nav class="nav">
+                                            <a class="nav-link ms-4" href=""><i class="icon ion-md-more"></i></a>
+                                            <a class="nav-link ms-4" data-bs-toggle="tooltip" href="" title="Call"><span class="fe fe-phone-call"></span></a>
+                                            <a class="nav-link ms-4" data-bs-toggle="tooltip" href="" title="Archive"><span class="fe fe-folder-plus"></span></a>
+                                            <a class="nav-link ms-4" data-bs-toggle="tooltip" href="" title="Trash"><span class="fe fe-trash-2"></span></a>
+                                            <a class="nav-link ms-4 me-1" data-bs-toggle="tooltip" href="" title="View Info"><span class="fe fe-info"></span></a>
+                                        </nav>
+                                    </div><!-- main-chat-header -->
+                                    <div class="main-chat-body" id="ChatBody">
+                                        <div class="content-inner">
+                                            <label class="main-chat-time"><span>3 days ago</span></label>
+                                            <div class="media flex-row-reverse">
+                                                <div class="main-img-user online"><img alt="" src="../assets/images/users/16.jpg" class="avatar avatar-md rounded-circle"></div>
+                                                <div class="media-body">
+                                                    <div class="main-msg-wrapper">
+                                                         Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="media flex-row-reverse mt-1">
+                                                <div class="main-img-user online"><img alt="" src="../assets/images/users/16.jpg" class="avatar avatar-md rounded-circle"></div>
+                                                <div class="media-body">
+                                                    <div class="main-msg-wrapper">
+                                                         sed quia non numquam eius modi tempora incidunt ut labore
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="media flex-row-reverse mt-1">
+                                                <div class="main-img-user online"><img alt="" src="../assets/images/users/16.jpg" class="avatar avatar-md rounded-circle"></div>
+                                                <div class="media-body">
+                                                    <div class="main-msg-wrapper">
+                                                         sed quia non numquam eius modi tempora incidunt ut labore
+                                                    </div>
+                                                    <div>
+                                                        <span>9:48 am</span> <a href=""><i class="icon ion-android-more-horizontal"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="media">
+                                                <div class="main-img-user online"><img alt="" src="../assets/images/users/2.jpg" class="avatar avatar-md rounded-circle"></div>
+                                                <div class="media-body">
+                                                    <div class="main-msg-wrapper">
+                                                        Nor again is there anyone who loves or pursues or desires to obtain pain of itself
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="media mt-1">
+                                                <div class="main-img-user online"><img alt="" src="../assets/images/users/2.jpg" class="avatar avatar-md rounded-circle"></div>
+                                                <div class="media-body">
+                                                    <div class="main-msg-wrapper">
+                                                        pursues or desires to obtain pain of itself
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="media mt-1">
+                                                <div class="main-img-user online"><img alt="" src="../assets/images/users/2.jpg" class="avatar avatar-md rounded-circle"></div>
+                                                <div class="media-body">
+                                                    <div class="main-msg-wrapper">
+                                                        who loves or pursues or Nor again is there anyone
+                                                    </div>
+                                                    <div>
+                                                        <span>9:32 am</span> <a href=""><i class="icon ion-android-more-horizontal"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="media flex-row-reverse">
+                                                <div class="main-img-user online"><img alt="" src="../assets/images/users/16.jpg" class="avatar avatar-md rounded-circle"></div>
+                                                <div class="media-body">
+                                                    <div class="main-msg-wrapper">
+                                                        Nullam dictum felis eu pede mollis pretium
+                                                    </div>
+                                                    <div>
+                                                        <span>11:22 am</span> <a href=""><i class="icon ion-android-more-horizontal"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div><label class="main-chat-time"><span>Yesterday</span></label>
+                                            <div class="media">
+                                                <div class="main-img-user online"><img alt="" src="../assets/images/users/2.jpg" class="avatar avatar-md rounded-circle"></div>
+                                                <div class="media-body">
+                                                    <div class="main-msg-wrapper">
+                                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+                                                    </div>
+                                                    <div>
+                                                        <span>9:32 am</span> <a href=""><i class="icon ion-android-more-horizontal"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="media flex-row-reverse">
+                                                <div class="main-img-user online"><img alt="" src="../assets/images/users/16.jpg" class="avatar avatar-md rounded-circle"></div>
+                                                <div class="media-body">
+                                                    <div class="main-msg-wrapper">
+                                                        To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="media flex-row-reverse mt-1">
+                                                <div class="main-img-user online"><img alt="" src="../assets/images/users/16.jpg" class="avatar avatar-md rounded-circle"></div>
+                                                <div class="media-body">
+                                                    <div class="main-msg-wrapper">
+                                                        Et harum quidem rerum facilis est et expedita distinctio
+                                                    </div>
+                                                    <div>
+                                                        <span>9:48 am</span> <a href=""><i class="icon ion-android-more-horizontal"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label class="main-chat-time"><span>Today</span></label>
+                                            <div class="media">
+                                                <div class="main-img-user online"><img alt="" src="../assets/images/users/2.jpg" class="avatar avatar-md rounded-circle"></div>
+                                                <div class="media-body">
+                                                    <div class="main-msg-wrapper">
+                                                        Et harum quidem rerum facilis est et expedita distinctio
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="media mt-1">
+                                                <div class="main-img-user online"><img alt="" src="../assets/images/users/2.jpg" class="avatar avatar-md rounded-circle"></div>
+                                                <div class="media-body">
+                                                    <div class="main-msg-wrapper">
+                                                        To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage
+                                                    </div>
+                                                    <div>
+                                                        <span>10:12 am</span> <a href=""><i class="icon ion-android-more-horizontal"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="media flex-row-reverse">
+                                                <div class="main-img-user online"><img alt="" src="../assets/images/users/16.jpg" class="avatar avatar-md rounded-circle"></div>
+                                                <div class="media-body">
+                                                    <div class="main-msg-wrapper">
+                                                        Et harum quidem rerum facilis est et expedita distinctio
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="media flex-row-reverse">
+                                                <div class="main-img-user online"><img alt="" src="../assets/images/users/16.jpg" class="avatar avatar-md rounded-circle"></div>
+                                                <div class="media-body">
+                                                    <div class="main-msg-wrapper">
+                                                        To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage
+                                                    </div>
+                                                    <div>
+                                                        <span>09:40 am</span> <a href=""><i class="icon ion-android-more-horizontal"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="main-chat-footer">
+                                        <nav class="nav mt-1">
+                                            <a href="javascript:void(0)" class="nav-link" data-bs-toggle="tooltip" title="Camera"><span class="fe fe-camera"></span></a>
+                                            <a href="javascript:void(0)" class="nav-link" data-bs-toggle="tooltip" title="Emojia"><span class="fa fa-smile-o"></span></a>
+                                            <a href="javascript:void(0)" class="nav-link" data-bs-toggle="tooltip" title="Attach"><span class="fe fe-paperclip"></span></a>
+                                        </nav>
+                                        <input class="form-control bg-transparent" placeholder="Type your message here..." type="text"> <a class="main-msg-send" href=""><span class="fe fe-send"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End::row-1 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Chat2 JS -->
+    <script src="../assets/js/chat2.js"></script>
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

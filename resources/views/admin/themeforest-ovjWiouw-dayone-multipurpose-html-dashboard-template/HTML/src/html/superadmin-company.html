@@ -1,0 +1,1225 @@
+@SPK@include("partials/mainhead.html")
+
+<!-- Full Calendar CSS -->
+<link rel="stylesheet" href="../assets/libs/fullcalendar/main.min.css">
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+               <!-- Page Header -->
+               <div class="page-header d-lg-flex d-block">
+                <div class="page-leftheader">
+                    <div class="page-title">Companies</div>
+                </div>
+                <div class="page-rightheader">
+                    <div class="d-flex align-items-center flex-wrap my-auto end-content breadcrumb-end">
+                        <div class="d-lg-flex d-block">
+                            <div class="btn-list">
+                                <button  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addmodal"><i class="fe fe-plus fs-12 my-auto me-2"></i>Add New Comapny</button>
+                                <button  class="btn btn-light3" data-bs-toggle="tooltip" data-bs-placement="top" title="E-mail"> <i class="fe fe-mail"></i> </button>
+                                <button  class="btn btn-light3" data-bs-placement="top" data-bs-toggle="tooltip" title="Contact"> <i class="fe fe-phone-call"></i> </button>
+                                <button  class="btn btn-primary" data-bs-placement="top" data-bs-toggle="tooltip" title="Info"> <i class="fe fe-info"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Page Header Close -->
+            
+                <!-- Start::row-1 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Package</label>
+                                            <select class="form-control custom-select" data-trigger data-placeholder="Select Package">
+                                                <option value="">Select Package</option>
+                                                <option value="1">Free</option>
+                                                <option value="2">Basic</option>
+                                                <option value="3">Premium</option>
+                                                <option value="4">Advanced</option>
+                                                <option value="5">Enterprise</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Package Type:</label>
+                                            <select class="form-control custom-select" data-trigger data-placeholder="Select Package Type">
+                                                <option value="">Select Package Type</option>
+                                                <option value="1">Monthly</option>
+                                                <option value="2">Yearly</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 ">
+                                        <div class="form-group mt-md-2 mb-0">
+                                            <label class="form-label"></label>
+                                            <a  href="javascript:void(0);" class="btn btn-primary d-grid">Search</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 ">
+                                        <div class="form-group mt-md-2 mb-0">
+                                            <label class="form-label"></label>
+                                            <a  href="javascript:void(0);" class="btn btn-danger d-grid">Reset</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body border-top pt-0">
+                                <div class="row my-3 px-3">
+                                    <div class="col-lg-6">
+                                        <div class="d-flex align-items-center">
+                                            <span>Show</span>
+                                            <div class="d-flex ms-2 mx-2">
+                                                <div class="form-group mt-2">
+                                                    <select name="quantity" id="select-countries17" class="form-control  wd-150" data-trigger>
+                                                        <option value="1" selected="">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <span>entries</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="float-end">
+                                            <input type="text" class="form-control" placeholder="search">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive company-table">
+                                    <table class="table  table-vcenter text-nowrap table-bordered border-bottom" id="company-list">
+                                        <thead>
+                                            <tr>
+                                                <th class="border-bottom-0 w-5">#NO</th>
+                                                <th class="border-bottom-0">Company Name</th>
+                                                <th class="border-bottom-0">Email</th>
+                                                <th class="border-bottom-0">Package</th>
+                                                <th class="border-bottom-0">Register Date</th>
+                                                <th class="border-bottom-0">Status</th>
+                                                <th class="border-bottom-0">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>#01</td>
+                                                <td>
+                                                    <a  href="javascript:void(0);" class="d-flex sidebarmodal-collpase" data-bs-toggle="offcanvas" data-bs-target=".offcanvasRight">
+                                                        <span class="avatar avatar-lg  me-2">
+                                                            <img src="../assets/images/media/files/company/img1.png" alt="img">
+                                                        </span>
+                                                        <div class="mt-0 mt-sm-4 d-block">
+                                                            <h6 class="mb-0 fs-16">Abcd Pvt Ltd</h6>
+                                                        </div>
+                                                    </a>
+                                                </td>
+                                                <td>abcd@gmail.com</td>
+                                                <td>
+                                                    <span class="fs-13">Basic (Monthly)</span>
+                                                    <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#changepackgemodal">
+                                                        <span class="badge bg-primary fs-10 ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Change">Change</span>
+                                                    </a>
+                                                </td>
+                                                <td>12-01-2021</td>
+                                                <td>
+                                                    <span class="badge bg-success">Active</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1 sidebarmodal-collpase"  data-bs-toggle="offcanvas" data-bs-target=".offcanvasRight">
+                                                            <i class="fe fe-eye text-primary"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#editmodal">
+                                                            <i class="fe fe-edit-2  text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#02</td>
+                                                <td>
+                                                    <a  href="javascript:void(0);" class="d-flex sidebarmodal-collpase" data-bs-toggle="offcanvas" data-bs-target=".offcanvasRight">
+                                                        <span class="avatar avatar-lg  me-2">
+                                                            <img src="../assets/images/media/files/company/img2.png" alt="img">
+                                                        </span>
+                                                        <div class="mt-0 mt-sm-4 d-block">
+                                                            <h6 class="mb-0 fs-16">Croport Pvt Ltd</h6>
+                                                        </div>
+                                                    </a>
+                                                </td>
+                                                <td>corport@gmail.com</td>
+                                                <td>
+                                                    <span class="fs-13">Premium (Yearly)</span>
+                                                    <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#changepackgemodal">
+                                                        <span class="badge bg-primary fs-10 ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Change">Change</span>
+                                                    </a>
+                                                </td>
+                                                <td>5-02-2021</td>
+                                                <td>
+                                                    <span class="badge bg-success">Active</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1 sidebarmodal-collpase"  data-bs-toggle="offcanvas" data-bs-target=".offcanvasRight">
+                                                            <i class="fe fe-eye text-primary"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#editmodal">
+                                                            <i class="fe fe-edit-2  text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#03</td>
+                                                <td>
+                                                    <a  href="javascript:void(0);" class="d-flex sidebarmodal-collpase" data-bs-toggle="offcanvas" data-bs-target=".offcanvasRight">
+                                                        <span class="avatar avatar-lg  me-2">
+                                                            <img src="../assets/images/media/files/company/img3.png" alt="img">
+                                                        </span>
+                                                        <div class="mt-0 mt-sm-4 d-block">
+                                                            <h6 class="mb-0 fs-16">kolit Pvt Ltd</h6>
+                                                        </div>
+                                                    </a>
+                                                </td>
+                                                <td>kolit@gmail.com</td>
+                                                <td>
+                                                    <span class="fs-13">Advanced (Monthly)</span>
+                                                    <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#changepackgemodal">
+                                                        <span class="badge bg-primary fs-10 ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Change">Change</span>
+                                                    </a>
+                                                </td>
+                                                <td>21-12-2020</td>
+                                                <td>
+                                                    <span class="badge bg-success">Active</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1 sidebarmodal-collpase"  data-bs-toggle="offcanvas" data-bs-target=".offcanvasRight">
+                                                            <i class="fe fe-eye text-primary"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#editmodal">
+                                                            <i class="fe fe-edit-2  text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#04</td>
+                                                <td>
+                                                    <a  href="javascript:void(0);" class="d-flex sidebarmodal-collpase" data-bs-toggle="offcanvas" data-bs-target=".offcanvasRight">
+                                                        <span class="avatar avatar-lg  me-2">
+                                                            <img src="../assets/images/media/files/company/img4.png" alt="img">
+                                                        </span>
+                                                        <div class="mt-0 mt-sm-4 d-block">
+                                                            <h6 class="mb-0 fs-16">Movck Pvt Ltd</h6>
+                                                        </div>
+                                                    </a>
+                                                </td>
+                                                <td>movck@gmail.com</td>
+                                                <td>
+                                                    <span class="fs-13">Enterprise (Yearly)</span>
+                                                    <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#changepackgemodal">
+                                                        <span class="badge bg-primary fs-10 ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Change">Change</span>
+                                                    </a>
+                                                </td>
+                                                <td>21-09-2020</td>
+                                                <td>
+                                                    <span class="badge bg-success">Active</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1 sidebarmodal-collpase"  data-bs-toggle="offcanvas" data-bs-target=".offcanvasRight">
+                                                            <i class="fe fe-eye text-primary"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#editmodal">
+                                                            <i class="fe fe-edit-2  text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#05</td>
+                                                <td>
+                                                    <a  href="javascript:void(0);" class="d-flex sidebarmodal-collpase" data-bs-toggle="offcanvas" data-bs-target=".offcanvasRight">
+                                                        <span class="avatar avatar-lg  me-2">
+                                                            <img src="../assets/images/media/files/company/img5.png" alt="img">
+                                                        </span>
+                                                        <div class="mt-0 mt-sm-4 d-block">
+                                                            <h6 class="mb-0 fs-16">Loki Pvt Ltd</h6>
+                                                        </div>
+                                                    </a>
+                                                </td>
+                                                <td>loki@gmail.com</td>
+                                                <td>
+                                                    <span class="fs-13">Basic (Monthly)</span>
+                                                    <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#changepackgemodal">
+                                                        <span class="badge bg-primary fs-10 ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Change">Change</span>
+                                                    </a>
+                                                </td>
+                                                <td>25-07-2020</td>
+                                                <td>
+                                                    <span class="badge bg-success">Active</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1 sidebarmodal-collpase"  data-bs-toggle="offcanvas" data-bs-target=".offcanvasRight">
+                                                            <i class="fe fe-eye text-primary"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#editmodal">
+                                                            <i class="fe fe-edit-2  text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#06</td>
+                                                <td>
+                                                    <a  href="javascript:void(0);" class="d-flex sidebarmodal-collpase" data-bs-toggle="offcanvas" data-bs-target=".offcanvasRight">
+                                                        <span class="avatar avatar-lg  me-2">
+                                                            <img src="../assets/images/media/files/company/img6.png" alt="img">
+                                                        </span>
+                                                        <div class="mt-0 mt-sm-4 d-block">
+                                                            <h6 class="mb-0 fs-16">frecho Pvt Ltd</h6>
+                                                        </div>
+                                                    </a>
+                                                </td>
+                                                <td>frecho@gmail.com</td>
+                                                <td>
+                                                    <span class="fs-13">Premium (Yearly)</span>
+                                                    <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#changepackgemodal">
+                                                        <span class="badge bg-primary fs-10 ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Change">Change</span>
+                                                    </a>
+                                                </td>
+                                                <td>22-06-2020</td>
+                                                <td>
+                                                    <span class="badge bg-success">Active</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1 sidebarmodal-collpase"  data-bs-toggle="offcanvas" data-bs-target=".offcanvasRight">
+                                                            <i class="fe fe-eye text-primary"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#editmodal">
+                                                            <i class="fe fe-edit-2  text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#07</td>
+                                                <td>
+                                                    <a  href="javascript:void(0);" class="d-flex sidebarmodal-collpase" data-bs-toggle="offcanvas" data-bs-target=".offcanvasRight">
+                                                        <span class="avatar avatar-lg  me-2">
+                                                            <img src="../assets/images/media/files/company/img7.png" alt="img">
+                                                        </span>
+                                                        <div class="mt-0 mt-sm-4 d-block">
+                                                            <h6 class="mb-0 fs-16">Mooke Pvt Ltd</h6>
+                                                        </div>
+                                                    </a>
+                                                </td>
+                                                <td>mooke@gmail.com</td>
+                                                <td>
+                                                    <span class="fs-13">Advanced (Monthly)</span>
+                                                    <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#changepackgemodal">
+                                                        <span class="badge bg-primary fs-10 ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Change">Change</span>
+                                                    </a>
+                                                </td>
+                                                <td>22-06-2020</td>
+                                                <td>
+                                                    <span class="badge bg-success">Active</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1 sidebarmodal-collpase"  data-bs-toggle="offcanvas" data-bs-target=".offcanvasRight">
+                                                            <i class="fe fe-eye text-primary"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#editmodal">
+                                                            <i class="fe fe-edit-2  text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#08</td>
+                                                <td>
+                                                    <a  href="javascript:void(0);" class="d-flex sidebarmodal-collpase" data-bs-toggle="offcanvas" data-bs-target=".offcanvasRight">
+                                                        <span class="avatar avatar-lg  me-2">
+                                                            <img src="../assets/images/media/files/company/img8.png" alt="img">
+                                                        </span>
+                                                        <div class="mt-0 mt-sm-4 d-block">
+                                                            <h6 class="mb-0 fs-16">Gomalik Pvt Ltd</h6>
+                                                        </div>
+                                                    </a>
+                                                </td>
+                                                <td>gomalik@gmail.com</td>
+                                                <td>
+                                                    <span class="fs-13">Enterprise (Yearly)</span>
+                                                    <a  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#changepackgemodal">
+                                                        <span class="badge bg-primary fs-10 ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Change">Change</span>
+                                                    </a>
+                                                </td>
+                                                <td>15-04-2020</td>
+                                                <td>
+                                                    <span class="badge bg-success">Active</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="d-flex">
+                                                        <a  href="javascript:void(0);" class="action-btns1 sidebarmodal-collpase"  data-bs-toggle="offcanvas" data-bs-target=".offcanvasRight">
+                                                            <i class="fe fe-eye text-primary"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#editmodal">
+                                                            <i class="fe fe-edit-2  text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i>
+                                                        </a>
+                                                        <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- Start::pagination -->
+                                <nav class="mt-4">
+                                    <ul class="pagination justify-content-end mb-0">
+                                        <li class="page-item disabled"><a class="page-link" href="javascript:void(0);">Prev</a></li>
+                                        <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
+                                    </ul>
+                                </nav>
+                                <!-- End::pagination -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               <!--End::row-1 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+        <!--Clock-IN Modal -->
+        <div class="modal fade"  id="clockinmodal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><span class="fe fe-clock  me-1"></span>Clock In</h5>
+                        <button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="countdowntimer text-center">
+                            <div class="mt-3 d-flex justify-content-center fs-30 digital-clock"></div>
+                            <label class="form-label">Current Time</label>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">IP Address</label>
+                            <input type="text" class="form-control" placeholder="225.192.145.1" disabled="">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Working Form</label>
+                            <select name="projects"  class="form-control custom-select" data-trigger>
+                                <option value="0">Select</option>
+                                <option value="1">Office</option>
+                                <option value="2">Home</option>
+                                <option value="3">Others</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Note:</label>
+                            <textarea class="form-control" rows="3">Some text here...</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                        <button class="btn btn-primary">Clock In</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Clock-IN Modal  -->
+
+        <!--Apply Leaves Modal -->
+        <div class="modal fade"  id="newcompanymodal">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Job</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Position</label>
+									</div>
+									<div class="col-md-9">
+										<input type="text" class="form-control" placeholder="Name" value="">
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Job Type</label>
+									</div>
+									<div class="col-md-9">
+                                    <select class="form-control custom-select" data-trigger data-placeholder="Select Priority">
+                                        <option value="1">Full Time</option>
+                                        <option value="2">Part Time</option>
+                                        <option value="3">Freelancer</option>
+                                    </select>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Description</label>
+									</div>
+									<div class="col-md-9">
+										<textarea class="form-control" id="text-area1" rows="3"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Posted Date</label>
+									</div>
+									<div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Last Date To Apply</label>
+									</div>
+									<div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Close Date</label>
+									</div>
+									<div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+									</div>
+								</div>
+							</div>
+							<div class="row mt-3">
+								<div class="col-md-3">
+									<label class="form-label mb-0 mt-1">Status</label>
+								</div>
+								<div class="col-md-9">
+									<div class="custom-controls-stacked d-md-flex">
+										<label class="custom-control custom-radio success me-4">
+											<input type="radio" class="custom-control-input" name="example-radios1" value="option1">
+											<span class="custom-control-label">Active</span>
+										</label>
+										<label class="custom-control custom-radio success me-4">
+											<input type="radio" class="custom-control-input" name="example-radios1" value="option2">
+											<span class="custom-control-label">InActive</span>
+										</label>
+									</div>
+								</div>
+							</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button  class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                        <button  class="btn btn-success successful-notify">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Apply Leaves Modal  -->
+
+        <!--Apply Leaves Modal -->
+        <div class="modal fade editjobtmodal">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Job</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Position</label>
+									</div>
+									<div class="col-md-9">
+										<input type="text" class="form-control" placeholder="Name" value="Senior PHP Developer">
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Job Type</label>
+									</div>
+									<div class="col-md-9">
+                                    <select class="form-control custom-select" data-trigger data-placeholder="Select Priority">
+                                        <option value="1">Full Time</option>
+                                        <option value="2">Part Time</option>
+                                        <option value="3">Freelancer</option>
+                                    </select>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Description</label>
+									</div>
+									<div class="col-md-9">
+										<textarea class="form-control" id="text-area" rows="3">Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur</textarea>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Posted Date</label>
+									</div>
+									<div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Last Date To Apply</label>
+									</div>
+									<div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-3">
+								<div class="row">
+									<div class="col-md-3">
+										<label class="form-label mb-0 mt-2">Close Date</label>
+									</div>
+									<div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                            <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                        </div>
+									</div>
+								</div>
+							</div>
+							<div class="row mt-3">
+								<div class="col-md-3">
+									<label class="form-label mb-0 mt-1">Status</label>
+								</div>
+								<div class="col-md-9">
+									<div class="custom-controls-stacked d-md-flex">
+										<label class="custom-control custom-radio success me-4">
+											<input type="radio" class="custom-control-input" name="example-radios1" value="option1" checked>
+											<span class="custom-control-label">Active</span>
+										</label>
+										<label class="custom-control custom-radio success me-4">
+											<input type="radio" class="custom-control-input" name="example-radios1" value="option2">
+											<span class="custom-control-label">InActive</span>
+										</label>
+									</div>
+								</div>
+							</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button  class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                        <button  class="btn btn-success" >Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- End Apply Leaves Modal  -->
+        <div class="offcanvas company-details offcanvas-end offcanvasRight" tabindex="-1"  aria-labelledby="offcanvasRightLabel2">
+            <div class="offcanvas-header border-bottom border-block-end-dashed flex-wrap gap-1">
+                <h5 class="offcanvas-title" id="offcanvasRightLabel2">Company Details</h5>
+                <div class="ms-auto">
+                    <a  href="javascript:void(0);" class="btn btn-success me-2">Edit Company</a>
+                    <a  href="javascript:void(0);" class="action-btns align-middle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fe fe-more-horizontal mt-1"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                        <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-eye me-2"></i>View</a></li>
+                        <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-plus-circle me-2"></i>Add</a></li>
+                        <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-send me-2"></i>Send</a></li>
+                        <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-edit-2 me-2"></i>Edit</a></li>
+                        <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-trash-2 me-2"></i>Remove</a></li>
+                        <li><a  href="javascript:void(0);" class="dropdown-item"><i class="fe fe-settings me-2"></i>More</a></li>
+                    </ul>
+                    <a href="javascript:void(0);" class="action-btns dismiss align-middle" data-bs-dismiss="offcanvas"> <i class="fe fe-x mt-1"></i> </a>
+                </div>
+                </div>
+                <div class="offcanvas-body p-0">
+                    <div class="row no-gutters border-bottom">
+                        <div class="col-md-12 col-xl-6 p-3 border-end">
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <span class="avatar avatar-xl  me-2">
+                                        <img src="../assets/images/media/files/company/img1.png" alt="img">
+                                    </span>
+                                    <h6 class="mb-0 fs-18 mt-2">Abcd Pvt Ltd</h6>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mt-4">
+                                            <label class="form-label mb-0">Company Email:</label>
+                                            <p class="text-muted">abcd@gmail.com</p>
+                                        </div>
+                                        <div class="mt-4">
+                                            <label class="form-label mb-0">Company Website:</label>
+                                            <p class="text-muted">www.abcd.com</p>
+                                        </div>
+                                        <div class="mt-4">
+                                            <label class="form-label mb-0"> Currency:</label>
+                                            <p class="text-muted">US DOllar(USD)</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mt-4">
+                                            <label class="form-label mb-0">Company Number:</label>
+                                            <p class="text-muted">+6325147890</p>
+                                        </div>
+                                        <div class="mt-4">
+                                            <label class="form-label mb-0">Password:</label>
+                                            <p class="text-muted">.......</p>
+                                        </div>
+                                        <div class="mt-4">
+                                            <label class="form-label mb-0"> Language:</label>
+                                            <p class="text-muted">English</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <label class="form-label mb-0">Company Address:</label>
+                                    <p class="text-muted">4102 Masonic Hill Road Little Rock Arkansas-727212</p>
+                                </div>
+                                <div class="mt-3 d-flex">
+                                    <label class="form-label mb-0">Status:</label>
+                                    <div class="ms-1"><span class="badge bg-success">Active</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-xl-6 p-3">
+                            <div class="card-body">
+                                <h5 class="mb-4  fw-semibold">Package Details</h5>
+                                <div class="table-responsive">
+                                    <table class="table mb-0 table-borderless me-0">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <label class="form-label mb-0">Package Name</label>
+                                                </td>
+                                                <td>:</td>
+                                                <td>Basic</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label class="form-label mb-0">Package Type</label>
+                                                </td>
+                                                <td>:</td>
+                                                <td>Monthly</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label class="form-label mb-0">Price</label>
+                                                </td>
+                                                <td>:</td>
+                                                <td>$98.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label class="form-label mb-0">Register Date</label>
+                                                </td>
+                                                <td>:</td>
+                                                <td>12-01-2021</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label class="form-label mb-0">Licence Expires On</label>
+                                                </td>
+                                                <td>:</td>
+                                                <td>12-02-2021</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        
+
+        <!-- Edit Company Modal -->
+        <div class="modal fade"  id="editmodal">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Company</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="form-label">Upload Company Logo</label>
+                            <div class="form-group">
+                                <input class="form-control" type="file">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Company Name</label>
+                                    <input class="form-control" placeholder="Name" value="Abcd Pvt Ltd">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Company Email</label>
+                                    <input class="form-control" placeholder="Email" value="abcd@gmail.com">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Company Ph:Number</label>
+                                    <input class="form-control" placeholder="Number" value="+6325147890">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Company Website</label>
+                                    <input class="form-control" placeholder="Website" value="www.abcd.com">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label">Company Address</label>
+                            <textarea rows="2" class="form-control" placeholder="something text here...">4102 Masonic Hill Road Little Rock Arkansas-727212</textarea>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" placeholder="Password" value="abcd123">
+                        </div>
+                        <div class="row  mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Select Currency</label>
+                                    <select class="form-control custom-select" data-trigger data-placeholder="Select Currency">
+                                        <option value="">Choose Currency</option>
+                                        <option value="1" selected>US DOllar(USD)</option>
+                                        <option value="2">European Euro (EUR)</option>
+                                        <option value="3">Japanese Yen (JPY)</option>
+                                        <option value="4">British Pound (GBP)</option>
+                                        <option value="5">Swiss Franc (CHF)</option>
+                                        <option value="6">Canadian Dollar (CAD)</option>
+                                        <option value="7">Australian/New Zealand Dollar (AUD/NZD)</option>
+                                        <option value="8">South African Rand (ZAR)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Select Language</label>
+                                    <select class="form-control custom-select" data-trigger data-placeholder="Select Language">
+                                        <option value="">Select Language</option>
+                                        <option value="AF">Afrikanns</option>
+                                        <option value="SQ">Albanian</option>
+                                        <option value="AR">Arabic</option>
+                                        <option value="HY">Armenian</option>
+                                        <option value="EU">Basque</option>
+                                        <option value="BN">Bengali</option>
+                                        <option value="BG">Bulgarian</option>
+                                        <option value="CA">Catalan</option>
+                                        <option value="KM">Cambodian</option>
+                                        <option value="ZH">Chinese (Mandarin)</option>
+                                        <option value="HR">Croation</option>
+                                        <option value="CS">Czech</option>
+                                        <option value="DA">Danish</option>
+                                        <option value="NL">Dutch</option>
+                                        <option value="EN" selected>English</option>
+                                        <option value="ET">Estonian</option>
+                                        <option value="FJ">Fiji</option>
+                                        <option value="FI">Finnish</option>
+                                        <option value="FR">French</option>
+                                        <option value="KA">Georgian</option>
+                                        <option value="DE">German</option>
+                                        <option value="EL">Greek</option>
+                                        <option value="GU">Gujarati</option>
+                                        <option value="HE">Hebrew</option>
+                                        <option value="HI">Hindi</option>
+                                        <option value="HU">Hungarian</option>
+                                        <option value="IS">Icelandic</option>
+                                        <option value="ID">Indonesian</option>
+                                        <option value="GA">Irish</option>
+                                        <option value="IT">Italian</option>
+                                        <option value="JA">Japanese</option>
+                                        <option value="JW">Javanese</option>
+                                        <option value="KO">Korean</option>
+                                        <option value="LA">Latin</option>
+                                        <option value="LV">Latvian</option>
+                                        <option value="LT">Lithuanian</option>
+                                        <option value="MK">Macedonian</option>
+                                        <option value="MS">Malay</option>
+                                        <option value="ML">Malayalam</option>
+                                        <option value="MT">Maltese</option>
+                                        <option value="MI">Maori</option>
+                                        <option value="MR">Marathi</option>
+                                        <option value="MN">Mongolian</option>
+                                        <option value="NE">Nepali</option>
+                                        <option value="NO">Norwegian</option>
+                                        <option value="FA">Persian</option>
+                                        <option value="PL">Polish</option>
+                                        <option value="PT">Portuguese</option>
+                                        <option value="PA">Punjabi</option>
+                                        <option value="QU">Quechua</option>
+                                        <option value="RO">Romanian</option>
+                                        <option value="RU">Russian</option>
+                                        <option value="SM">Samoan</option>
+                                        <option value="SR">Serbian</option>
+                                        <option value="SK">Slovak</option>
+                                        <option value="SL">Slovenian</option>
+                                        <option value="ES">Spanish</option>
+                                        <option value="SW">Swahili</option>
+                                        <option value="SV">Swedish </option>
+                                        <option value="TA">Tamil</option>
+                                        <option value="TT">Tatar</option>
+                                        <option value="TE">Telugu</option>
+                                        <option value="TH">Thai</option>
+                                        <option value="BO">Tibetan</option>
+                                        <option value="TO">Tonga</option>
+                                        <option value="TR">Turkish</option>
+                                        <option value="UK">Ukranian</option>
+                                        <option value="USA">USA</option>
+                                        <option value="UR">Urdu</option>
+                                        <option value="UZ">Uzbek</option>
+                                        <option value="VI">Vietnamese</option>
+                                        <option value="CY">Welsh</option>
+                                        <option value="XH">Xhosa</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="custom-controls-stacked d-md-flex mt-3">
+                            <label class="form-label me-5">Status :</label>
+                            <div class="form-check mb-0 me-4">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Active
+                                </label>
+                            </div>
+                            <div class="form-check mb-0">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    InActive
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a  href="javascript:void(0);" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</a>
+                        <a  href="javascript:void(0);" class="btn btn-success">Updated</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Edit Company Modal  -->
+        
+        <!-- Edit Company Modal -->
+        <div class="modal fade"  id="addmodal">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Company</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="form-label">Upload Company Logo</label>
+                            <div class="form-group">
+                                <input class="form-control" type="file">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Company Name</label>
+                                    <input class="form-control" placeholder="Name" >
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Company Email</label>
+                                    <input class="form-control" placeholder="Email" >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Company Ph:Number</label>
+                                    <input class="form-control" placeholder="Number" >
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Company Website</label>
+                                    <input class="form-control" placeholder="Website">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label">Company Address</label>
+                            <textarea rows="2" class="form-control" placeholder="something text here..."></textarea>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" placeholder="Password" >
+                        </div>
+                        <div class="row  mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Select Currency</label>
+                                    <select class="form-control custom-select" data-trigger data-placeholder="Select Priority">
+                                        <option label="Choose Currency"></option>
+                                        <option value="1" selected>US DOllar(USD)</option>
+                                        <option value="2">European Euro (EUR)</option>
+                                        <option value="3">Japanese Yen (JPY)</option>
+                                        <option value="4">British Pound (GBP)</option>
+                                        <option value="5">Swiss Franc (CHF)</option>
+                                        <option value="6">Canadian Dollar (CAD)</option>
+                                        <option value="7">Australian/New Zealand Dollar (AUD/NZD)</option>
+                                        <option value="8">South African Rand (ZAR)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Select Language</label>
+                                    <select class="form-control custom-select" data-trigger data-placeholder="Select Priority">
+                                        <option label="Choose Language"></option>
+                                        <option value="AF">Afrikanns</option>
+                                        <option value="SQ">Albanian</option>
+                                        <option value="AR">Arabic</option>
+                                        <option value="HY">Armenian</option>
+                                        <option value="EU">Basque</option>
+                                        <option value="BN">Bengali</option>
+                                        <option value="BG">Bulgarian</option>
+                                        <option value="CA">Catalan</option>
+                                        <option value="KM">Cambodian</option>
+                                        <option value="ZH">Chinese (Mandarin)</option>
+                                        <option value="HR">Croation</option>
+                                        <option value="CS">Czech</option>
+                                        <option value="DA">Danish</option>
+                                        <option value="NL">Dutch</option>
+                                        <option value="EN" selected>English</option>
+                                        <option value="ET">Estonian</option>
+                                        <option value="FJ">Fiji</option>
+                                        <option value="FI">Finnish</option>
+                                        <option value="FR">French</option>
+                                        <option value="KA">Georgian</option>
+                                        <option value="DE">German</option>
+                                        <option value="EL">Greek</option>
+                                        <option value="GU">Gujarati</option>
+                                        <option value="HE">Hebrew</option>
+                                        <option value="HI">Hindi</option>
+                                        <option value="HU">Hungarian</option>
+                                        <option value="IS">Icelandic</option>
+                                        <option value="ID">Indonesian</option>
+                                        <option value="GA">Irish</option>
+                                        <option value="IT">Italian</option>
+                                        <option value="JA">Japanese</option>
+                                        <option value="JW">Javanese</option>
+                                        <option value="KO">Korean</option>
+                                        <option value="LA">Latin</option>
+                                        <option value="LV">Latvian</option>
+                                        <option value="LT">Lithuanian</option>
+                                        <option value="MK">Macedonian</option>
+                                        <option value="MS">Malay</option>
+                                        <option value="ML">Malayalam</option>
+                                        <option value="MT">Maltese</option>
+                                        <option value="MI">Maori</option>
+                                        <option value="MR">Marathi</option>
+                                        <option value="MN">Mongolian</option>
+                                        <option value="NE">Nepali</option>
+                                        <option value="NO">Norwegian</option>
+                                        <option value="FA">Persian</option>
+                                        <option value="PL">Polish</option>
+                                        <option value="PT">Portuguese</option>
+                                        <option value="PA">Punjabi</option>
+                                        <option value="QU">Quechua</option>
+                                        <option value="RO">Romanian</option>
+                                        <option value="RU">Russian</option>
+                                        <option value="SM">Samoan</option>
+                                        <option value="SR">Serbian</option>
+                                        <option value="SK">Slovak</option>
+                                        <option value="SL">Slovenian</option>
+                                        <option value="ES">Spanish</option>
+                                        <option value="SW">Swahili</option>
+                                        <option value="SV">Swedish </option>
+                                        <option value="TA">Tamil</option>
+                                        <option value="TT">Tatar</option>
+                                        <option value="TE">Telugu</option>
+                                        <option value="TH">Thai</option>
+                                        <option value="BO">Tibetan</option>
+                                        <option value="TO">Tonga</option>
+                                        <option value="TR">Turkish</option>
+                                        <option value="UK">Ukranian</option>
+                                        <option value="USA">USA</option>
+                                        <option value="UR">Urdu</option>
+                                        <option value="UZ">Uzbek</option>
+                                        <option value="VI">Vietnamese</option>
+                                        <option value="CY">Welsh</option>
+                                        <option value="XH">Xhosa</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="custom-controls-stacked d-md-flex mt-3">
+                            <label class="form-label me-5">Status :</label>
+                            <div class="form-check mb-0 me-4">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault11">
+                                <label class="form-check-label" for="flexRadioDefault11">
+                                    Active
+                                </label>
+                            </div>
+                            <div class="form-check mb-0">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault12">
+                                <label class="form-check-label" for="flexRadioDefault12">
+                                    InActive
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a  href="javascript:void(0);" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</a>
+                        <a  href="javascript:void(0);" class="btn btn-success">Updated</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Edit Company Modal  -->
+
+        <!-- Modal -->
+        <div class="modal fade"  id="remindermodal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Reminder</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="form-label">Project</label>
+                            <select class="form-control custom-select" data-trigger data-placeholder="Select Department">
+                                <option value="1">Project 01</option>
+                                <option value="2">Project 02</option>
+                                <option value="3">Project 03</option>
+                                <option value="4">Project 04</option>
+                                <option value="5">Project 05</option>
+                            </select>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label">Select Date</label>
+                            <div class="input-group">
+                                <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                <input type="text" class="form-control choose-date flatpickr-input" placeholder="DD-MM-YYYY" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label">Note:</label>
+                            <textarea class="form-control" rows="3">Some text here...</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button  class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                        <button  class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+
+    <!-- Date & Time Picker JS -->
+    <script src="../assets/libs/flatpickr/flatpickr.min.js"></script>
+
+    <!-- Default date picker js-->
+    <script src="../assets/js/default-flat-datepicker.js"></script>
+
+    <!-- Notifications JS -->
+    <script src="../assets/libs/awesome-notifications/index.var.js"></script>
+
+    <!-- Successful-notify JS -->
+    <script src="../assets/js/successful-notify.js"></script>
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

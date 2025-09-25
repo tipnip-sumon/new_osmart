@@ -1,0 +1,393 @@
+@SPK@include("partials/mainhead.html")
+
+<link rel="stylesheet" href="../assets/libs/quill/quill.snow.css">
+<link rel="stylesheet" href="../assets/libs/quill/quill.bubble.css">
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                <!-- Page Header -->
+                <div class="page-header d-lg-flex d-block">
+                    <div class="page-leftheader">
+                        <div class="page-title">Notice Board</div>
+                    </div>
+                    <div class="page-rightheader">
+                        <div class="btn-list">
+                            <a href="hr-attmark.html" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addnoticemodal">Add New Notice</a>
+                            <button  class="btn btn-light3" data-bs-toggle="tooltip" data-bs-placement="top" title="E-mail"> <i class="fe fe-mail"></i> </button>
+                            <button  class="btn btn-light3" data-bs-placement="top" data-bs-toggle="tooltip" title="Contact"> <i class="fe fe-phone-call"></i> </button>
+                            <button  class="btn btn-primary" data-bs-placement="top" data-bs-toggle="tooltip" title="Info"> <i class="fe fe-info"></i> </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Page Header Close -->
+
+                <!-- Start::row-1 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card custom-card">
+                            <div class="card-header  border-0">
+                                <h5 class="card-title">Notice Summary</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row mb-2 gap-1 gap-lg-0">
+                                    <div class="col-lg-6">
+                                        <div class="d-flex align-items-center">
+                                            <span>Show</span>
+                                            <div class="d-flex ms-2 mx-2">
+                                                <div class="form-group mb-0">
+                                                    <select name="quantity" id="select-countries17" class="form-control  wd-150" data-trigger>
+                                                        <option value="1" selected="">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <span>entries</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="float-end">
+                                            <input type="text" class="form-control" placeholder="search">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table  table-vcenter text-nowrap table-bordered border-bottom" id="hr-notice">
+                                        <thead>
+                                            <tr>
+                                                <th class="border-bottom-0 w-5">No</th>
+                                                <th class="border-bottom-0">Title</th>
+                                                <th class="border-bottom-0">Description</th>
+                                                <th class="border-bottom-0">To</th>
+                                                <th class="border-bottom-0">Create On</th>
+                                                <th class="border-bottom-0">Status</th>
+                                                <th class="border-bottom-0">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>01</td>
+                                                <td>Board meeting Completed</td>
+                                                <td>Attend the  company mangers & teamleads.</td>
+                                                <td>Employees</td>
+                                                <td>18-02-2021</td>
+                                                <td><span class="badge bg-success">Active</span></td>
+                                                <td>
+                                                <div class="d-flex">
+                                                    <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#editnoticemodal"><i class="fe fe-eye primary text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="Edit/View"></i></a>
+                                                    <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>02</td>
+                                                <td>Updated the Company Policy</td>
+                                                <td>some changes & add the terms & conditions.</td>
+                                                <td>Employees</td>
+                                                <td>16-02-2021</td>
+                                                <td><span class="badge bg-success">Active</span></td>
+                                                <td>
+                                                <div class="d-flex">
+                                                    <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#editnoticemodal"><i class="fe fe-eye primary text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="Edit/View"></i></a>
+                                                    <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>03</td>
+                                                <td>Office Timings Changed</td>
+                                                <td>This effetct after March 01st 9:00 Am To 5:00 Pm</td>
+                                                <td>Employees</td>
+                                                <td>17-02-2021</td>
+                                                <td><span class="badge bg-success">Active</span></td>
+                                                <td>
+                                                <div class="d-flex">
+                                                    <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#editnoticemodal"><i class="fe fe-eye primary text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="Edit/View"></i></a>
+                                                    <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>04</td>
+                                                <td>Republic Day Celebrated</td>
+                                                <td>Participate the all employess</td>
+                                                <td>Employees</td>
+                                                <td>26-01-2021</td>
+                                                <td><span class="badge bg-success">Active</span></td>
+                                                <td>
+                                                <div class="d-flex">
+                                                    <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#editnoticemodal"><i class="fe fe-eye primary text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="Edit/View"></i></a>
+                                                    <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>05</td>
+                                                <td>Client meeting Completed</td>
+                                                <td>Participate the all the managers</td>
+                                                <td>Employees</td>
+                                                <td>12-01-2021</td>
+                                                <td><span class="badge bg-danger">InActive</span></td>
+                                                <td>
+                                                <div class="d-flex">
+                                                    <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#editnoticemodal"><i class="fe fe-eye primary text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="Edit/View"></i></a>
+                                                    <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>06</td>
+                                                <td>Update the Employee Leave Policy</td>
+                                                <td>Participate the all employess</td>
+                                                <td>Employees</td>
+                                                <td>02-01-2021</td>
+                                                <td><span class="badge bg-success">Active</span></td>
+                                                <td>
+                                                <div class="d-flex">
+                                                    <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#editnoticemodal"><i class="fe fe-eye primary text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="Edit/View"></i></a>
+                                                    <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>07</td>
+                                                <td>Faith Harris, Please sent the email</td>
+                                                <td>Sed ut perspiciatis unde omnis iste natus error sit voluptatem</td>
+                                                <td>Employees</td>
+                                                <td>26-01-2021</td>
+                                                <td><span class="badge bg-success">Active</span></td>
+                                                <td>
+                                                <div class="d-flex">
+                                                    <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#editnoticemodal"><i class="fe fe-eye primary text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="Edit/View"></i></a>
+                                                    <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>08</td>
+                                                <td>Update the Agreement Policy</td>
+                                                <td>There are many variations of passages of  but the majority have suffered alteration </td>
+                                                <td>Employees</td>
+                                                <td>12-02-2021</td>
+                                                <td><span class="badge bg-danger">InActive</span></td>
+                                                <td>
+                                                <div class="d-flex">
+                                                    <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="modal" data-bs-target="#editnoticemodal"><i class="fe fe-eye primary text-primary"  data-bs-toggle="tooltip" data-bs-placement="top" title="Edit/View"></i></a>
+                                                    <a  href="javascript:void(0);" class="action-btns1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fe fe-trash-2 text-danger"></i></a>
+                                                </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- Start::pagination -->
+                                <nav class="mt-4">
+                                   <ul class="pagination justify-content-end mb-0">
+                                       <li class="page-item disabled"><a class="page-link" href="javascript:void(0);">Prev</a></li>
+                                       <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
+                                       <li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
+                                   </ul>
+                               </nav>
+                               <!-- End::pagination -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-1 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+        <!-- Add leave Modal -->
+			<div class="modal fade"  id="addnoticemodal">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Add New Notice</h5>
+							<button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="form-group mb-3">
+								<label class="form-label">Title</label>
+								<input class="form-control" placeholder="Text">
+							</div>
+							<div class="form-group mb-3 d-flex">
+								<div class="form-check me-3">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="toEmployees">
+                                    <label class="form-check-label" for="toEmployees">
+                                        To Employees
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="toClients">
+                                    <label class="form-check-label" for="toClients">
+                                        To Clients
+                                    </label>
+                                </div>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label">Select Date:</label>
+								<div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                        <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                    </div>
+                                </div>
+							</div>
+							<div class="form-group mb-3">
+                                <label class="fw-medium form-label">Description:</label>
+                                <div id="editor"></div>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label">Attachment:</label>
+								<div class="form-group">
+									<input class="form-control" type="file">
+								</div>
+							</div>
+                            <div class="form-group mb-0 d-flex">
+                                <label class="form-label me-5">Status :</label>
+								<div class="form-check me-3">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="toEmployee1">
+                                    <label class="form-check-label" for="toEmployee1">
+                                        To Employees
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="toClients3">
+                                    <label class="form-check-label" for="toClients3">
+                                        To Clients
+                                    </label>
+                                </div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button  class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+							<button  class="btn btn-success">Save</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Add leave Modal -->
+
+			<!-- Edit Notice Modal -->
+			<div class="modal fade"  id="editnoticemodal">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Edit Leaves</h5>
+							<button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="form-group mb-3">
+								<label class="form-label">Title</label>
+								<input class="form-control" placeholder="Text" value="Board meeting Completed">
+							</div>
+							<div class="form-group mb-3 d-flex">
+								<div class="form-check me-3">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="toEmployee2">
+                                    <label class="form-check-label" for="toEmployee2">
+                                        To Employees
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="toClients2">
+                                    <label class="form-check-label" for="toClients2">
+                                        To Clients
+                                    </label>
+                                </div>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label">Select Date:</label>
+								<div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                        <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                    </div>
+                                </div>
+							</div>
+							<div class="form-group mb-3">
+                                <label class="fw-medium form-label">Description:</label>
+                                <div id="editor1"></div>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label">Attachment:</label>
+                                <input class="form-control" type="file">
+							</div>
+							<div class="form-group mb-0 d-flex">
+                                <label class="form-label me-5">Status :</label>
+								<div class="form-check me-3">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="active1">
+                                    <label class="form-check-label" for="active1">
+                                        Active
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="inactive1">
+                                    <label class="form-check-label" for="inactive1">
+                                        Inactive
+                                    </label>
+                                </div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button  class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+							<button  class="btn btn-success">Update</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Edit Notice Modal -->
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    <!-- Quill Editor JS -->
+    <script src="../assets/libs/quill/quill.min.js"></script>
+
+    <!-- Date & Time Picker JS -->
+    <script src="../assets/libs/flatpickr/flatpickr.min.js"></script>
+
+    <!-- HR notice JS -->
+    <script src="../assets/js/hr-notice.js"></script>
+
+    <!-- Default date picker js-->
+    <script src="../assets/js/default-flat-datepicker.js"></script> 
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

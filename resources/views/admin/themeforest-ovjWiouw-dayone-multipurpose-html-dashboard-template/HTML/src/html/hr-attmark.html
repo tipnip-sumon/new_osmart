@@ -1,0 +1,883 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                @SPK@include("partials/page-header.html", {"title": "Mark Attendance"})
+
+                <!-- Start::row-1 -->
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 col-lg-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Select Date:</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                                    <input type="text" class="form-control choose-date" placeholder="DD-MM-YYYY">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body border-top">
+                                <div class="row mb-3 gap-1 gap-lg-0">
+                                    <div class="col-lg-6">
+                                        <div class="d-flex align-items-center gap-2 flex-wrap">
+                                            <span>Show</span>
+                                            <div class="d-flex ms-2 mx-2">
+                                                <div class="form-group mb-0">
+                                                    <select name="quantity" id="select-countries17" class="form-control  wd-150" data-trigger>
+                                                        <option value="1" selected="">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <span class="pe-3">entries</span>
+                                            
+                                            <div class="form-check form-check-xl d-flex align-items-center mb-2">
+                                                <input class="form-check-input success check-all" type="checkbox" id="all-tasks" value="" aria-label="...">
+                                                <label class="form-check-label" >Check All</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="float-end">
+                                            <input type="text" class="form-control" placeholder="search">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table  table-vcenter text-nowrap table-bordered border-bottom" id="hr-table">
+                                        <thead>
+                                            <tr>
+                                                <th class="border-bottom-0 w-5">#Emp ID</th>
+                                                <th class="border-bottom-0">Emp Name</th>
+                                                <th class="border-bottom-0">Status</th>
+                                                <th class="border-bottom-0">Clock In</th>
+                                                <th class="border-bottom-0">Clock Out</th>
+                                                <th class="border-bottom-0">IP Address</th>
+                                                <th class="border-bottom-0">Working From</th>
+                                                <th class="border-bottom-0">Attendance</th>
+                                                <th class="border-bottom-0">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>#2987</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="avatar me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/1.jpg" alt="img">
+                                                        </div>
+                                                        <div>
+                                                            <div class="lh-1">
+                                                                <h6 class="mb-1">Faith Harris</h6>
+                                                            </div>
+                                                            <div class="lh-1">
+                                                                <span
+                                                                    class="fs-12 text-muted">Web Designer</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-success-transparent">Present</span></td>
+                                                <td>09:30 AM</td>
+                                                <td>06:30 PM</td>
+                                                <td>225.192.45.1</td>
+                                                <td>Office</td>
+                                                <td><span class="badge bg-success">Marked</span></td>
+                                                <td class="task-list">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <div class="form-check form-check-xl d-flex align-items-center">
+                                                            <div class="task-checkbox">
+                                                                <input class="form-check-input success" type="checkbox" value="" aria-label="..." checked>
+                                                            </div>
+                                                        </div>
+                                                        <a  href="javascript:void(0);" class="action-btns1 bg-light" data-bs-toggle="modal" data-bs-target="#presentmodal">
+                                                            <i class="fe fe-eye primary text-primary" data-bs-toggle="tooltip" data-original-title="View"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#4987</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="avatar me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/9.jpg" alt="img">
+                                                        </div>
+                                                        <div>
+                                                            <div class="lh-1">
+                                                                <h6 class="mb-1">Austin Bell</h6>
+                                                            </div>
+                                                            <div class="lh-1">
+                                                                <span
+                                                                    class="fs-12 text-muted">Angular Developer</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-danger-transparent">Absent</span></td>
+                                                <td>09:30 AM</td>
+                                                <td>06:30 PM</td>
+                                                <td>225.192.45.2</td>
+                                                <td>Office</td>
+                                                <td><span class="badge bg-danger">Not Marked</span></td>
+                                                <td class="task-list">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <div class="form-check form-check-xl d-flex align-items-center">
+                                                            <div class="task-checkbox">
+                                                                <input class="form-check-input success" type="checkbox" value="" aria-label="..." checked>
+                                                            </div>
+                                                        </div>
+                                                        <a  href="javascript:void(0);" class="action-btns1 bg-light" data-bs-toggle="modal" data-bs-target="#presentmodal1">
+                                                            <i class="fe fe-eye primary text-primary" data-bs-toggle="tooltip" data-original-title="View"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#6729</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="avatar me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/2.jpg" alt="img">
+                                                        </div>
+                                                        <div>
+                                                            <div class="lh-1">
+                                                                <h6 class="mb-1">Maria Bower</h6>
+                                                            </div>
+                                                            <div class="lh-1">
+                                                                <span
+                                                                    class="fs-12 text-muted">Marketing analyst</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-success-transparent">Present</span></td>
+                                                <td>09:30 AM</td>
+                                                <td>06:30 PM</td>
+                                                <td>225.192.45.1</td>
+                                                <td>Office</td>
+                                                <td><span class="badge bg-success">Marked</span></td>
+                                                <td class="task-list">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <div class="form-check form-check-xl d-flex align-items-center">
+                                                            <div class="task-checkbox">
+                                                                <input class="form-check-input success" type="checkbox" value="" aria-label="...">
+                                                            </div>
+                                                        </div>
+                                                        <a  href="javascript:void(0);" class="action-btns1 bg-light" data-bs-toggle="modal" data-bs-target="#presentmodal">
+                                                            <i class="fe fe-eye primary text-primary" data-bs-toggle="tooltip" data-original-title="View"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#2098</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="avatar me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/10.jpg" alt="img">
+                                                        </div>
+                                                        <div>
+                                                            <div class="lh-1">
+                                                                <h6 class="mb-1">Peter Hill</h6>
+                                                            </div>
+                                                            <div class="lh-1">
+                                                                <span
+                                                                    class="fs-12 text-muted">Testor</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-warning-transparent">Half Day</span></td>
+                                                <td>09:30 AM</td>
+                                                <td>01:30 PM</td>
+                                                <td>225.192.45.1</td>
+                                                <td>Office</td>
+                                                <td><span class="badge bg-danger">Not Marked</span></td>
+                                                <td class="task-list">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <div class="form-check form-check-xl d-flex align-items-center">
+                                                            <div class="task-checkbox">
+                                                                <input class="form-check-input success" type="checkbox" value="" aria-label="..." checked>
+                                                            </div>
+                                                        </div>
+                                                        <a  href="javascript:void(0);" class="action-btns1 bg-light" data-bs-toggle="modal" data-bs-target="#halfpresentmodal">
+                                                            <i class="fe fe-eye primary text-primary" data-bs-toggle="tooltip" data-original-title="View"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#1025</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="avatar me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/3.jpg" alt="img">
+                                                        </div>
+                                                        <div>
+                                                            <div class="lh-1">
+                                                                <h6 class="mb-1">Victoria Lyman</h6>
+                                                            </div>
+                                                            <div class="lh-1">
+                                                                <span
+                                                                    class="fs-12 text-muted">General Manager</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-success-transparent">Present</span></td>
+                                                <td>09:30 AM</td>
+                                                <td>06:30 PM</td>
+                                                <td>225.192.45.1</td>
+                                                <td>Office</td>
+                                                <td><span class="badge bg-success">Marked</span></td>
+                                                <td class="task-list">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <div class="form-check form-check-xl d-flex align-items-center">
+                                                            <div class="task-checkbox">
+                                                                <input class="form-check-input success" type="checkbox" value="" aria-label="..." checked>
+                                                            </div>
+                                                        </div>
+                                                        <a  href="javascript:void(0);" class="action-btns1 bg-light" data-bs-toggle="modal" data-bs-target="#presentmodal">
+                                                            <i class="fe fe-eye primary text-primary" data-bs-toggle="tooltip" data-original-title="View"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#3262</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="avatar me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/4.jpg" alt="img">
+                                                        </div>
+                                                        <div>
+                                                            <div class="lh-1">
+                                                                <h6 class="mb-1">Adam Quinn</h6>
+                                                            </div>
+                                                            <div class="lh-1">
+                                                                <span
+                                                                    class="fs-12 text-muted">Accountant</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-success-transparent">Present</span></td>
+                                                <td>09:30 AM</td>
+                                                <td>06:30 PM</td>
+                                                <td>225.192.45.1</td>
+                                                <td>Office</td>
+                                                <td><span class="badge bg-success">Marked</span></td>
+                                                <td class="task-list">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <div class="form-check form-check-xl d-flex align-items-center">
+                                                            <div class="task-checkbox">
+                                                                <input class="form-check-input success" type="checkbox" value="" aria-label="..." checked>
+                                                            </div>
+                                                        </div>
+                                                        <a  href="javascript:void(0);" class="action-btns1 bg-light" data-bs-toggle="modal" data-bs-target="#presentmodal">
+                                                            <i class="fe fe-eye primary text-primary" data-bs-toggle="tooltip" data-original-title="View"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#3489</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="avatar me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/2.jpg" alt="img">
+                                                        </div>
+                                                        <div>
+                                                            <div class="lh-1">
+                                                                <h6 class="mb-1">Melanie Coleman</h6>
+                                                            </div>
+                                                            <div class="lh-1">
+                                                                <span
+                                                                    class="fs-12 text-muted">App Designer</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-success-transparent">Present</span></td>
+                                                <td>09:30 AM</td>
+                                                <td>06:30 PM</td>
+                                                <td>225.192.45.1</td>
+                                                <td>Office</td>
+                                                <td><span class="badge bg-success">Marked</span></td>
+                                                <td class="task-list">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <div class="form-check form-check-xl d-flex align-items-center">
+                                                            <div class="task-checkbox">
+                                                                <input class="form-check-input success" type="checkbox" value="" aria-label="...">
+                                                            </div>
+                                                        </div>
+                                                        <a  href="javascript:void(0);" class="action-btns1 bg-light" data-bs-toggle="modal" data-bs-target="#presentmodal">
+                                                            <i class="fe fe-eye primary text-primary" data-bs-toggle="tooltip" data-original-title="View"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#3698</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="avatar me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/12.jpg" alt="img">
+                                                        </div>
+                                                        <div>
+                                                            <div class="lh-1">
+                                                                <h6 class="mb-1">Max Wilson</h6>
+                                                            </div>
+                                                            <div class="lh-1">
+                                                                <span
+                                                                    class="fs-12 text-muted">PHP Developer</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-orange-transparent">Late</span></td>
+                                                <td>10:30 AM</td>
+                                                <td>06:30 PM</td>
+                                                <td>225.192.45.1</td>
+                                                <td>Office</td>
+                                                <td><span class="badge bg-danger">Not Marked</span></td>
+                                                <td class="task-list">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <div class="form-check form-check-xl d-flex align-items-center">
+                                                            <div class="task-checkbox">
+                                                                <input class="form-check-input success" type="checkbox" value="" aria-label="...">
+                                                            </div>
+                                                        </div>
+                                                        <a  href="javascript:void(0);" class="action-btns1 bg-light" data-bs-toggle="modal" data-bs-target="#presentmodal1">
+                                                            <i class="fe fe-eye primary text-primary" data-bs-toggle="tooltip" data-original-title="View"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#5612</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="avatar me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/5.jpg" alt="img">
+                                                        </div>
+                                                        <div>
+                                                            <div class="lh-1">
+                                                                <h6 class="mb-1">Amelia Russell</h6>
+                                                            </div>
+                                                            <div class="lh-1">
+                                                                <span
+                                                                    class="fs-12 text-muted">UX Designer</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-success-transparent">Present</span></td>
+                                                <td>10:30 AM</td>
+                                                <td>06:30 PM</td>
+                                                <td>225.192.45.1</td>
+                                                <td>Office</td>
+                                                <td><span class="badge bg-success">Marked</span></td>
+                                                <td class="task-list">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <div class="form-check form-check-xl d-flex align-items-center">
+                                                            <div class="task-checkbox">
+                                                                <input class="form-check-input success" type="checkbox" value="" aria-label="..." checked>
+                                                            </div>
+                                                        </div>
+                                                        <a  href="javascript:void(0);" class="action-btns1 bg-light" data-bs-toggle="modal" data-bs-target="#presentmodal1">
+                                                            <i class="fe fe-eye primary text-primary" data-bs-toggle="tooltip" data-original-title="View"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#0245</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="avatar me-2 avatar-rounded">
+                                                            <img src="../assets/images/users/13.jpg" alt="img">
+                                                        </div>
+                                                        <div>
+                                                            <div class="lh-1">
+                                                                <h6 class="mb-1">Justin Metcalfe</h6>
+                                                            </div>
+                                                            <div class="lh-1">
+                                                                <span
+                                                                    class="fs-12 text-muted">Web Designer</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-success-transparent">Present</span></td>
+                                                <td>10:30 AM</td>
+                                                <td>06:30 PM</td>
+                                                <td>225.192.45.1</td>
+                                                <td>Office</td>
+                                                <td><span class="badge bg-success">Marked</span></td>
+                                                <td class="task-list">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <div class="form-check form-check-xl d-flex align-items-center">
+                                                            <div class="task-checkbox">
+                                                                <input class="form-check-input success" type="checkbox" value="" aria-label="..." checked>
+                                                            </div>
+                                                        </div>
+                                                        <a  href="javascript:void(0);" class="action-btns1 bg-light" data-bs-toggle="modal" data-bs-target="#presentmodal1">
+                                                            <i class="fe fe-eye primary text-primary" data-bs-toggle="tooltip" data-original-title="View"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                 <!-- Start::pagination -->
+                                 <nav class="mt-4">
+                                    <ul class="pagination justify-content-end mb-0">
+                                        <li class="page-item disabled"><a class="page-link" href="javascript:void(0);">Prev</a></li>
+                                        <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
+                                    </ul>
+                                </nav>
+                                <!-- End::pagination -->
+                            </div>
+                            <div class="card-footer">
+                                <a  href="javascript:void(0);" class="btn btn-primary float-end">Save All</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-1 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+        <!--Present Modal -->
+        <div class="modal fade"  id="presentmodal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Attendance Details</h5>
+                        <button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row mb-2">
+                            <div class="col-md-4">
+                                <div class="pt-5 text-center">
+                                    <h6 class="mb-1 fs-16 fw-medium">09:30 AM</h6>
+                                    <small class="text-muted fs-14">Clock In</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="attendance-details2"></div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="pt-5 text-center">
+                                    <h6 class="mb-1 fs-16 fw-medium"> 06:30 PM</h6>
+                                    <small class="text-muted fs-14">Clock Out</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">IP Address</label>
+                            <input type="text" class="form-control" placeholder="225.192.145.1" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Working Form</label>
+                            <select name="projects"  class="form-control custom-select" data-trigger disabled data-placeholder="Select">
+                                <option value="">Select</option>
+                                <option value="1" selected>Office</option>
+                                <option value="2">Home</option>
+                                <option value="3">Others</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a  href="javascript:void(0);" class="btn btn-outline-primary" data-bs-dismiss="modal">close</a>
+                        <a  href="javascript:void(0);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editmodal" data-bs-dismiss="modal">Edit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Present Modal  -->
+
+        <!--Edit Modal -->
+        <div class="modal fade"  id="editmodal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Attendance Details</h5>
+                        <button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Clock In</label>
+                                    <div class="input-group">
+                                        <div class="input-group-text text-muted"> <i class="ri-time-line"></i> </div>
+                                        <input type="text" class="form-control" value="9:30 AM">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-check-lg form-switch mt-4">
+                                    <input class="form-check-input success" type="checkbox" role="switch"
+                                        id="switch-md1">
+                                    <label class="form-check-label" for="switch-md1">Late</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Clock Out</label>
+                                    <div class="input-group">
+                                        <div class="input-group-text text-muted"> <i class="ri-time-line"></i> </div>
+                                        <input type="text" class="form-control" value="06:30 PM">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-check-lg form-switch mt-4">
+                                    <input class="form-check-input success" type="checkbox" role="switch"
+                                        id="switch-md2"> 
+                                    <label class="form-check-label" for="switch-md2">half Day</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">IP Address</label>
+                            <input type="text" class="form-control" placeholder="225.192.145.1" disabled>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Working Form</label>
+                            <select name="projects"  class="form-control custom-select" data-trigger disabled data-placeholder="Select">
+                                <option value="">Select</option>
+                                <option value="1" selected>Office</option>
+                                <option value="2">Home</option>
+                                <option value="3">Others</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer d-flex">
+                        <div>
+                            <a  href="javascript:void(0);" class="btn btn-light"  data-bs-toggle="modal" data-bs-target="#presentmodal" data-bs-dismiss="modal"><i class="feather feather-arrow-left me-1"></i>Back</a>
+                        </div>
+                        <div class="ms-auto">
+                            <a  href="javascript:void(0);" class="btn btn-outline-primary" data-bs-dismiss="modal">close</a>
+                            <a  href="javascript:void(0);" class="btn btn-primary">Save</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Edit Modal  -->
+
+        <!--Present Modal1 -->
+        <div class="modal fade"  id="presentmodal1">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Attendance Details</h5>
+                        <button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row mb-5 mt-4">
+                            <div class="col-md-4">
+                                <div class="pt-5 text-center">
+                                    <h6 class="mb-1 fs-16 fw-medium">09:30 AM</h6>
+                                    <small class="text-muted fs-14">Clock In</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="attendance-details3"></div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="pt-5 text-center">
+                                    <h6 class="mb-1 fs-16 fw-medium"> 06:30 PM</h6>
+                                    <small class="text-muted fs-14">Clock Out</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">IP Address</label>
+                            <input type="text" class="form-control" placeholder="225.192.145.1">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Working Form</label>
+                            <select name="projects"  class="form-control custom-select" data-trigger data-placeholder="Select">
+                                <option value="">Select</option>
+                                <option value="1" selected>Office</option>
+                                <option value="2">Home</option>
+                                <option value="3">Others</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a  href="javascript:void(0);" class="btn btn-outline-primary" data-bs-dismiss="modal">close</a>
+                        <a  href="javascript:void(0);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editmodal1" data-bs-dismiss="modal">Edit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Present1 Modal  -->
+
+        <!--Edit1 Modal -->
+        <div class="modal fade"  id="editmodal1">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Attendance Details</h5>
+                        <button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Clock In</label>
+                                    <div class="input-group">
+                                        <div class="input-group-text text-muted"> <i class="ri-time-line"></i> </div>
+                                        <input type="text" class="form-control" value="9:30 AM">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-check-lg form-switch mt-4">
+                                    <input class="form-check-input success" type="checkbox" role="switch"
+                                        id="switch-md3">
+                                    <label class="form-check-label" for="switch-md3">Late</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Clock Out</label>
+                                    <div class="input-group">
+                                        <div class="input-group-text text-muted"> <i class="ri-time-line"></i> </div>
+                                        <input type="text" class="form-control" value="06:30 PM">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-check-lg form-switch mt-4">
+                                    <input class="form-check-input success" type="checkbox" role="switch"
+                                        id="switch-md4"> 
+                                    <label class="form-check-label" for="switch-md4">half Day</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">IP Address</label>
+                            <input type="text" class="form-control" placeholder="225.192.145.1">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Working Form</label>
+                            <select name="projects"  class="form-control custom-select" data-trigger data-placeholder="Select">
+                                <option value="1" selected>Office</option>
+                                <option value="2">Home</option>
+                                <option value="3">Others</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer d-flex">
+                        <div>
+                            <a  href="javascript:void(0);" class="btn btn-light"  data-bs-toggle="modal" data-bs-target="#presentmodal1" data-bs-dismiss="modal"><i class="feather feather-arrow-left me-1"></i>Back</a>
+                        </div>
+                        <div class="ms-auto">
+                            <a  href="javascript:void(0);" class="btn btn-outline-primary" data-bs-dismiss="modal">close</a>
+                            <a  href="javascript:void(0);" class="btn btn-primary">Save</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Edit1 Modal  -->
+
+        <!--HalfPresent Modal -->
+        <div class="modal fade"  id="halfpresentmodal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Attendance Details <span class="badge badge-orange">Half Day</span></h5>
+                        <button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row my-4">
+                            <div class="col-md-4">
+                                <div class="pt-5 text-center">
+                                    <h6 class="mb-1 fs-16 fw-medium">09:30 AM</h6>
+                                    <small class="text-muted fs-14">Clock In</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="attendance-details4"></div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="pt-5 text-center">
+                                    <h6 class="mb-1 fs-16 fw-medium"> 01:30 PM</h6>
+                                    <small class="text-muted fs-14">Clock Out</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">IP Address</label>
+                            <input type="text" class="form-control" placeholder="225.192.145.1" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Working Form</label>
+                            <select name="projects"  class="form-control custom-select" data-trigger disabled data-placeholder="Select">
+                                <option value="">Select</option>
+                                <option value="1" selected>Office</option>
+                                <option value="2">Home</option>
+                                <option value="3">Others</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a  href="javascript:void(0);" class="btn btn-outline-primary" data-bs-dismiss="modal">close</a>
+                        <a  href="javascript:void(0);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#halfdayeditmodal" data-bs-dismiss="modal">Edit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Present Modal  -->
+
+        <!--Halfday Edit Modal -->
+        <div class="modal fade"  id="halfdayeditmodal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Attendance Details <span class="badge bg-orange">Half Day</span></h5>
+                        <button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Clock In</label>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-time-line"></i> </div>
+                                            <input type="text" class="form-control" value="9:30 AM">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-check-lg form-switch mt-4">
+                                    <input class="form-check-input success" type="checkbox" role="switch"
+                                        id="switch-md5">
+                                    <label class="form-check-label" for="switch-md5">Late</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Clock Out</label>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-text text-muted"> <i class="ri-time-line"></i> </div>
+                                            <input type="text" class="form-control" value="1:30 PM">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-check-lg form-switch mt-4">
+                                    <input class="form-check-input success" type="checkbox" role="switch"
+                                        id="switch-md">
+                                    <label class="form-check-label" for="switch-md">half Day</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">IP Address</label>
+                            <input type="text" class="form-control" placeholder="225.192.145.1" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Working Form</label>
+                            <select name="projects"  class="form-control custom-select" data-trigger disabled data-placeholder="Select">
+                                <option value="">Select</option>
+                                <option value="1" selected>Office</option>
+                                <option value="2">Home</option>
+                                <option value="3">Others</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer d-flex">
+                        <div>
+                            <a  href="javascript:void(0);" class="btn btn-light"  data-bs-toggle="modal" data-bs-target="#halfpresentmodal" data-bs-dismiss="modal"><i class="feather feather-arrow-left me-1"></i>Back</a>
+                        </div>
+                        <div class="ms-auto">
+                            <a  href="javascript:void(0);" class="btn btn-outline-primary" data-bs-dismiss="modal">close</a>
+                            <a  href="javascript:void(0);" class="btn btn-primary">Save</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Edit Modal  -->
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    <!-- Apex Charts JS -->
+    <script src="../assets/libs/apexcharts/apexcharts.min.js"></script>
+
+    <!-- Date & Time Picker JS -->
+    <script src="../assets/libs/flatpickr/flatpickr.min.js"></script>
+
+    <!-- Default date picker js-->
+    <script src="../assets/js/default-flat-datepicker.js"></script> 
+
+    <!-- HR attendance user Js-->
+    <script src="../assets/js/hr-attmark.js"></script>
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

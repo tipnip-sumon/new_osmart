@@ -1,0 +1,320 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                @SPK@include("partials/page-header.html", {"title": "Chart Widgets"})
+
+                <!-- Start::row-1 -->
+                <div class="row">
+                    <div class="col-xl-4">
+                        <div class="card custom-card">
+                            <div class="card-body pb-1 pt-3">
+                                <div class="row">
+                                    <div class="col mt-1">
+                                        <div class="mb-2 fs-18 text-muted">
+                                            Total Application
+                                        </div>
+                                        <h2 class="fw-semibold mb-1">45,675</h2>
+                                        <span class="text-primary"><i class="fa fa-arrow-up me-1"></i> +1.4%</span>
+                                    </div>
+                                    <div class="col col-auto">
+                                        <div id="total-app"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="card custom-card">
+                            <div class="card-body pb-1 pt-3">
+                                <div class="row">
+                                    <div class="col mt-1">
+                                        <div class="mb-2 fs-18 text-muted">
+                                            Shortlisted
+                                        </div>
+                                        <h2 class="fw-semibold mb-1">30,175</h2>
+                                        <span class="text-success"><i class="fa fa-arrow-up me-1"></i> +1.8%</span>
+                                    </div>
+                                    <div class="col col-auto">
+                                        <div id="shortlist"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="card custom-card">
+                            <div class="card-body pb-1 pt-3">
+                                <div class="row">
+                                    <div class="col mt-1">
+                                        <div class="mb-2 fs-18 text-muted">
+                                            Rejected
+                                        </div>
+                                        <h2 class="fw-semibold mb-1">79,745</h2>
+                                        <span class="text-danger"><i class="fa fa-arrow-down me-1"></i> -2.4%</span>
+                                    </div>
+                                    <div class="col col-auto">
+                                        <div id="rejected"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-1 -->
+
+                <!-- Start::row-2 -->
+                <div class="row">
+                    <div class="col-xl-4 col-md-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <div>
+                                        <p class="mb-1">Today Revenue</p>
+                                        <h2 class="mb-0 fw-semibold">$897k</h2>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <div id="spark1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <div>
+                                        <p class="mb-1">Unique Visitors</p>
+                                        <h2 class="mb-0 fw-semibold">5,896</h2>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <div id="spark2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <div>
+                                        <p class="mb-1">Expenses</p>
+                                        <h2 class="mb-0 fw-semibold">$1,678</h2>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <div id="spark3"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-2 -->
+
+                <!-- Start::row-3 -->
+                <div class="row">
+                    <div class="col-xl-3 col-lg-6 col-md-12">
+                        <div class="card overflow-hidden custom-card">
+                            <div class="card-body pb-0">
+                                <div class="text-start mb-4">
+                                    <p class=" mb-1 ">
+                                        <i class="fa fa-line-chart me-1"></i>
+                                        Total Sales
+                                    </p>
+                                    <h2 class="mb-0 fw-semibold">4,786<span class="fs-12 text-muted"><span class="text-success me-1"><i class="fe fe-arrow-up ms-1 "></i> 12%</span> last week</span></h2>
+                                </div>
+                            </div>
+                            <div id="sparklinebar1"></div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-md-12">
+                        <div class="card overflow-hidden custom-card">
+                            <div class="card-body pb-0">
+                                <div class="text-start mb-4">
+                                    <p class=" mb-1 ">
+                                        <i class="fa fa-usd me-1"></i>
+                                        Total Profits
+                                    </p>
+                                    <h2 class="mb-0 fw-semibold">$873<span class="fs-12 text-muted"><span class="text-danger me-1"><i class="fe fe-arrow-down ms-1 "></i> 0.34%</span> last week</span></h2>
+                                </div>
+                            </div>
+                            <div id="sparklinebar2"></div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-md-12">
+                        <div class="card overflow-hidden custom-card">
+                            <div class="card-body pb-0">
+                                <div class="text-start mb-4">
+                                    <p class=" mb-1 ">
+                                        <i class="fa fa-cart-arrow-down me-1"></i>
+                                        Total Orders
+                                    </p>
+                                    <h2 class="mb-0 fw-semibold">6,295<span class="fs-12 text-muted"><span class="text-success me-1"><i class="fe fe-arrow-up ms-1 "></i> 0.22%</span> last week</span></h2>
+                                </div>
+                            </div>
+                            <div id="sparklinebar3"></div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-md-12">
+                        <div class="card overflow-hidden custom-card">
+                            <div class="card-body pb-0">
+                                <div class="text-start mb-4">
+                                    <p class=" mb-1">
+                                        <i class="fa fa-signal me-1"></i>
+                                        Total Sales Revenue
+                                    </p>
+                                    <h2 class="mb-0 fw-semibold">$356<span class="fs-12 text-muted"><span class="text-danger me-1"><i class="fe fe-arrow-down ms-1"></i>0.82%</span> last week</span></h2>
+                                </div>
+                            </div>
+                            <div id="sparklinebar4"></div>
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-3 -->
+
+                <!-- Start::row-4 -->
+                <div class="row">
+                    <div class="col-xl-3 col-md-12 col-lg-6">
+                        <div class="card custom-card overflow-hidden">
+                            <div class="card-body pb-0">
+                                <div>
+                                    <p class=" mb-0">BTC / USDT</p>
+                                    <h3 class="mb-1 fw-semibold">$10513</h3>
+                                </div>
+                            </div>
+                            <div id="CryptoChart"></div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-12 col-lg-6">
+                        <div class="card custom-card overflow-hidden">
+                            <div class="card-body pb-0">
+                                <div>
+                                    <p class=" mb-0">XEM / USDT</p>
+                                    <h3 class="mb-1 fw-semibold">$966</h3>
+                                </div>
+                            </div>
+                            <div id="CryptoChart1"></div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-12 col-lg-6">
+                        <div class="card custom-card overflow-hidden">
+                            <div class="card-body pb-0">
+                                <div>
+                                    <p class=" mb-0">XRP / USDT</p>
+                                    <h3 class="mb-1 fw-semibold">$7,349</h3>
+                                </div>
+                            </div>
+                            <div id="CryptoChart2"></div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-12 col-lg-6">
+                        <div class="card custom-card overflow-hidden">
+                            <div class="card-body pb-0">
+                                <div>
+                                    <p class=" mb-0">NEO / USDT</p>
+                                    <h3 class="mb-1 fw-semibold">$5,563</h3>
+                                </div>
+                            </div>
+                            <div id="CryptoChart3"></div>
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-4 -->
+
+                <!-- Start::row-5 -->
+                <div class="row">
+                    <div class="col-xl-4 col-sm-12">
+                        <div class="card text-center custom-card">
+                            <div class="widget-line mt-4">
+                                <p class="mb-2">Shares</p>
+                                <h2 class="fw-semibold">1452</h2>
+                            </div>
+                            <div class="chart-circle">
+                                <div id="shares" class="mx-auto">
+                                </div>
+                                <div class="chart-circle-value fs"><i class="fe fe-mail text-primary"></i></div>
+                            </div>
+                            <ul class="widget-line-list mb-4 ps-2 mt-3">
+                                <li class="border-end">45% <br><span class="text-success"><i class="fa-regular fa-thumbs-up"></i> Positive</span></li>
+                                <li>6% <br><span class="text-danger"><i class="fa-regular fa-thumbs-down"></i> Negative</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-sm-12 p-l-0 p-r-0">
+                        <div class="card text-center custom-card">
+                            <div class="widget-line mt-4">
+                                <p class="mb-2">Projects</p>
+                                <h2 class="fw-semibold">3265</h2>
+                            </div>
+                            <div class="chart-circle">
+                                <div id="projects" class="mx-auto">
+                                </div>
+                                <div class="chart-circle-value fs"><i class="fe fe-life-buoy text-danger"></i></div>
+                            </div>
+                            <ul class="widget-line-list mb-4 ps-2 mt-3">
+                                <li class="border-end">55% <br><span class="text-success"><i class="fa-regular fa-thumbs-up"></i> Positive</span></li>
+                                <li>3% <br><span class="text-danger"><i class="fa-regular fa-thumbs-down"></i> Negative</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-sm-12 p-l-0 p-r-0">
+                        <div class="card text-center custom-card">
+                            <div class="widget-line mt-4">
+                                <p class="mb-2">Projects</p>
+                                <h2 class="fw-semibold">3265</h2>
+                            </div>
+                            <div class="chart-circle">
+                                <div id="users111" class="mx-auto">
+                                </div>
+                                <div class="chart-circle-value fs"><i class="fe fe-tag text-success"></i></div>
+                            </div>
+                            <ul class="widget-line-list mb-4 ps-2 mt-3">
+                                <li class="border-end">55% <br><span class="text-success"><i class="fa-regular fa-thumbs-up"></i> Positive</span></li>
+                                <li>3% <br><span class="text-danger"><i class="fa-regular fa-thumbs-down"></i> Negative</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-5 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/notificationbar.html")
+        @SPK@include("partials/change-password-modal.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    <!-- Apex Charts JS -->
+    <script src="../assets/libs/apexcharts/apexcharts.min.js"></script>
+
+    <!-- Widget-2 JS -->
+    <script src="../assets/js/widget-2.js"></script>
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>
