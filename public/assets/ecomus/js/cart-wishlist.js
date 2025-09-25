@@ -73,26 +73,32 @@ class CartWishlistManager {
             const response = await fetch('/cart/count');
             const data = await response.json();
             
-            // Update all cart count elements - specifically target the cart count badge
-            const cartCountElements = document.querySelectorAll('#cart-count, .cart-count, .count-box');
-            cartCountElements.forEach(element => {
+            // Update cart count
+            const cartCountElement = document.getElementById('cart-count');
+            if (cartCountElement) {
                 const count = data.count || 0;
-                element.textContent = count;
+                cartCountElement.textContent = count;
                 
-                // Show badge if there are items, hide if empty
+                // Show/hide badge based on count
                 if (count > 0) {
-                    element.style.display = 'flex';
-                    element.classList.add('has-items');
+                    cartCountElement.style.display = 'inline-block';
+                    cartCountElement.classList.add('has-items');
                 } else {
-                    element.textContent = '0';
-                    element.style.display = 'flex'; // Still show 0
-                    element.classList.remove('has-items');
+                    cartCountElement.style.display = 'none';
+                    cartCountElement.classList.remove('has-items');
                 }
-            });
+            }
             
             console.log('Cart count updated:', data.count);
         } catch (error) {
             console.error('Error loading cart count:', error);
+            // Set default to 0 and hide if cart route doesn't exist
+            const cartCountElement = document.getElementById('cart-count');
+            if (cartCountElement) {
+                cartCountElement.textContent = '0';
+                cartCountElement.style.display = 'none';
+                cartCountElement.classList.remove('has-items');
+            }
         }
     }
 
@@ -107,13 +113,12 @@ class CartWishlistManager {
                 const count = data.count || 0;
                 element.textContent = count;
                 
-                // Show badge if there are items, hide if empty  
+                // Show/hide badge based on count
                 if (count > 0) {
-                    element.style.display = 'flex';
+                    element.style.display = 'inline-block';
                     element.classList.add('has-items');
                 } else {
-                    element.textContent = '0';
-                    element.style.display = 'flex'; // Still show 0
+                    element.style.display = 'none';
                     element.classList.remove('has-items');
                 }
             });
@@ -121,11 +126,11 @@ class CartWishlistManager {
             console.log('Wishlist count updated:', data.count);
         } catch (error) {
             console.error('Error loading wishlist count:', error);
-            // Set default to 0 if wishlist route doesn't exist
+            // Set default to 0 and hide if wishlist route doesn't exist
             const wishlistCountElements = document.querySelectorAll('#wishlist-count, .wishlist-count');
             wishlistCountElements.forEach(element => {
                 element.textContent = '0';
-                element.style.display = 'flex';
+                element.style.display = 'none';
                 element.classList.remove('has-items');
             });
         }
@@ -328,15 +333,13 @@ class CartWishlistManager {
         const originalClass = heartIcon?.className;
 
         try {
-            const response = await fetch('/wishlist/toggle', {
+            const response = await fetch(`/wishlist/toggle/${productId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': this.csrfToken
-                },
-                body: JSON.stringify({
-                    product_id: productId
-                })
+                    'X-CSRF-TOKEN': this.csrfToken,
+                    'Accept': 'application/json'
+                }
             });
 
             const data = await response.json();

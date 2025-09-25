@@ -668,6 +668,17 @@ Route::post('/cart/add', function (Request $request) {
     
     session()->put('cart', $cart);
     
+    // Calculate cart count for response
+    $cartCount = array_sum(array_column($cart, 'quantity'));
+    
+    if ($request->expectsJson()) {
+        return response()->json([
+            'success' => true, 
+            'message' => 'Product added to cart',
+            'cartCount' => $cartCount
+        ]);
+    }
+    
     return response()->json(['success' => true, 'message' => 'Product added to cart']);
 })->name('cart.add');
 
@@ -832,6 +843,7 @@ Route::post('/wishlist/toggle', function (Request $request) {
         'count' => count($wishlist)
     ]);
 })->name('wishlist.toggle');
+Route::post('/wishlist/toggle/{id}', [WishlistController::class, 'toggle'])->name('wishlist.toggle.id');
 Route::post('/wishlist/remove', [WishlistController::class, 'remove'])->name('wishlist.remove');
 Route::post('/wishlist/clear', [WishlistController::class, 'clear'])->name('wishlist.clear');
 Route::get('/wishlist/count', function () {

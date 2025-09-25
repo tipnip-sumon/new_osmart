@@ -31,6 +31,17 @@
 
     <!-- Additional CSS -->
     @stack('styles')
+    
+    <style>
+        /* Count box styling */
+        .count-box {
+            display: none; /* Hide by default, will be shown by JS if count > 0 */
+        }
+        
+        .count-box.has-items {
+            display: inline-block !important;
+        }
+    </style>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="{{ asset('manifest.json') }}">
@@ -230,6 +241,74 @@
         // Make currency symbol available to JavaScript
         window.currencySymbol = '{{ currencySymbol() }}';
         window.currencyText = '{{ currencyText() }}';
+        
+        // Initialize counts on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateWishlistCount();
+            updateCartCount();
+        });
+        
+        // Function to update wishlist count
+        function updateWishlistCount() {
+            fetch('{{ route('wishlist.count') }}', {
+                method: 'GET',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const wishlistCountElement = document.getElementById('wishlist-count');
+                if (wishlistCountElement && data.count !== undefined) {
+                    wishlistCountElement.textContent = data.count;
+                    // Show/hide count box based on count
+                    if (data.count > 0) {
+                        wishlistCountElement.style.display = 'inline-block';
+                        wishlistCountElement.classList.add('has-items');
+                    } else {
+                        wishlistCountElement.style.display = 'none';
+                        wishlistCountElement.classList.remove('has-items');
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error updating wishlist count:', error);
+            });
+        }
+        
+        // Function to update cart count
+        function updateCartCount() {
+            fetch('/cart/count', {
+                method: 'GET',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const cartCountElement = document.getElementById('cart-count');
+                if (cartCountElement && data.count !== undefined) {
+                    cartCountElement.textContent = data.count;
+                    // Show/hide count box based on count
+                    if (data.count > 0) {
+                        cartCountElement.style.display = 'inline-block';
+                        cartCountElement.classList.add('has-items');
+                    } else {
+                        cartCountElement.style.display = 'none';
+                        cartCountElement.classList.remove('has-items');
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error updating cart count:', error);
+            });
+        }
+        
+        // Make functions globally available
+        window.updateWishlistCount = updateWishlistCount;
+        window.updateCartCount = updateCartCount;
     </script>
 
     @stack('scripts')

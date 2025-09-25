@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Wishlist;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class WishlistController extends Controller
 {
@@ -26,7 +27,7 @@ class WishlistController extends Controller
             $products = Product::whereIn('id', $wishlistIds)->get();
         }
 
-        return view('wishlist.grid', compact('products'));
+        return view('wishlist.wishlist-ecomus', compact('products'));
     }
 
     /**
