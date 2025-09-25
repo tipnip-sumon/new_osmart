@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+
+    <link rel="icon" href="assets/img/logo-small.png">
+
+    <title>Suha - Multipurpose Ecommerce Mobile HTML Template | Documentation</title>
+
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="assets/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="header-area shadow-sm border-bottom bg-white">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-6">
+                    <div class="logo">
+                        <img src="assets/img/logo-small.png" alt="">
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="buy-now-btn text-end">
+                        <a href="https://themeforest.net/item/suha-multipurpose-ecommerce-mobile-template/25294162"
+                            target="_blank" class="btn rounded-3 btn-dark fz-14">Buy Again</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-4 col-lg-3 d-none d-md-block">
+                    <div id="sticker" class="sidenav-wrap bg-white border shadow-sm p-4 rounded-3">
+                        <nav id="onePageNav">
+                            <ul class="ps-0 nav flex-column">
+                                <li><a href="#introduction">Introduction</a></li>
+                                <li><a href="#fileStructure">Files Structure</a></li>
+                                <li><a href="#developementSetup">Development Setup</a>
+                                    <ul class="ps-4">
+                                        <li><a href="#codeEditor">Code Editor</a></li>
+                                        <li><a href="#installation">Installation &amp; Run Gulp</a></li>
+                                        <li><a href="#knowFileType">Know file type </a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#customize">Customize</a>
+                                    <ul class="ps-4">
+                                        <li><a href="#beforeStarted">Before Started</a></li>
+                                        <li><a href="#scssFiles">SCSS &amp; PUG files</a></li>
+                                        <li><a href="#basicCustomization">Basic Customization</a></li>
+                                        <li><a href="#pwa">Customize PWA</a></li>
+                                        <li><a href="#darkMode">Dark Mode</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#compliedFiles">Customize with Complied Files</a></li>
+                                <li><a href="#3rdParty">Third Party Plugins Activation</a></li>
+                                <li><a class="mb-0" href="#credits">Credits &amp; Changelog</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-8 col-lg-9">
+                    <h2 class="mb-5 display-5 fw-bold big-title">Development Guide</h2>
+
+                    <!-- Intro -->
+                    <div class="card border-0 mb-5 bg-light" id="introduction">
+                        <div class="card-body">
+                            <span class="badge bg-primary mb-2">Documentation - v1.2</span>
+                            <h3 class="mb-4 fw-bold">Suha - Multipurpose Ecommerce Mobile HTML Template</h3>
+
+                            <div class="alert alert-warning mb-0 border-0 border-start border-warning border-5">
+                                <strong class="mb-2 d-inline-block">The Suha is a Static HTML5 Template:</strong> <br>
+                                We do not provide any documentation or email support on how to integrate with any CMS
+                                (such as WordPress, Joomla, etc.) or frameworks (such as Angular, Vue, React, etc.).
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Help -->
+                    <div class="card border-0 mb-5 bg-light">
+                        <div class="card-body">
+                            <h3 class="mb-3 fw-bold">Get Help</h3>
+                            <p>Thank you for purchased our item(s). If you have any questions that are beyond the scope
+                                of this help file, please feel free to email via support page <a class="fw-bold"
+                                    href="https://themeforest.net/item/suha-multipurpose-ecommerce-mobile-template/25294162/support">here</a>.
+                                Thank you so much!</p>
+
+                            <div class="alert alert-info mb-0 border-0 border-start border-info border-5">
+                                In some cases, you may have to wait 2 working days to get an email answer. However, we
+                                will try to answer you as soon as possible. Replies are sometimes delayed due to
+                                multiple emails and time zone variations.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-top w-100 mb-5"></div>
+
+                    <!-- File Structure -->
+                    <div class="card border-0 mb-5 bg-light" id="fileStructure">
+                        <div class="card-body">
+                            <h3 class="mb-3 fw-bold">Files Structure</h3>
+
+                            <ul class="ps-0 files-structure">
+                                <li><i class="fa fa-folder"></i> Suha
+                                    <ul class="ps-4">
+                                        <li><i class="fa fa-folder"></i> dist <span>(compiled distribution files)</span>
+                                        </li>
+                                        <li class="text-muted"><i class="fa fa-folder"></i> node_modules <span>(npm
+                                                dependencies files. It is NOT included in the downloaded file, this
+                                                folder will be installed automatically when you install npm).</span>
+                                        </li>
+                                        <li><i class="fa fa-folder"></i> src <span>(all source files)</span>
+                                            <ul class="ps-4">
+                                                <li><i class="fa fa-folder"></i> pug <span>(all .pug files into this
+                                                        folder)</span></li>
+                                                <li><i class="fa fa-folder"></i> scss <span>(all .scss files into this
+                                                        folder)</span></li>
+                                            </ul>
+                                        </li>
+                                        <li><i class="fa fa-folder"></i> static <span>(all static assets)</span>
+                                            <ul>
+                                                <li><i class="fa fa-folder"></i> css <span>(all static css files)</span>
+                                                </li>
+                                                <li><i class="fa fa-folder"></i> fonts <span>(all static fonts
+                                                        files)</span></li>
+                                                <li><i class="fa fa-folder"></i> img <span>(all images)</span></li>
+                                                <li><i class="fa fa-folder"></i> js <span>(all static .js files)</span>
+                                                </li>
+                                                <li><i class="fa fa-file"></i> manifest.json <span>(manifest file for
+                                                        PWA functions)</span></li>
+                                                <li><i class="fa fa-file"></i> service-worker.js <span>(service worker
+                                                        file for PWA functions)</span></li>
+                                            </ul>
+                                        </li>
+                                        <li><i class="fa fa-file"></i> .browerslistrc</li>
+                                        <li><i class="fa fa-file"></i> changelog.txt</li>
+                                        <li><i class="fa fa-file"></i> gulpfile.js</li>
+                                        <li><i class="fa fa-file"></i> license</li>
+                                        <li><i class="fa fa-file"></i> package.json</li>
+                                        <li class="text-muted"><i class="fa fa-file"></i> package-lock.json <span>(this
+                                                file NOT included in the downloaded file, this file will be
+                                                automatically created when you run gulp)</span></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="border-top w-100 mb-5" id="developementSetup"></div>
+
+                    <!-- Code Editor -->
+                    <div class="card border-0 mb-5 bg-light" id="codeEditor">
+                        <div class="card-body">
+                            <h3 class="mb-3 fw-bold">Code Editor</h3>
+
+                            <p>There are many code editors for web code editing. You can use whatever you want. We
+                                recommend that you use <strong>Visual Studio Code</strong> . Because - this template is
+                                coded using it.</p>
+
+                            <ul class="ps-0">
+                                <li><a class="fz-14" href="http://brackets.io"><i class="fa fa-check"></i> Brackets</a>
+                                </li>
+                                <li><a class="fz-14" href="https://www.sublimetext.com"><i class="fa fa-check"></i>
+                                        Sublime Text</a>
+                                </li>
+                                <li><a class="fz-14" href="https://code.visualstudio.com"><i class="fa fa-check"></i>
+                                        Visual Studio
+                                        Code <span class="badge bg-success">Recommend</span></a></li>
+                                <li><a class="fz-14" href="https://atom.io"><i class="fa fa-check"></i> Atom</a></li>
+                                <li><a class="fz-14" href="https://notepad-plus-plus.org"><i class="fa fa-check"></i>
+                                        Notepad++</a>
+                                </li>
+                                <li><a class="fz-14" href="https://www.jetbrains.com/phpstorm/"><i
+                                            class="fa fa-check"></i> Php
+                                        Storm</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Installation -->
+                    <div class="card border-0 mb-5 bg-light" id="installation">
+                        <div class="card-body">
+                            <h3 class="mb-3 fw-bold">Installation</h3>
+
+                            <div class="alert alert-warning border-0 border-start border-warning border-5">It has a
+                                directory (suha/dist) of compiled files. If you want to edit without source files
+                                (plain HTML/CSS/JS files), you do not need to install anything on your machine.</div>
+
+                            <p>You need to install package files/dependencies for this project if you want to customize
+                                it. To do this, you must have node and npm installed on your computer. Installation
+                                guide of
+                                the node can be found <a href="https://nodejs.org/en/" target="_blank"
+                                    class="text-primary">here</a>.</p>
+                            <p>As npm comes bundled with a node, a separate installation of npm is NOT needed. If you
+                                have installed them, just go to the root folder and run the following command in your
+                                command
+                                prompt or terminal.</p>
+                            <div class="alert alert-light mb-0 border-0 border-start border-primary border-5 shadow-sm">
+                                npm install</div>
+                        </div>
+                    </div>
+
+                    <!-- Gulp -->
+                    <div class="card border-0 mb-5 bg-light">
+                        <div class="card-body">
+                            <h3 class="mb-3 fw-bold">Run Gulp</h3>
+                            <p>Run a command to run Gulp. When you run this command, it also watching at all source and
+                                static files. So, you don't need to run another command to watching these.</p>
+                            <div class="alert alert-light border-0 border-start border-primary border-5 shadow-sm">
+                                npm run dev</div>
+                            <p>If you want, just watch the source files. You can run another individual command.</p>
+                            <div class="alert alert-light border-0 border-start border-primary border-5 shadow-sm">
+                                npm run dev watch</div>
+                        </div>
+                    </div>
+
+                    <!-- File Types -->
+                    <div class="card border-0 mb-5 bg-light" id="knowFileType">
+                        <div class="card-body">
+                            <h3 class="mb-3 fw-bold">Know the file type</h3>
+
+                            <h6 class="fw-bold">Source files:</h6>
+                            <p class="text-muted mb-2 d-block">Source files are files that are processed with template
+                                build tools to make the browser readable. E.g. SCSS &amp; PUG files always source files.
+                            </p>
+                            <p class="fz-14 d-inline-block mb-4">Files location: <code
+                                    class="ms-2 bg-white rounded-3 px-2 fz-14 py-1 shadow-sm">suha > "src"
+                                    folder</code></p>
+
+                            <h6 class="fw-bold">Compiled files:</h6>
+                            <p class="text-muted mb-2 d-block">Compiled files are files generated as a result of running
+                                a compilation process in the source files. E.g. CSS &amp; standard HTML files always
+                                compiled files.</p>
+                            <p class="fz-14 d-inline-block mb-4">Files location: <code
+                                    class="ms-2 bg-white rounded-3 px-2 fz-14 py-1 shadow-sm">suha > "dist"
+                                    folder</code></p>
+
+                            <h6 class="fw-bold">Static files:</h6>
+                            <p class="text-muted mb-2">Static files are ones that aren’t processed or generated. E.g.
+                                Images, Web Icon Fonts and standard HTML are static files.</p>
+                            <p class="fz-14 d-inline-block mb-0">Files location:
+                                <code class="ms-2 bg-white rounded-3 px-2 fz-14 py-1 shadow-sm">suha > "static"
+                                    folder</code></p>
+                        </div>
+                    </div>
+
+                    <div class="border-top w-100 mb-5" id="customize"></div>
+
+                    <!-- Before Started -->
+                    <div class="card border-0 mb-5 bg-light" id="beforeStarted">
+                        <div class="card-body">
+                            <h3 class="mb-3 fw-bold">Before getting started you must read this</h3>
+
+                            <div class="alert alert-light border-0 border-start border-primary border-5 shadow-sm">
+                                <strong class="text-dark mb-1 d-inline-block">Before getting started with a PWA ready
+                                    template, you need to know a very simple thing!</strong> <br> PWA (Progressive Web
+                                App) mainly works with the <strong>"service-worker.js"</strong> file. This file cache
+                                data in your browser for smoothly viewing this website when you're offline.</div>
+
+                            <div class="alert alert-light border-0 border-start border-primary border-5 shadow-sm">
+                                <strong class="text-dark mb-1 d-inline-block">What is the problem with that?</strong>
+                                <br> When you edited the files & script and save it, your changes won't take effect
+                                until clear your browser cache.</div>
+
+                            <div class="alert alert-light border-0 border-start border-primary border-5 shadow-sm">
+                                <strong class="text-dark mb-1 d-inline-block">How to solve this problem?</strong> <br>
+                                Please disconnect "service-worker.js" file, when you are developing your site. Find
+                                "service-worker.js" file in <code class="bg-light">"static" folder >
+                                    "service-worker.js". </code> Comment on all codes or remove this file another
+                                location.
+                            </div>
+
+                            <div class="btn-group-wrap mb-3">
+                                <a class="text-decoration-underline fz-14 me-3" href="https://prnt.sc/tuwnua"
+                                    target="_blank"><i class="fa fa-external-link"></i> View Screenshot 1</a>
+                                <a class="text-decoration-underline fz-14" href="https://prnt.sc/tuwo66"
+                                    target="_blank"><i class="fa fa-external-link"></i> View Screenshot 2</a>
+                            </div>
+
+                            <div
+                                class="alert alert-warning mb-0 border-0 border-start border-warning border-5 shadow-sm d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                                    class="bi bi-lightbulb me-3" viewBox="0 0 16 16">
+                                    <path
+                                        d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1z" />
+                                </svg>
+                                After the site has finished developing, when you are ready to upload your website to the
+                                server, then connect this file again "service-worker.js" to your project.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SCSS files -->
+                    <div class="card border-0 mb-5 bg-light" id="scssFiles">
+                        <div class="card-body">
+                            <h3 class="mb-3 fw-bold">SCSS files</h3>
+                            <p>Sass stands for Syntactically Awesome Stylesheet. Sass is the most mature, stable, and
+                                powerful professional grade CSS extension language in the world. It's gives you
+                                variables, nesting, partials, modules, mixins, extend/inheritance &amp; operators, etc.
+                            </p>
+                            <a class="text-decoration-underline mb-4 d-block fz-14" href="https://sass-lang.com"
+                                target="_blank"><i class="fa fa-external-link"></i> Visit the official website to learn
+                                the details.</a>
+
+                            <table class="table-files-structure table mb-0">
+                                <caption class="caption-top">SCSS Files Layout</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">File</th>
+                                        <th scope="col">Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>style.scss <span class="badge bg-success">core .scss file</span></th>
+                                        <td>Core stylesheet</td>
+                                    </tr>
+                                    <tr>
+                                        <th>_reboot.scss</th>
+                                        <td>All style reboot</td>
+                                    </tr>
+                                    <tr>
+                                        <th>_preloader.scss</th>
+                                        <td>Preloader CSS</td>
+                                    </tr>
+                                    <tr>
+                                        <th>_shortcode.scss</th>
+                                        <td>All shortcode CSS</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>_demo.scss</th>
+                                        <td>Demo page CSS</td>
+                                    </tr>
+                                    <tr>
+                                        <th>_miscellaneous.scss</th>
+                                        <td>Miscellaneous CSS</td>
+                                    </tr>
+                                    <tr>
+                                        <th>_header.scss</th>
+                                        <td>Header css</td>
+                                    </tr>
+                                    <tr>
+                                        <th>_footer.scss</th>
+                                        <td>Footer css</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>_register.scss</th>
+                                        <td>Login/Register page CSS</td>
+                                    </tr>
+                                    <tr>
+                                        <th>_sidenav.scss</th>
+                                        <td>Sidenav CSS</td>
+                                    </tr>
+                                    <tr>
+                                        <th>_hero.scss</th>
+                                        <td>Hero area CSS</td>
+                                    </tr>
+                                    <tr>
+                                        <th>_chat.scss</th>
+                                        <td>Chat page CSS</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>_settings.scss</th>
+                                        <td>Settings CSS</td>
+                                    </tr>
+                                    <tr>
+                                        <th>_catagory.scss</th>
+                                        <td>Catagories CSS</td>
+                                    </tr>
+                                    <tr>
+                                        <th>_flash-sale.scss</th>
+                                        <td>Flash sale CSS</td>
+                                    </tr>
+                                    <tr>
+                                        <th>_product.scss</th>
+                                        <td>All product CSS</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>_horizontal-product.scss</th>
+                                        <td>Horizontal product CSS</td>
+                                    </tr>
+                                    <tr>
+                                        <th>_featured-product.scss</th>
+                                        <td>Featured product CSS</td>
+                                    </tr>
+                                    <tr>
+                                        <th>_product-details.scss</th>
+                                        <td>Product details CSS</td>
+                                    </tr>
+                                    <tr>
+                                        <th>_cart.scss</th>
+                                        <td>Cart CSS</td>
+                                    </tr>
+                                    <tr>
+                                        <th>_order.scss</th>
+                                        <td>Order status CSS</td>
+                                    </tr>
+                                    <tr>
+                                        <th>_accordion.scss</th>
+                                        <td>Accordion CSS</td>
+                                    </tr>
+                                    <tr>
+                                        <th>_faq.scss</th>
+                                        <td>FAQ CSS</td>
+                                    </tr>
+                                    <tr>
+                                        <th>_blog.scss</th>
+                                        <td>Blog CSS</td>
+                                    </tr>
+                                    <tr>
+                                        <th>_contact.scss</th>
+                                        <td>Contact CSS</td>
+                                    </tr>
+                                    <tr>
+                                        <th>_cta.scss</th>
+                                        <td>CTA CSS</td>
+                                    </tr>
+                                    <tr>
+                                        <th>_profile.scss</th>
+                                        <td>Profile CSS</td>
+                                    </tr>
+                                    <tr>
+                                        <th>_notification.scss</th>
+                                        <td>Notification CSS</td>
+                                    </tr>
+                                    <tr>
+                                        <th>_vendor.scss</th>
+                                        <td>Vendor pages CSS</td>
+                                    </tr>
+                                    <tr>
+                                        <th>_dark.scss <span class="badge bg-success">dark mode</span></th>
+                                        <td>Dark mode CSS</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- PUG files -->
+                    <div class="card border-0 mb-5 bg-light">
+                        <div class="card-body">
+                            <h3 class="mb-3 fw-bold">PUG files</h3>
+                            <p>With Pug you can easily write HTML code. You have many powerful features at Pug. It's has
+                                powerful features like conditions, loops, includes, mixins. When you write HTML code in
+                                Pug, it is processed by the template engine into standard HTML code. So that web
+                                browsers can understand the code.</p>
+                            <a class="text-decoration-underline mb-4 d-block fz-14"
+                                href="https://pugjs.org/api/getting-started.html" target="_blank"><i
+                                    class="fa fa-external-link"></i> Visit the official website to learn the
+                                details.</a>
+
+                            <table class="table-files-structure table mb-0">
+                                <caption class="caption-top">PUG Files Layout</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">File</th>
+                                        <th scope="col">Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>inc/collection.pug</th>
+                                        <td>Collection carousel code</td>
+                                    </tr>
+                                    <tr>
+                                        <th>inc/coupon.pug</th>
+                                        <td>Coupon code</td>
+                                    </tr>
+                                    <tr>
+                                        <th>inc/cta.pug</th>
+                                        <td>Call to action code</td>
+                                    </tr>
+                                    <tr>
+                                        <th>inc/featured-product.pug</th>
+                                        <td>Featured product code</td>
+                                    </tr>
+                                    <tr>
+                                        <th>inc/filter.pug</th>
+                                        <td>Filter sidenav code</td>
+                                    </tr>
+                                    <tr>
+                                        <th>inc/footer.pug</th>
+                                        <td>Footer all plugins</td>
+                                    </tr>
+                                    <tr>
+                                        <th>inc/footer-nav.pug</th>
+                                        <td>Footer navigation code</td>
+                                    </tr>
+                                    <tr>
+                                        <th>inc/footer-no-internet.pug</th>
+                                        <td>No internet page footer code</td>
+                                    </tr>
+                                    <tr>
+                                        <th>inc/footer-otp.pug</th>
+                                        <td>OTP page footer code</td>
+                                    </tr>
+                                    <tr>
+                                        <th>inc/head.pug</th>
+                                        <td>Head code</td>
+                                    </tr>
+                                    <tr>
+                                        <th>inc/header.pug</th>
+                                        <td>Header code</td>
+                                    </tr>
+                                    <tr>
+                                        <th>inc/hero.pug</th>
+                                        <td>Hero carousel code</td>
+                                    </tr>
+                                    <tr>
+                                        <th>inc/loader.pug</th>
+                                        <td>Pre-loader code</td>
+                                    </tr>
+                                    <tr>
+                                        <th>inc/sidenav.pug</th>
+                                        <td>Sidenav code</td>
+                                    </tr>
+                                    <tr>
+                                        <th>inc/video-cta.pug</th>
+                                        <td>Video Call to action code</td>
+                                    </tr>
+                                    <tr>
+                                        <th>inc/weekly-product.pug</th>
+                                        <td>Weekly product code</td>
+                                    </tr>
+                                    <tr>
+                                        <th>*.pug <span class="badge bg-primary">All HTML Pages</span></th>
+                                        <td>All pages code</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Title and Favicon -->
+                    <div class="card border-0 mb-5 bg-light" id="basicCustomization">
+                        <div class="card-body">
+                            <h3 class="mb-3 fw-bold">How to edit the <span class="text-primary">Title &amp;
+                                    Favicon?</span></h3>
+                            <p class="mb-2">Open the mail file (suha) in your code editor. Then open <code
+                                    class="bg-white px-2 py-1 shadow-sm rounded-3">head.pug</code> file &amp; customize
+                                as your desire.</p>
+                            <p>File location: <code class="bg-white px-2 py-1 shadow-sm rounded-3">suha > src > pug >
+                                    inc > head.pug</code></p>
+                            <img class="img-thumbnail mb-3" src="assets/img/title.png" alt="">
+
+                            <h5 class="mb-3">Customize with Complied Files</h5>
+                            <p class="mb-2">Open any <code class="bg-white px-2 py-1 shadow-sm rounded-3">*.html</code>
+                                file &amp; customize as your desire.</p>
+                            <p>File location: <code class="bg-white px-2 py-1 shadow-sm rounded-3">suha > dist >
+                                    *.html</code></p>
+
+                            <div class="alert alert-primary mb-0 border-0 border-start border-primary border-5">
+                                Remember: The page you will edit, the change will be only that page. So, you need to
+                                edit all the HTML files.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Logo -->
+                    <div class="card border-0 mb-5 bg-light">
+                        <div class="card-body">
+                            <h3 class="mb-3 fw-bold">How to edit the <span class="text-primary">Brand Logo?</span></h3>
+                            <p class="mb-2">Open the mail file (suha) in your code editor. Then open <code
+                                    class="bg-white px-2 py-1 shadow-sm rounded-3">header.pug</code> file
+                                &amp; customize as your desire.</p>
+                            <p>File location: <code class="bg-white px-2 py-1 shadow-sm rounded-3">suha > src > pug >
+                                    inc > header.pug</code></p>
+                            <img class="img-thumbnail mb-3" src="assets/img/logo.png" alt="">
+
+                            <h5 class="mb-3">Customize with Complied Files</h5>
+                            <p class="mb-2">Open any <code class="bg-white px-2 py-1 shadow-sm rounded-3">*.html</code>
+                                file &amp; customize as your desire.</p>
+                            <p>File location: <code class="bg-white px-2 py-1 shadow-sm rounded-3">suha > dist >
+                                    *.html</code></p>
+
+                            <div class="alert alert-primary mb-0 border-0 border-start border-primary border-5">
+                                Remember: The page you will edit, the change will be only that page. So, you need to
+                                edit all the HTML files.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Side Navbar -->
+                    <div class="card border-0 mb-5 bg-light">
+                        <div class="card-body">
+                            <h3 class="mb-3 fw-bold">How to edit the <span class="text-primary">Side Navbar?</span></h3>
+                            <p class="mb-2">Open the mail file (suha) in your code editor. Then open <code
+                                    class="bg-white px-2 py-1 shadow-sm rounded-3">sidenav.pug</code>
+                                file &amp; customize as your desire.</p>
+                            <p>File location: <code class="bg-white px-2 py-1 shadow-sm rounded-3">suha > src > pug >
+                                    inc > sidenav.pug</code></p>
+                            <img class="img-thumbnail mb-3" src="assets/img/sidenav.png" alt="">
+
+                            <h5 class="mb-3">Customize with Complied Files</h5>
+                            <p class="mb-2">Open any <code class="bg-white px-2 py-1 shadow-sm rounded-3">*.html</code>
+                                file &amp; customize as your desire.</p>
+                            <p>File location: <code class="bg-white px-2 py-1 shadow-sm rounded-3">suha > dist >
+                                    *.html</code></p>
+                            <div class="alert alert-primary mb-0 border-0 border-start border-primary border-5">
+                                Remember: The page you will edit, the change will be only that page. So, you need to
+                                edit all the HTML files.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer Nav -->
+                    <div class="card border-0 mb-5 bg-light">
+                        <div class="card-body">
+                            <h3 class="mb-3 fw-bold">How to edit the <span class="text-primary">Footer Nav?</span></h3>
+                            <p class="mb-2">Open the mail file (suha) in your code editor. Then open <code
+                                    class="bg-white px-2 py-1 shadow-sm rounded-3">footer-nav.pug</code> file &amp;
+                                customize as your desire.</p>
+                            <p>File location: <code class="bg-white px-2 py-1 shadow-sm rounded-3">suha > src > pug >
+                                    inc > footer-nav.pug</code></p>
+                            <img class="img-thumbnail mb-3" src="assets/img/footer-nav.png" alt="">
+
+                            <h5 class="mb-3">Customize with Complied Files</h5>
+                            <p class="mb-2">Open any <code class="bg-white px-2 py-1 shadow-sm rounded-3">*.html</code>
+                                file &amp; customize as your desire.</p>
+                            <p>File location: <code class="bg-white px-2 py-1 shadow-sm rounded-3">suha > dist >
+                                    *.html</code></p>
+                            <div class="alert alert-primary mb-0 border-0 border-start border-primary border-5">
+                                Remember: The page you will edit, the change will be only that page. So, you need to
+                                edit all the HTML files.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Colors -->
+                    <div class="card border-0 mb-5 bg-light">
+                        <div class="card-body">
+                            <h3 class="mb-3 fw-bold">How to edit the template <span class="text-primary">Colors?</span>
+                            </h3>
+                            <p class="mb-2">Open the mail file (suha) in your code editor. Then open <code
+                                    class="bg-white px-2 py-1 shadow-sm rounded-3">_variables.scss</code> file &amp;
+                                customize as your desire.</p>
+                            <p>File location: <code class="bg-white px-2 py-1 shadow-sm rounded-3">suha > src > scss >
+                                    _variables.scss</code></p>
+                            <img class="img-thumbnail mb-3" src="assets/img/color.png" alt="">
+
+                            <h5 class="mb-3">Customize with Complied Files</h5>
+                            <p class="mb-2">Open <code class="bg-white px-2 py-1 shadow-sm rounded-3">style.css</code>
+                                file &amp; customize as your desire.</p>
+                            <p class="mb-0">File location: <code class="bg-white px-2 py-1 shadow-sm rounded-3">suha >
+                                    dist > style.css</code></p>
+                        </div>
+                    </div>
+
+                    <!-- PWA -->
+                    <div class="card border-0 mb-5 bg-light" id="pwa">
+                        <div class="card-body">
+                            <h3 class="mb-3 fw-bold">Progressive Web Apps (PWA)</h3>
+                            <p class="mb-4">A progressive web application (PWA) is a type of application software
+                                delivered through the web, built using common web technologies including HTML, CSS and
+                                JavaScript. It is intended to work on any platform that uses a standards-compliant
+                                browser, including both desktop and mobile devices. </p>
+
+                            <div class="alert alert-warning border-0 border-start border-warning border-5">
+                                Remember: PWA will work if you have a server that serves HTPPS.
+                            </div>
+
+                            <h5 class="mb-3">Change the <span class="text-primary">Name, Start URL, Theme Color,
+                                    Catagories, Description &amp Icons:</span></h5>
+                            <p class="mb-2">Open <code
+                                    class="bg-white px-2 py-1 shadow-sm rounded-3">manifest.json</code> file &amp;
+                                customize as your desire.</p>
+
+                            <p>File location: <code class="bg-white px-2 py-1 shadow-sm rounded-3">suha > static >
+                                    manifest.json</code></p>
+                            <h6 class="mb-3">Customize with Complied Files</h6>
+                            <p class="mb-2">Open <code
+                                    class="bg-white px-2 py-1 shadow-sm rounded-3">manifest.json</code> file &amp;
+                                customize as your desire.</p>
+                            <p>File location: <code class="bg-white px-2 py-1 shadow-sm rounded-3">suha >
+                                    dist > manifest.json</code></p>
+                            <img class="img-thumbnail" src="assets/img/pwa.png" alt="">
+                        </div>
+                    </div>
+
+                    <!-- Dark Mode -->
+                    <div class="card border-0 mb-5 bg-light" id="darkMode">
+                        <div class="card-body">
+                            <h3 class="mb-3 fw-bold">Dark Mode</h3>
+                            <p class="mb-4">Dark mode are becoming very popular nowadays. So we have given
+                                dark mode in this template. If you want, you can use it as toggle switch mode or by
+                                default. Or, you can delete this.</p>
+
+                            <p class="mb-2">If you want to use it in default mode, use the following code
+                                in the <code>&lt;html&gt;</code> tag.</p>
+                            <code
+                                class="bg-white px-2 py-1 shadow-sm rounded-3 d-inline-block mb-3">data-theme="dark"</code>
+                            <img class="d-block img-thumbnail mb-3" src="assets/img/dark1.png" alt="">
+
+                            <p class="mb-2">If not, delete the Dark code and toggle switch code from the
+                                template.</p>
+                            <code class="bg-white px-2 py-1 shadow-sm rounded-3 d-inline-block">suha > src > scss
+                                > _dark.scss</code>
+                        </div>
+                    </div>
+
+                    <div class="border-top w-100 mb-5"></div>
+
+                    <!-- Customize with Complied Files -->
+                    <div class="card border-0 mb-5 bg-light" id="compliedFiles">
+                        <div class="card-body">
+                            <h3 class="mb-3 fw-bold">Customize with Complied Files</h3>
+                            <p class="mb-4">Working with compiled files is very easy. You don't need any build tools or
+                                local setup to edit the template. A folder (suha/dist) is already provided with the
+                                template. Open this folder and edit it as your desired.</p>
+
+                            <div class="alert alert-danger mb-0 border-0 border-start border-danger border-5">
+                                <div class="text-content">
+                                    <h6>Recompiling will overwrite your all changes!</h6>
+                                    <p class="mb-0">When you will customize with compile files, please do not run the
+                                        template build tools. If you run the template build tools again, all your
+                                        changes will be overwritten.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-top w-100 mb-5"></div>
+
+                    <!-- Third Party Plugins -->
+                    <div class="card border-0 mb-5 bg-light" id="3rdParty">
+                        <div class="card-body">
+                            <h3 class="mb-3 fw-bold">Third Party Plugins Activation</h3>
+                            <div class="table-responsive">
+                                <table class="table-files-structure table table-bordered mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Plugins Activation Code</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>Preloader Active Code</th>
+                                            <td class="bg-white">
+                                                <pre class="mb-0"><code>var suhaWindow = $(window);
+
+suhaWindow.on('load', function () {
+    $('#preloader').fadeOut('1000', function () {
+        $(this).remove();
+    });
+});
+</code></pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Magnific Popup<br>(jquery.magnific-popup.min.js)</th>
+                                            <td class="bg-white">
+                                                <pre class="mb-0"><code>&lt;!-- Image Gallery Activation --&gt;
+$('your_selector_name').magnificPopup({
+    type: 'image',
+    gallery: {
+        enabled: true
+    }
+});</code></pre>
+
+                                                <pre class="mb-0"><code>
+&lt;!-- Video Popup Activation --&gt;
+$('your_selector_name').magnificPopup({
+    type: 'iframe'
+});</code></pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Countdown<br>(jquery.countdown.min.js)</th>
+                                            <td class="bg-white">
+                                                <pre class="mb-0"><code>$('your_selector_name').countdown('YYYY/MM/DD', function (event) {
+    var $this = $(this).html(event.strftime(
+        '<span>%D</span> Days ' +
+        '<span>%H</span> Hour ' +
+        '<span>%M</span> Min ' +
+        '<span>%S</span> Sec'));
+});</code></pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Counter Up<br>(jquery.counterup.min.js)</th>
+                                            <td class="bg-white">
+                                                <pre class="mb-0"><code>$('your_selector_name').counterUp({
+    delay: 100,
+    time: 3000
+});</code></pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Password Strength<br>(jquery.passwordstrength.js)</th>
+                                            <td class="bg-white">
+                                                <pre class="mb-0"><code>$('your_selector_name').passwordStrength({
+    minimumChars: 8
+});</code></pre>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-top w-100 mb-5"></div>
+
+                    <!-- Credit -->
+                    <div class="card border-0 mb-5 bg-light" id="credits">
+                        <div class="card-body">
+                            <h3 class="mb-3 fw-bold">Credits</h3>
+
+                            <ul class="ps-0 credits-list">
+                                <li>Framework</li>
+                                <li><a href="https://getbootstrap.com"><i class="fa fa-external-link"></i> Bootstrap
+                                        5</a></li>
+                                <li><a href="http://jquery.com"><i class="fa fa-external-link"></i> jQuery</a></li>
+
+                                <li>Fonts &amp; Icons</li>
+                                <li><a href="https://icons.getbootstrap.com"><i class="fa fa-external-link"></i>
+                                        Bootstrap Icons</a></li>
+                                <li><a href="https://fonts.google.com"><i class="fa fa-external-link"></i> Google
+                                        Fonts</a></li>
+                                <li><a href="http://fontawesome.io/icons"><i class="fa fa-external-link"></i> Font
+                                        Awesome</a></li>
+
+                                <li>Images</li>
+                                <li><a href="https://unsplash.com"><i class="fa fa-external-link"></i> Unsplash</a></li>
+                                <li><a href="https://www.freepik.com"><i class="fa fa-external-link"></i> Freepik</a>
+                                </li>
+
+                                <ul class="ps-3 mb-3">
+                                    <li>
+                                        <a class="d-block fz-14" href="https://www.flaticon.com/free-icons/dress"
+                                            title="dress icons">Dress icons created by DinosoftLabs - Flaticon</a>
+                                    </li>
+                                    <li>
+                                        <a class="d-block fz-14" href="https://www.flaticon.com/free-icons/grocery"
+                                            title="grocery icons">Grocery icons created by Freepik - Flaticon</a>
+                                    </li>
+                                    <li>
+                                        <a class="d-block fz-14" href="https://www.flaticon.com/free-icons/dress"
+                                            title="dress icons">Dress icons created by SBTS2018 - Flaticon</a>
+                                    </li>
+                                    <li>
+                                        <a class="d-block fz-14" href="https://www.flaticon.com/free-icons/hygiene"
+                                            title="hygiene icons">Hygiene icons created by photo3idea_studio -
+                                            Flaticon</a>
+                                    </li>
+                                    <li>
+                                        <a class="d-block fz-14" href="https://www.flaticon.com/free-icons/sports"
+                                            title="sports icons">Sports icons created by Pause08 - Flaticon</a>
+                                    </li>
+                                    <li>
+                                        <a class="d-block fz-14" href="https://www.flaticon.com/free-icons/television"
+                                            title="television icons">Television icons created by Freepik - Flaticon</a>
+                                    </li>
+                                    <li>
+                                        <a class="d-block fz-14" href="https://www.flaticon.com/free-icons/tourism"
+                                            title="tourism icons">Tourism icons created by iconixar - Flaticon</a>
+                                    </li>
+                                    <li>
+                                        <a class="d-block fz-14" href="https://www.flaticon.com/free-icons/baby"
+                                            title="baby icons">Baby icons created by iconixar - Flaticon</a>
+                                    </li>
+                                    <li>
+                                        <a class="d-block fz-14" href="https://www.flaticon.com/free-icons/offer"
+                                            title="offer icons">Offer icons created by Freepik - Flaticon</a>
+                                    </li>
+
+                                    <li>
+                                        <a class="d-block fz-14" href="https://www.freepik.com/vectors/night-sea">Night
+                                            sea vector created by vectorpouch - www.freepik.com</a>
+                                    </li>
+                                </ul>
+
+                                <li>Plugins</li>
+                                <li><a href="https://owlcarousel2.github.io/OwlCarousel2"><i
+                                            class="fa fa-external-link"></i> Owl Carousel 2</a>
+                                </li>
+                                <li><a href="http://imagesloaded.desandro.com"><i class="fa fa-external-link"></i>
+                                        Images Loaded</a></li>
+                                <li><a href="https://github.com/dimsemenov/Magnific-Popup"><i
+                                            class="fa fa-external-link"></i> Magnific Popup</a>
+                                </li>
+                                <li><a href="https://github.com/bfintal/Counter-Up"><i class="fa fa-external-link"></i>
+                                        Counter Up</a></li>
+                                <li><a href="http://imakewebthings.com/waypoints"><i class="fa fa-external-link"></i>
+                                        Waypoints</a></li>
+                                <li><a href="https://jqueryui.com/easing"><i class="fa fa-external-link"></i> jQuery
+                                        Easing</a></li>
+                                <li><a href="http://daneden.me/animate"><i class="fa fa-external-link"></i> Animate</a>
+                                </li>
+                                <li><a href="https://wowjs.uk/"><i class="fa fa-external-link"></i> WOW</a></li>
+                                <li><a href="https://hilios.github.io/jQuery.countdown"><i
+                                            class="fa fa-external-link"></i> Countdown</a></li>
+                                <li><a href="https://www.humankode.com"><i class="fa fa-external-link"></i> Password
+                                        Strength</a></li>
+                                <li><a href="https://jqueryniceselect.hernansartorio.com/"><i
+                                            class="fa fa-external-link"></i> Nice Select</a></li>
+
+                                <li>Maps</li>
+                                <li><a href="https://www.google.com/maps/"><i class="fa fa-external-link"></i> Google
+                                        Maps</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Changelog(s) -->
+                    <div class="card border-0 bg-light">
+                        <div class="card-body">
+                            <h3 class="mb-4 fw-bold">Changelog(s)</h3>
+
+                            <h6 class="fw-bold">Version 3.3.0</h6>
+                            <ul class="ps-0 mb-4 fz-14 changelog-list">
+                                <li><span class="badge bg-primary">Updated:</span> Plugins</li>
+                                <li><span class="badge bg-warning text-dark">Fixed:</span> Some Minor Issues</li>
+                                <li><span class="badge bg-info text-dark">Improved:</span> Code Readability</li>
+                            </ul>
+
+                            <h6 class="fw-bold">Version 3.2.0</h6>
+                            <ul class="ps-0 mb-4 fz-14 changelog-list">
+                                <li><span class="badge bg-primary">Updated:</span> Bootstrap v5.3.2 > Bootstrap v5.3.3
+                                </li>
+                                <li><span class="badge bg-warning text-dark">Fixed:</span> Some Minor Design Issues</li>
+                                </li>
+                            </ul>
+
+                            <h6 class="fw-bold">Version 3.1.0</h6>
+                            <ul class="ps-0 mb-4 fz-14 changelog-list">
+                                <li><span class="badge bg-primary">Updated:</span>  Bootstrap v5.2.2 > Bootstrap v5.3.2
+                                </li>
+                                <li><span class="badge bg-warning text-dark">Fixed:</span> Some Minor Bugs</li>
+                                </li>
+                                <li><span class="badge bg-info text-dark">Improved:</span> Code Readability</li>
+                            </ul>
+
+                            <h6 class="fw-bold">Version 3.0.1</h6>
+                            <ul class="ps-0 mb-4 fz-14 changelog-list">
+                                <li><span class="badge bg-primary">Updated:</span> Bootstrap v5.2.0 > Bootstrap v5.2.2
+                                </li>
+                                <li><span class="badge bg-warning text-dark">Fixed:</span> Some Minor Bugs</li>
+                            </ul>
+
+                            <h6 class="fw-bold">Version 3.0</h6>
+                            <ul class="ps-0 mb-4 fz-14 changelog-list">
+                                <li><span class="badge bg-success">New Added:</span> RTL Mode</li>
+                                <li><span class="badge bg-primary">Updated:</span> Bootstrap v5.1.3 > Bootstrap v5.2.0
+                                </li>
+                                <li><span class="badge bg-primary">Updated:</span> Design Quality</li>
+                                <li><span class="badge bg-primary">Updated:</span> Documentation 1.1 > Documentation 1.2
+                                </li>
+                                <li><span class="badge bg-primary">Updated:</span> Third Party Scripts</li>
+                                <li><span class="badge bg-warning text-dark">Fixed:</span> Some Minor Bugs</li>
+                            </ul>
+
+                            <h6 class="fw-bold">Version 2.5.0</h6>
+                            <ul class="ps-0 mb-4 fz-14 changelog-list">
+                                <li><span class="badge bg-success">New Added:</span> Three(3) New Vendor Page</li>
+                                <li><span class="badge bg-success">New Added:</span> 'Static' Folder Under the Main
+                                    Folder. This Folder Contains All Static Content (Like - CSS/JS/Images/Fonts)</li>
+                                <li><span class="badge bg-primary">Updated:</span> Design Quality</li>
+                                <li><span class="badge bg-primary">Updated:</span> Bootstrap v5.0.0-beta2 > Bootstrap
+                                    v5.0.2</li>
+                                <li><span class="badge bg-primary">Updated:</span> Owl Carousel 2.2.1 > Owl Carousel
+                                    2.3.4</li>
+                                <li><span class="badge bg-primary">Updated:</span> Documentation 1 > Documentation 1.1
+                                </li>
+                            </ul>
+
+                            <h6 class="fw-bold">Version 2.4.0</h6>
+                            <ul class="ps-0 mb-4 fz-14 changelog-list">
+                                <li><span class="badge bg-primary">Updated:</span> Bootstrap v5.0.0-beta1 > Bootstrap
+                                    v5.0.0-beta2</li>
+                                <li><span class="badge bg-warning text-dark">Fixed:</span> Some Minor Issues</li>
+                            </ul>
+
+                            <h6 class="fw-bold">Version 2.3.0</h6>
+                            <ul class="ps-0 mb-4 fz-14 changelog-list">
+                                <li><span class="badge bg-primary">Updated:</span> Design Quality (Chat Page)</li>
+                                <li><span class="badge bg-warning text-dark">Fixed:</span> Some Minor Issues</li>
+                            </ul>
+
+                            <h6 class="fw-bold">Version: 2.2.0</h6>
+                            <ul class="ps-0 mb-4 fz-14 changelog-list">
+                                <li><span class="badge bg-primary">Updated:</span> Bootstrap v5.0.0-alpha1 > Bootstrap
+                                    v5.0.0-beta1</li>
+                                <li><span class="badge bg-primary">Updated:</span> Design Quality</li>
+                            </ul>
+
+                            <h6 class="fw-bold">Version: 2.1.0</h6>
+                            <ul class="ps-0 mb-4 fz-14 changelog-list">
+                                <li><span class="badge bg-success">New Added:</span> CSS Autoprefixer in npm (Now no
+                                    need to use SCSS mixins for CSS prefixes)</li>
+                                <li><span class="badge bg-warning text-dark">Fixed:</span> Some Minor Bugs</li>
+                            </ul>
+
+                            <h6 class="fw-bold">Version: 2.0.0</h6>
+                            <ul class="ps-0 mb-4 fz-14 changelog-list">
+                                <li><span class="badge bg-primary">Updated:</span> Bootstrap 4.5.0 > Bootstrap
+                                    5.0.0-alpha1</li>
+                                <li><span class="badge bg-primary">Updated:</span> Design Quality</li>
+                                <li><span class="badge bg-success">New Added:</span> Progressive Web App (PWA)</li>
+                                <li><span class="badge bg-success">New Added:</span> Dropdown Menu in the Sidebar Area
+                                </li>
+                            </ul>
+
+                            <h6 class="fw-bold">Version: 1.6.0</h6>
+                            <ul class="ps-0 mb-4 fz-14 changelog-list">
+                                <li><span class="badge bg-warning text-dark">Fixed:</span> Some Minor Bugs</li>
+                            </ul>
+
+                            <h6 class="fw-bold">Version: 1.5.0</h6>
+                            <ul class="ps-0 mb-4 fz-14 changelog-list">
+                                <li><span class="badge bg-success">New Added:</span> About Us Page</li>
+                                <li><span class="badge bg-success">New Added:</span> Contact Page</li>
+                                <li><span class="badge bg-success">New Added:</span> OTP Page</li>
+                                <li><span class="badge bg-success">New Added:</span> OTP Confirmation Page</li>
+                                <li><span class="badge bg-success">New Added:</span> Featured Product Page</li>
+                                <li><span class="badge bg-primary">Updated:</span> Bootstrap 4.4.1 > Bootstrap 4.5.0
+                                </li>
+                                <li><span class="badge bg-primary">Updated:</span> Gulp 3.9.1 > Gulp 4</li>
+                                <li><span class="badge bg-primary">Updated:</span> LineIcons 1.0 > LineIcons 2.0</li>
+                                <li><span class="badge bg-primary">Updated:</span> Design Quality</li>
+                                <li><span class="badge bg-warning text-dark">Fixed:</span> Some Minor Issues</li>
+                            </ul>
+
+                            <h6 class="fw-bold">Version: 1.4.0</h6>
+                            <ul class="ps-0 mb-4 fz-14 changelog-list">
+                                <li><span class="badge bg-primary">Updated:</span> Responsive Quality (Smartphone -
+                                    Tablet - Laptop - Desktop)</li>
+                            </ul>
+
+                            <h6 class="fw-bold">Version: 1.3.0</h6>
+                            <ul class="ps-0 mb-4 fz-14 changelog-list">
+                                <li><span class="badge bg-primary">Updated:</span> jQuery Code Quality</li>
+                            </ul>
+
+                            <h6 class="fw-bold">Version: 1.2.0</h6>
+                            <ul class="ps-0 mb-4 fz-14 changelog-list">
+                                <li><span class="badge bg-success">New Added:</span> Blog & Blog Details Pages</li>
+                            </ul>
+
+                            <h6 class="fw-bold">Version: 1.1.1</h6>
+                            <ul class="ps-0 mb-4 fz-14 changelog-list">
+                                <li><span class="badge bg-primary">Updated:</span> Dark Mode</li>
+                                <li><span class="badge bg-primary">Updated:</span> Design Quality</li>
+                            </ul>
+
+                            <h6 class="fw-bold">Version: 1.1.0</h6>
+                            <ul class="ps-0 mb-4 fz-14 changelog-list">
+                                <li><span class="badge bg-success">New Added:</span> Dark Mode Version</li>
+                            </ul>
+
+                            <h6 class="fw-bold">Version: 1.0.3</h6>
+                            <ul class="ps-0 mb-4 fz-14 changelog-list">
+                                <li><span class="badge bg-success">New Added:</span> LineIcons Web Icons Font</li>
+                                <li><span class="badge bg-primary">Updated:</span> Design Quality</li>
+                                <li><span class="badge bg-danger">Removed:</span> IcoFont Web Icons Font</li>
+                            </ul>
+
+                            <h6 class="fw-bold">Version: 1.0.2</h6>
+                            <ul class="ps-0 mb-4 fz-14 changelog-list">
+                                <li><span class="badge bg-primary">Updated:</span> Bootstrap 4.3.1 > Bootstrap 4.4.1
+                                </li>
+                                <li><span class="badge bg-primary">Updated:</span> Design Quality</li>
+                            </ul>
+
+                            <h6 class="fw-bold">Version: 1.0.1</h6>
+                            <ul class="ps-0 mb-4 fz-14 changelog-list">
+                                <li><span class="badge bg-warning text-dark">Fixed:</span> Some Minor Issues</li>
+                            </ul>
+
+                            <h6 class="fw-bold">Version 1.0.0</h6>
+                            <ul class="ps-0 mb-4 fz-14 changelog-list">
+                                <li><span class="badge bg-info">Initial Realease</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="assets/js/jquery.easing.min.js"></script>
+    <script src="assets/js/jquery.sticky.js"></script>
+    <script src="assets/js/one-page-nav.js"></script>
+    <script src="assets/js/active.js"></script>
+</body>
+
+</html>

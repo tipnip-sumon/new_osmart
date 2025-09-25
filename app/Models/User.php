@@ -8,6 +8,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+// Additional model imports for package system
+use App\Models\UserActivePackage;
+use App\Models\UserPackageHistory;
+use App\Models\UserDailyCashback;
+
 class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -372,6 +377,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Commission::class);
     }
 
+    public function affiliateClicks()
+    {
+        return $this->hasMany(AffiliateClick::class);
+    }
+
+    public function subscriptionPlan()
+    {
+        return $this->belongsTo(SubscriptionPlan::class);
+    }
+
     public function supportTickets()
     {
         return $this->hasMany(SupportTicket::class);
@@ -393,11 +408,51 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Get user's active packages
+     */
+    public function activePackages()
+    {
+        return $this->hasMany(UserActivePackage::class)->active();
+    }
+
+    /**
+     * Get all user packages (active and inactive)
+     */
+    public function allPackages()
+    {
+        return $this->hasMany(UserActivePackage::class);
+    }
+
+    /**
+     * Get user's package history
+     */
+    public function packageHistory()
+    {
+        return $this->hasMany(UserPackageHistory::class)->orderBy('created_at', 'desc');
+    }
+
+    /**
      * Get current subscription plan (existing relationship)
      */
     public function currentPlan()
     {
         return $this->belongsTo(Plan::class, 'current_package_id');
+    }
+
+    /**
+     * Get packages eligible for payout
+     */
+    public function eligiblePackages()
+    {
+        return $this->hasMany(UserActivePackage::class)->eligibleForPayout();
+    }
+
+    /**
+     * Get user's daily cashback records
+     */
+    public function dailyCashbacks()
+    {
+        return $this->hasMany(UserDailyCashback::class);
     }
 
     // Accessors

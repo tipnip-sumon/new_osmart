@@ -125,8 +125,8 @@ return new class extends Migration
             $table->string('business_license')->nullable();
             $table->string('tax_id', 50)->nullable();
 
-            // Subscription fields (plan reference removed since subscription_plans table doesn't exist)
-            $table->unsignedBigInteger('subscription_plan_id')->nullable();
+            // Subscription fields
+            $table->foreignId('subscription_plan_id')->nullable()->constrained()->onDelete('set null');
             $table->timestamp('subscription_expires_at')->nullable();
             $table->timestamp('trial_ends_at')->nullable();
 

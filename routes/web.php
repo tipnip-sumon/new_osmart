@@ -55,6 +55,12 @@ Route::get('/debug-current-user', function () {
     ]);
 })->middleware('auth');
 
+// Include debug routes for image troubleshooting
+require __DIR__.'/debug.php';
+
+// Include debug routes for image troubleshooting
+require __DIR__.'/debug.php';
+
 // Direct storage access route to bypass symlink issues
 Route::get('direct-storage/{path}', function($path) {
     $filePath = storage_path('app/public/' . $path);
@@ -937,3 +943,8 @@ Route::prefix('affiliate')->name('affiliate.')->group(function () {
         return redirect()->route('affiliate.info'); 
     })->name('program');
 });
+
+// Include debug routes for link sharing testing
+if (app()->environment(['local', 'staging'])) {
+    require __DIR__ . '/debug-link-sharing.php';
+}

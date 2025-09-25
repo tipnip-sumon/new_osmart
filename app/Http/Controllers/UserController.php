@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Transaction;
 use App\Models\Commission;
 use App\Models\Withdrawal;
+use App\Models\SubscriptionPlan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -21,7 +22,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         try {
-            $query = User::with(['sponsor']);
+            $query = User::with(['sponsor', 'subscriptionPlan']);
 
             // Search functionality
             if ($request->filled('search')) {
@@ -103,7 +104,9 @@ class UserController extends Controller
     {
         try {
             $sponsors = User::affiliates()->active()->get();
-            return view('users.create', compact('sponsors'));
+            $subscriptionPlans = SubscriptionPlan::active()->ordered()->get();
+
+            return view('users.create', compact('sponsors', 'subscriptionPlans'));
 
         } catch (\Exception $e) {
             Log::error('User create form error: ' . $e->getMessage());
@@ -149,13 +152,19 @@ class UserController extends Controller
 
             $user = User::create($userData);
 
+            // Set subscription if provided
+            if ($request->subscription_plan_id) {
+                $plan = SubscriptionPlan::find($request->subscription_plan_id);
+                $plan->createSubscription($user);
+            }
+
             DB::commit();
 
             if ($request->ajax()) {
                 return response()->json([
                     'success' => true,
                     'message' => 'User created successfully',
-                    'data' => $user->load(['sponsor'])
+                    'data' => $user->load(['sponsor', 'subscriptionPlan'])
                 ]);
             }
 

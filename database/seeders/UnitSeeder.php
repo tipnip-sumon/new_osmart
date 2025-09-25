@@ -223,10 +223,7 @@ class UnitSeeder extends Seeder
         ];
 
         foreach ($units as $unit) {
-            Unit::updateOrCreate(
-                ['name' => $unit['name'], 'type' => $unit['type']], // Key to check for existing records
-                $unit // Data to update or create
-            );
+            Unit::create($unit);
         }
     }
 }

@@ -1,0 +1,186 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+ol,
+li,
+ul {
+    margin: 0;
+    list-style: none;
+}
+
+a {
+    transition-duration: 500ms;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+a:hover,
+a:focus {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+.header-area {
+    height: 60px;
+    z-index: 999;
+}
+
+.logo>img {
+    max-height: 2.25rem;
+}
+
+.page-wrapper {
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+#sticker {
+    z-index: 1000 !important;
+}
+
+.sidenav-wrap nav li a {
+    color: #212529;
+    font-weight: 500;
+    font-size: 14px;
+    display: block;
+    transition-duration: 500ms;
+    margin-bottom: .275rem;
+}
+
+.sidenav-wrap nav li a:hover {
+    color: #0d6efd;
+}
+
+.sidenav-wrap nav li.current a {
+    color: #0d6efd;
+}
+
+.sidenav-wrap nav li ul li a {
+    color: #6c757d;
+    font-weight: 400;
+}
+
+.card-body {
+    padding: 2.5rem;
+}
+
+.files-structure li {
+    padding-bottom: .375rem;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.files-structure li span {
+    font-size: 12px;
+    font-weight: 400;
+    color: #6c757d;
+}
+
+.files-structure li i {
+    color: #0d6efd;
+}
+
+.files-structure li ul {
+    padding-top: .375rem;
+}
+
+.files-structure li:last-child {
+    padding-bottom: 0;
+}
+
+.big-title {
+    letter-spacing: -1px;
+    padding-left: 2.5rem;
+    border-bottom: 2px solid #ebebeb;
+    padding-bottom: 1rem;
+}
+
+.alert {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.credits-list li {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 0.375rem;
+}
+
+.credits-list li:last-child {
+    margin-bottom: 0;
+}
+
+.credits-list li a {
+    font-size: 14px;
+    font-weight: 400;
+    padding-left: 1rem;
+    color: #6c757d;
+}
+
+.credits-list li a i {
+    color: #0d6efd;
+}
+
+.credits-list li a:hover {
+    text-decoration: underline;
+    color: #0d6efd;
+}
+
+.fz-14 {
+    font-size: 14px;
+}
+
+code,
+pre {
+    font-size: .875rem;
+    font-weight: 500;
+    color: #d63384;
+}
+
+.img-thumbnail {
+    border-radius: .75rem;
+}
+
+.table-files-structure {
+    font-size: 13px;
+    color: #6c757d;
+}
+
+.table-files-structure th,
+.table-files-structure td {
+    font-weight: 400;
+    padding: .5rem 1.125rem;
+}
+
+.table-files-structure thead th {
+    font-weight: 700;
+}
+
+.changelog-list li {
+    color: #6c757d;
+    margin-bottom: 0.25rem;
+}
+
+.changelog-list li:last-child {
+    margin-bottom: 0;
+}
+
+@media only screen and (max-width: 479px) {
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    .big-title {
+        padding-left: 1.5rem;
+    }
+}

@@ -392,6 +392,41 @@
 </div>
 @endif
 
+<!-- Priority Action Buttons -->
+<div class="row mt-4 mb-4">
+    <div class="col-12">
+        <div class="card smart-card border-0 quick-actions-card">
+            <div class="card-body py-3">
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                    <div>
+                        <h5 class="mb-1" style="color: white !important;">
+                            <i class="bx bx-zap me-2"></i>Quick Actions
+                        </h5>
+                        <small style="color: rgba(255, 255, 255, 0.8) !important;">Essential actions for your business growth</small>
+                    </div>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <a href="{{ route('member.add-fund') }}" class="btn btn-info btn-sm px-3">
+                            <i class="bx bx-plus-circle me-1"></i> Add Fund
+                        </a>
+                        <a href="{{ route('member.direct-point-purchase.index') }}" class="btn btn-primary btn-sm px-3">
+                            <i class="bx bx-coin me-1"></i> Point Purchase
+                        </a>
+                        <a href="{{ route('member.packages.index') }}" class="btn btn-secondary btn-sm px-3">
+                            <i class="bx bx-package me-1"></i> Activate Package
+                        </a>
+                        <a href="{{ route('member.link-sharing.dashboard') }}" class="btn btn-warning btn-sm px-3">
+                            <i class="bx bx-share-alt me-1"></i> Link Sharing
+                        </a>
+                        <a href="{{ route('member.orders.create') }}" class="btn btn-success btn-sm px-3">
+                            <i class="bx bx-shopping-bag me-1"></i> New Order
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Main Wallet Cards - Serial Order -->
 <div class="row mt-4 my-4">
     <!-- 1. Available Balance -->
@@ -533,6 +568,201 @@
             </div>
         </div>
     </div>
+
+    <!-- 4. Reserve Points -->
+    <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+        <div class="card smart-card">
+            <div class="card-body">
+                <div class="d-flex align-items-start justify-content-between">
+                    <div>
+                        <div class="mb-2">
+                            <span class="d-block fw-medium">Reserve Points</span>
+                        </div>
+                        <h4 class="fw-semibold mb-2" id="reserve_points">{{ number_format(Auth::user()->reserve_points ?? 0) }}</h4>
+                        <div>
+                            <span class="text-primary me-1"><i class="ri-coin-line align-middle"></i>Available</span>
+                            <span class="text-muted">points</span>
+                        </div>
+                    </div>
+                    <div class="ms-2">
+                        <span class="avatar avatar-md bg-primary-transparent">
+                            <i class="bx bx-coin-stack fs-18"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Commission Breakdown Cards -->
+<div class="row mt-4" style="display:none;">
+    <div class="col-12">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+            <h5 class="card-title mb-0">
+                <i class="ri-money-dollar-circle-line text-success me-2"></i>Commission Breakdown
+            </h5>
+            <a href="{{ route('member.commissions') }}" class="btn btn-sm btn-outline-primary">
+                <i class="ri-eye-line me-1"></i>View All
+            </a>
+        </div>
+    </div>
+    
+    <!-- Sponsor Bonus -->
+    <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-sm-12">
+        <div class="card border-0 shadow-sm commission-card" style="border-left: 4px solid #3b82f6 !important;">
+            <div class="card-body py-3">
+                <div class="d-flex align-items-center">
+                    <div class="me-3">
+                        <div class="avatar-sm bg-primary-subtle rounded">
+                            <i class="ri-handshake-line fs-18 text-primary"></i>
+                        </div>
+                    </div>
+                    <div class="flex-grow-1">
+                        <p class="text-muted mb-1 fw-medium" style="font-size: 11px;">SPONSOR BONUS</p>
+                        <h6 class="mb-0 text-primary fw-semibold" id="sponsor-bonus">{{ formatCurrency($bonusStats['sponsor_bonus'] ?? 0) }}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Binary Bonus -->
+    <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-sm-12">
+        <div class="card border-0 shadow-sm commission-card" style="border-left: 4px solid #06b6d4 !important;">
+            <div class="card-body py-3">
+                <div class="d-flex align-items-center">
+                    <div class="me-3">
+                        <div class="avatar-sm bg-info-subtle rounded">
+                            <i class="ri-git-branch-line fs-18 text-info"></i>
+                        </div>
+                    </div>
+                    <div class="flex-grow-1">
+                        <p class="text-muted mb-1 fw-medium" style="font-size: 11px;">BINARY BONUS</p>
+                        <h6 class="mb-0 text-info fw-semibold" id="binary-bonus">{{ formatCurrency($bonusStats['binary_bonus'] ?? 0) }}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Team Bonus -->
+    <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-sm-12">
+        <div class="card border-0 shadow-sm commission-card" style="border-left: 4px solid #f59e0b !important;">
+            <div class="card-body py-3">
+                <div class="d-flex align-items-center">
+                    <div class="me-3">
+                        <div class="avatar-sm bg-warning-subtle rounded">
+                            <i class="ri-team-line fs-18 text-warning"></i>
+                        </div>
+                    </div>
+                    <div class="flex-grow-1">
+                        <p class="text-muted mb-1 fw-medium" style="font-size: 11px;">TEAM BONUS</p>
+                        <h6 class="mb-0 text-warning fw-semibold" id="team-bonus">{{ formatCurrency($bonusStats['team_bonus'] ?? 0) }}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Rank Bonus -->
+    <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-sm-12">
+        <div class="card border-0 shadow-sm commission-card" style="border-left: 4px solid #ef4444 !important;">
+            <div class="card-body py-3">
+                <div class="d-flex align-items-center">
+                    <div class="me-3">
+                        <div class="avatar-sm bg-danger-subtle rounded">
+                            <i class="ri-medal-line fs-18 text-danger"></i>
+                        </div>
+                    </div>
+                    <div class="flex-grow-1">
+                        <p class="text-muted mb-1 fw-medium" style="font-size: 11px;">RANK BONUS</p>
+                        <h6 class="mb-0 text-danger fw-semibold" id="rank_bonus">{{ formatCurrency($bonusStats['rank_bonus'] ?? 0) }}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Link Share Bonus -->
+    <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-sm-12">
+        <div class="card border-0 shadow-sm commission-card" style="border-left: 4px solid #10b981 !important;">
+            <div class="card-body py-3">
+                <div class="d-flex align-items-center">
+                    <div class="me-3">
+                        <div class="avatar-sm bg-success-subtle rounded">
+                            <i class="ri-share-line fs-18 text-success"></i>
+                        </div>
+                    </div>
+                    <div class="flex-grow-1">
+                        <p class="text-muted mb-1 fw-medium" style="font-size: 11px;">LINK SHARE</p>
+                        <h6 class="mb-0 text-success fw-semibold" id="link-share-bonus">{{ formatCurrency($bonusStats['link_share_bonus'] ?? 0) }}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Rank Salary -->
+    <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-sm-12">
+        <div class="card border-0 shadow-sm commission-card" style="border-left: 4px solid #6b7280 !important;">
+            <div class="card-body py-3">
+                <div class="d-flex align-items-center">
+                    <div class="me-3">
+                        <div class="avatar-sm bg-secondary-subtle rounded">
+                            <i class="ri-money-dollar-box-line fs-18 text-secondary"></i>
+                        </div>
+                    </div>
+                    <div class="flex-grow-1">
+                        <p class="text-muted mb-1 fw-medium" style="font-size: 11px;">RANK SALARY</p>
+                        <h6 class="mb-0 text-secondary fw-semibold" id="rank-salary">{{ formatCurrency($bonusStats['rank_salary'] ?? 0) }}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    @if(($bonusStats['cash_back'] ?? 0) > 0)
+    <!-- Cashback -->
+    <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-sm-12">
+        <div class="card border-0 shadow-sm commission-card" style="border-left: 4px solid #14b8a6 !important;">
+            <div class="card-body py-3">
+                <div class="d-flex align-items-center">
+                    <div class="me-3">
+                        <div class="avatar-sm bg-teal-subtle rounded">
+                            <i class="ri-refund-2-line fs-18 text-teal"></i>
+                        </div>
+                    </div>
+                    <div class="flex-grow-1">
+                        <p class="text-muted mb-1 fw-medium" style="font-size: 11px;">CASHBACK</p>
+                        <h6 class="mb-0 text-teal fw-semibold" id="cash-back">{{ formatCurrency($bonusStats['cash_back'] ?? 0) }}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+    
+    @if(($bonusStats['kyc_bonus'] ?? 0) > 0)
+    <!-- KYC Bonus -->
+    <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-sm-12">
+        <div class="card border-0 shadow-sm commission-card" style="border-left: 4px solid #8b5cf6 !important;">
+            <div class="card-body py-3">
+                <div class="d-flex align-items-center">
+                    <div class="me-3">
+                        <div class="avatar-sm bg-violet-subtle rounded">
+                            <i class="ri-shield-check-line fs-18 text-violet"></i>
+                        </div>
+                    </div>
+                    <div class="flex-grow-1">
+                        <p class="text-muted mb-1 fw-medium" style="font-size: 11px;">KYC BONUS</p>
+                        <h6 class="mb-0 text-violet fw-semibold" id="kyc-bonus">{{ formatCurrency($bonusStats['kyc_bonus'] ?? 0) }}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
 </div>
 
 <!-- Transfer and Withdraw Cards -->
@@ -584,6 +814,497 @@
                             <i class="bx bx-credit-card fs-18"></i>
                         </span>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Current Rank -->
+    <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+        <div class="card smart-card">
+            <div class="card-body">
+                <div class="d-flex align-items-start justify-content-between">
+                    <div>
+                        <div class="mb-2">
+                            <span class="d-block fw-medium">Current Rank</span>
+                        </div>
+                        <h4 class="fw-semibold mb-2">{{ $affiliateStats['current_rank'] ?? 'Bronze' }}</h4>
+                        <div>
+                            <a href="{{ route('member.rank') }}" class="btn btn-sm btn-outline-warning">
+                                <i class="bx bx-crown me-1"></i> View Details
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ms-2">
+                        <span class="avatar avatar-md bg-warning-transparent">
+                            <i class="bx bx-crown fs-18"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Team Members -->
+    <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+        <div class="card smart-card">
+            <div class="card-body">
+                <div class="d-flex align-items-start justify-content-between">
+                    <div>
+                        <div class="mb-2">
+                            <span class="d-block fw-medium">Total Team Member</span>
+                        </div>
+                        <h4 class="fw-semibold mb-2">{{ number_format($affiliateStats['total_downline'] ?? 0) }}</h4>
+                        <div>
+                            <span class="text-primary me-1"><i class="ri-team-line align-middle"></i>All Levels</span>
+                            <span class="text-muted">downline</span>
+                        </div>
+                    </div>
+                    <div class="ms-2">
+                        <span class="avatar avatar-md bg-primary-transparent">
+                            <i class="bx bx-group fs-18"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- All Income/Bonus Cards Section -->
+<div class="row mt-4">
+    <!-- Cash Back -->
+    <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+        <div class="card smart-card">
+            <div class="card-body">
+                <div class="d-flex align-items-start justify-content-between">
+                    <div>
+                        <div class="mb-2">
+                            <span class="d-block fw-medium">Cash Back</span>
+                        </div>
+                        <h4 class="fw-semibold mb-2" id="cash-back">{{ formatCurrency($bonusStats['cash_back'] ?? 0) }}</h4>
+                        <div>
+                            <span class="text-warning me-1"><i class="ri-clock-line align-middle"></i>Pending</span>
+                            <span class="text-muted" id="pending-cashback-amount">{{ formatCurrency($pendingCashbackAmount ?? 0) }}</span>
+                        </div>
+                    </div>
+                    <div class="ms-2">
+                        <span class="avatar avatar-md bg-info-transparent">
+                            <i class="bx bx-receipt fs-18"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sponsor Bonus -->
+    <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+        <div class="card smart-card">
+            <div class="card-body">
+                <div class="d-flex align-items-start justify-content-between">
+                    <div>
+                        <div class="mb-2">
+                            <span class="d-block fw-medium">Sponsor Bonus</span>
+                        </div>
+                        <h4 class="fw-semibold mb-2" id="sponsor-bonus">{{ formatCurrency($bonusStats['sponsor_bonus'] ?? 0) }}</h4>
+                        <div>
+                            <span class="text-warning me-1"><i class="ri-user-star-line align-middle"></i>Direct</span>
+                            <span class="text-muted">referrals</span>
+                        </div>
+                    </div>
+                    <div class="ms-2">
+                        <span class="avatar avatar-md bg-warning-transparent">
+                            <i class="bx bx-user-plus fs-18"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Binary Bonus -->
+    <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+        <div class="card smart-card">
+            <div class="card-body">
+                <div class="d-flex align-items-start justify-content-between">
+                    <div>
+                        <div class="mb-2">
+                            <span class="d-block fw-medium">Binary Bonus</span>
+                        </div>
+                        <h4 class="fw-semibold mb-2" id="binary-bonus">{{ formatCurrency($bonusStats['binary_bonus'] ?? 0) }}</h4>
+                        <div>
+                            <span class="text-danger me-1"><i class="ri-git-branch-line align-middle"></i>Binary</span>
+                            <span class="text-muted">matching</span>
+                        </div>
+                    </div>
+                    <div class="ms-2">
+                        <span class="avatar avatar-md bg-danger-transparent">
+                            <i class="bx bx-git-branch fs-18"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Team Bonus -->
+    <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+        <div class="card smart-card">
+            <div class="card-body">
+                <div class="d-flex align-items-start justify-content-between">
+                    <div>
+                        <div class="mb-2">
+                            <span class="d-block fw-medium">Team Bonus</span>
+                        </div>
+                        <h4 class="fw-semibold mb-2" id="team-bonus">{{ formatCurrency($bonusStats['team_bonus'] ?? 0) }}</h4>
+                        <div>
+                            <span class="text-indigo me-1"><i class="ri-team-line align-middle"></i>Team</span>
+                            <span class="text-muted">volume</span>
+                        </div>
+                    </div>
+                    <div class="ms-2">
+                        <span class="avatar avatar-md bg-indigo-transparent">
+                            <i class="bx bx-group fs-18"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Additional Income Cards -->
+<div class="row mt-4">
+    <!-- Rank Bonus -->
+    <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+        <div class="card smart-card">
+            <div class="card-body">
+                <div class="d-flex align-items-start justify-content-between">
+                    <div>
+                        <div class="mb-2">
+                            <span class="d-block fw-medium">Rank Bonus</span>
+                        </div>
+                        <h4 class="fw-semibold mb-2" id="rank_bonus">{{ formatCurrency($bonusStats['rank_bonus'] ?? 0) }}</h4>
+                        <div>
+                            <span class="text-warning me-1"><i class="ri-medal-line align-middle"></i>Achievement</span>
+                            <span class="text-muted">rewards</span>
+                        </div>
+                    </div>
+                    <div class="ms-2">
+                        <span class="avatar avatar-md bg-warning-transparent">
+                            <i class="bx bx-medal fs-18"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rank Salary -->
+    <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+        <div class="card smart-card">
+            <div class="card-body">
+                <div class="d-flex align-items-start justify-content-between">
+                    <div>
+                        <div class="mb-2">
+                            <span class="d-block fw-medium">Rank Salary</span>
+                        </div>
+                        <h4 class="fw-semibold mb-2" id="rank-salary">{{ formatCurrency($bonusStats['rank_salary'] ?? 0) }}</h4>
+                        <div>
+                            <span class="text-success me-1"><i class="ri-award-line align-middle"></i>Monthly</span>
+                            <span class="text-muted">salary</span>
+                        </div>
+                    </div>
+                    <div class="ms-2">
+                        <span class="avatar avatar-md bg-success-transparent">
+                            <i class="bx bx-award fs-18"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Link Share Bonus -->
+    <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+        <div class="card smart-card">
+            <div class="card-body">
+                <div class="d-flex align-items-start justify-content-between">
+                    <div>
+                        <div class="mb-2">
+                            <span class="d-block fw-medium">Link Share Bonus</span>
+                        </div>
+                        <h4 class="fw-semibold mb-2" id="link-share-bonus">{{ formatCurrency($bonusStats['link_share_bonus'] ?? 0) }}</h4>
+                        <div>
+                            <span class="text-warning me-1"><i class="ri-share-line align-middle"></i>৳2 per</span>
+                            <span class="text-muted">link share</span>
+                        </div>
+                    </div>
+                    <div class="ms-2">
+                        <span class="avatar avatar-md bg-warning-transparent">
+                            <i class="bx bx-share-alt fs-18"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KYC Bonus -->
+    <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+        <div class="card smart-card">
+            <div class="card-body">
+                <div class="d-flex align-items-start justify-content-between">
+                    <div>
+                        <div class="mb-2">
+                            <span class="d-block fw-medium">KYC Bonus</span>
+                        </div>
+                        <h4 class="fw-semibold mb-2" id="kyc-bonus">{{ formatCurrency($bonusStats['kyc_bonus'] ?? 0) }}</h4>
+                        <div>
+                            <span class="text-info me-1"><i class="ri-verified-badge-line align-middle"></i>Verification</span>
+                            <span class="text-muted">reward</span>
+                        </div>
+                    </div>
+                    <div class="ms-2">
+                        <span class="avatar avatar-md bg-info-transparent">
+                            <i class="bx bx-badge-check fs-18"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Activities Section -->
+<div class="row mt-4">
+    <!-- Recent Commissions -->
+    <div class="col-xl-8 col-lg-8">
+        <div class="card smart-card">
+            <div class="card-header justify-content-between">
+                <div class="card-title">
+                    Recent Commissions
+                </div>
+                <div class="dropdown">
+                    <a href="{{ route('member.commissions') }}" class="btn btn-outline-light btn-icons btn-sm">
+                        View All <i class="ri-arrow-right-s-line ms-1"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                @if($recentCommissions->count() > 0)
+                    <div class="table-responsive">
+                        <table class="table text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th>Level</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($recentCommissions as $commission)
+                                <tr>
+                                    <td>
+                                        <span class="fw-medium">{{ $commission->created_at->format('M d, Y') }}</span>
+                                        <br>
+                                        <span class="text-muted fs-12">{{ $commission->created_at->format('h:i A') }}</span>
+                                    </td>
+                                    <td>
+                                        @php
+                                            $badgeClass = 'bg-primary-transparent';
+                                            $displayType = ucfirst(str_replace('_', ' ', $commission->commission_type));
+                                            
+                                            switch($commission->commission_type) {
+                                                case 'direct':
+                                                    $badgeClass = 'bg-success-transparent';
+                                                    $displayType = 'Direct Referral';
+                                                    break;
+                                                case 'matching_bonus':
+                                                    $badgeClass = 'bg-info-transparent';
+                                                    $displayType = 'Binary Matching';
+                                                    break;
+                                                case 'tier_bonus':
+                                                    $badgeClass = 'bg-warning-transparent';
+                                                    $displayType = 'Level Bonus';
+                                                    break;
+                                                case 'binary':
+                                                    $badgeClass = 'bg-purple-transparent';
+                                                    $displayType = 'Binary Commission';
+                                                    break;
+                                            }
+                                        @endphp
+                                        <span class="badge {{ $badgeClass }}">
+                                            {{ $displayType }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        @if($commission->commission_type == 'matching_bonus')
+                                            <span class="fw-medium">Binary Tree</span>
+                                        @else
+                                            <span class="fw-medium">Level {{ $commission->level ?? 1 }}</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <span class="fw-semibold text-success">
+                                            {{ formatCurrency($commission->commission_amount) }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        @if($commission->status == 'paid')
+                                            <span class="badge bg-success">Paid</span>
+                                        @elseif($commission->status == 'pending')
+                                            <span class="badge bg-warning">Pending</span>
+                                        @else
+                                            <span class="badge bg-secondary">{{ ucfirst($commission->status) }}</span>
+                                        @endif
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @else
+                    <div class="text-center py-4">
+                        <i class="bx bx-receipt fs-40 text-muted"></i>
+                        <p class="text-muted mt-2">No commissions yet. Start building your network!</p>
+                        <a href="{{ route('member.sponsor') }}" class="btn btn-primary btn-sm">
+                            <i class="bx bx-user-plus me-1"></i> Invite Members
+                        </a>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions & Team Summary -->
+    <div class="col-xl-4 col-lg-4">
+        <!-- Quick Actions -->
+        <div class="card smart-card mb-3">
+            <div class="card-header">
+                <div class="card-title">Quick Actions</div>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <!-- Priority Actions First -->
+                    <a href="{{ route('member.add-fund') }}" class="btn btn-success btn-sm">
+                        <i class="bx bx-plus-circle me-2"></i> Add Fund
+                    </a>
+                    <a href="{{ route('member.direct-point-purchase.index') }}" class="btn btn-primary btn-sm">
+                        <i class="bx bx-coin me-2"></i> Point Purchase
+                    </a>
+                    <a href="{{ route('member.packages.index') }}" class="btn btn-secondary btn-sm">
+                        <i class="bx bx-package me-2"></i> Activate Package
+                    </a>
+                    <a href="{{ route('member.link-sharing.dashboard') }}" class="btn btn-warning btn-sm">
+                        <i class="bx bx-share-alt me-2"></i> Link Sharing
+                    </a>
+                    
+                    <!-- Order Actions -->
+                    <a href="{{ route('member.orders.create') }}" class="btn btn-primary btn-sm">
+                        <i class="bx bx-plus-circle me-2"></i> Create New Order
+                    </a>
+                    <a href="{{ route('member.orders.index') }}" class="btn btn-outline-dark btn-sm">
+                        <i class="bx bx-list-ul me-2"></i> View Orders
+                    </a>
+                    
+                    <!-- Network Actions -->
+                    <a href="{{ route('member.genealogy') }}" class="btn btn-outline-primary btn-sm">
+                        <i class="bx bx-network-chart me-2"></i> View Network Tree
+                    </a>
+                    <a href="{{ route('member.binary') }}" class="btn btn-outline-info btn-sm">
+                        <i class="bx bx-git-branch me-2"></i> Binary Structure
+                    </a>
+                    
+                    <!-- Financial Actions -->
+                    <a href="{{ route('member.withdraw') }}" class="btn btn-outline-success btn-sm">
+                        <i class="bx bx-credit-card me-2"></i> Request Withdrawal
+                    </a>
+                    <a href="{{ route('member.transfer') }}" class="btn btn-outline-warning btn-sm">
+                        <i class="bx bx-transfer me-2"></i> Transfer Funds
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Referrals -->
+        <div class="card smart-card">
+            <div class="card-header justify-content-between">
+                <div class="card-title">Recent Referrals</div>
+                <a href="{{ route('member.sponsor') }}" class="btn btn-outline-light btn-icons btn-sm">
+                    View All
+                </a>
+            </div>
+            <div class="card-body">
+                @if($recentReferrals->count() > 0)
+                    @foreach($recentReferrals as $referral)
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="me-3">
+                            <span class="avatar avatar-md bg-primary-transparent">
+                                {{ strtoupper(substr($referral->name, 0, 1)) }}
+                            </span>
+                        </div>
+                        <div class="flex-fill">
+                            <p class="mb-0 fw-medium">{{ $referral->name }}</p>
+                            <span class="text-muted fs-12">{{ $referral->created_at->diffForHumans() }}</span>
+                        </div>
+                        <div>
+                            <span class="badge bg-success-transparent">New</span>
+                        </div>
+                    </div>
+                    @endforeach
+                @else
+                    <div class="text-center py-3">
+                        <i class="bx bx-user-plus fs-30 text-muted"></i>
+                        <p class="text-muted mt-2 mb-2">No referrals yet</p>
+                        <a href="{{ route('member.sponsor') }}" class="btn btn-sm btn-primary">
+                            Start Referring
+                        </a>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Binary Progress Section -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card smart-card">
+            <div class="card-header justify-content-between">
+                <div class="card-title">Binary Tree Progress</div>
+                <a href="{{ route('member.binary') }}" class="btn btn-outline-light btn-icons btn-sm">
+                    View Full Tree <i class="ri-arrow-right-s-line ms-1"></i>
+                </a>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="fw-medium">Left Leg Volume</span>
+                            <span class="fw-semibold">{{ formatCurrency($affiliateStats['left_volume'] ?? 0) }}</span>
+                        </div>
+                        <div class="progress progress-lg mb-3">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="fw-medium">Right Leg Volume</span>
+                            <span class="fw-semibold">{{ formatCurrency($affiliateStats['right_volume'] ?? 0) }}</span>
+                        </div>
+                        <div class="progress progress-lg mb-3">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <small class="text-muted">
+                        Keep your legs balanced for maximum commission potential
+                    </small>
                 </div>
             </div>
         </div>

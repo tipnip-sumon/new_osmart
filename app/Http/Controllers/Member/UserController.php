@@ -14,6 +14,7 @@ use App\Models\Order;
 use App\Models\Transaction;
 use App\Models\PaymentTransaction;
 use App\Models\Commission;
+use App\Models\BinaryMatching;
 use App\Models\Product;
 use App\Models\GeneralSetting;
 use App\Models\VendorApplication;
@@ -48,8 +49,11 @@ class UserController extends Controller
                 ->sum('amount'),
         ];
 
-        // Pending cashback amount (table removed)
-        $pendingCashbackAmount = 0;
+        // Get pending cashback amount sum from user_daily_cashbacks table
+        $pendingCashbackAmount = DB::table('user_daily_cashbacks')
+            ->where('user_id', $user->id)
+            ->where('status', 'pending')
+            ->sum('cashback_amount');
         
         // Bonus statistics from commissions table
         $sponsorBonus = Commission::where('user_id', $user->id)
@@ -57,10 +61,9 @@ class UserController extends Controller
             ->where('status', 'approved')
             ->sum('commission_amount');
             
-        $binaryBonus = Commission::where('user_id', $user->id)
-            ->where('commission_type', 'binary')
-            ->where('status', 'approved')
-            ->sum('commission_amount');
+        $binaryBonus = BinaryMatching::where('user_id', $user->id)
+            ->whereIn('status', ['processed', 'paid'])
+            ->sum('matching_bonus');
             
         $teamBonus = Commission::where('user_id', $user->id)
             ->where('commission_type', 'team')
@@ -72,8 +75,10 @@ class UserController extends Controller
             ->where('status', 'approved')
             ->sum('commission_amount');
 
-        // Link Share Bonus (table removed)
-        $linkShareBonus = 0;
+        // Link Share Bonus - Cumulative from daily link sharing stats (2 TK per link share)
+        $linkShareBonus = DB::table('daily_link_sharing_stats')
+            ->where('user_id', $user->id)
+            ->sum('earnings_amount');
             
         // Rank Salary from transactions
         $rankSalary = DB::table('transactions')
@@ -135,17 +140,16 @@ class UserController extends Controller
             ->get();
             
         // Get recent binary matching bonuses
-        $recentBinaryMatching = Commission::where('user_id', $user->id)
-            ->where('commission_type', 'binary')
+        $recentBinaryMatching = BinaryMatching::where('user_id', $user->id)
             ->latest()
             ->take(2)
             ->get()
             ->map(function ($matching) {
                 return (object) [
                     'id' => $matching->id,
-                    'commission_type' => 'binary_bonus',
-                    'commission_amount' => $matching->commission_amount,
-                    'status' => $matching->status,
+                    'commission_type' => 'matching_bonus',
+                    'commission_amount' => $matching->matching_bonus,
+                    'status' => 'paid', // Binary matchings are automatically paid
                     'level' => 'Binary',
                     'created_at' => $matching->created_at,
                     'description' => 'Binary Matching Bonus',
@@ -496,29 +500,34 @@ class UserController extends Controller
             ->sum('commission_amount');
             
         // Add binary matching earnings to totals
-        $binaryTotalEarnings = Commission::where('user_id', $user->id)
-            ->where('commission_type', 'binary')
-            ->where('status', 'approved')
-            ->sum('commission_amount');
+        $binaryTotalEarnings = BinaryMatching::where('user_id', $user->id)
+            ->whereIn('status', ['processed', 'paid'])
+            ->sum('matching_bonus');
             
-        $binaryThisMonthEarnings = Commission::where('user_id', $user->id)
-            ->where('commission_type', 'binary')
-            ->where('status', 'approved')
+        $binaryThisMonthEarnings = BinaryMatching::where('user_id', $user->id)
+            ->whereIn('status', ['processed', 'paid'])
             ->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()])
-            ->sum('commission_amount');
+            ->sum('matching_bonus');
             
-        $binaryThisWeekEarnings = Commission::where('user_id', $user->id)
-            ->where('commission_type', 'binary')
-            ->where('status', 'approved')
+        $binaryThisWeekEarnings = BinaryMatching::where('user_id', $user->id)
+            ->whereIn('status', ['processed', 'paid'])
             ->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])
-            ->sum('commission_amount');
+            ->sum('matching_bonus');
         
-        // Link share earnings (table removed)
-        $linkShareTotalEarnings = 0;
+        // Add other income sources to totals
+        $linkShareTotalEarnings = DB::table('daily_link_sharing_stats')
+            ->where('user_id', $user->id)
+            ->sum('earnings_amount');
             
-        $linkShareThisMonthEarnings = 0;
+        $linkShareThisMonthEarnings = DB::table('daily_link_sharing_stats')
+            ->where('user_id', $user->id)
+            ->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()])
+            ->sum('earnings_amount');
             
-        $linkShareThisWeekEarnings = 0;
+        $linkShareThisWeekEarnings = DB::table('daily_link_sharing_stats')
+            ->where('user_id', $user->id)
+            ->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])
+            ->sum('earnings_amount');
         
         $summary = [
             'total_earnings' => $totalEarnings + $binaryTotalEarnings + $linkShareTotalEarnings,
@@ -558,12 +567,13 @@ class UserController extends Controller
         ];
         
         // Additional income sources for enhanced view
-        $binaryMatching = Commission::where('user_id', $user->id)
-            ->where('commission_type', 'binary')
-            ->where('status', 'approved')
-            ->sum('commission_amount');
+        $binaryMatching = BinaryMatching::where('user_id', $user->id)
+            ->whereIn('status', ['processed', 'paid'])
+            ->sum('matching_bonus');
         
-        $linkShareBonus = 0; // Table removed
+        $linkShareBonus = DB::table('daily_link_sharing_stats')
+            ->where('user_id', $user->id)
+            ->sum('earnings_amount');
             
         $rankSalary = DB::table('transactions')
             ->where('user_id', $user->id)
@@ -786,14 +796,14 @@ class UserController extends Controller
     {
         $user = Auth::user();
         
-        // Generation income service not available
-        // $generationService = new \App\Services\GenerationIncomeService();
+        // Get generation income service
+        $generationService = new \App\Services\GenerationIncomeService();
         
-        // Get generation income summary (using fallback method)
-        $incomeSummary = $this->getGenerationIncomeFallback($user);
+        // Get generation income summary
+        $incomeSummary = $generationService->getGenerationIncomeSummary($user);
         
-        // Get generation details with pagination (using fallback)
-        $generationIncomes = collect(); // Empty collection as fallback
+        // Get generation details with pagination
+        $generationIncomes = $generationService->getGenerationIncomeDetails($user, 15);
         
         // Get traditional generation levels for display
         $generations = $this->getNewGenerationLevels($user);
@@ -2351,8 +2361,11 @@ class UserController extends Controller
                 'reserve_points' => $userFresh->reserve_points ?? 0,
             ];
 
-            // Pending cashback amount (table removed)
-            $pendingCashbackAmount = 0;
+            // Get pending cashback amount sum from user_daily_cashbacks table
+            $pendingCashbackAmount = DB::table('user_daily_cashbacks')
+                ->where('user_id', $user->id)
+                ->where('status', 'pending')
+                ->sum('cashback_amount');
             
             // Get bonus statistics
             $sponsorBonus = Commission::where('user_id', $user->id)
@@ -2360,10 +2373,9 @@ class UserController extends Controller
                 ->where('status', 'approved')
                 ->sum('commission_amount');
                 
-            $binaryBonus = Commission::where('user_id', $user->id)
-                ->where('commission_type', 'binary')
-                ->where('status', 'approved')
-                ->sum('commission_amount');
+            $binaryBonus = BinaryMatching::where('user_id', $user->id)
+                ->whereIn('status', ['processed', 'paid'])
+                ->sum('matching_bonus');
                 
             $teamBonus = Commission::where('user_id', $user->id)
                 ->where('commission_type', 'team')
@@ -2376,7 +2388,9 @@ class UserController extends Controller
                 ->sum('commission_amount');
 
             // Link Share Bonus - Cumulative from daily link sharing stats
-            $linkShareBonus = 0;
+            $linkShareBonus = DB::table('daily_link_sharing_stats')
+                ->where('user_id', $user->id)
+                ->sum('earnings_amount');
                 
             // Rank Salary from transactions
             $rankSalary = DB::table('transactions')
@@ -2821,21 +2835,5 @@ class UserController extends Controller
         }
         
         return $totalCount;
-    }
-
-    /**
-     * Fallback method for generation income summary when GenerationIncomeService doesn't exist
-     */
-    private function getGenerationIncomeFallback($user)
-    {
-        return [
-            'total_income' => 0,
-            'this_month_income' => 0,
-            'this_week_income' => 0,
-            'pending_income' => 0,
-            'total_members' => 0,
-            'active_members' => 0,
-            'generations' => []
-        ];
     }
 }

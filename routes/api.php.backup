@@ -1,0 +1,487 @@
+<?php
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\CartController;
+use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\ShippingController;
+
+// Shipping API routes
+Route::prefix('shipping')->group(function () {
+    Route::post('/calculate', [ShippingController::class, 'calculateShipping']);
+    Route::post('/check-free-shipping', [ShippingController::class, 'checkFreeShipping']);
+    Route::get('/config', [ShippingController::class, 'getShippingConfig']);
+});
+
+// Cart API routes
+Route::prefix('cart')->group(function () {
+    Route::post('/add', function (Request $request) {
+        // For now, just return success response
+        // In a real app, you'd save to database or session
+        return response()->json([
+            'success' => true,
+            'message' => 'Product added to cart successfully',
+            'cart_count' => 1 // This would be the actual cart count
+        ]);
+    });
+
+    Route::get('/count', function (Request $request) {
+        // Return cart count
+        return response()->json([
+            'count' => 0 // This would be the actual cart count from session/database
+        ]);
+    });
+
+    Route::post('/update-quantity', function (Request $request) {
+        // Update cart item quantity
+        $productId = $request->input('product_id');
+        $quantity = $request->input('quantity', 1);
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'Cart quantity updated',
+            'quantity' => $quantity
+        ]);
+    });
+
+    // Cart price update routes
+    Route::post('/prices', [CartController::class, 'getPrices']);
+    Route::post('/update-prices', [CartController::class, 'updatePrices']);
+
+    Route::delete('/remove/{id}', function ($id) {
+        // Remove item from cart
+        return response()->json([
+            'success' => true,
+            'message' => 'Product removed from cart'
+        ]);
+    });
+
+    Route::delete('/clear', function (Request $request) {
+        // Clear entire cart
+        return response()->json([
+            'success' => true,
+            'message' => 'Cart cleared successfully'
+        ]);
+    });
+
+    Route::get('/totals', function (Request $request) {
+        // Calculate cart totals
+        // This would typically calculate based on session/database cart
+        return response()->json([
+            'subtotal' => 0.00,
+            'shipping' => 5.99,
+            'tax' => 0.00,
+            'total' => 5.99
+        ]);
+    });
+});
+
+// Coupon API routes
+Route::prefix('coupons')->group(function () {
+    Route::post('/validate', function (Request $request) {
+        $couponCode = $request->input('code');
+        $cartTotal = $request->input('cart_total', 0);
+        
+        // Find coupon by code
+        $coupon = \App\Models\Coupon::where('code', $couponCode)
+            ->where('is_active', true)
+            ->first();
+        
+        if (!$coupon) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid coupon code'
+            ], 422);
+        }
+        
+        // Check if coupon is expired
+        if ($coupon->end_date && now()->isAfter($coupon->end_date)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'This coupon has expired'
+            ], 422);
+        }
+        
+        // Check if coupon has started
+        if ($coupon->start_date && now()->isBefore($coupon->start_date)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'This coupon is not yet valid'
+            ], 422);
+        }
+        
+        // Check minimum amount
+        if ($coupon->minimum_amount && $cartTotal < $coupon->minimum_amount) {
+            return response()->json([
+                'success' => false,
+                'message' => "Minimum order amount of $" . number_format($coupon->minimum_amount, 2) . " required"
+            ], 422);
+        }
+        
+        // Check usage limit
+        if ($coupon->usage_limit && $coupon->used_count >= $coupon->usage_limit) {
+            return response()->json([
+                'success' => false,
+                'message' => 'This coupon has reached its usage limit'
+            ], 422);
+        }
+        
+        // Calculate discount
+        $discount = 0;
+        switch ($coupon->type) {
+            case 'percentage':
+                $discount = ($cartTotal * $coupon->value) / 100;
+                break;
+            case 'fixed':
+                $discount = $coupon->value;
+                break;
+            case 'free_shipping':
+                $discount = 5.99; // Assuming fixed shipping cost
+                break;
+        }
+        
+        // Apply maximum discount limit
+        if ($coupon->maximum_discount && $discount > $coupon->maximum_discount) {
+            $discount = $coupon->maximum_discount;
+        }
+        
+        // Ensure discount doesn't exceed cart total
+        if ($discount > $cartTotal) {
+            $discount = $cartTotal;
+        }
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'Coupon applied successfully',
+            'coupon' => [
+                'code' => $coupon->code,
+                'name' => $coupon->name,
+                'type' => $coupon->type,
+                'value' => $coupon->value,
+                'discount_amount' => round($discount, 2),
+                'free_shipping' => $coupon->type === 'free_shipping' || $coupon->free_shipping
+            ]
+        ]);
+    });
+    
+    Route::post('/remove', function (Request $request) {
+        return response()->json([
+            'success' => true,
+            'message' => 'Coupon removed successfully'
+        ]);
+    });
+});
+
+// Wishlist API routes
+Route::prefix('wishlist')->group(function () {
+    Route::post('/toggle', function (Request $request) {
+        $productId = $request->input('product_id');
+        
+        return response()->json([
+            'success' => true,
+            'in_wishlist' => true, // This would check actual wishlist status
+            'message' => 'Wishlist updated'
+        ]);
+    });
+});
+
+// Reviews API routes
+Route::prefix('reviews')->group(function () {
+    Route::post('/', function (Request $request) {
+        // Validate and save review
+        $request->validate([
+            'product_id' => 'required|integer',
+            'rating' => 'required|integer|min:1|max:5',
+            'review' => 'required|string|max:1000'
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Review submitted successfully. It will be published after moderation.'
+        ]);
+    });
+});
+
+// Orders API routes
+Route::prefix('orders')->group(function () {
+    Route::get('/{id}', [OrderController::class, 'show']);
+    Route::get('/{id}/invoice', [OrderController::class, 'downloadInvoice']);
+    Route::get('/{id}/pdf', [OrderController::class, 'downloadPdfInvoice']);
+});
+
+// Real-time validation routes for registration form
+Route::get('/validate-sponsor', function (Request $request) {
+    $sponsorId = $request->get('sponsor_id');
+    
+    if (!$sponsorId) {
+        return response()->json(['valid' => false, 'message' => 'Sponsor ID is required']);
+    }
+    
+    // Check by username, referral_code, or referral_hash
+    $sponsor = \App\Models\User::where(function($query) use ($sponsorId) {
+        $query->where('username', $sponsorId)
+              ->orWhere('referral_code', $sponsorId)
+              ->orWhere('referral_hash', $sponsorId);
+    })->first();
+    
+    if ($sponsor) {
+        return response()->json([
+            'valid' => true,
+            'sponsor' => [
+                'id' => $sponsor->id,
+                'name' => $sponsor->name ?? $sponsor->firstname . ' ' . $sponsor->lastname,
+                'username' => $sponsor->username,
+                'avatar' => $sponsor->avatar ? asset('storage/' . $sponsor->avatar) : asset('assets/img/default-avatar.png'),
+                'status' => $sponsor->status,
+                'role' => $sponsor->role
+            ]
+        ]);
+    }
+    
+    return response()->json(['valid' => false, 'message' => 'Sponsor not found']);
+});
+
+Route::get('/check-username', function (Request $request) {
+    $username = $request->get('username');
+    
+    if (!$username) {
+        return response()->json(['available' => false, 'message' => 'Username is required']);
+    }
+    
+    // Validate username format
+    if (!preg_match('/^[a-zA-Z0-9_]+$/', $username)) {
+        return response()->json(['available' => false, 'message' => 'Username can only contain letters, numbers, and underscores']);
+    }
+    
+    // Check if username is available
+    $exists = \App\Models\User::where('username', $username)->exists();
+    
+    return response()->json([
+        'available' => !$exists,
+        'message' => $exists ? 'Username is already taken' : 'Username is available'
+    ]);
+});
+
+Route::get('/check-email', function (Request $request) {
+    $email = $request->get('email');
+    
+    if (!$email) {
+        return response()->json(['available' => false, 'message' => 'Email is required']);
+    }
+    
+    // Validate email format
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return response()->json(['available' => false, 'message' => 'Invalid email format']);
+    }
+    
+    // Check if email is available
+    $exists = \App\Models\User::where('email', $email)->exists();
+    
+    return response()->json([
+        'available' => !$exists,
+        'message' => $exists ? 'Email is already registered' : 'Email is available'
+    ]);
+});
+
+Route::get('/check-phone', function (Request $request) {
+    $phone = $request->get('phone');
+    
+    if (!$phone) {
+        return response()->json(['available' => false, 'message' => 'Phone number is required']);
+    }
+    
+    // Check if phone is available
+    $exists = \App\Models\User::where('phone', $phone)->exists();
+    
+    return response()->json([
+        'available' => !$exists,
+        'message' => $exists ? 'Phone number is already registered' : 'Phone number is available'
+    ]);
+});
+
+// Upline username validation for manual placement
+Route::post('/validate-upline-username', function (Request $request) {
+    $username = $request->input('username');
+    
+    if (!$username) {
+        return response()->json(['valid' => false, 'message' => 'Upline username is required']);
+    }
+    
+    // Find the upline user by username
+    $uplineUser = \App\Models\User::where('username', $username)
+                                 ->where('status', 'active')
+                                 ->first();
+    
+    if (!$uplineUser) {
+        return response()->json(['valid' => false, 'message' => 'Upline username not found or inactive']);
+    }
+    
+    // Additional check: ensure upline can accept new downlines
+    // You can add more business logic here like checking if upline has space for new members
+    
+    return response()->json([
+        'valid' => true,
+        'upline' => [
+            'id' => $uplineUser->id,
+            'name' => $uplineUser->name ?? $uplineUser->firstname . ' ' . $uplineUser->lastname,
+            'username' => $uplineUser->username,
+            'status' => $uplineUser->status
+        ],
+        'message' => 'Valid upline username'
+    ]);
+});
+
+// Check position availability for placement
+Route::post('/check-position-availability', function (Request $request) {
+    $uplineUsername = $request->input('upline_username');
+    $position = $request->input('position'); // 'left' or 'right'
+    
+    if (!$uplineUsername || !$position) {
+        return response()->json([
+            'available' => false, 
+            'message' => 'Upline username and position are required'
+        ]);
+    }
+    
+    // Find the upline user
+    $uplineUser = \App\Models\User::where('username', $uplineUsername)
+                                 ->where('status', 'active')
+                                 ->first();
+    
+    if (!$uplineUser) {
+        return response()->json([
+            'available' => false, 
+            'message' => 'Upline user not found or inactive'
+        ]);
+    }
+    
+    // Check if the position is already taken
+    $existingDownline = \App\Models\User::where('upline_id', $uplineUser->id)
+                                       ->where('position', $position)
+                                       ->first();
+    
+    if ($existingDownline) {
+        return response()->json([
+            'available' => false,
+            'message' => ucfirst($position) . ' position is already occupied by ' . $existingDownline->username,
+            'occupied_by' => [
+                'username' => $existingDownline->username,
+                'name' => $existingDownline->name ?? $existingDownline->firstname . ' ' . $existingDownline->lastname,
+                'joined_at' => $existingDownline->created_at->format('M d, Y')
+            ]
+        ]);
+    }
+    
+    return response()->json([
+        'available' => true,
+        'message' => ucfirst($position) . ' position is available under ' . $uplineUser->username,
+        'upline' => [
+            'username' => $uplineUser->username,
+            'name' => $uplineUser->name ?? $uplineUser->firstname . ' ' . $uplineUser->lastname
+        ]
+    ]);
+});
+
+// Check if user has space for auto placement
+Route::post('/check-auto-placement-availability', function (Request $request) {
+    $sponsorUsername = $request->input('sponsor_username');
+    $preferredPosition = $request->input('position'); // 'left' or 'right'
+    
+    if (!$sponsorUsername || !$preferredPosition) {
+        return response()->json([
+            'available' => false,
+            'message' => 'Sponsor username and preferred position are required'
+        ]);
+    }
+    
+    // Find the sponsor user
+    $sponsor = \App\Models\User::where('username', $sponsorUsername)
+                              ->orWhere('referral_code', $sponsorUsername)
+                              ->orWhere('referral_hash', $sponsorUsername)
+                              ->where('status', 'active')
+                              ->first();
+    
+    if (!$sponsor) {
+        return response()->json([
+            'available' => false,
+            'message' => 'Sponsor not found or inactive'
+        ]);
+    }
+    
+    // Check if preferred position is available directly under sponsor
+    $directPositionTaken = \App\Models\User::where('upline_id', $sponsor->id)
+                                          ->where('position', $preferredPosition)
+                                          ->exists();
+    
+    if (!$directPositionTaken) {
+        return response()->json([
+            'available' => true,
+            'placement_type' => 'direct',
+            'message' => 'You will be placed directly under your sponsor on the ' . $preferredPosition . ' side',
+            'upline' => [
+                'username' => $sponsor->username,
+                'name' => $sponsor->name ?? $sponsor->firstname . ' ' . $sponsor->lastname
+            ]
+        ]);
+    }
+    
+    // Find the next available position in the tree using breadth-first search
+    $availablePosition = findNextAvailablePosition($sponsor->id, $preferredPosition);
+    
+    if ($availablePosition) {
+        $uplineUser = \App\Models\User::find($availablePosition['upline_id']);
+        return response()->json([
+            'available' => true,
+            'placement_type' => 'auto_deep',
+            'message' => 'You will be placed under ' . $uplineUser->username . ' on the ' . $availablePosition['position'] . ' side',
+            'upline' => [
+                'username' => $uplineUser->username,
+                'name' => $uplineUser->name ?? $uplineUser->firstname . ' ' . $uplineUser->lastname,
+                'depth' => $availablePosition['depth']
+            ]
+        ]);
+    }
+    
+    return response()->json([
+        'available' => false,
+        'message' => 'No available positions found in the ' . $preferredPosition . ' leg. Please try the other position.'
+    ]);
+});
+
+// Helper function to find next available position
+function findNextAvailablePosition($sponsorId, $preferredSide, $maxDepth = 10) {
+    $queue = [['user_id' => $sponsorId, 'depth' => 0]];
+    $visited = [];
+    
+    while (!empty($queue) && $queue[0]['depth'] < $maxDepth) {
+        $current = array_shift($queue);
+        $userId = $current['user_id'];
+        $depth = $current['depth'];
+        
+        if (in_array($userId, $visited)) {
+            continue;
+        }
+        $visited[] = $userId;
+        
+        // Check if this user has space for the preferred position
+        $positionTaken = \App\Models\User::where('upline_id', $userId)
+                                        ->where('position', $preferredSide)
+                                        ->exists();
+        
+        if (!$positionTaken && $depth > 0) { // Don't place directly under sponsor if we're here
+            return [
+                'upline_id' => $userId,
+                'position' => $preferredSide,
+                'depth' => $depth
+            ];
+        }
+        
+        // Add children to queue for further searching
+        $children = \App\Models\User::where('upline_id', $userId)->get();
+        foreach ($children as $child) {
+            $queue[] = ['user_id' => $child->id, 'depth' => $depth + 1];
+        }
+    }
+    
+    return null;
+}

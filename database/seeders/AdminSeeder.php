@@ -15,12 +15,6 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        // Check if admins already exist
-        if (DB::table('admins')->count() > 0) {
-            $this->command->info('✅ Admin users already exist. Skipping admin seeding.');
-            return;
-        }
-
         $now = Carbon::now();
 
         // Insert default admin users

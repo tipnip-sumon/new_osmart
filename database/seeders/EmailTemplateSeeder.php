@@ -45,10 +45,7 @@ class EmailTemplateSeeder extends Seeder
         ];
 
         foreach ($templates as $template) {
-            EmailTemplate::updateOrCreate(
-                ['slug' => $template['slug']], // Key to check for existing records
-                $template // Data to update or create
-            );
+            EmailTemplate::create($template);
         }
     }
 

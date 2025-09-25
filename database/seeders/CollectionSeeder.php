@@ -87,10 +87,7 @@ class CollectionSeeder extends Seeder
         ];
 
         foreach ($collections as $collection) {
-            Collection::updateOrCreate(
-                ['slug' => $collection['slug']], // Key to check for existing records
-                $collection // Data to update or create
-            );
+            Collection::create($collection);
         }
     }
 }

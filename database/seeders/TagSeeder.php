@@ -72,10 +72,7 @@ class TagSeeder extends Seeder
         ];
 
         foreach ($tags as $tag) {
-            Tag::updateOrCreate(
-                ['slug' => $tag['slug']], // Key to check for existing records
-                $tag // Data to update or create
-            );
+            Tag::create($tag);
         }
     }
 }

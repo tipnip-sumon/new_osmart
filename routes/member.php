@@ -28,7 +28,12 @@ Route::middleware(['auth', 'role.session:affiliate'])->prefix('member')->name('m
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
     Route::get('/wallet/balance', [UserController::class, 'getWalletBalance'])->name('wallet.balance');
     
-    
+    // Daily Cashback System
+    Route::prefix('daily-cashback')->name('daily-cashback.')->group(function () {
+        Route::get('/dashboard', [\App\Http\Controllers\Member\DailyCashbackController::class, 'dashboard'])->name('dashboard');
+        Route::get('/history', [\App\Http\Controllers\Member\DailyCashbackController::class, 'history'])->name('history');
+        Route::get('/pending', [\App\Http\Controllers\Member\DailyCashbackController::class, 'pending'])->name('pending');
+    });
     
     // Vendor Application (Affiliate members can apply to become vendors)
     Route::get('/vendor-application', [UserController::class, 'vendorApplication'])->name('vendor-application');
@@ -60,7 +65,18 @@ Route::middleware(['auth', 'role.session:affiliate'])->prefix('member')->name('m
     // Financial Management
     Route::get('/commissions', [UserController::class, 'commissions'])->name('commissions');
     
-   
+    // Matching Bonus Routes
+    Route::prefix('matching')->name('matching.')->group(function () {
+        Route::get('/dashboard', [MatchingController::class, 'dashboard'])->name('dashboard');
+        Route::get('/history', [MatchingController::class, 'history'])->name('history');
+        Route::get('/details/{id}', [MatchingController::class, 'details'])->name('details');
+        Route::get('/qualifications', [MatchingController::class, 'qualifications'])->name('qualifications');
+        Route::get('/calculator', [MatchingController::class, 'calculator'])->name('calculator');
+        Route::get('/rank-salary-report', [MatchingController::class, 'rankSalaryReport'])->name('rank.salary.report');
+        Route::post('/calculate', [MatchingController::class, 'calculate'])->name('calculate');
+        Route::get('/binary-summary', [MatchingController::class, 'getBinarySummary'])->name('binary.summary');
+        Route::get('/leg-volumes', [MatchingController::class, 'getLegVolumes'])->name('leg.volumes');
+    });
     
     // Withdrawal & Transfer
     Route::get('/withdraw', [UserController::class, 'withdraw'])->name('withdraw');
@@ -110,6 +126,53 @@ Route::middleware(['auth', 'role.session:affiliate'])->prefix('member')->name('m
         Route::get('/{investment}', [InvestController::class, 'show'])->name('show');
     });
     
+    // Direct Point Purchase Routes
+    Route::prefix('direct-point-purchase')->name('direct-point-purchase.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Member\DirectPointPurchaseController::class, 'index'])->name('index');
+        Route::post('/purchase-product', [\App\Http\Controllers\Member\DirectPointPurchaseController::class, 'purchaseProduct'])->name('purchase-product');
+        Route::get('/success', [\App\Http\Controllers\Member\DirectPointPurchaseController::class, 'success'])->name('success');
+        // Redirect history to orders page since orders page already exists with all the data
+        Route::get('/history', function () {
+            return redirect()->route('member.orders');
+        })->name('history');
+        Route::get('/calculate-cost', [\App\Http\Controllers\Member\DirectPointPurchaseController::class, 'calculateCost'])->name('calculate-cost');
+    });
+    
+    // Points Management Routes
+    Route::prefix('points')->name('points.')->group(function () {
+        Route::get('/dashboard', [\App\Http\Controllers\Member\PointsController::class, 'dashboard'])->name('dashboard');
+        Route::get('/history', [\App\Http\Controllers\Member\PointsController::class, 'history'])->name('history');
+        Route::get('/transfer', [\App\Http\Controllers\Member\PointsController::class, 'transfer'])->name('transfer');
+        Route::post('/transfer', [\App\Http\Controllers\Member\PointsController::class, 'processTransfer'])->name('transfer.process');
+        Route::get('/balance', [\App\Http\Controllers\Member\PointsController::class, 'balance'])->name('balance');
+        Route::get('/transactions', [\App\Http\Controllers\Member\PointsController::class, 'transactions'])->name('transactions');
+    });
+    
+    // Point Transactions History Routes
+    Route::prefix('point-transactions')->name('point-transactions.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Member\PointTransactionController::class, 'index'])->name('index');
+        Route::get('/{id}', [\App\Http\Controllers\Member\PointTransactionController::class, 'show'])->name('show');
+        Route::get('/export/download', [\App\Http\Controllers\Member\PointTransactionController::class, 'export'])->name('export');
+        Route::get('/stats/data', [\App\Http\Controllers\Member\PointTransactionController::class, 'stats'])->name('stats');
+    });
+    
+    // Package Management Routes
+    Route::prefix('packages')->name('packages.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Member\PackageController::class, 'index'])->name('index');
+        Route::get('/current', [\App\Http\Controllers\Member\PackageController::class, 'current'])->name('current');
+        Route::get('/upgrade', [\App\Http\Controllers\Member\PackageController::class, 'upgrade'])->name('upgrade');
+        Route::get('/purchase/{plan}', [\App\Http\Controllers\Member\PackageController::class, 'purchase'])->name('purchase');
+        Route::post('/store', [\App\Http\Controllers\Member\PackageController::class, 'store'])->name('store');
+        Route::post('/process-purchase', [\App\Http\Controllers\Member\PackageController::class, 'processPurchase'])->name('process-purchase');
+        Route::get('/success', [\App\Http\Controllers\Member\PackageController::class, 'success'])->name('success');
+        Route::get('/payout', [\App\Http\Controllers\Member\PackageController::class, 'payout'])->name('payout');
+        Route::post('/process-payout', [\App\Http\Controllers\Member\PackageController::class, 'processPayout'])->name('process-payout');
+        Route::get('/payout-success', [\App\Http\Controllers\Member\PackageController::class, 'payoutSuccess'])->name('payout-success');
+        Route::get('/history', [\App\Http\Controllers\Member\PackageController::class, 'history'])->name('history');
+        Route::get('/calculate-cost', [\App\Http\Controllers\Member\PackageController::class, 'calculateCost'])->name('calculate-cost');
+        Route::get('/summary', [\App\Http\Controllers\Member\PackageController::class, 'getSummary'])->name('summary');
+    });
+    
     // Reports
     Route::prefix('reports')->name('reports.')->group(function () {
         Route::get('/sales', [UserController::class, 'salesReport'])->name('sales');
@@ -148,6 +211,13 @@ Route::middleware(['auth', 'role.session:affiliate'])->prefix('member')->name('m
         Route::post('/affiliate/bulk-links', [ProductController::class, 'bulkGenerateAffiliateLinks'])->name('affiliate.bulk-links');
         Route::get('/{product}/quick-view', [ProductController::class, 'quickView'])->name('quick-view');
         Route::get('/{product}', [ProductController::class, 'show'])->name('show');
+    });
+    
+    // Dedicated affiliate management routes
+    Route::prefix('affiliate')->name('affiliate.')->group(function () {
+        Route::get('/dashboard', [AffiliateController::class, 'dashboard'])->name('dashboard');
+        Route::get('/analytics', [AffiliateController::class, 'getAnalytics'])->name('analytics');
+        Route::post('/share', [AffiliateController::class, 'generateShareableLink'])->name('share');
     });
     
     // Support & Profile Management
@@ -190,6 +260,17 @@ Route::middleware(['auth', 'role.session:affiliate'])->prefix('member')->name('m
         Route::get('/verify/status', [\App\Http\Controllers\Member\EmailVerificationController::class, 'status'])->name('verify.status');
         Route::post('/update', [\App\Http\Controllers\Member\EmailVerificationController::class, 'updateEmail'])->name('update');
         Route::get('/stats', [\App\Http\Controllers\Member\EmailVerificationController::class, 'stats'])->name('stats');
+    });
+
+    // Package Link Sharing System
+    Route::prefix('link-sharing')->name('link-sharing.')->group(function () {
+        Route::get('/', [App\Http\Controllers\Member\PackageLinkSharingController::class, 'index'])->name('dashboard');
+        Route::post('/share', [App\Http\Controllers\Member\PackageLinkSharingController::class, 'shareProduct'])->name('share');
+        Route::get('/products', [App\Http\Controllers\Member\PackageLinkSharingController::class, 'getProducts'])->name('products');
+        Route::get('/history', [App\Http\Controllers\Member\PackageLinkSharingController::class, 'sharingHistory'])->name('history');
+        Route::get('/stats', [App\Http\Controllers\Member\PackageLinkSharingController::class, 'getStats'])->name('stats');
+        Route::get('/upgrade', [App\Http\Controllers\Member\PackageLinkSharingController::class, 'packageUpgrade'])->name('upgrade');
+        Route::get('/social-urls', [App\Http\Controllers\Member\PackageLinkSharingController::class, 'getSocialSharingUrls'])->name('social-urls');
     });
 
     // Notification Routes

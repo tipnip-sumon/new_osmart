@@ -38,12 +38,18 @@ class DatabaseSeeder extends Seeder
             WarehouseSeeder::class,
             
             // 5. MLM System (Basic)
-            // SubscriptionPlanSeeder::class, // Removed - subscription_plans table doesn't exist
+            MlmSeeder::class,
+            PointBasedPlanSeeder::class,
+            SubscriptionPlanSeeder::class,
             CommissionSeeder::class,
             // CommissionSettingSeeder::class, // Has column issues
             
             // 6. Admin Interface
+            AdminMenuSeeder::class,
             ModalSettingsSeeder::class,
+            
+            // 7. System Tasks
+            ScheduledTasksSeeder::class,
         ]);
         
         $this->command->info('✅ O-Smart BD Database Seeding Completed Successfully!');
