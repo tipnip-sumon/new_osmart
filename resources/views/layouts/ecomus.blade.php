@@ -37,6 +37,84 @@
         .count-box.has-items {
             display: inline-block !important;
         }
+        
+        /* Quantity Controls (+ - buttons) */
+        .wg-quantity {
+            display: flex;
+            align-items: center;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            overflow: hidden;
+            background: white;
+        }
+        
+        .wg-quantity.small {
+            height: 32px;
+            max-width: 100px;
+        }
+        
+        .wg-quantity .btn-quantity {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 100%;
+            background: #f8f9fa;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+        
+        .wg-quantity .btn-quantity:hover {
+            background: #e9ecef;
+            color: #000;
+        }
+        
+        .wg-quantity .btn-quantity:active {
+            background: #dee2e6;
+        }
+        
+        .wg-quantity input[type="text"] {
+            border: none;
+            outline: none;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            width: 44px;
+            height: 100%;
+            background: white;
+            color: #333;
+        }
+        
+        .wg-quantity input[type="text"]:focus {
+            outline: none;
+            box-shadow: none;
+        }
+        
+        /* Remove button styling */
+        .tf-mini-cart-remove {
+            color: #999;
+            font-size: 12px;
+            cursor: pointer;
+            margin-top: 4px;
+            transition: color 0.2s ease;
+        }
+        
+        .tf-mini-cart-remove:hover {
+            color: #dc3545;
+        }
+        
+        /* Mini cart buttons container */
+        .tf-mini-cart-btns {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
+        }
     </style>
 
     <!-- Web App Manifest -->
@@ -260,6 +338,61 @@
                 console.error('Error updating cart count:', error);
             });
         }
+        
+        // Quantity Controls Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle quantity buttons
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('btn-quantity')) {
+                    e.preventDefault();
+                    
+                    const button = e.target;
+                    const quantityContainer = button.closest('.wg-quantity');
+                    const input = quantityContainer.querySelector('input[type="text"]');
+                    let currentValue = parseInt(input.value) || 1;
+                    
+                    if (button.classList.contains('plus-btn')) {
+                        currentValue += 1;
+                    } else if (button.classList.contains('minus-btn') && currentValue > 1) {
+                        currentValue -= 1;
+                    }
+                    
+                    input.value = currentValue;
+                    
+                    // Trigger change event for any listeners
+                    input.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+            });
+            
+            // Handle direct input changes
+            document.addEventListener('input', function(e) {
+                if (e.target.matches('.wg-quantity input[type="text"]')) {
+                    let value = parseInt(e.target.value) || 1;
+                    if (value < 1) value = 1;
+                    if (value > 999) value = 999;
+                    e.target.value = value;
+                }
+            });
+            
+            // Handle remove buttons
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('tf-mini-cart-remove')) {
+                    e.preventDefault();
+                    
+                    const cartItem = e.target.closest('.tf-mini-cart-item');
+                    if (cartItem) {
+                        // Add fade out animation
+                        cartItem.style.transition = 'opacity 0.3s ease';
+                        cartItem.style.opacity = '0';
+                        
+                        setTimeout(() => {
+                            cartItem.remove();
+                            updateCartCount();
+                        }, 300);
+                    }
+                }
+            });
+        });
         
         // Make functions globally available
         window.updateWishlistCount = updateWishlistCount;
