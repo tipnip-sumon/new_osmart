@@ -6,64 +6,129 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
 <style>
-    /* Interactive Form Styles */
+    /* International Standard Form Styles */
     .form-control:focus, .form-select:focus {
-        border-color: #007bff;
-        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-        transform: translateY(-1px);
-        transition: all 0.3s ease;
+        border-color: #0066cc;
+        box-shadow: 0 0 0 0.15rem rgba(0, 102, 204, 0.15);
+        transition: all 0.2s ease-in-out;
     }
 
-    .form-control.border-warning {
-        border-color: #ffc107 !important;
-        box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
+    .form-control.is-invalid {
+        border-color: #dc3545;
+        box-shadow: 0 0 0 0.15rem rgba(220, 53, 69, 0.15);
     }
 
-    /* Color Suggestions Styling */
-    .color-suggestions, .size-suggestions {
+    .form-control.is-valid {
+        border-color: #28a745;
+        box-shadow: 0 0 0 0.15rem rgba(40, 167, 69, 0.15);
+    }
+
+    /* Standard Form Section Styling */
+    .form-section {
+        background: #ffffff;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+    }
+
+    .form-section-header {
         background: #f8f9fa;
-        padding: 10px;
+        border-bottom: 1px solid #dee2e6;
+        padding: 1rem 1.25rem;
+        border-radius: 8px 8px 0 0;
+    }
+
+    .form-section-title {
+        font-weight: 600;
+        font-size: 1.1rem;
+        color: #495057;
+        margin: 0;
+    }
+
+    .form-section-body {
+        padding: 1.25rem;
+    }
+
+    /* Field Labels with Standard Marking */
+    .field-required {
+        color: #dc3545;
+        font-weight: 500;
+    }
+
+    .field-optional {
+        color: #6c757d;
+        font-weight: normal;
+        font-size: 0.875rem;
+    }
+
+    .field-help {
+        color: #6c757d;
+        font-size: 0.8125rem;
+        margin-top: 0.25rem;
+    }
+
+    /* Standard Button Styling */
+    .btn-suggestion {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+        margin: 0.125rem;
+        border-radius: 4px;
+        border: 1px solid #dee2e6;
+        background: #ffffff;
+        color: #495057;
+        transition: all 0.15s ease-in-out;
+    }
+
+    .btn-suggestion:hover {
+        background: #e9ecef;
+        border-color: #adb5bd;
+        color: #495057;
+    }
+
+    /* Standard Color Display */
+    .color-display-area {
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
         border-radius: 6px;
-        border: 1px solid #e9ecef;
-    }
-
-    .color-suggestion, .size-suggestion {
-        font-size: 11px !important;
-        padding: 2px 6px !important;
-        margin: 1px;
-        border-radius: 3px;
-        transition: all 0.2s ease;
-    }
-
-    .color-suggestion:hover, .size-suggestion:hover {
-        background-color: #007bff;
-        color: white;
-        transform: translateY(-1px);
+        padding: 0.75rem;
     }
 
     .color-swatch {
-        transition: all 0.2s ease;
-        position: relative;
+        width: 20px;
+        height: 20px;
+        border: 1px solid #adb5bd;
+        border-radius: 3px;
+        display: inline-block;
+        margin: 0.125rem;
+        transition: border-color 0.15s ease-in-out;
     }
 
     .color-swatch:hover {
-        transform: scale(1.2);
-        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        z-index: 10;
+        border-color: #495057;
     }
 
     .color-swatch-container {
-        position: relative;
         text-align: center;
+        margin: 0.25rem;
     }
 
-    .color-swatch-container:hover {
-        transform: translateY(-2px);
+    .color-name {
+        font-size: 0.75rem;
+        color: #6c757d;
+        margin-top: 0.25rem;
     }
 
-    .color-preview-actions {
-        border-top: 1px solid #dee2e6;
-        padding-top: 8px;
+    /* Progress Indicator */
+    .form-progress {
+        background: #ffffff;
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .progress-bar {
+        background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
     }
 
     /* Color Picker Modal Styles */
@@ -124,9 +189,37 @@
 
     /* Interactive button styling */
     #generate-slug-btn:hover {
-        background-color: #0056b3;
-        transform: rotate(180deg);
-        transition: all 0.3s ease;
+        background-color: #0066cc;
+        color: white;
+        transition: all 0.2s ease-in-out;
+    }
+
+    /* International Standard Color System */
+    :root {
+        --primary-color: #0066cc;
+        --success-color: #28a745;
+        --warning-color: #ffc107;
+        --danger-color: #dc3545;
+        --info-color: #17a2b8;
+        --light-color: #f8f9fa;
+        --dark-color: #343a40;
+        --border-color: #dee2e6;
+        --text-muted: #6c757d;
+    }
+
+    /* Accessibility and Mobile Improvements */
+    @media (max-width: 768px) {
+        .form-section {
+            margin-bottom: 1rem;
+        }
+        
+        .form-section-body {
+            padding: 1rem;
+        }
+        
+        .btn-suggestion {
+            font-size: 0.7rem;
+        }
     }
 
     /* Starter kit tier highlighting */
@@ -143,33 +236,38 @@
         to { box-shadow: 0 0 20px #ffc107, 0 0 30px #ffc107; }
     }
 
-    /* Image Upload Styles */
+    /* Responsive Image Upload Styles */
     .image-upload-container {
         border: 2px dashed #dee2e6;
         border-radius: 8px;
-        padding: 20px;
+        padding: 2rem;
         text-align: center;
         background: #f8f9fa;
         transition: all 0.3s ease;
         cursor: pointer;
+        min-height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .image-upload-container:hover {
-        border-color: #007bff;
-        background: #e7f3ff;
+        border-color: var(--primary-color);
+        background: #e3f2fd;
         transform: translateY(-2px);
     }
 
     .image-upload-container.drag-over {
-        border-color: #28a745;
-        background: #d4edda;
+        border-color: var(--success-color);
+        background: #e8f5e8;
+        transform: scale(1.02);
     }
 
     .image-preview-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 15px;
-        margin-top: 20px;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
     }
 
     .image-preview-item {
@@ -178,19 +276,134 @@
         border-radius: 8px;
         overflow: hidden;
         background: white;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        transition: all 0.3s ease;
+        aspect-ratio: 1;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
 
     .image-preview-item:hover {
         transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
     }
 
     .image-preview-item img {
         width: 100%;
-        height: 150px;
+        height: 100%;
         object-fit: cover;
+    }
+
+    .image-actions {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        display: flex;
+        gap: 2px;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+    }
+
+    .image-preview-item:hover .image-actions {
+        opacity: 1;
+    }
+
+    .btn-primary-image, .btn-remove-image {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        border: none;
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .btn-primary-image {
+        background: var(--warning-color);
+        color: white;
+    }
+
+    .btn-remove-image {
+        background: var(--danger-color);
+        color: white;
+    }
+
+    .primary-badge {
+        position: absolute;
+        bottom: 2px;
+        left: 2px;
+        background: var(--success-color);
+        color: white;
+        font-size: 8px;
+        padding: 2px 4px;
+        border-radius: 3px;
+        font-weight: 500;
+    }
+
+    .image-info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0,0,0,0.7);
+        color: white;
+        font-size: 9px;
+        padding: 2px 4px;
+        text-align: center;
+    }
+
+    /* Responsive Design for Mobile */
+    @media (max-width: 768px) {
+        .col-lg-9 {
+            order: 1;
+        }
+        
+        .col-lg-3 {
+            order: 2;
+        }
+        
+        .image-upload-container {
+            padding: 1.5rem;
+            min-height: 150px;
+        }
+        
+        .image-preview-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+        }
+        
+        .btn-group {
+            width: 100%;
+        }
+        
+        .btn-group .btn {
+            flex: 1;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .image-upload-container {
+            padding: 1rem;
+            min-height: 120px;
+        }
+        
+        .upload-content h5 {
+            font-size: 1rem;
+        }
+        
+        .upload-content p {
+            font-size: 0.8rem;
+        }
+        
+        .d-flex.gap-2 {
+            flex-direction: column;
+            gap: 0.5rem !important;
+        }
+        
+        .image-preview-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
 
     .image-remove-btn {
@@ -828,15 +1041,31 @@
     <div class="container-fluid">
         <!-- Page Header -->
         <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-            <h1 class="page-title fw-semibold fs-18 mb-0">Create Product</h1>
+            <div>
+                <h1 class="page-title fw-semibold fs-20 mb-1 text-dark">Create New Product</h1>
+                <p class="text-muted mb-0">Add a new product to your inventory with complete details</p>
+            </div>
             <div class="ms-md-1 ms-0">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('admin.products.index') }}">Products</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Create</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}" class="text-decoration-none">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.products.index') }}" class="text-decoration-none">Products</a></li>
+                        <li class="breadcrumb-item active text-primary" aria-current="page">Create</li>
                     </ol>
                 </nav>
+            </div>
+        </div>
+        
+        <!-- Field Legend -->
+        <div class="alert alert-light border border-primary-subtle mb-4">
+            <div class="d-flex align-items-center">
+                <i class="ti ti-info-circle text-primary me-2"></i>
+                <div>
+                    <strong class="text-dark">Field Requirements:</strong>
+                    <span class="field-required ms-3">* Required Field</span>
+                    <span class="field-optional ms-3">(Optional)</span>
+                    <span class="text-muted ms-3">• Standard fields follow international e-commerce standards</span>
+                </div>
             </div>
         </div>
         <!-- Page Header Close -->
@@ -844,100 +1073,132 @@
         <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data" id="productForm">
             @csrf
             <div class="row">
-                <!-- Basic Information -->
-                <div class="col-xl-8">
-                    <div class="card custom-card">
-                        <div class="card-header">
-                            <div class="card-title">Basic Information</div>
+                <!-- Main Content -->
+                <div class="col-lg-12 col-md-12">
+                    <div class="form-section">
+                        <div class="form-section-header">
+                            <h4 class="form-section-title">
+                                <i class="ti ti-package text-primary me-2"></i>
+                                Basic Information
+                            </h4>
                         </div>
-                        <div class="card-body">
+                        <div class="form-section-body">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="name" class="form-label">Product Name <span class="text-danger">*</span></label>
+                                    <label for="name" class="form-label fw-medium">
+                                        Product Name <span class="field-required">*</span>
+                                    </label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror" 
                                            id="name" name="name" value="{{ old('name') }}" placeholder="Enter product name" required>
                                     @error('name')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
+                                    <div class="field-help">Enter a clear, descriptive product name</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="slug" class="form-label">Slug</label>
+                                    <label for="slug" class="form-label fw-medium">
+                                        URL Slug <span class="field-optional">(Optional)</span>
+                                    </label>
                                     <div class="input-group">
                                         <input type="text" class="form-control @error('slug') is-invalid @enderror" 
                                                id="slug" name="slug" value="{{ old('slug') }}" placeholder="Auto-generated from name">
                                         <button class="btn btn-outline-secondary" type="button" id="generate-slug-btn" title="Generate slug from product name">
-                                            <i class="fas fa-sync-alt"></i>
+                                            <i class="ti ti-refresh"></i>
                                         </button>
                                     </div>
                                     @error('slug')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                    <div class="form-text">Leave empty to auto-generate, or customize as needed (e.g., "ami-vat-khai")</div>
+                                    <div class="field-help">Leave empty to auto-generate, or customize (e.g., "my-product-name")</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="sku" class="form-label">SKU</label>
+                                    <label for="sku" class="form-label fw-medium">
+                                        SKU <span class="field-optional">(Optional)</span>
+                                    </label>
                                     <input type="text" class="form-control @error('sku') is-invalid @enderror" 
                                            id="sku" name="sku" value="{{ old('sku') }}" placeholder="Auto-generated">
                                     @error('sku')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                    <div class="form-text">Stock Keeping Unit - Leave empty to auto-generate</div>
+                                    <div class="field-help">Stock Keeping Unit - Leave empty to auto-generate</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="barcode" class="form-label">Barcode</label>
+                                    <label for="barcode" class="form-label fw-medium">
+                                        Barcode <span class="field-optional">(Optional)</span>
+                                    </label>
                                     <input type="text" class="form-control @error('barcode') is-invalid @enderror" 
                                            id="barcode" name="barcode" value="{{ old('barcode') }}" placeholder="Product barcode">
                                     @error('barcode')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
+                                    <div class="field-help">Product barcode or UPC code</div>
                                 </div>
                                 <div class="col-md-12 mb-3">
-                                    <label for="short_description" class="form-label">Short Description</label>
+                                    <label for="short_description" class="form-label fw-medium">
+                                        Short Description <span class="field-optional">(Optional)</span>
+                                    </label>
                                     <textarea class="form-control @error('short_description') is-invalid @enderror" 
                                               id="short_description" name="short_description" rows="3" 
-                                              placeholder="Brief description of the product">{{ old('short_description') }}</textarea>
+                                              placeholder="Brief product description for listings">{{ old('short_description') }}</textarea>
                                     @error('short_description')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                    <div class="form-text">This appears in product listings (max 500 characters)</div>
+                                    <div class="field-help">Appears in product listings (recommended: 150-300 characters)</div>
                                 </div>
                                 <div class="col-md-12 mb-3">
-                                    <label for="description" class="form-label">Description</label>
+                                    <label for="description" class="form-label fw-medium">
+                                        Detailed Description <span class="field-optional">(Optional)</span>
+                                    </label>
                                     <textarea class="form-control @error('description') is-invalid @enderror" 
                                               id="description" name="description" rows="6" 
-                                              placeholder="Detailed product description">{{ old('description') }}</textarea>
+                                              placeholder="Comprehensive product description with features and benefits">{{ old('description') }}</textarea>
                                     @error('description')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                    <div class="form-text">Detailed product information for customers</div>
+                                    <div class="field-help">Detailed product information for customers</div>
                                 </div>
-                            </div>
                         </div>
                     </div>
 
                     <!-- Pricing Information -->
-                    <div class="card custom-card">
-                        <div class="card-header">
-                            <div class="card-title">Pricing Information</div>
+                    <div class="form-section">
+                        <div class="form-section-header">
+                            <h4 class="form-section-title">
+                                <i class="ti ti-currency-dollar text-success me-2"></i>
+                                Pricing Information
+                            </h4>
                         </div>
-                        <div class="card-body">
+                        <div class="form-section-body">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="price" class="form-label">Regular Price <span class="text-danger">*</span></label>
-                                    <input type="number" class="form-control @error('price') is-invalid @enderror" 
-                                           id="price" name="price" value="{{ old('price') }}" step="0.01" min="0" placeholder="0.00" required>
+                                    <label for="price" class="form-label fw-medium">
+                                        Regular Price <span class="field-required">*</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light">৳</span>
+                                        <input type="number" class="form-control @error('price') is-invalid @enderror" 
+                                               id="price" name="price" value="{{ old('price') }}" step="0.01" min="0" 
+                                               placeholder="0.00" required>
+                                    </div>
                                     @error('price')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
+                                    <div class="field-help">Base selling price of the product</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="sale_price" class="form-label">Sale Price</label>
-                                    <input type="number" class="form-control @error('sale_price') is-invalid @enderror" 
-                                           id="sale_price" name="sale_price" value="{{ old('sale_price') }}" step="0.01" min="0" placeholder="0.00">
+                                    <label for="sale_price" class="form-label fw-medium">
+                                        Sale Price <span class="field-optional">(Optional)</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light">৳</span>
+                                        <input type="number" class="form-control @error('sale_price') is-invalid @enderror" 
+                                               id="sale_price" name="sale_price" value="{{ old('sale_price') }}" step="0.01" min="0" 
+                                               placeholder="0.00">
+                                    </div>
                                     @error('sale_price')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                    <div class="form-text">Leave empty if no sale price</div>
+                                    <div class="field-help">Discounted price (must be less than regular price)</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="cost_price" class="form-label">Cost Price</label>
@@ -1098,71 +1359,85 @@
                     </div>
 
                     <!-- SEO Information -->
-                    <div class="card custom-card">
-                        <div class="card-header">
-                            <div class="card-title">SEO Information</div>
+                    <div class="form-section">
+                        <div class="form-section-header">
+                            <h4 class="form-section-title">
+                                <i class="ti ti-search text-success me-2"></i>
+                                SEO Information
+                            </h4>
                         </div>
-                        <div class="card-body">
+                        <div class="form-section-body">
                             <div class="mb-3">
-                                <label for="meta_title" class="form-label">Meta Title</label>
+                                <label for="meta_title" class="form-label fw-medium">
+                                    Meta Title <span class="field-optional">(Optional)</span>
+                                </label>
                                 <input type="text" class="form-control @error('meta_title') is-invalid @enderror" 
                                        id="meta_title" name="meta_title" value="{{ old('meta_title') }}" 
                                        placeholder="SEO friendly title">
                                 @error('meta_title')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-                                <div class="form-text">Recommended length: 50-60 characters</div>
+                                <div class="field-help">Recommended length: 50-60 characters</div>
                             </div>
 
                             <div class="mb-3">
-                                <label for="meta_description" class="form-label">Meta Description</label>
+                                <label for="meta_description" class="form-label fw-medium">
+                                    Meta Description <span class="field-optional">(Optional)</span>
+                                </label>
                                 <textarea class="form-control @error('meta_description') is-invalid @enderror" 
                                           id="meta_description" name="meta_description" rows="3" 
                                           placeholder="SEO friendly description">{{ old('meta_description') }}</textarea>
                                 @error('meta_description')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-                                <div class="form-text">Recommended length: 150-160 characters</div>
+                                <div class="field-help">Recommended length: 150-160 characters</div>
                             </div>
 
                             <div class="mb-3">
-                                <label for="meta_keywords" class="form-label">Meta Keywords</label>
+                                <label for="meta_keywords" class="form-label fw-medium">
+                                    Meta Keywords <span class="field-optional">(Optional)</span>
+                                </label>
                                 <input type="text" class="form-control @error('meta_keywords') is-invalid @enderror" 
                                        id="meta_keywords" name="meta_keywords" value="{{ old('meta_keywords') }}" 
                                        placeholder="keyword1, keyword2, keyword3">
                                 @error('meta_keywords')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-                                <div class="form-text">Separate keywords with commas</div>
+                                <div class="field-help">Separate keywords with commas</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Settings & Media -->
-                <div class="col-xl-4">
+                <!-- Sidebar - Settings & Media -->
+                <div class="col-lg-12 col-md-12">
                     <!-- Product Images -->
-                    <div class="card custom-card">
-                        <div class="card-header">
-                            <div class="card-title">Product Images</div>
-                            <small class="text-muted">Upload high-quality product images. First image will be the main product image.</small>
+                    <div class="form-section">
+                        <div class="form-section-header">
+                            <h4 class="form-section-title">
+                                <i class="ti ti-image text-info me-2"></i>
+                                Product Images
+                            </h4>
+                            <small class="text-muted">Upload high-quality product images</small>
                         </div>
-                        <div class="card-body">
+                        <div class="form-section-body">
                             <div class="image-upload-container" id="image-upload-area">
-                                <div class="upload-content">
-                                    <i class="ti ti-cloud-upload" style="font-size: 48px; color: #6c757d; margin-bottom: 15px;"></i>
-                                    <h5>Drop images here or click to upload</h5>
-                                    <p class="text-muted">Supports: JPG, PNG, GIF, WEBP (Max: 10MB each)</p>
-                                    <div class="d-flex gap-2 justify-content-center">
-                                        <button type="button" class="btn btn-primary" onclick="document.getElementById('image-input').click()">
+                                <div class="upload-content text-center">
+                                    <i class="ti ti-cloud-upload" style="font-size: 32px; color: #6c757d; margin-bottom: 10px;"></i>
+                                    <h6 class="mb-2">Drop images or click to upload</h6>
+                                    <p class="text-muted small mb-3">JPG, PNG, GIF, WEBP (Max: 10MB)</p>
+                                    <div class="d-grid gap-1">
+                                        <button type="button" class="btn btn-primary btn-sm" onclick="document.getElementById('image-input').click()">
                                             <i class="ti ti-upload"></i> Choose Files
                                         </button>
-                                        <button type="button" class="btn btn-info" onclick="openResizeOptions()">
-                                            <i class="ti ti-crop"></i> Resize Options
-                                        </button>
-                                        <a href="{{ route('admin.image-upload.demo') }}" target="_blank" class="btn btn-success">
-                                            <i class="ti ti-external-link"></i> Image Demo
-                                        </a>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <button type="button" class="btn btn-outline-secondary" onclick="openResizeOptions()">
+                                                <i class="ti ti-crop"></i> Resize
+                                            </button>
+                                            <a href="{{ route('admin.image-upload.demo') }}" target="_blank" class="btn btn-outline-success">
+                                                <i class="ti ti-external-link"></i> Demo
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1171,40 +1446,42 @@
                             
                             <!-- Resize Options Panel -->
                             <div id="resize-options-panel" class="mt-3" style="display: none;">
-                                <div class="alert alert-info">
-                                    <h6><i class="ti ti-info-circle me-2"></i>Image Resize Options</h6>
-                                    <div class="row g-2">
-                                        <div class="col-md-3">
-                                            <label class="form-label">Width (px)</label>
+                                <div class="alert alert-info p-2">
+                                    <h6 class="mb-2"><i class="ti ti-info-circle me-1"></i>Resize Options</h6>
+                                    <div class="row g-1">
+                                        <div class="col-6">
+                                            <label class="form-label small">Width</label>
                                             <input type="number" class="form-control form-control-sm" id="resize-width" value="800" min="50" max="2000">
                                         </div>
-                                        <div class="col-md-3">
-                                            <label class="form-label">Height (px)</label>
+                                        <div class="col-6">
+                                            <label class="form-label small">Height</label>
                                             <input type="number" class="form-control form-control-sm" id="resize-height" value="600" min="50" max="2000">
                                         </div>
-                                        <div class="col-md-3">
-                                            <label class="form-label">Quality (%)</label>
+                                        <div class="col-6">
+                                            <label class="form-label small">Quality (%)</label>
                                             <input type="number" class="form-control form-control-sm" id="resize-quality" value="85" min="10" max="100">
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="form-check mt-4">
+                                        <div class="col-6">
+                                            <div class="form-check mt-3">
                                                 <input class="form-check-input" type="checkbox" id="maintain-ratio" checked>
-                                                <label class="form-check-label" for="maintain-ratio">
-                                                    Maintain Aspect Ratio
+                                                <label class="form-check-label small" for="maintain-ratio">
+                                                    Keep Ratio
                                                 </label>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="mt-2">
-                                        <button type="button" class="btn btn-sm btn-primary" onclick="resizeUploadedImages()">
-                                            <i class="ti ti-crop me-1"></i>Resize Images
-                                        </button>
-                                        <button type="button" class="btn btn-sm btn-secondary" onclick="generateThumbnails()">
-                                            <i class="ti ti-photo me-1"></i>Generate Thumbnails
-                                        </button>
-                                        <button type="button" class="btn btn-sm btn-warning" onclick="optimizeImages()">
-                                            <i class="ti ti-zap me-1"></i>Optimize Images
-                                        </button>
+                                    <div class="mt-2 d-grid gap-1">
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <button type="button" class="btn btn-primary" onclick="resizeUploadedImages()">
+                                                <i class="ti ti-crop"></i> Resize
+                                            </button>
+                                            <button type="button" class="btn btn-secondary" onclick="generateThumbnails()">
+                                                <i class="ti ti-photo"></i> Thumbnails
+                                            </button>
+                                            <button type="button" class="btn btn-warning" onclick="optimizeImages()">
+                                                <i class="ti ti-zap"></i> Optimize
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1219,13 +1496,18 @@
                     </div>
 
                     <!-- Product Organization -->
-                    <div class="card custom-card">
-                        <div class="card-header">
-                            <div class="card-title">Product Organization</div>
+                    <div class="form-section">
+                        <div class="form-section-header">
+                            <h4 class="form-section-title">
+                                <i class="ti ti-category text-info me-2"></i>
+                                Product Organization
+                            </h4>
                         </div>
-                        <div class="card-body">
+                        <div class="form-section-body">
                             <div class="mb-3">
-                                <label for="category_id" class="form-label">Category <span class="text-danger">*</span></label>
+                                <label for="category_id" class="form-label fw-medium">
+                                    Category <span class="field-required">*</span>
+                                </label>
                                 <select class="form-select @error('category_id') is-invalid @enderror" id="category_id" name="category_id" required>
                                     <option value="">Select Category</option>
                                     @foreach($categories as $category)
@@ -1237,10 +1519,13 @@
                                 @error('category_id')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
+                                <div class="field-help">Choose the most relevant category for your product</div>
                             </div>
 
                             <div class="mb-3">
-                                <label for="vendor_id" class="form-label">Vendor <span class="text-danger">*</span></label>
+                                <label for="vendor_id" class="form-label fw-medium">
+                                    Vendor <span class="field-required">*</span>
+                                </label>
                                 <select class="form-select @error('vendor_id') is-invalid @enderror" id="vendor_id" name="vendor_id" required>
                                     <option value="">Select Vendor</option>
                                     @foreach($vendors as $vendor)
@@ -1252,6 +1537,7 @@
                                 @error('vendor_id')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
+                                <div class="field-help">Select the vendor who supplies this product</div>
                             </div>
 
                             @if($brands->isNotEmpty())
@@ -1302,13 +1588,18 @@
                     </div>
 
                     <!-- Product Settings -->
-                    <div class="card custom-card">
-                        <div class="card-header">
-                            <div class="card-title">Product Settings</div>
+                    <div class="form-section">
+                        <div class="form-section-header">
+                            <h4 class="form-section-title">
+                                <i class="ti ti-settings text-warning me-2"></i>
+                                Product Settings
+                            </h4>
                         </div>
-                        <div class="card-body">
+                        <div class="form-section-body">
                             <div class="mb-3">
-                                <label for="status" class="form-label">Status <span class="text-danger">*</span></label>
+                                <label for="status" class="form-label fw-medium">
+                                    Status <span class="field-required">*</span>
+                                </label>
                                 <select class="form-select @error('status') is-invalid @enderror" id="status" name="status" required>
                                     <option value="active" {{ old('status', 'active') == 'active' ? 'selected' : '' }}>Active</option>
                                     <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
@@ -1317,6 +1608,7 @@
                                 @error('status')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
+                                <div class="field-help">Choose product visibility status</div>
                             </div>
 
                             <div class="form-check form-switch mb-3">
@@ -1481,29 +1773,32 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label for="color_options" class="form-label">Color Options</label>
+                                    <label for="color_options" class="form-label fw-medium">
+                                        Color Options <span class="field-optional">(Optional)</span>
+                                    </label>
                                     <textarea class="form-control @error('color_options') is-invalid @enderror" 
-                                              id="color_options" name="color_options" rows="2" placeholder="Available color options">{{ old('color_options') }}</textarea>
+                                              id="color_options" name="color_options" rows="2" 
+                                              placeholder="Available colors (e.g., Red, Blue, Green)">{{ old('color_options') }}</textarea>
                                     @error('color_options')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                    <div class="form-text mb-2">Describe available color variants</div>
+                                    <div class="field-help mb-2">List available color variants</div>
                                     
-                                    <!-- Color Suggestions -->
-                                    <div class="color-suggestions">
-                                        <small class="text-muted d-block mb-1">Quick Add Colors:</small>
-                                        <div class="btn-group-sm d-flex flex-wrap gap-1" role="group">
-                                            <button type="button" class="btn btn-outline-secondary btn-sm color-suggestion" data-colors="Red, Blue, Green, Black, White">Basic Colors</button>
-                                            <button type="button" class="btn btn-outline-secondary btn-sm color-suggestion" data-colors="Navy, Maroon, Forest Green, Charcoal, Cream">Premium Colors</button>
-                                            <button type="button" class="btn btn-outline-secondary btn-sm color-suggestion" data-colors="Pink, Purple, Orange, Yellow, Turquoise">Vibrant Colors</button>
-                                            <button type="button" class="btn btn-outline-secondary btn-sm color-suggestion" data-colors="Beige, Brown, Grey, Khaki, Olive">Neutral Colors</button>
+                                    <!-- Standard Color Suggestions -->
+                                    <div class="color-display-area">
+                                        <small class="text-muted d-block mb-2">Standard Colors:</small>
+                                        <div class="d-flex flex-wrap gap-1" role="group">
+                                            <button type="button" class="btn-suggestion color-suggestion" data-colors="Black, White, Gray">Basic</button>
+                                            <button type="button" class="btn-suggestion color-suggestion" data-colors="Red, Blue, Green">Primary</button>
+                                            <button type="button" class="btn-suggestion color-suggestion" data-colors="Navy, Brown, Beige">Natural</button>
+                                            <button type="button" class="btn-suggestion color-suggestion" data-colors="Pink, Purple, Orange">Bright</button>
                                         </div>
-                                        <div class="mt-1">
-                                            <button type="button" class="btn btn-outline-info btn-sm" id="custom-color-picker">
-                                                <i class="fas fa-palette"></i> Color Picker
+                                        <div class="mt-2">
+                                            <button type="button" class="btn btn-sm btn-outline-primary" id="custom-color-picker">
+                                                <i class="ti ti-palette"></i> Color Picker
                                             </button>
-                                            <button type="button" class="btn btn-outline-warning btn-sm" id="clear-colors">
-                                                <i class="fas fa-eraser"></i> Clear
+                                            <button type="button" class="btn btn-sm btn-outline-secondary" id="clear-colors">
+                                                <i class="ti ti-x"></i> Clear
                                             </button>
                                         </div>
                                     </div>
@@ -1514,10 +1809,7 @@
                                         <div id="color-swatches" class="d-flex flex-wrap gap-1 mb-2"></div>
                                         <div class="color-preview-actions">
                                             <button type="button" class="btn btn-sm btn-outline-secondary" onclick="copyColorsToClipboard()">
-                                                <i class="fas fa-copy"></i> Copy Colors
-                                            </button>
-                                            <button type="button" class="btn btn-sm btn-outline-info" onclick="showColorDetails()">
-                                                <i class="fas fa-info-circle"></i> Details
+                                                <i class="ti ti-copy"></i> Copy
                                             </button>
                                         </div>
                                     </div>
@@ -1569,14 +1861,14 @@
                         </div>
                     </div>
 
-                    <!-- Submit Buttons -->
-                    <div class="card custom-card">
-                        <div class="card-body">
+                    <!-- Submit Actions -->
+                    <div class="form-section">
+                        <div class="form-section-body">
                             <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-primary btn-lg">
+                                <button type="submit" class="btn btn-primary btn-lg fw-medium">
                                     <i class="ti ti-device-floppy me-2"></i>Create Product
                                 </button>
-                                <a href="{{ route('admin.products.index') }}" class="btn btn-outline-secondary">
+                                <a href="{{ route('admin.products.index') }}" class="btn btn-outline-secondary fw-medium">
                                     <i class="ti ti-arrow-left me-2"></i>Back to Products
                                 </a>
                             </div>
@@ -2002,24 +2294,25 @@ $(document).ready(function() {
         
         const colors = colorsText.split(',').map(c => c.trim()).filter(c => c !== '');
         
-        // Enhanced color mapping with more colors
-        const colorMap = {
-            // Basic Colors
-            'red': '#FF0000', 'blue': '#0000FF', 'green': '#008000', 'black': '#000000', 'white': '#FFFFFF',
+        // International Standard Color Mapping (ISO 3864 & Web Standards)
+        const standardColors = {
+            // Basic Colors (Primary)
+            'black': '#000000', 'white': '#FFFFFF', 'gray': '#808080', 'grey': '#808080',
+            'red': '#FF0000', 'green': '#008000', 'blue': '#0000FF',
             
-            // Premium Colors  
-            'navy': '#000080', 'maroon': '#800000', 'forest green': '#228B22', 'charcoal': '#36454F', 'cream': '#FFFDD0',
+            // Standard Web Colors
+            'navy': '#000080', 'maroon': '#800000', 'olive': '#808000',
+            'lime': '#00FF00', 'aqua': '#00FFFF', 'teal': '#008080',
+            'silver': '#C0C0C0', 'fuchsia': '#FF00FF', 'purple': '#800080',
+            'yellow': '#FFFF00', 'orange': '#FFA500',
             
-            // Vibrant Colors
-            'pink': '#FFC0CB', 'purple': '#800080', 'orange': '#FFA500', 'yellow': '#FFFF00', 'turquoise': '#40E0D0',
+            // Natural Colors
+            'brown': '#A52A2A', 'beige': '#F5F5DC', 'tan': '#D2B48C',
+            'khaki': '#F0E68C', 'coral': '#FF7F50', 'salmon': '#FA8072',
             
-            // Neutral Colors
-            'beige': '#F5F5DC', 'brown': '#A52A2A', 'grey': '#808080', 'gray': '#808080', 'khaki': '#F0E68C', 'olive': '#808000',
-            
-            // Fashion Colors
-            'rose gold': '#E8B4A0', 'champagne': '#F7E7CE', 'burgundy': '#800020', 'emerald': '#50C878', 
-            'sapphire': '#0F52BA', 'coral': '#FF7F50', 'mint': '#98FB98', 'lavender': '#E6E6FA',
-            'gold': '#FFD700', 'silver': '#C0C0C0', 'copper': '#B87333', 'platinum': '#E5E4E2'
+            // Professional Colors
+            'pink': '#FFC0CB', 'gold': '#FFD700', 'turquoise': '#40E0D0',
+            'violet': '#8A2BE2', 'indigo': '#4B0082', 'cyan': '#00FFFF'
         };
         
         colorSwatches.empty();
@@ -2031,45 +2324,37 @@ $(document).ready(function() {
         
         colors.forEach((color, index) => {
             const colorLower = color.toLowerCase().trim();
-            let hexColor = colorMap[colorLower];
+            let hexColor = standardColors[colorLower];
             
-            // If color not found in map, try to detect if it's already a hex color
+            // If color not found in standard colors, check if it's already a hex color
             if (!hexColor) {
                 if (color.match(/^#[0-9A-Fa-f]{6}$/)) {
                     hexColor = color;
                 } else {
-                    hexColor = '#CCCCCC'; // Default gray for unknown colors
+                    hexColor = '#CCCCCC'; // Standard gray for unknown colors
                 }
             }
             
             const swatch = $(`
-                <div class="color-swatch-container d-inline-block me-1 mb-1" title="${color}">
+                <div class="color-swatch-container d-inline-block me-1 mb-1" title="${color}" data-color="${color}">
                     <span class="color-swatch" style="
                         display: inline-block;
-                        width: 24px;
-                        height: 24px;
+                        width: 20px;
+                        height: 20px;
                         background-color: ${hexColor};
-                        border: 2px solid #ddd;
-                        border-radius: 4px;
+                        border: 1px solid #adb5bd;
+                        border-radius: 3px;
                         cursor: pointer;
-                        transition: all 0.2s ease;
-                        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-                    " data-color="${color}" data-hex="${hexColor}"></span>
-                    <small class="d-block text-center mt-1" style="font-size: 10px; color: #666;">${color}</small>
+                        transition: border-color 0.15s ease-in-out;
+                    "></span>
+                    <small class="color-name d-block text-center">${color}</small>
                 </div>
             `);
             
             // Add special styling for light colors
-            if (hexColor === '#FFFFFF' || hexColor === '#FFFDD0' || hexColor === '#F5F5DC' || hexColor === '#CCCCCC') {
-                swatch.find('.color-swatch').css('border-color', '#999');
+            if (hexColor === '#FFFFFF' || hexColor === '#F5F5DC' || hexColor === '#CCCCCC') {
+                swatch.find('.color-swatch').css('border-color', '#6c757d');
             }
-            
-            // Add click handler to show color details
-            swatch.find('.color-swatch').on('click', function() {
-                const colorName = $(this).data('color');
-                const colorHex = $(this).data('hex');
-                showToast(`Color: ${colorName} (${colorHex})`, 'info');
-            });
             
             colorSwatches.append(swatch);
         });
