@@ -1,5 +1,16 @@
 @extends('admin.layouts.app')
 
+@php
+// Safe helper function to handle old values and prevent array to string conversion errors
+function safeOld($key, $default = '') {
+    $value = old($key, $default);
+    if (is_array($value)) {
+        return is_array($default) ? $value : (string) json_encode($default);
+    }
+    return (string) $value;
+}
+@endphp
+
 @section('title', 'Edit Product')
 
 @push('styles')
@@ -692,19 +703,29 @@
                     </div>
 
                     <!-- Pricing Information -->
-                    <div class="card custom-card">
-                        <div class="card-header">
-                            <div class="card-title">Pricing Information</div>
+                    <div class="form-section">
+                        <div class="form-section-header">
+                            <h4 class="form-section-title">
+                                <i class="ti ti-currency-dollar text-success me-2"></i>
+                                Pricing Information
+                            </h4>
                         </div>
-                        <div class="card-body">
+                        <div class="form-section-body">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="price" class="form-label">Regular Price <span class="text-danger">*</span></label>
-                                    <input type="number" class="form-control @error('price') is-invalid @enderror" 
-                                           id="price" name="price" value="{{ old('price', $product->price) }}" step="0.01" min="0" placeholder="0.00" required>
+                                    <label for="price" class="form-label fw-medium">
+                                        Regular Price <span class="field-required">*</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light">৳</span>
+                                        <input type="number" class="form-control @error('price') is-invalid @enderror" 
+                                               id="price" name="price" value="{{ old('price', $product->price) }}" step="0.01" min="0" 
+                                               placeholder="0.00" required>
+                                    </div>
                                     @error('price')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
+                                    <div class="field-help">Base selling price of the product</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="sale_price" class="form-label fw-medium">
@@ -941,7 +962,7 @@
                                     Meta Keywords <span class="field-optional">(Optional)</span>
                                 </label>
                                 <input type="text" class="form-control @error('meta_keywords') is-invalid @enderror" 
-                                       id="meta_keywords" name="meta_keywords" value="{{ old('meta_keywords', $product->meta_keywords) }}" 
+                                       id="meta_keywords" name="meta_keywords" value="{{ old('meta_keywords', is_array($product->meta_keywords ?? '') ? implode(', ', $product->meta_keywords) : ($product->meta_keywords ?? '')) }}" 
                                        placeholder="keyword1, keyword2, keyword3">
                                 @error('meta_keywords')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -951,171 +972,490 @@
                         </div>
                     </div>
 
-                    <!-- Classifications -->
+                    <!-- Product Organization -->
                     <div class="form-section">
                         <div class="form-section-header">
                             <h4 class="form-section-title">
                                 <i class="ti ti-category text-info me-2"></i>
-                                Classifications
+                                Product Organization
                             </h4>
                         </div>
                         <div class="form-section-body">
-                            <div class="mb-3">
-                                <label for="category_id" class="form-label">Category <span class="text-danger">*</span></label>
-                                <select class="form-select @error('category_id') is-invalid @enderror" 
-                                        id="category_id" name="category_id" required>
-                                    <option value="">Select Category</option>
-                                    @foreach($categories as $category)
-                                        <option value="{{ $category->id }}" 
-                                            {{ old('category_id', $product->category_id) == $category->id ? 'selected' : '' }}>
-                                            {{ $category->name }}
-                                        </option>
-                                        @if($category->children)
-                                            @foreach($category->children as $child)
-                                                <option value="{{ $child->id }}" 
-                                                    {{ old('category_id', $product->category_id) == $child->id ? 'selected' : '' }}>
-                                                    -- {{ $child->name }}
-                                                </option>
-                                                @if($child->children)
-                                                    @foreach($child->children as $grandchild)
-                                                        <option value="{{ $grandchild->id }}" 
-                                                            {{ old('category_id', $product->category_id) == $grandchild->id ? 'selected' : '' }}>
-                                                            ---- {{ $grandchild->name }}
-                                                        </option>
-                                                    @endforeach
-                                                @endif
-                                            @endforeach
-                                        @endif
-                                    @endforeach
-                                </select>
-                                @error('category_id')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label for="brand_id" class="form-label">Brand</label>
-                                <select class="form-select @error('brand_id') is-invalid @enderror" 
-                                        id="brand_id" name="brand_id">
-                                    <option value="">Select Brand</option>
-                                    @foreach($brands as $brand)
-                                        <option value="{{ $brand->id }}" 
-                                            {{ old('brand_id', $product->brand_id) == $brand->id ? 'selected' : '' }}>
-                                            {{ $brand->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('brand_id')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label for="vendor_id" class="form-label">Vendor <span class="text-danger">*</span></label>
-                                <select class="form-select @error('vendor_id') is-invalid @enderror" 
-                                        id="vendor_id" name="vendor_id" required>
-                                    <option value="">Select Vendor</option>
-                                    @foreach($vendors as $vendor)
-                                        <option value="{{ $vendor->id }}" 
-                                            {{ old('vendor_id', $product->vendor_id) == $vendor->id ? 'selected' : '' }}>
-                                            {{ $vendor->firstname }} {{ $vendor->lastname }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('vendor_id')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            
-                            <div class="mb-4">
-                                <label for="tags" class="form-label fw-semibold mb-2">
-                                    <i class="ti ti-tags me-2 text-primary"></i>Product Tags
-                                </label>
-                                <div class="tags-input-wrapper">
-                                    <select class="form-select tags-select @error('tags') is-invalid @enderror" 
-                                            id="tags" name="tags[]" multiple data-placeholder="Search and select tags...">
-                                        @foreach($tags as $tag)
-                                            <option value="{{ $tag->id }}" 
-                                                {{ in_array($tag->id, old('tags', $product->tags instanceof \Illuminate\Database\Eloquent\Collection ? $product->tags->pluck('id')->toArray() : [])) ? 'selected' : '' }}>
-                                                {{ $tag->name }}
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="category_id" class="form-label fw-medium">
+                                        Category <span class="field-required">*</span>
+                                    </label>
+                                    <select class="form-select @error('category_id') is-invalid @enderror" 
+                                            id="category_id" name="category_id" required>
+                                        <option value="">Select Category</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category->id }}" 
+                                                {{ old('category_id', $product->category_id) == $category->id ? 'selected' : '' }}>
+                                                {{ $category->name }}
+                                            </option>
+                                            @if($category->children)
+                                                @foreach($category->children as $child)
+                                                    <option value="{{ $child->id }}" 
+                                                        {{ old('category_id', $product->category_id) == $child->id ? 'selected' : '' }}>
+                                                        -- {{ $child->name }}
+                                                    </option>
+                                                    @if($child->children)
+                                                        @foreach($child->children as $grandchild)
+                                                            <option value="{{ $grandchild->id }}" 
+                                                                {{ old('category_id', $product->category_id) == $grandchild->id ? 'selected' : '' }}>
+                                                                ---- {{ $grandchild->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                    @error('category_id')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <div class="field-help">Choose the most relevant category for your product</div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="vendor_id" class="form-label fw-medium">
+                                        Vendor <span class="field-required">*</span>
+                                    </label>
+                                    <select class="form-select @error('vendor_id') is-invalid @enderror" 
+                                            id="vendor_id" name="vendor_id" required>
+                                        <option value="">Select Vendor</option>
+                                        @foreach($vendors as $vendor)
+                                            <option value="{{ $vendor->id }}" 
+                                                {{ old('vendor_id', $product->vendor_id) == $vendor->id ? 'selected' : '' }}>
+                                                {{ $vendor->firstname }} {{ $vendor->lastname }}
                                             </option>
                                         @endforeach
                                     </select>
-                                    @error('tags')
+                                    @error('vendor_id')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                    <div class="form-text mt-2">
-                                        <i class="ti ti-info-circle me-1"></i>
-                                        Start typing to search for tags or select from the dropdown
+                                    <div class="field-help">Select the vendor who supplies this product</div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="brand_id" class="form-label fw-medium">
+                                        Brand <span class="field-optional">(Optional)</span>
+                                    </label>
+                                    <select class="form-select @error('brand_id') is-invalid @enderror" 
+                                            id="brand_id" name="brand_id">
+                                        <option value="">Select Brand (Optional)</option>
+                                        @foreach($brands as $brand)
+                                            <option value="{{ $brand->id }}" 
+                                                {{ old('brand_id', $product->brand_id) == $brand->id ? 'selected' : '' }}>
+                                                {{ $brand->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('brand_id')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label for="tags" class="form-label fw-medium">
+                                        Product Tags
+                                    </label>
+                                    <div class="tags-input-wrapper">
+                                        <select class="form-select tags-select @error('tags') is-invalid @enderror" 
+                                                id="tags" name="tags[]" multiple data-placeholder="Start typing to search for tags...">
+                                            @foreach($tags as $tag)
+                                                @php
+                                                    $selectedTags = old('tags', []);
+                                                    if (empty($selectedTags) && isset($product->tags)) {
+                                                        $selectedTags = $product->tags instanceof \Illuminate\Database\Eloquent\Collection 
+                                                            ? $product->tags->pluck('id')->toArray() 
+                                                            : (is_array($product->tags) ? $product->tags : []);
+                                                    }
+                                                    $selectedTags = is_array($selectedTags) ? $selectedTags : [];
+                                                @endphp
+                                                <option value="{{ $tag->id }}" 
+                                                    {{ in_array($tag->id, $selectedTags) ? 'selected' : '' }}>
+                                                    {{ $tag->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('tags')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                        <div class="field-help">
+                                            Start typing to search for tags or select from the dropdown
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="selected-tags-preview mt-3" id="selected-tags-preview" style="display: none;">
-                                    <small class="text-muted d-block mb-2">Selected Tags:</small>
-                                    <div class="selected-tags-container" id="selected-tags-container"></div>
-                                </div>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Status & Visibility -->
-                    <div class="card custom-card">
-                        <div class="card-header">
-                            <div class="card-title">Status & Visibility</div>
+                    <!-- Product Settings -->
+                    <div class="form-section">
+                        <div class="form-section-header">
+                            <h4 class="form-section-title">
+                                <i class="ti ti-settings text-secondary me-2"></i>
+                                Product Settings
+                            </h4>
                         </div>
-                        <div class="card-body">
-                            <div class="mb-3">
-                                <label for="status" class="form-label">Status</label>
-                                <select class="form-select @error('status') is-invalid @enderror" 
-                                        id="status" name="status">
-                                    <option value="active" {{ old('status', $product->status) == 'active' ? 'selected' : '' }}>Active</option>
-                                    <option value="inactive" {{ old('status', $product->status) == 'inactive' ? 'selected' : '' }}>Inactive</option>
-                                    <option value="draft" {{ old('status', $product->status) == 'draft' ? 'selected' : '' }}>Draft</option>
-                                </select>
-                                @error('status')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label for="featured" class="form-label">Featured</label>
-                                <select class="form-select @error('featured') is-invalid @enderror" 
-                                        id="featured" name="featured">
-                                    <option value="1" {{ old('featured', $product->featured) == 1 ? 'selected' : '' }}>Yes</option>
-                                    <option value="0" {{ old('featured', $product->featured) == 0 ? 'selected' : '' }}>No</option>
-                                </select>
-                                @error('featured')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                                <div class="form-text">Show in featured section</div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="is_new" class="form-label">Mark as New</label>
-                                <select class="form-select @error('is_new') is-invalid @enderror" 
-                                        id="is_new" name="is_new">
-                                    <option value="1" {{ old('is_new', $product->is_new) == 1 ? 'selected' : '' }}>Yes</option>
-                                    <option value="0" {{ old('is_new', $product->is_new) == 0 ? 'selected' : '' }}>No</option>
-                                </select>
-                                @error('is_new')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                                <div class="form-text">Show "New" badge on product</div>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="has_variations" name="has_variations" value="1" 
-                                           {{ old('has_variations', $product->has_variations) ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="has_variations">
-                                        Has Variations
+                        <div class="form-section-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="status" class="form-label fw-medium">
+                                        Status <span class="field-required">*</span>
                                     </label>
+                                    <select class="form-select @error('status') is-invalid @enderror" 
+                                            id="status" name="status">
+                                        <option value="active" {{ old('status', $product->status) == 'active' ? 'selected' : '' }}>Active</option>
+                                        <option value="inactive" {{ old('status', $product->status) == 'inactive' ? 'selected' : '' }}>Inactive</option>
+                                        <option value="draft" {{ old('status', $product->status) == 'draft' ? 'selected' : '' }}>Draft</option>
+                                    </select>
+                                    @error('status')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <div class="field-help">Choose product visibility status</div>
                                 </div>
-                                <div class="form-text">Enable color/size variations</div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="featured" name="featured" value="1" 
+                                               {{ old('featured', $product->featured) ? 'checked' : '' }}>
+                                        <label class="form-check-label fw-medium" for="featured">
+                                            Featured Product
+                                        </label>
+                                    </div>
+                                    <div class="field-help">Featured products appear in special sections</div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="is_digital" name="is_digital" value="1" 
+                                               {{ old('is_digital', $product->is_digital ?? false) ? 'checked' : '' }}>
+                                        <label class="form-check-label fw-medium" for="is_digital">
+                                            Digital Product
+                                        </label>
+                                    </div>
+                                    <div class="field-help">No shipping required for digital products</div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="downloadable" name="downloadable" value="1" 
+                                               {{ old('downloadable', $product->downloadable ?? false) ? 'checked' : '' }}>
+                                        <label class="form-check-label fw-medium" for="downloadable">
+                                            Downloadable
+                                        </label>
+                                    </div>
+                                    <div class="field-help">Customer can download this product</div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="weight" class="form-label fw-medium">
+                                        Weight (kg) <span class="field-optional">(Optional)</span>
+                                    </label>
+                                    <input type="number" class="form-control @error('weight') is-invalid @enderror" 
+                                           id="weight" name="weight" value="{{ old('weight', $product->weight) }}" step="0.01" min="0" placeholder="0.00">
+                                    @error('weight')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="shipping_weight" class="form-label fw-medium">
+                                        Shipping Weight (kg) <span class="field-optional">(Optional)</span>
+                                    </label>
+                                    <input type="number" class="form-control @error('shipping_weight') is-invalid @enderror" 
+                                           id="shipping_weight" name="shipping_weight" value="{{ old('shipping_weight', $product->shipping_weight) }}" step="0.01" min="0" placeholder="0.00">
+                                    @error('shipping_weight')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="unit" class="form-label fw-medium">
+                                        Unit <span class="field-optional">(Optional)</span>
+                                    </label>
+                                    <select class="form-select @error('unit') is-invalid @enderror" id="unit" name="unit">
+                                        <option value="">Select Unit</option>
+                                        <option value="piece" {{ old('unit', $product->unit ?? '') == 'piece' ? 'selected' : '' }}>Piece</option>
+                                        <option value="kg" {{ old('unit', $product->unit ?? '') == 'kg' ? 'selected' : '' }}>Kilogram</option>
+                                        <option value="g" {{ old('unit', $product->unit ?? '') == 'g' ? 'selected' : '' }}>Gram</option>
+                                        <option value="liter" {{ old('unit', $product->unit ?? '') == 'liter' ? 'selected' : '' }}>Liter</option>
+                                        <option value="ml" {{ old('unit', $product->unit ?? '') == 'ml' ? 'selected' : '' }}>Milliliter</option>
+                                        <option value="meter" {{ old('unit', $product->unit ?? '') == 'meter' ? 'selected' : '' }}>Meter</option>
+                                        <option value="cm" {{ old('unit', $product->unit ?? '') == 'cm' ? 'selected' : '' }}>Centimeter</option>
+                                    </select>
+                                    @error('unit')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="length" class="form-label fw-medium">
+                                        Length (cm) <span class="field-optional">(Optional)</span>
+                                    </label>
+                                    <input type="number" class="form-control @error('length') is-invalid @enderror" 
+                                           id="length" name="length" value="{{ old('length', $product->length) }}" step="0.01" min="0" placeholder="0.00">
+                                    @error('length')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="width" class="form-label fw-medium">
+                                        Width (cm) <span class="field-optional">(Optional)</span>
+                                    </label>
+                                    <input type="number" class="form-control @error('width') is-invalid @enderror" 
+                                           id="width" name="width" value="{{ old('width', $product->width) }}" step="0.01" min="0" placeholder="0.00">
+                                    @error('width')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="height" class="form-label fw-medium">
+                                        Height (cm) <span class="field-optional">(Optional)</span>
+                                    </label>
+                                    <input type="number" class="form-control @error('height') is-invalid @enderror" 
+                                           id="height" name="height" value="{{ old('height', $product->height) }}" step="0.01" min="0" placeholder="0.00">
+                                    @error('height')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="dimensions" class="form-label fw-medium">
+                                        Dimensions (Text) <span class="field-optional">(Optional)</span>
+                                    </label>
+                                    <input type="text" class="form-control @error('dimensions') is-invalid @enderror" 
+                                           id="dimensions" name="dimensions" value="{{ old('dimensions', is_array($product->dimensions ?? '') ? json_encode($product->dimensions) : ($product->dimensions ?? '')) }}" placeholder="e.g., 50x30x20 cm">
+                                    @error('dimensions')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="condition" class="form-label fw-medium">
+                                        Condition <span class="field-optional">(Optional)</span>
+                                    </label>
+                                    <select class="form-select @error('condition') is-invalid @enderror" id="condition" name="condition">
+                                        <option value="new" {{ old('condition', $product->condition ?? 'new') == 'new' ? 'selected' : '' }}>New</option>
+                                        <option value="used" {{ old('condition', $product->condition ?? '') == 'used' ? 'selected' : '' }}>Used</option>
+                                        <option value="refurbished" {{ old('condition', $product->condition ?? '') == 'refurbished' ? 'selected' : '' }}>Refurbished</option>
+                                    </select>
+                                    @error('condition')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="size" class="form-label fw-medium">
+                                        Size <span class="field-optional">(Optional)</span>
+                                    </label>
+                                    <input type="text" class="form-control @error('size') is-invalid @enderror" 
+                                           id="size" name="size" value="{{ old('size', $product->size ?? '') }}" placeholder="e.g., XL, 42, Large">
+                                    @error('size')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="color" class="form-label fw-medium">
+                                        Color <span class="field-optional">(Optional)</span>
+                                    </label>
+                                    <input type="text" class="form-control @error('color') is-invalid @enderror" 
+                                           id="color" name="color" value="{{ old('color', $product->color ?? '') }}" placeholder="e.g., Red, Blue, Black">
+                                    @error('color')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="material" class="form-label fw-medium">
+                                        Material <span class="field-optional">(Optional)</span>
+                                    </label>
+                                    <input type="text" class="form-control @error('material') is-invalid @enderror" 
+                                           id="material" name="material" value="{{ old('material', $product->material ?? '') }}" placeholder="e.g., Cotton, Steel, Plastic">
+                                    @error('material')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label for="size_chart" class="form-label fw-medium">
+                                        Size Chart <span class="field-optional">(Optional)</span>
+                                    </label>
+                                    <textarea class="form-control @error('size_chart') is-invalid @enderror" 
+                                              id="size_chart" name="size_chart" rows="3" 
+                                              placeholder="Size chart information">{{ old('size_chart', is_array($product->size_chart ?? '') ? json_encode($product->size_chart, JSON_PRETTY_PRINT) : ($product->size_chart ?? '')) }}</textarea>
+                                    @error('size_chart')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <div class="field-help">Add size measurements and fitting guide</div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="free_shipping" name="free_shipping" value="1" 
+                                               {{ old('free_shipping', $product->free_shipping ?? false) ? 'checked' : '' }}>
+                                        <label class="form-check-label fw-medium" for="free_shipping">
+                                            Free Shipping
+                                        </label>
+                                    </div>
+                                    <div class="field-help">Enable free shipping for this product</div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="shipping_cost" class="form-label fw-medium">
+                                        Shipping Cost (৳) <span class="field-optional">(Optional)</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light">৳</span>
+                                        <input type="number" class="form-control @error('shipping_cost') is-invalid @enderror" 
+                                               id="shipping_cost" name="shipping_cost" value="{{ old('shipping_cost', $product->shipping_cost ?? 0) }}" step="0.01" min="0" 
+                                               placeholder="0.00">
+                                    </div>
+                                    @error('shipping_cost')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <div class="field-help">Only applicable if free shipping is disabled</div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="warranty_period" class="form-label fw-medium">
+                                        Warranty Period <span class="field-optional">(Optional)</span>
+                                    </label>
+                                    <input type="text" class="form-control @error('warranty_period') is-invalid @enderror" 
+                                           id="warranty_period" name="warranty_period" value="{{ old('warranty_period', $product->warranty_period ?? '') }}" placeholder="e.g., 1 Year, 6 Months, Lifetime">
+                                    @error('warranty_period')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="warranty_terms" class="form-label fw-medium">
+                                        Warranty Terms <span class="field-optional">(Optional)</span>
+                                    </label>
+                                    <textarea class="form-control @error('warranty_terms') is-invalid @enderror" 
+                                              id="warranty_terms" name="warranty_terms" rows="3" 
+                                              placeholder="Warranty terms and conditions">{{ old('warranty_terms', $product->warranty_terms ?? '') }}</textarea>
+                                    @error('warranty_terms')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Shipping & Dimensions -->
+
+                    <!-- Product Images -->
+                    <div class="form-section">
+                        <div class="form-section-header">
+                            <h4 class="form-section-title">
+                                <i class="ti ti-photo text-primary me-2"></i>
+                                Product Images
+                            </h4>
+                        </div>
+                        <div class="form-section-body">
+                            <div class="row">
+                                <div class="col-lg-8 mb-4">
+                                    <h6 class="fw-medium mb-3">Upload high-quality product images</h6>
+                                    <div class="image-upload-container" onclick="document.getElementById('image-input').click()">
+                                        <div class="text-center">
+                                            <i class="ti ti-cloud-upload display-6 text-muted mb-3"></i>
+                                            <h6 class="fw-medium text-dark mb-2">Drop images or click to upload</h6>
+                                            <p class="text-muted mb-0">JPG, PNG, GIF, WEBP (Max: 10MB)</p>
+                                        </div>
+                                        <input type="file" id="image-input" name="images[]" multiple accept="image/*" style="display: none;">
+                                    </div>
+                                    
+                                    <!-- Current Images Display -->
+                                    @if($product->images)
+                                        @php
+                                            // Handle both string JSON and array formats
+                                            if (is_string($product->images)) {
+                                                $existingImages = json_decode($product->images, true);
+                                            } else {
+                                                $existingImages = $product->images;
+                                            }
+                                        @endphp
+                                        @if(is_array($existingImages) && count($existingImages) > 0)
+                                            <div class="mt-4">
+                                                <h6 class="fw-medium mb-3">Current Images</h6>
+                                                <div class="image-preview-grid">
+                                                    @foreach($existingImages as $index => $image)
+                                                        <div class="image-preview-item current-image-item" data-image-index="{{ $index }}">
+                                                            @if(is_array($image) && isset($image['sizes']))
+                                                                <!-- New format with multiple sizes -->
+                                                                @php
+                                                                    $imageUrl = '';
+                                                                    if (isset($image['sizes']) && is_array($image['sizes'])) {
+                                                                        if (isset($image['sizes']['medium']['url']) && is_string($image['sizes']['medium']['url'])) {
+                                                                            $imageUrl = $image['sizes']['medium']['url'];
+                                                                        } elseif (isset($image['sizes']['large']['url']) && is_string($image['sizes']['large']['url'])) {
+                                                                            $imageUrl = $image['sizes']['large']['url'];
+                                                                        } elseif (isset($image['sizes']['original']['url']) && is_string($image['sizes']['original']['url'])) {
+                                                                            $imageUrl = $image['sizes']['original']['url'];
+                                                                        } elseif (isset($image['sizes']['medium']['path']) && is_string($image['sizes']['medium']['path'])) {
+                                                                            $imageUrl = asset('storage/' . $image['sizes']['medium']['path']);
+                                                                        }
+                                                                    }
+                                                                    if (empty($imageUrl)) {
+                                                                        $imageUrl = asset('/admin-assets/images/media/1.jpg');
+                                                                    }
+                                                                @endphp
+                                                            @else
+                                                                <!-- Legacy format - simple path -->
+                                                                @php
+                                                                    if (is_string($image)) {
+                                                                        $imageUrl = asset('storage/' . $image);
+                                                                    } elseif (is_array($image) && isset($image['url']) && is_string($image['url'])) {
+                                                                        $imageUrl = $image['url'];
+                                                                    } elseif (is_array($image) && isset($image['path']) && is_string($image['path'])) {
+                                                                        $imageUrl = asset('storage/' . $image['path']);
+                                                                    } else {
+                                                                        $imageUrl = asset('/admin-assets/images/media/1.jpg');
+                                                                    }
+                                                                @endphp
+                                                            @endif
+                                                            <img src="{{ $imageUrl }}" alt="Product Image">
+                                                            @if($index === 0)
+                                                                <span class="primary-badge">Primary</span>
+                                                            @endif
+                                                            <div class="image-actions">
+                                                                @if($index !== 0)
+                                                                    <button type="button" class="btn-primary-image" onclick="makePrimaryImage({{ $index }})">
+                                                                        <i class="ti ti-star"></i>
+                                                                    </button>
+                                                                @endif
+                                                                <button type="button" class="btn-remove-image" onclick="removeExistingImage({{ $index }})">
+                                                                    <i class="ti ti-trash"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endif
+                                    
+                                    <!-- New Images Preview -->
+                                    <div class="mt-4" id="new-images-preview" style="display: none;">
+                                        <h6 class="fw-medium mb-3">New Images</h6>
+                                        <div class="image-preview-grid" id="new-images-grid"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-4">
+                                    <div class="bg-light rounded p-4">
+                                        <h6 class="fw-medium mb-3">
+                                            <i class="ti ti-settings me-2"></i>Image Options
+                                        </h6>
+                                        <div class="mb-3">
+                                            <button type="button" class="btn btn-sm btn-outline-primary w-100 mb-2" onclick="openResizeOptions()">
+                                                <i class="ti ti-resize me-1"></i> Resize Images
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-outline-info w-100 mb-2" onclick="generateThumbnails()">
+                                                <i class="ti ti-photo-plus me-1"></i> Generate Thumbnails
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-outline-success w-100" onclick="optimizeImages()">
+                                                <i class="ti ti-wand me-1"></i> Optimize Images
+                                            </button>
+                                        </div>
+                                        
+                                        <div class="border-top pt-3 mt-3">
+                                            <h6 class="fw-medium mb-2">Tips:</h6>
+                                            <ul class="list-unstyled small text-muted mb-0">
+                                                <li class="mb-1"><i class="ti ti-check text-success me-1"></i> Use high-quality images</li>
+                                                <li class="mb-1"><i class="ti ti-check text-success me-1"></i> First image will be primary</li>
+                                                <li class="mb-1"><i class="ti ti-check text-success me-1"></i> Recommended: 800x800px</li>
+                                                <li><i class="ti ti-check text-success me-1"></i> Maximum 10 images</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card custom-card">
                         <div class="card-header">
                             <div class="card-title">Shipping & Dimensions</div>
