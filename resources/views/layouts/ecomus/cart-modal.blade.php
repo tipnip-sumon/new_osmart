@@ -9,7 +9,13 @@
             <div class="wrap">
                 <div class="tf-mini-cart-threshold">
                     <div class="tf-progress-bar">
-                        <span style="width: 50%;">
+                        @php
+                            $freeShippingThreshold = config('shipping.free_shipping.minimum_order', 1000);
+                            $currentCartTotal = 49.99; // This should be dynamic from your cart system
+                            $progressPercentage = min(($currentCartTotal / $freeShippingThreshold) * 100, 100);
+                            $remainingForFree = max($freeShippingThreshold - $currentCartTotal, 0);
+                        @endphp
+                        <span style="width: {{ $progressPercentage }}%;">
                             <div class="progress-car">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="21" height="14" viewBox="0 0 21 14"
                                     fill="currentColor">
@@ -20,9 +26,12 @@
                             </div>
                         </span>
                     </div>
-                    <div class="tf-progress-msg">
-                        Buy <span class="price fw-6">{{ formatCurrency(75.00) }}</span> more to enjoy <span class="fw-6">Free
-                            Shipping</span>
+                    <div class="tf-progress-msg" id="free-shipping-progress">
+                        @if($remainingForFree > 0)
+                            Buy <span class="price fw-6">{{ formatCurrency($remainingForFree) }}</span> more to enjoy <span class="fw-6">Free Shipping</span>
+                        @else
+                            <span class="fw-6 text-success">🎉 You qualify for Free Shipping!</span>
+                        @endif
                     </div>
                 </div>
                 <div class="tf-mini-cart-wrap">
@@ -206,33 +215,397 @@
                     </div>
                     <div class="tf-mini-cart-tool-openable add-gift">
                         <div class="overplay tf-mini-cart-tool-close"></div>
-                        <form class="tf-product-form-addgift">
-                            <div class="tf-mini-cart-tool-content">
-                                <div class="tf-mini-cart-tool-text">
-                                    <div class="icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="currentColor">
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M4.65957 3.64545C4.65957 0.73868 7.89921 -0.995558 10.3176 0.617949L11.9997 1.74021L13.6818 0.617949C16.1001 -0.995558 19.3398 0.73868 19.3398 3.64545V4.32992H20.4286C21.9498 4.32992 23.1829 5.56311 23.1829 7.08416V9.10087C23.1829 9.61861 22.7632 10.0383 22.2454 10.0383H21.8528V20.2502C21.8528 20.254 21.8527 20.2577 21.8527 20.2614C21.8467 22.3272 20.1702 24 18.103 24H5.89634C3.82541 24 2.14658 22.3212 2.14658 20.2502V10.0384H1.75384C1.23611 10.0384 0.816406 9.61865 0.816406 9.10092V7.08421C0.816406 5.56304 2.04953 4.32992 3.57069 4.32992H4.65957V3.64545ZM6.53445 4.32992H11.0622V3.36863L9.27702 2.17757C8.10519 1.39573 6.53445 2.2357 6.53445 3.64545V4.32992ZM12.9371 3.36863V4.32992H17.4649V3.64545C17.4649 2.2357 15.8942 1.39573 14.7223 2.17756L12.9371 3.36863ZM3.57069 6.2048C3.08499 6.2048 2.69128 6.59851 2.69128 7.08421V8.16348H8.31067L8.3107 6.2048H3.57069ZM8.31071 10.0384V18.5741C8.31071 18.9075 8.48779 19.2158 8.77577 19.3838C9.06376 19.5518 9.4193 19.5542 9.70953 19.3901L11.9997 18.0953L14.2898 19.3901C14.58 19.5542 14.9356 19.5518 15.2236 19.3838C15.5115 19.2158 15.6886 18.9075 15.6886 18.5741V10.0383H19.9779V20.2137C19.9778 20.2169 19.9778 20.2201 19.9778 20.2233V20.2502C19.9778 21.2857 19.1384 22.1251 18.103 22.1251H5.89634C4.86088 22.1251 4.02146 21.2857 4.02146 20.2502V10.0384H8.31071ZM21.308 8.16344V7.08416C21.308 6.59854 20.9143 6.2048 20.4286 6.2048H15.6886V8.16344H21.308ZM13.8138 6.2048H10.1856V16.9672L11.5383 16.2024C11.8246 16.0405 12.1748 16.0405 12.461 16.2024L13.8138 16.9672V6.2048Z">
-                                            </path>
-                                        </svg>
-                                    </div>
-                                    <div class="tf-gift-wrap-infos">
-                                        <p>Do you want a gift wrap?</p>
-                                        Only
-                                        <span class="price fw-6">{{ formatCurrency(5.00) }}</span>
-                                    </div>
+                        <div class="tf-mini-cart-tool-content">
+                            <div class="tf-mini-cart-tool-text">
+                                <div class="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="currentColor">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M4.65957 3.64545C4.65957 0.73868 7.89921 -0.995558 10.3176 0.617949L11.9997 1.74021L13.6818 0.617949C16.1001 -0.995558 19.3398 0.73868 19.3398 3.64545V4.32992H20.4286C21.9498 4.32992 23.1829 5.56311 23.1829 7.08416V9.10087C23.1829 9.61861 22.7632 10.0383 22.2454 10.0383H21.8528V20.2502C21.8528 20.254 21.8527 20.2577 21.8527 20.2614C21.8467 22.3272 20.1702 24 18.103 24H5.89634C3.82541 24 2.14658 22.3212 2.14658 20.2502V10.0384H1.75384C1.23611 10.0384 0.816406 9.61865 0.816406 9.10092V7.08421C0.816406 5.56304 2.04953 4.32992 3.57069 4.32992H4.65957V3.64545ZM6.53445 4.32992H11.0622V3.36863L9.27702 2.17757C8.10519 1.39573 6.53445 2.2357 6.53445 3.64545V4.32992ZM12.9371 3.36863V4.32992H17.4649V3.64545C17.4649 2.2357 15.8942 1.39573 14.7223 2.17756L12.9371 3.36863ZM3.57069 6.2048C3.08499 6.2048 2.69128 6.59851 2.69128 7.08421V8.16348H8.31067L8.3107 6.2048H3.57069ZM8.31071 10.0384V18.5741C8.31071 18.9075 8.48779 19.2158 8.77577 19.3838C9.06376 19.5518 9.4193 19.5542 9.70953 19.3901L11.9997 18.0953L14.2898 19.3901C14.58 19.5542 14.9356 19.5518 15.2236 19.3838C15.5115 19.2158 15.6886 18.9075 15.6886 18.5741V10.0383H19.9779V20.2137C19.9778 20.2169 19.9778 20.2201 19.9778 20.2233V20.2502C19.9778 21.2857 19.1384 22.1251 18.103 22.1251H5.89634C4.86088 22.1251 4.02146 21.2857 4.02146 20.2502V10.0384H8.31071ZM21.308 8.16344V7.08416C21.308 6.59854 20.9143 6.2048 20.4286 6.2048H15.6886V8.16344H21.308ZM13.8138 6.2048H10.1856V16.9672L11.5383 16.2024C11.8246 16.0405 12.1748 16.0405 12.461 16.2024L13.8138 16.9672V6.2048Z">
+                                        </path>
+                                    </svg>
                                 </div>
-                                <div class="tf-cart-tool-btns">
-                                    <button type="submit"
-                                        class="tf-btn fw-6 w-100 justify-content-center btn-fill animate-hover-btn radius-3"><span>Add
-                                            a gift wrap</span></button>
-                                    <div
-                                        class="tf-mini-cart-tool-primary text-center w-100 fw-6 tf-mini-cart-tool-close">
-                                        Cancel</div>
+                                <div class="tf-gift-wrap-infos">
+                                    <p>Do you want a gift wrap?</p>
+                                    <div class="gift-wrap-options">
+                                        @php
+                                            $giftWrapOptions = [
+                                                ['name' => 'Basic Gift Wrap', 'price' => 5.00, 'description' => 'Simple wrapping paper with ribbon'],
+                                                ['name' => 'Premium Gift Wrap', 'price' => 10.00, 'description' => 'Elegant box with bow and card'],
+                                                ['name' => 'Luxury Gift Wrap', 'price' => 15.00, 'description' => 'Premium box with custom message']
+                                            ];
+                                        @endphp
+                                        @foreach($giftWrapOptions as $index => $option)
+                                            <div class="gift-wrap-option" data-price="{{ $option['price'] }}">
+                                                <input type="radio" id="gift-wrap-{{ $index }}" name="gift_wrap_type" value="{{ $option['name'] }}" data-price="{{ $option['price'] }}">
+                                                <label for="gift-wrap-{{ $index }}" class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <div class="fw-6">{{ $option['name'] }}</div>
+                                                        <small class="text-muted">{{ $option['description'] }}</small>
+                                                    </div>
+                                                    <span class="price fw-6">{{ formatCurrency($option['price']) }}</span>
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    
+                                    <div class="gift-message-section mt-3" style="display: none;">
+                                        <label for="gift-message" class="form-label small fw-6">Gift Message (Optional)</label>
+                                        <textarea class="form-control" id="gift-message" name="gift_message" rows="3" placeholder="Write your gift message here..." maxlength="200"></textarea>
+                                        <small class="text-muted">Maximum 200 characters</small>
+                                    </div>
+                                    
+                                    <div class="gift-wrap-summary mt-3" style="display: none;">
+                                        <div class="d-flex justify-content-between">
+                                            <span>Selected Option:</span>
+                                            <span id="selected-gift-wrap-name" class="fw-6"></span>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <span>Additional Cost:</span>
+                                            <span id="selected-gift-wrap-price" class="fw-6 text-success"></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </form>
+                            
+                            <div class="tf-cart-tool-btns">
+                                <button type="button" id="add-gift-wrap-btn" disabled
+                                    class="tf-btn fw-6 w-100 justify-content-center btn-fill animate-hover-btn radius-3">
+                                    <span>Add Gift Wrap</span>
+                                </button>
+                                <div class="tf-mini-cart-tool-primary text-center w-100 fw-6 tf-mini-cart-tool-close">
+                                    Cancel
+                                </div>
+                            </div>
+                            
+                            <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const giftWrapOptions = document.querySelectorAll('input[name="gift_wrap_type"]');
+                                const giftMessageSection = document.querySelector('.gift-message-section');
+                                const giftWrapSummary = document.querySelector('.gift-wrap-summary');
+                                const addGiftWrapBtn = document.getElementById('add-gift-wrap-btn');
+                                const selectedNameSpan = document.getElementById('selected-gift-wrap-name');
+                                const selectedPriceSpan = document.getElementById('selected-gift-wrap-price');
+                                let selectedGiftWrap = null;
+                                
+                                // Handle gift wrap option selection
+                                giftWrapOptions.forEach(option => {
+                                    option.addEventListener('change', function() {
+                                        if (this.checked) {
+                                            selectedGiftWrap = {
+                                                name: this.value,
+                                                price: parseFloat(this.dataset.price)
+                                            };
+                                            
+                                            // Show gift message section
+                                            giftMessageSection.style.display = 'block';
+                                            giftWrapSummary.style.display = 'block';
+                                            
+                                            // Update summary
+                                            selectedNameSpan.textContent = selectedGiftWrap.name;
+                                            selectedPriceSpan.textContent = '{{ currencySymbol() }}' + selectedGiftWrap.price.toFixed(2);
+                                            
+                                            // Enable add button
+                                            addGiftWrapBtn.disabled = false;
+                                            addGiftWrapBtn.classList.remove('disabled');
+                                        }
+                                    });
+                                });
+                                
+                                // Handle add gift wrap
+                                addGiftWrapBtn.addEventListener('click', function() {
+                                    if (!selectedGiftWrap) {
+                                        alert('Please select a gift wrap option');
+                                        return;
+                                    }
+                                    
+                                    const giftMessage = document.getElementById('gift-message').value;
+                                    
+                                    // Add gift wrap to cart (you'll need to implement this based on your cart system)
+                                    addGiftWrapToCart(selectedGiftWrap, giftMessage);
+                                    
+                                    // Close modal
+                                    document.querySelector('.tf-mini-cart-tool-close').click();
+                                    
+                                    // Show success message
+                                    showNotification('Gift wrap added to cart!', 'success');
+                                });
+                                
+                                function addGiftWrapToCart(giftWrap, message) {
+                                    // This function should integrate with your cart system
+                                    console.log('Adding gift wrap to cart:', {
+                                        name: giftWrap.name,
+                                        price: giftWrap.price,
+                                        message: message
+                                    });
+                                    
+                                    // Add gift wrap item to cart display
+                                    addGiftWrapToDisplay(giftWrap, message);
+                                    
+                                    // Update cart totals
+                                    updateCartTotals();
+                                    
+                                    // You might want to make an AJAX call to save this to session/database
+                                    /*
+                                    fetch('/cart/add-gift-wrap', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                                        },
+                                        body: JSON.stringify({
+                                            gift_wrap: giftWrap.name,
+                                            gift_wrap_price: giftWrap.price,
+                                            gift_message: message
+                                        })
+                                    })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        if (data.success) {
+                                            updateCartDisplay();
+                                        }
+                                    });
+                                    */
+                                }
+                                
+                                function addGiftWrapToDisplay(giftWrap, message) {
+                                    // Check if gift wrap already exists in cart
+                                    const existingGiftWrap = document.querySelector('.tf-mini-cart-item.gift-wrap-item');
+                                    if (existingGiftWrap) {
+                                        existingGiftWrap.remove(); // Remove existing gift wrap to replace
+                                    }
+                                    
+                                    // Create gift wrap item HTML
+                                    const giftWrapItem = document.createElement('div');
+                                    giftWrapItem.className = 'tf-mini-cart-item gift-wrap-item';
+                                    giftWrapItem.innerHTML = `
+                                        <div class="tf-mini-cart-image">
+                                            <div class="gift-wrap-icon">
+                                                🎁
+                                            </div>
+                                        </div>
+                                        <div class="tf-mini-cart-info">
+                                            <div class="title">${giftWrap.name}</div>
+                                            ${message ? `<div class="meta-variant">Message: "${message}"</div>` : ''}
+                                            <div class="price fw-6">{{ currencySymbol() }}${giftWrap.price.toFixed(2)}</div>
+                                            <div class="tf-mini-cart-btns">
+                                                <div class="tf-mini-cart-remove gift-wrap-remove">Remove</div>
+                                            </div>
+                                        </div>
+                                    `;
+                                    
+                                    // Add to cart items container
+                                    const cartContainer = document.getElementById('cart-items-container');
+                                    if (cartContainer) {
+                                        cartContainer.appendChild(giftWrapItem);
+                                        
+                                        // Add remove functionality
+                                        const removeBtn = giftWrapItem.querySelector('.gift-wrap-remove');
+                                        removeBtn.addEventListener('click', function() {
+                                            removeGiftWrapFromCart(giftWrapItem, giftWrap.price);
+                                        });
+                                    }
+                                }
+                                
+                                function removeGiftWrapFromCart(itemElement, price) {
+                                    // Remove from display
+                                    itemElement.remove();
+                                    
+                                    // Update cart totals
+                                    const currentSubtotal = getCurrentCartTotal();
+                                    const newSubtotal = Math.max(currentSubtotal - price, 0);
+                                    
+                                    // Update subtotal display
+                                    const subtotalElement = document.getElementById('cart-subtotal');
+                                    if (subtotalElement) {
+                                        subtotalElement.textContent = '{{ currencySymbol() }}' + newSubtotal.toFixed(2);
+                                    }
+                                    
+                                    // Update free shipping progress
+                                    updateFreeShippingProgress(newSubtotal);
+                                    
+                                    // Show notification
+                                    showNotification('Gift wrap removed from cart!', 'info');
+                                }
+                                
+                                // Helper function to get current cart total (local version for gift wrap)
+                                function getCurrentCartTotal() {
+                                    // This should return the current cart subtotal
+                                    // You may need to implement this based on your cart system
+                                    const subtotalElement = document.getElementById('cart-subtotal');
+                                    if (subtotalElement) {
+                                        // Extract number from formatted currency string
+                                        const subtotalText = subtotalElement.textContent || subtotalElement.innerText;
+                                        const match = subtotalText.match(/[\d,]+\.?\d*/);
+                                        return match ? parseFloat(match[0].replace(/,/g, '')) : 0;
+                                    }
+                                    return 49.99; // Default fallback based on current cart
+                                }
+                                
+                                function updateCartTotals() {
+                                    // Update cart subtotal with gift wrap cost
+                                    const currentSubtotal = getCurrentCartTotal();
+                                    const newSubtotal = currentSubtotal + selectedGiftWrap.price;
+                                    
+                                    // Update subtotal display
+                                    const subtotalElement = document.getElementById('cart-subtotal');
+                                    if (subtotalElement) {
+                                        subtotalElement.textContent = '{{ currencySymbol() }}' + newSubtotal.toFixed(2);
+                                    }
+                                    
+                                    // Update free shipping progress
+                                    updateFreeShippingProgress(newSubtotal);
+                                }
+                                
+                                function updateFreeShippingProgress(newTotal) {
+                                    const freeShippingThreshold = {{ config('shipping.free_shipping.minimum_order', 1000) }};
+                                    const progressElement = document.querySelector('.tf-progress-bar span');
+                                    const messageElement = document.getElementById('free-shipping-progress');
+                                    
+                                    if (progressElement && messageElement) {
+                                        const progressPercentage = Math.min((newTotal / freeShippingThreshold) * 100, 100);
+                                        const remainingForFree = Math.max(freeShippingThreshold - newTotal, 0);
+                                        
+                                        progressElement.style.width = progressPercentage + '%';
+                                        
+                                        if (remainingForFree > 0) {
+                                            messageElement.innerHTML = `Buy <span class="price fw-6">{{ currencySymbol() }}${remainingForFree.toFixed(2)}</span> more to enjoy <span class="fw-6">Free Shipping</span>`;
+                                        } else {
+                                            messageElement.innerHTML = '<span class="fw-6 text-success">🎉 You qualify for Free Shipping!</span>';
+                                        }
+                                    }
+                                }
+                                
+                                function showNotification(message, type = 'success') {
+                                    // Create notification element
+                                    const notification = document.createElement('div');
+                                    notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+                                    notification.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+                                    notification.innerHTML = `
+                                        ${message}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                    `;
+                                    
+                                    document.body.appendChild(notification);
+                                    
+                                    // Auto remove after 3 seconds
+                                    setTimeout(() => {
+                                        if (notification.parentNode) {
+                                            notification.parentNode.removeChild(notification);
+                                        }
+                                    }, 3000);
+                                }
+                            });
+                            </script>
+                            
+                            <style>
+                            .gift-wrap-option {
+                                margin-bottom: 10px;
+                                border: 1px solid #e1e5e9;
+                                border-radius: 6px;
+                                transition: all 0.3s ease;
+                            }
+                            
+                            .gift-wrap-option:hover {
+                                border-color: var(--primary-color, #007bff);
+                                background-color: #f8f9fa;
+                            }
+                            
+                            .gift-wrap-option input[type="radio"] {
+                                display: none;
+                            }
+                            
+                            .gift-wrap-option label {
+                                padding: 12px 15px;
+                                margin: 0;
+                                cursor: pointer;
+                                width: 100%;
+                                border-radius: 6px;
+                                transition: all 0.3s ease;
+                            }
+                            
+                            .gift-wrap-option input[type="radio"]:checked + label {
+                                background-color: var(--primary-color, #007bff);
+                                color: white;
+                                border-color: var(--primary-color, #007bff);
+                            }
+                            
+                            .gift-wrap-option input[type="radio"]:checked + label .text-muted {
+                                color: rgba(255, 255, 255, 0.8) !important;
+                            }
+                            
+                            .gift-message-section textarea {
+                                border: 1px solid #e1e5e9;
+                                border-radius: 6px;
+                                padding: 10px 12px;
+                                font-size: 14px;
+                                resize: vertical;
+                            }
+                            
+                            .gift-message-section textarea:focus {
+                                border-color: var(--primary-color, #007bff);
+                                box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+                                outline: none;
+                            }
+                            
+                            .gift-wrap-summary {
+                                background-color: #f8f9fa;
+                                padding: 12px;
+                                border-radius: 6px;
+                                border: 1px solid #e1e5e9;
+                            }
+                            
+                            #add-gift-wrap-btn:disabled {
+                                opacity: 0.6;
+                                cursor: not-allowed;
+                            }
+                            
+                            /* Gift wrap item in cart styling */
+                            .tf-mini-cart-item.gift-wrap-item {
+                                border-left: 3px solid #28a745;
+                                background-color: #f8f9fa;
+                                margin-bottom: 10px;
+                            }
+                            
+                            .gift-wrap-icon {
+                                width: 60px;
+                                height: 60px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                font-size: 24px;
+                                background-color: #28a745;
+                                border-radius: 6px;
+                                color: white;
+                            }
+                            
+                            .tf-mini-cart-item.gift-wrap-item .title {
+                                color: #28a745;
+                                font-weight: 600;
+                            }
+                            
+                            .tf-mini-cart-item.gift-wrap-item .meta-variant {
+                                font-size: 12px;
+                                color: #6c757d;
+                                margin-top: 2px;
+                                font-style: italic;
+                            }
+                            
+                            .gift-wrap-remove {
+                                background-color: #dc3545;
+                                color: white;
+                                padding: 4px 8px;
+                                border-radius: 4px;
+                                font-size: 12px;
+                                cursor: pointer;
+                                transition: background-color 0.3s ease;
+                            }
+                            
+                            .gift-wrap-remove:hover {
+                                background-color: #c82333;
+                            }
+                            </style>
+                        </div>
                     </div>
                     <div class="tf-mini-cart-tool-openable estimate-shipping">
                         <div class="overplay tf-mini-cart-tool-close"></div>
@@ -249,33 +622,243 @@
                                 <span class="fw-6">Estimate Shipping</span>
                             </div>
                             <div class="field">
-                                <p>Country</p>
-                                <select class="tf-select w-100" id="ShippingCountry_CartDrawer-Form"
-                                    name="address[country]" data-default="">
-                                    <option value="---" data-provinces="[]">---</option>
-                                    <option value="Australia">Australia</option>
-                                    <option value="Austria" data-provinces="[]">Austria</option>
-                                    <option value="Belgium" data-provinces="[]">Belgium</option>
-                                    <option value="Canada">Canada</option>
-                                    <option value="Denmark" data-provinces="[]">Denmark</option>
-                                    <option value="Finland" data-provinces="[]">Finland</option>
-                                    <option value="France" data-provinces="[]">France</option>
-                                    <option value="Germany" data-provinces="[]">Germany</option>
-                                    <option value="United Kingdom">United Kingdom</option>
-                                    <option value="United States">United States</option>
+                                <p>District</p>
+                                <select class="tf-select w-100" id="ShippingDistrict" name="district">
+                                    <option value="">Select District</option>
+                                    @php
+                                        $deliveryCharges = \Illuminate\Support\Facades\DB::table('delivery_charges')
+                                            ->where('is_active', 1)
+                                            ->orderBy('district')
+                                            ->orderBy('upazila')
+                                            ->orderBy('ward')
+                                            ->get()
+                                            ->groupBy('district');
+                                    @endphp
+                                    @foreach($deliveryCharges as $district => $charges)
+                                        <option value="{{ $district }}">{{ $district }}</option>
+                                    @endforeach
                                 </select>
                             </div>
-                            <div class="field">
-                                <p>Zip code</p>
-                                <input type="text" name="text" placeholder="">
+                            <div class="field" id="upazila-field" style="display: none;">
+                                <p>Upazila</p>
+                                <select class="tf-select w-100" id="ShippingUpazila" name="upazila">
+                                    <option value="">Select Upazila</option>
+                                </select>
+                            </div>
+                            <div class="field" id="ward-field" style="display: none;">
+                                <p>Ward</p>
+                                <select class="tf-select w-100" id="ShippingWard" name="ward">
+                                    <option value="">Select Ward</option>
+                                </select>
+                            </div>
+                            <div id="shipping-result" class="shipping-result" style="display: none;">
+                                <div class="shipping-info">
+                                    <div class="shipping-charge" id="shipping-charge-display"></div>
+                                    <div class="delivery-time" id="delivery-time-display"></div>
+                                    <div class="free-shipping-msg" id="free-shipping-msg" style="display: none; color: #10B981; font-weight: 600; margin-top: 8px;"></div>
+                                </div>
                             </div>
                             <div class="tf-cart-tool-btns">
-                                <a href="#"
-                                    class="tf-btn fw-6 justify-content-center btn-fill w-100 animate-hover-btn radius-3"><span>Estimate</span></a>
-                                <div
-                                    class="tf-mini-cart-tool-primary text-center fw-6 w-100 tf-mini-cart-tool-close">
+                                <button type="button" class="tf-btn fw-6 justify-content-center btn-fill w-100 animate-hover-btn radius-3" id="calculate-shipping-btn">
+                                    <span>Calculate Shipping</span>
+                                </button>
+                                <div class="tf-mini-cart-tool-primary text-center fw-6 w-100 tf-mini-cart-tool-close">
                                     Cancel</div>
                             </div>
+                            
+                            <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const districtSelect = document.getElementById('ShippingDistrict');
+                                const upazilaSelect = document.getElementById('ShippingUpazila');
+                                const wardSelect = document.getElementById('ShippingWard');
+                                const upazilaField = document.getElementById('upazila-field');
+                                const wardField = document.getElementById('ward-field');
+                                const shippingResult = document.getElementById('shipping-result');
+                                const calculateBtn = document.getElementById('calculate-shipping-btn');
+                                
+                                // Delivery charges data from database
+                                const deliveryCharges = @json($deliveryCharges->toArray());
+                                
+                                // Shipping config from config/shipping.php
+                                const shippingConfig = {
+                                    freeShippingEnabled: {{ config('shipping.free_shipping.enabled') ? 'true' : 'false' }},
+                                    freeShippingThreshold: {{ config('shipping.free_shipping.minimum_order', 1000) }},
+                                    currency: '{{ currencySymbol() }}'
+                                };
+                                
+                                // Handle district change
+                                districtSelect.addEventListener('change', function() {
+                                    const selectedDistrict = this.value;
+                                    upazilaSelect.innerHTML = '<option value="">Select Upazila</option>';
+                                    wardSelect.innerHTML = '<option value="">Select Ward</option>';
+                                    
+                                    if (selectedDistrict && deliveryCharges[selectedDistrict]) {
+                                        console.log('District selected:', selectedDistrict);
+                                        console.log('Available charges for district:', deliveryCharges[selectedDistrict]);
+                                        
+                                        const upazilas = [...new Set(deliveryCharges[selectedDistrict]
+                                            .map(item => item.upazila)
+                                            .filter(upazila => upazila && upazila.trim() !== '')
+                                        )];
+                                        
+                                        console.log('Found upazilas:', upazilas);
+                                        
+                                        if (upazilas.length > 0) {
+                                            upazilas.forEach(upazila => {
+                                                upazilaSelect.innerHTML += `<option value="${upazila}">${upazila}</option>`;
+                                            });
+                                            upazilaField.style.display = 'block';
+                                        } else {
+                                            // If no specific upazilas, auto-select district level and show calculate button
+                                            upazilaSelect.innerHTML += '<option value="District Level" selected>District Level Delivery</option>';
+                                            upazilaField.style.display = 'block';
+                                        }
+                                    } else {
+                                        upazilaField.style.display = 'none';
+                                        wardField.style.display = 'none';
+                                    }
+                                    shippingResult.style.display = 'none';
+                                });
+                                
+                                // Handle upazila change
+                                upazilaSelect.addEventListener('change', function() {
+                                    const selectedDistrict = districtSelect.value;
+                                    const selectedUpazila = this.value;
+                                    wardSelect.innerHTML = '<option value="">Select Ward</option>';
+                                    
+                                    if (selectedDistrict && selectedUpazila && deliveryCharges[selectedDistrict]) {
+                                        const wards = deliveryCharges[selectedDistrict]
+                                            .filter(item => item.upazila === selectedUpazila)
+                                            .map(item => item.ward)
+                                            .filter(ward => ward);
+                                        
+                                        const uniqueWards = [...new Set(wards)];
+                                        uniqueWards.forEach(ward => {
+                                            wardSelect.innerHTML += `<option value="${ward}">${ward}</option>`;
+                                        });
+                                        
+                                        if (uniqueWards.length > 0) {
+                                            wardField.style.display = 'block';
+                                        }
+                                    } else {
+                                        wardField.style.display = 'none';
+                                    }
+                                    shippingResult.style.display = 'none';
+                                });
+                                
+                                // Calculate shipping
+                                calculateBtn.addEventListener('click', function() {
+                                    const selectedDistrict = districtSelect.value;
+                                    const selectedUpazila = upazilaSelect.value;
+                                    const selectedWard = wardSelect.value || 'Default';
+                                    
+                                    console.log('Selected:', {
+                                        district: selectedDistrict,
+                                        upazila: selectedUpazila, 
+                                        ward: selectedWard
+                                    });
+                                    
+                                    console.log('Available delivery charges:', deliveryCharges);
+                                    
+                                    if (!selectedDistrict) {
+                                        alert('Please select a district');
+                                        return;
+                                    }
+                                    
+                                    if (!selectedUpazila) {
+                                        alert('Please select an upazila');
+                                        return;
+                                    }
+                                    
+                                    // Find matching delivery charge
+                                    let deliveryCharge = null;
+                                    
+                                    // Handle district level delivery
+                                    if (selectedUpazila === 'District Level') {
+                                        if (deliveryCharges[selectedDistrict]) {
+                                            deliveryCharge = deliveryCharges[selectedDistrict].find(item => 
+                                                !item.upazila || item.upazila === null
+                                            );
+                                        }
+                                    } else {
+                                        // Find matching delivery charge for specific upazila
+                                        if (deliveryCharges[selectedDistrict]) {
+                                            console.log('District charges found:', deliveryCharges[selectedDistrict]);
+                                            
+                                            deliveryCharge = deliveryCharges[selectedDistrict].find(item => 
+                                                item.upazila === selectedUpazila && 
+                                                (item.ward === selectedWard || item.ward === null || item.ward === '')
+                                            );
+                                            
+                                            // Fallback to district/upazila only if no exact match
+                                            if (!deliveryCharge) {
+                                                deliveryCharge = deliveryCharges[selectedDistrict].find(item => 
+                                                    item.upazila === selectedUpazila
+                                                );
+                                            }
+                                            
+                                            // Final fallback to district-level charge
+                                            if (!deliveryCharge) {
+                                                deliveryCharge = deliveryCharges[selectedDistrict].find(item => 
+                                                    !item.upazila
+                                                );
+                                            }
+                                        }
+                                    }
+                                    
+                                    console.log('Found delivery charge:', deliveryCharge);
+                                    
+                                    if (deliveryCharge) {
+                                        const charge = parseFloat(deliveryCharge.charge) || 0;
+                                        const deliveryTime = deliveryCharge.estimated_delivery_time || '3-5 business days';
+                                        
+                                        // Get current cart total (you may need to adjust this based on your cart implementation)
+                                        const cartTotal = getCurrentCartTotal(); // This function needs to be implemented
+                                        
+                                        // Check for free shipping
+                                        let finalCharge = charge;
+                                        let freeShippingMsg = '';
+                                        
+                                        if (shippingConfig.freeShippingEnabled && cartTotal >= shippingConfig.freeShippingThreshold) {
+                                            finalCharge = 0;
+                                            freeShippingMsg = `🎉 Free shipping applied! (Order over ${shippingConfig.currency}${shippingConfig.freeShippingThreshold})`;
+                                        }
+                                        
+                                        // Display results
+                                        document.getElementById('shipping-charge-display').innerHTML = 
+                                            `<strong>Shipping Charge: ${shippingConfig.currency}${finalCharge.toFixed(2)}</strong>`;
+                                        document.getElementById('delivery-time-display').innerHTML = 
+                                            `<small>Estimated Delivery: ${deliveryTime}</small>`;
+                                        
+                                        const freeShippingElement = document.getElementById('free-shipping-msg');
+                                        if (freeShippingMsg) {
+                                            freeShippingElement.innerHTML = freeShippingMsg;
+                                            freeShippingElement.style.display = 'block';
+                                        } else {
+                                            freeShippingElement.style.display = 'none';
+                                        }
+                                        
+                                        shippingResult.style.display = 'block';
+                                    } else {
+                                        alert('Shipping not available for selected location');
+                                    }
+                                });
+                                
+                                // Helper function to get current cart total
+                                function getCurrentCartTotal() {
+                                    // This should return the current cart subtotal
+                                    // You may need to implement this based on your cart system
+                                    const subtotalElement = document.getElementById('cart-subtotal');
+                                    if (subtotalElement) {
+                                        // Extract number from formatted currency string
+                                        const subtotalText = subtotalElement.textContent || subtotalElement.innerText;
+                                        const match = subtotalText.match(/[\d,]+\.?\d*/);
+                                        return match ? parseFloat(match[0].replace(/,/g, '')) : 0;
+                                    }
+                                    return 1000; // Default fallback
+                                }
+                            });
+                            </script>
                         </div>
                     </div>
                 </div>
