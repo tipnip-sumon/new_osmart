@@ -272,6 +272,29 @@ Route::get('/api/categories', [App\Http\Controllers\CategoryController::class, '
 Route::get('/shop', [App\Http\Controllers\ShopController::class, 'grid'])->name('shop.grid');
 Route::get('/shop/list', [App\Http\Controllers\ShopController::class, 'list'])->name('shop.list');
 
+// Add missing shop routes for Ecomus theme
+Route::get('/shop/index', [App\Http\Controllers\ShopController::class, 'grid'])->name('shop.index');
+
+// Missing collections routes
+Route::get('/collections', [CollectionsController::class, 'index'])->name('collections.index');
+
+// Missing pages routes
+Route::get('/pages/returns', function() { return view('pages.returns'); })->name('pages.returns');
+Route::get('/pages/shipping', function() { return view('pages.shipping'); })->name('pages.shipping');
+Route::get('/pages/faq', function() { return view('pages.faq'); })->name('pages.faq');
+Route::get('/pages/store', function() { return view('pages.store'); })->name('pages.store');
+
+// Missing brand and search routes
+Route::get('/brands', function() { return redirect('/shop'); })->name('brands.index');
+Route::get('/compare', function() { return view('compare.index'); })->name('compare.index');
+Route::get('/search', [App\Http\Controllers\ShopController::class, 'grid'])->name('search');
+
+// Newsletter subscription route
+Route::post('/newsletter/subscribe', function(Request $request) {
+    // Add newsletter subscription logic here
+    return response()->json(['success' => true, 'message' => 'Subscribed successfully!']);
+})->name('newsletter.subscribe');
+
 // AJAX routes for shop
 Route::get('/api/shop/categories', [App\Http\Controllers\ShopController::class, 'getCategories'])->name('shop.categories');
 Route::get('/api/shop/brands', [App\Http\Controllers\ShopController::class, 'getBrands'])->name('shop.brands');
@@ -842,7 +865,7 @@ Route::get('/about', function () {
     return view('pages.about');
 })->name('pages.about');
 
-Route::get('/contact', [App\Http\Controllers\ContactController::class, 'index'])->name('contact');
+Route::get('/contact', [App\Http\Controllers\ContactController::class, 'index'])->name('contact.show');
 Route::post('/contact', [App\Http\Controllers\ContactController::class, 'submit'])->name('contact.submit');
 
 // Terms and Privacy pages for registration

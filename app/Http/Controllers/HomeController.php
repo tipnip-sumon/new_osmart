@@ -108,7 +108,7 @@ class HomeController extends Controller
             ->get();
 
         // Pass heroBanners as banners for the view
-        return view('home', [
+        return view('home-ecomus', [
             'banners' => $heroBanners,
             'categories' => $categories, 
             'flashSaleProducts' => $flashSaleProducts,

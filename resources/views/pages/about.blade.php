@@ -48,7 +48,7 @@
                     
                     <div class="text-center mt-5">
                         <a href="{{ route('register') }}" class="btn btn-primary btn-lg">Join Us Today</a>
-                        <a href="{{ route('contact') }}" class="btn btn-outline-primary btn-lg ms-3">Contact Us</a>
+                        <a href="{{ route('contact.show') }}" class="btn btn-outline-primary btn-lg ms-3">Contact Us</a>
                     </div>
                 </div>
             </div>

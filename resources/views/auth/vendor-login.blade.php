@@ -129,7 +129,7 @@
                             <i class="ti ti-info-circle me-2"></i>
                             <div>
                                 <strong>Note:</strong> Vendor accounts are currently managed by administrators.
-                                Please <a href="{{ route('contact') }}" class="alert-link">contact us</a> for vendor partnership opportunities.
+                                Please <a href="{{ route('contact.show') }}" class="alert-link">contact us</a> for vendor partnership opportunities.
                             </div>
                         </div>
                     </div>

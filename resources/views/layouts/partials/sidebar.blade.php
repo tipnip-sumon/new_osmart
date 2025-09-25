@@ -269,7 +269,7 @@
                 <i class="ti ti-notebook"></i>
                 <span>About Us</span>
             </a></li>
-            <li><a href="{{ route('contact') }}" class="menu-item">
+            <li><a href="{{ route('contact.show') }}" class="menu-item">
                 <i class="ti ti-phone"></i>
                 <span>Contact</span>
             </a></li>

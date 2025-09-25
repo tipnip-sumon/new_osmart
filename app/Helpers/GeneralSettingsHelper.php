@@ -26,6 +26,18 @@ if (!function_exists('getSettings')) {
     }
 }
 
+if (!function_exists('generalSettings')) {
+    /**
+     * Get all settings (alias for getSettings).
+     *
+     * @return \App\Models\GeneralSetting
+     */
+    function generalSettings()
+    {
+        return \App\Models\GeneralSetting::getSettings();
+    }
+}
+
 if (!function_exists('siteName')) {
     /**
      * Get site name.

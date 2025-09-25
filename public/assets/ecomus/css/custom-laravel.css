@@ -1,0 +1,311 @@
+/* Custom CSS for Laravel Integration with Ecomus Theme */
+
+/* Ensure proper font loading */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Custom variables for theme customization */
+:root {
+    --primary-color: #4F46E5;
+    --secondary-color: #10B981;
+    --accent-color: #F59E0B;
+    --text-primary: #1F2937;
+    --text-secondary: #6B7280;
+    --background-light: #F9FAFB;
+    --border-color: #E5E7EB;
+    --success-color: #10B981;
+    --warning-color: #F59E0B;
+    --error-color: #EF4444;
+}
+
+/* Logo styling */
+.logo-header img {
+    max-height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Navigation improvements */
+.header-default .nav-icon-item {
+    transition: all 0.3s ease;
+}
+
+.header-default .nav-icon-item:hover {
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+/* Count badges */
+.count-box {
+    background: var(--primary-color);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+}
+
+/* Button customizations */
+.tf-btn.btn-fill {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.tf-btn.btn-fill:hover {
+    background: color-mix(in srgb, var(--primary-color) 90%, black);
+    border-color: color-mix(in srgb, var(--primary-color) 90%, black);
+    transform: translateY(-1px);
+}
+
+.tf-btn.btn-outline {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.tf-btn.btn-outline:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Product card enhancements */
+.card-product {
+    transition: all 0.3s ease;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.card-product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.card-product-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.card-product-wrapper .img-product {
+    transition: transform 0.3s ease;
+}
+
+.card-product:hover .img-product {
+    transform: scale(1.05);
+}
+
+/* Price styling */
+.price-on-sale {
+    color: var(--error-color);
+    font-weight: 600;
+}
+
+.compare-at-price {
+    color: var(--text-secondary);
+    text-decoration: line-through;
+}
+
+/* Collection items */
+.collection-item-circle {
+    transition: all 0.3s ease;
+}
+
+.collection-item-circle:hover {
+    transform: translateY(-10px);
+}
+
+.collection-item-circle .collection-image {
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.collection-item-circle:hover .collection-image {
+    border-color: var(--primary-color);
+}
+
+/* Slider customizations */
+.tf-slideshow .heading {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--text-primary);
+}
+
+.tf-slideshow .desc {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin: 1.5rem 0;
+}
+
+/* Announcement bar */
+.announcement-bar {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+}
+
+.announcement-bar-item p {
+    color: white;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* Footer customizations */
+.footer {
+    background: #1F2937;
+    color: white;
+}
+
+.footer .footer-logo img {
+    max-height: 50px;
+    filter: brightness(0) invert(1);
+}
+
+.footer a {
+    color: #D1D5DB;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: white;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .tf-slideshow .heading {
+        font-size: 2.5rem;
+    }
+    
+    .tf-slideshow .desc {
+        font-size: 1rem;
+    }
+    
+    .collection-item-circle .collection-content .title {
+        font-size: 14px;
+    }
+    
+    .collection-item-circle .collection-content .count {
+        font-size: 12px;
+    }
+    
+    .card-product {
+        margin-bottom: 20px;
+    }
+}
+
+/* Loading states */
+.tf-btn-loading {
+    position: relative;
+}
+
+.tf-btn-loading.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    margin: -8px 0 0 -8px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Testimonial improvements */
+.testimonial-item {
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+.testimonial-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+.testimonial-item .rating {
+    color: #F59E0B;
+    margin-bottom: 20px;
+}
+
+/* Search modal improvements */
+.canvas-search {
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+}
+
+.canvas-search .canvas-wrapper {
+    background: white;
+    border-radius: 16px 0 0 16px;
+}
+
+/* Cart modal improvements */
+.modal-shopping-cart .modal-content {
+    border-radius: 16px;
+    border: none;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+/* Success messages */
+.alert-success {
+    background: color-mix(in srgb, var(--success-color) 10%, white);
+    border-color: var(--success-color);
+    color: color-mix(in srgb, var(--success-color) 80%, black);
+}
+
+.alert-error {
+    background: color-mix(in srgb, var(--error-color) 10%, white);
+    border-color: var(--error-color);
+    color: color-mix(in srgb, var(--error-color) 80%, black);
+}
+
+/* Preloader customization */
+.preload-container {
+    background: var(--background-light);
+}
+
+.spinner {
+    border-top-color: var(--primary-color);
+}
+
+/* RTL Support */
+[dir="rtl"] .icon-arrow-right::before {
+    transform: rotate(180deg);
+}
+
+[dir="rtl"] .icon-arrow-left::before {
+    transform: rotate(180deg);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .tf-btn.btn-fill {
+        border: 2px solid;
+    }
+    
+    .card-product {
+        border: 1px solid var(--border-color);
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

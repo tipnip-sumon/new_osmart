@@ -90,7 +90,7 @@
                                     <i class="ti ti-help-circle" style="font-size: 3rem; color: #6f42c1;"></i>
                                     <h5 class="mt-3">Help & Support</h5>
                                     <p class="text-muted">Get help and contact customer support</p>
-                                    <a href="{{ route('contact') }}" class="btn btn-secondary">
+                                    <a href="{{ route('contact.show') }}" class="btn btn-secondary">
                                         <i class="ti ti-message"></i> Contact Support
                                     </a>
                                 </div>

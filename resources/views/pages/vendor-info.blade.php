@@ -17,7 +17,7 @@
                                     <p class="lead mb-4">Join our marketplace and reach thousands of customers worldwide. Start selling your products with our comprehensive vendor platform.</p>
                                     <div class="hero-btn-group">
                                         <a class="btn btn-primary btn-lg me-2" href="{{ route('vendor.register') }}">Apply Now</a>
-                                        <a class="btn btn-outline-primary btn-lg" href="{{ route('contact') }}">Contact Us</a>
+                                        <a class="btn btn-outline-primary btn-lg" href="{{ route('contact.show') }}">Contact Us</a>
                                     </div>
                                 </div>
                             </div>
