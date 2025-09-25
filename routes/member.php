@@ -133,7 +133,7 @@ Route::middleware(['auth', 'role.session:affiliate'])->prefix('member')->name('m
         Route::get('/success', [\App\Http\Controllers\Member\DirectPointPurchaseController::class, 'success'])->name('success');
         // Redirect history to orders page since orders page already exists with all the data
         Route::get('/history', function () {
-            return redirect()->route('member.orders');
+            return redirect()->route('member.orders.index');
         })->name('history');
         Route::get('/calculate-cost', [\App\Http\Controllers\Member\DirectPointPurchaseController::class, 'calculateCost'])->name('calculate-cost');
     });

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\ShippingCalculationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 
 class ShippingController extends Controller
@@ -128,5 +129,53 @@ class ShippingController extends Controller
                 'by_location' => $config['free_shipping']['by_location']
             ]
         ]);
+    }
+
+    public function calculateShippingCost(Request $request)
+    {
+        try {
+            $district = $request->district;
+            $upazila = $request->upazila;
+            $subtotal = $request->subtotal;
+
+            // Get shipping configuration
+            $shippingConfig = config('shipping');
+            $freeShippingThreshold = $shippingConfig['free_shipping_threshold'] ?? 1000;
+            $defaultShippingCost = $shippingConfig['default_cost'] ?? 60;
+
+            // Check if eligible for free shipping
+            $isFreeShipping = $subtotal >= $freeShippingThreshold;
+            
+            if ($isFreeShipping) {
+                session(['shipping_cost' => 0]);
+                return response()->json([
+                    'shipping_cost' => 0,
+                    'is_free_shipping' => true,
+                    'message' => 'Free shipping applied'
+                ]);
+            }
+
+            // Get location-specific shipping cost
+            $deliveryCharge = DB::table('delivery_charges')
+                ->where('district', $district)
+                ->where('upazila', $upazila)
+                ->first();
+
+            $shippingCost = $deliveryCharge ? $deliveryCharge->charge : $defaultShippingCost;
+            
+            session(['shipping_cost' => $shippingCost]);
+
+            return response()->json([
+                'shipping_cost' => $shippingCost,
+                'is_free_shipping' => false,
+                'location' => $district . ', ' . $upazila
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Failed to calculate shipping cost',
+                'message' => $e->getMessage()
+            ], 500);
+        }
     }
 }

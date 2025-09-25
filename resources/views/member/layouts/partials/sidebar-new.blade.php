@@ -138,7 +138,7 @@
                 
                 <!-- My Orders -->
                 <li class="slide">
-                    <a href="{{ route('member.orders') }}" class="side-menu__item {{ request()->routeIs('member.orders') ? 'active' : '' }}">
+                    <a href="{{ route('member.orders.index') }}" class="side-menu__item {{ request()->routeIs('member.orders.*') ? 'active' : '' }}">
                         <i class="bx bx-shopping-bag side-menu__icon"></i>
                         <span class="side-menu__label">My Orders</span>
                     </a>

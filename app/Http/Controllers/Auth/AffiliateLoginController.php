@@ -69,11 +69,29 @@ class AffiliateLoginController extends Controller
                 'ip' => $request->ip()
             ]);
             
-            // Redirect based on user role and intended URL
+            // Check for redirect_to parameter (for checkout login) or referer URL
+            if ($request->filled('redirect_to')) {
+                return redirect($request->redirect_to)->with('success', 'Welcome back! You are now logged in.');
+            }
+            
+            // Check if request came from checkout page
+            if ($request->filled('from_checkout')) {
+                return redirect()->route('checkout.index')->with('success', 'Welcome back! You are now logged in.');
+            }
+            
+            $referer = $request->header('referer');
+            if ($referer && (str_contains($referer, '/checkout') || str_contains($referer, 'checkout'))) {
+                return redirect()->route('checkout.index')->with('success', 'Welcome back! You are now logged in.');
+            }
+            
+            // Check for intended URL from session
             $intendedUrl = $request->session()->pull('url.intended');
+            if ($intendedUrl && (str_contains($intendedUrl, '/checkout') || str_contains($intendedUrl, 'checkout'))) {
+                return redirect($intendedUrl)->with('success', 'Welcome back! You are now logged in.');
+            }
             
             // For affiliate login, always redirect to appropriate dashboard
-            // Don't use intended URL to avoid conflicts with middleware
+            // Use the already pulled intended URL or default to role-based redirect
             switch ($user->role) {
                 case 'affiliate':
                     return redirect()->route('member.dashboard')->with([

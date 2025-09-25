@@ -8,6 +8,8 @@ use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ShippingController;
 use App\Http\Controllers\Api\RealTimeBinaryController;
 use App\Http\Controllers\Api\DeliveryChargeController;
+use App\Http\Controllers\Api\LocationController;
+use App\Http\Controllers\CouponController;
 
 // Authentication check route for AJAX requests
 Route::get('/auth-check', function () {
@@ -97,6 +99,19 @@ Route::prefix('shipping')->group(function () {
     Route::post('/check-free-shipping', [ShippingController::class, 'checkFreeShipping']);
     Route::get('/config', [ShippingController::class, 'getShippingConfig']);
 });
+
+// Shipping Cost Calculation
+Route::post('/shipping-cost', [ShippingController::class, 'calculateShippingCost']);
+
+// Location API routes
+Route::get('/districts', [LocationController::class, 'getDistricts']);
+Route::get('/upazilas/{district}', [LocationController::class, 'getUpazilas']);
+Route::get('/wards/{district}/{upazila}', [LocationController::class, 'getWards']);
+
+// Coupon API routes
+Route::post('/apply-coupon', [CouponController::class, 'validateCoupon']);
+Route::post('/validate-coupon', [CouponController::class, 'validateCoupon']);
+Route::get('/auto-apply-coupons', [CouponController::class, 'getAutoApplyCoupons']);
 
 // Delivery Charge API routes
 Route::prefix('delivery')->group(function () {

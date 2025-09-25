@@ -37,7 +37,7 @@
                         <ul class="sub-nav-menu">
                             <li><a href="{{ route('member.dashboard') }}" class="sub-nav-link">Dashboard</a></li>
                             <li><a href="{{ route('member.profile') }}" class="sub-nav-link">Profile</a></li>
-                            <li><a href="{{ route('member.orders') }}" class="sub-nav-link">Orders</a></li>
+                            <li><a href="{{ route('member.orders.index') }}" class="sub-nav-link">Orders</a></li>
                             <li><a href="{{ route('wishlist.index') }}" class="sub-nav-link">Wishlist</a></li>
                             <li><a href="{{ route('logout') }}" class="sub-nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
                         </ul>
