@@ -30,6 +30,34 @@
     }
 }
 
+/* Price styling */
+.card-product-info .price .compare-at-price {
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    text-decoration-color: #e74c3c;
+    color: #666;
+    margin-right: 8px;
+    font-size: 14px;
+    position: relative;
+}
+
+.card-product-info .price .compare-at-price::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 2px;
+    background-color: #e74c3c;
+    transform: translateY(-50%);
+}
+
+.card-product-info .price .price-on-sale {
+    color: #e74c3c;
+    font-weight: 600;
+    font-size: 16px;
+}
+
 /* Quick View Modal Fix */
 .modal#quick_view {
     z-index: 9999 !important;
@@ -486,11 +514,11 @@ function getCategoryImageSrc($category, $defaultImage = 'assets/ecomus/images/co
                             <div class="card-product-info">
                                 <a href="{{ route('products.show', $product->slug) }}" class="title link">{{ $product->name }}</a>
                                 <span class="price">
-                                    @if($product->sale_price)
-                                        <span class="compare-at-price">{{ formatCurrency($product->price) }}</span>
-                                        <span class="price-on-sale fw-6">{{ formatCurrency($product->sale_price) }}</span>
+                                    @if($product->sale_price && $product->sale_price < $product->price)
+                                        <span class="compare-at-price">৳{{ number_format($product->price, 0) }}</span>
+                                        <span class="price-on-sale fw-6">৳{{ number_format($product->sale_price, 0) }}</span>
                                     @else
-                                        <span class="fw-6">{{ formatCurrency($product->price) }}</span>
+                                        <span class="fw-6">৳{{ number_format($product->price, 0) }}</span>
                                     @endif
                                 </span>
                             </div>

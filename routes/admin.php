@@ -843,6 +843,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth:admin'])->group(functi
         Route::get('/', [ProductController::class, 'index'])->name('index');
         Route::get('/create', [ProductController::class, 'create'])->name('create');
         Route::post('/', [ProductController::class, 'store'])->name('store');
+        Route::get('/check-slug', [ProductController::class, 'checkSlug'])->name('check-slug');
         Route::get('/subcategories/{categoryId}', [ProductController::class, 'getSubcategories'])->name('subcategories');
         Route::post('/bulk-action', [ProductController::class, 'bulkAction'])->name('bulk-action');
         Route::get('/bulk-import', [ProductController::class, 'bulkImport'])->name('bulk-import');

@@ -6,6 +6,143 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
 <style>
+    /* Interactive Form Styles */
+    .form-control:focus, .form-select:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        transform: translateY(-1px);
+        transition: all 0.3s ease;
+    }
+
+    .form-control.border-warning {
+        border-color: #ffc107 !important;
+        box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
+    }
+
+    /* Color Suggestions Styling */
+    .color-suggestions, .size-suggestions {
+        background: #f8f9fa;
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #e9ecef;
+    }
+
+    .color-suggestion, .size-suggestion {
+        font-size: 11px !important;
+        padding: 2px 6px !important;
+        margin: 1px;
+        border-radius: 3px;
+        transition: all 0.2s ease;
+    }
+
+    .color-suggestion:hover, .size-suggestion:hover {
+        background-color: #007bff;
+        color: white;
+        transform: translateY(-1px);
+    }
+
+    .color-swatch {
+        transition: all 0.2s ease;
+        position: relative;
+    }
+
+    .color-swatch:hover {
+        transform: scale(1.2);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        z-index: 10;
+    }
+
+    .color-swatch-container {
+        position: relative;
+        text-align: center;
+    }
+
+    .color-swatch-container:hover {
+        transform: translateY(-2px);
+    }
+
+    .color-preview-actions {
+        border-top: 1px solid #dee2e6;
+        padding-top: 8px;
+    }
+
+    /* Color Picker Modal Styles */
+    .color-btn {
+        margin: 2px;
+        transition: all 0.2s ease;
+    }
+
+    .color-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .color-btn.selected {
+        background-color: #007bff;
+        color: white;
+        border-color: #007bff;
+        transform: scale(1.05);
+    }
+
+    /* Clickable field indicators */
+    .form-control[placeholder*="Auto"], .form-control[placeholder*="Suggested"] {
+        background: linear-gradient(90deg, #f8f9fa 0%, #e9ecef 100%);
+        cursor: pointer;
+    }
+
+    .form-control[placeholder*="Auto"]:hover, .form-control[placeholder*="Suggested"]:hover {
+        background: linear-gradient(90deg, #e9ecef 0%, #dee2e6 100%);
+        transform: translateY(-1px);
+    }
+
+    /* Required field styling */
+    .form-label .text-danger {
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% { opacity: 1; }
+        50% { opacity: 0.5; }
+        100% { opacity: 1; }
+    }
+
+    /* Tooltip styling enhancements */
+    .custom-tooltip {
+        animation: fadeInUp 0.3s ease;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Interactive button styling */
+    #generate-slug-btn:hover {
+        background-color: #0056b3;
+        transform: rotate(180deg);
+        transition: all 0.3s ease;
+    }
+
+    /* Starter kit tier highlighting */
+    #starter_kit_tier_section.highlight {
+        background: linear-gradient(45deg, #fff3cd, #ffeaa7);
+        padding: 15px;
+        border-radius: 8px;
+        border: 2px solid #ffc107;
+        animation: glow 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+        from { box-shadow: 0 0 5px #ffc107; }
+        to { box-shadow: 0 0 20px #ffc107, 0 0 30px #ffc107; }
+    }
+
     /* Image Upload Styles */
     .image-upload-container {
         border: 2px dashed #dee2e6;
@@ -20,6 +157,7 @@
     .image-upload-container:hover {
         border-color: #007bff;
         background: #e7f3ff;
+        transform: translateY(-2px);
     }
 
     .image-upload-container.drag-over {
@@ -724,12 +862,17 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="slug" class="form-label">Slug</label>
-                                    <input type="text" class="form-control @error('slug') is-invalid @enderror" 
-                                           id="slug" name="slug" value="{{ old('slug') }}" placeholder="Auto-generated from name">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control @error('slug') is-invalid @enderror" 
+                                               id="slug" name="slug" value="{{ old('slug') }}" placeholder="Auto-generated from name">
+                                        <button class="btn btn-outline-secondary" type="button" id="generate-slug-btn" title="Generate slug from product name">
+                                            <i class="fas fa-sync-alt"></i>
+                                        </button>
+                                    </div>
                                     @error('slug')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                    <div class="form-text">Leave empty to auto-generate from product name</div>
+                                    <div class="form-text">Leave empty to auto-generate, or customize as needed (e.g., "ami-vat-khai")</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="sku" class="form-label">SKU</label>
@@ -1204,11 +1347,221 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-12 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="weight" class="form-label">Weight (kg)</label>
                                     <input type="number" class="form-control @error('weight') is-invalid @enderror" 
                                            id="weight" name="weight" value="{{ old('weight') }}" step="0.01" min="0" placeholder="0.00">
                                     @error('weight')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="shipping_weight" class="form-label">Shipping Weight (kg)</label>
+                                    <input type="number" class="form-control @error('shipping_weight') is-invalid @enderror" 
+                                           id="shipping_weight" name="shipping_weight" value="{{ old('shipping_weight') }}" step="0.01" min="0" placeholder="0.00">
+                                    @error('shipping_weight')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="unit_id" class="form-label">Unit</label>
+                                    <select class="form-control select2 @error('unit_id') is-invalid @enderror" 
+                                            id="unit_id" name="unit_id">
+                                        <option value="">Select Unit</option>
+                                        @if(isset($units))
+                                            @foreach($units as $unit)
+                                                <option value="{{ $unit->id }}" {{ old('unit_id') == $unit->id ? 'selected' : '' }}>
+                                                    {{ $unit->name }} ({{ $unit->symbol }})
+                                                </option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                    @error('unit_id')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <!-- Dimensions -->
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <label for="length" class="form-label">Length (cm)</label>
+                                    <input type="number" class="form-control @error('length') is-invalid @enderror" 
+                                           id="length" name="length" value="{{ old('length') }}" step="0.01" min="0" placeholder="0.00">
+                                    @error('length')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="width" class="form-label">Width (cm)</label>
+                                    <input type="number" class="form-control @error('width') is-invalid @enderror" 
+                                           id="width" name="width" value="{{ old('width') }}" step="0.01" min="0" placeholder="0.00">
+                                    @error('width')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="height" class="form-label">Height (cm)</label>
+                                    <input type="number" class="form-control @error('height') is-invalid @enderror" 
+                                           id="height" name="height" value="{{ old('height') }}" step="0.01" min="0" placeholder="0.00">
+                                    @error('height')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="dimensions" class="form-label">Dimensions (Text)</label>
+                                    <input type="text" class="form-control @error('dimensions') is-invalid @enderror" 
+                                           id="dimensions" name="dimensions" value="{{ old('dimensions') }}" placeholder="e.g., 50x30x20 cm">
+                                    @error('dimensions')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <!-- Product Properties -->
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="condition" class="form-label">Condition</label>
+                                    <select class="form-control @error('condition') is-invalid @enderror" 
+                                            id="condition" name="condition">
+                                        <option value="new" {{ old('condition', 'new') == 'new' ? 'selected' : '' }}>New</option>
+                                        <option value="used" {{ old('condition') == 'used' ? 'selected' : '' }}>Used</option>
+                                        <option value="refurbished" {{ old('condition') == 'refurbished' ? 'selected' : '' }}>Refurbished</option>
+                                        <option value="damaged" {{ old('condition') == 'damaged' ? 'selected' : '' }}>Damaged</option>
+                                    </select>
+                                    @error('condition')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="size" class="form-label">Size</label>
+                                    <input type="text" class="form-control @error('size') is-invalid @enderror" 
+                                           id="size" name="size" value="{{ old('size') }}" placeholder="e.g., XL, 42, Large">
+                                    @error('size')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="color" class="form-label">Color</label>
+                                    <input type="text" class="form-control @error('color') is-invalid @enderror" 
+                                           id="color" name="color" value="{{ old('color') }}" placeholder="e.g., Red, Blue, Black">
+                                    @error('color')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <!-- Material and Options -->
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="material" class="form-label">Material</label>
+                                    <input type="text" class="form-control @error('material') is-invalid @enderror" 
+                                           id="material" name="material" value="{{ old('material') }}" placeholder="e.g., Cotton, Steel, Plastic">
+                                    @error('material')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="size_chart" class="form-label">Size Chart</label>
+                                    <textarea class="form-control @error('size_chart') is-invalid @enderror" 
+                                              id="size_chart" name="size_chart" rows="2" placeholder="Size chart information">{{ old('size_chart') }}</textarea>
+                                    @error('size_chart')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <div class="form-text mb-2">Add size measurements and fitting guide</div>
+                                    
+                                    <!-- Size Chart Suggestions -->
+                                    <div class="size-suggestions">
+                                        <small class="text-muted d-block mb-1">Quick Templates:</small>
+                                        <div class="btn-group-sm d-flex flex-wrap gap-1" role="group">
+                                            <button type="button" class="btn btn-outline-secondary btn-sm size-suggestion" data-template="clothing">Clothing Sizes</button>
+                                            <button type="button" class="btn btn-outline-secondary btn-sm size-suggestion" data-template="shoes">Shoe Sizes</button>
+                                            <button type="button" class="btn btn-outline-secondary btn-sm size-suggestion" data-template="electronics">Device Specs</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="color_options" class="form-label">Color Options</label>
+                                    <textarea class="form-control @error('color_options') is-invalid @enderror" 
+                                              id="color_options" name="color_options" rows="2" placeholder="Available color options">{{ old('color_options') }}</textarea>
+                                    @error('color_options')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <div class="form-text mb-2">Describe available color variants</div>
+                                    
+                                    <!-- Color Suggestions -->
+                                    <div class="color-suggestions">
+                                        <small class="text-muted d-block mb-1">Quick Add Colors:</small>
+                                        <div class="btn-group-sm d-flex flex-wrap gap-1" role="group">
+                                            <button type="button" class="btn btn-outline-secondary btn-sm color-suggestion" data-colors="Red, Blue, Green, Black, White">Basic Colors</button>
+                                            <button type="button" class="btn btn-outline-secondary btn-sm color-suggestion" data-colors="Navy, Maroon, Forest Green, Charcoal, Cream">Premium Colors</button>
+                                            <button type="button" class="btn btn-outline-secondary btn-sm color-suggestion" data-colors="Pink, Purple, Orange, Yellow, Turquoise">Vibrant Colors</button>
+                                            <button type="button" class="btn btn-outline-secondary btn-sm color-suggestion" data-colors="Beige, Brown, Grey, Khaki, Olive">Neutral Colors</button>
+                                        </div>
+                                        <div class="mt-1">
+                                            <button type="button" class="btn btn-outline-info btn-sm" id="custom-color-picker">
+                                                <i class="fas fa-palette"></i> Color Picker
+                                            </button>
+                                            <button type="button" class="btn btn-outline-warning btn-sm" id="clear-colors">
+                                                <i class="fas fa-eraser"></i> Clear
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Color Preview -->
+                                    <div id="color-preview" class="mt-2" style="display: none;">
+                                        <small class="text-muted d-block mb-2">Selected Colors:</small>
+                                        <div id="color-swatches" class="d-flex flex-wrap gap-1 mb-2"></div>
+                                        <div class="color-preview-actions">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="copyColorsToClipboard()">
+                                                <i class="fas fa-copy"></i> Copy Colors
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-outline-info" onclick="showColorDetails()">
+                                                <i class="fas fa-info-circle"></i> Details
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Shipping -->
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="free_shipping" name="free_shipping" value="1" 
+                                               {{ old('free_shipping') ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="free_shipping">
+                                            Free Shipping
+                                        </label>
+                                        <div class="form-text">Enable free shipping for this product</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="shipping_cost" class="form-label">Shipping Cost (৳)</label>
+                                    <input type="number" class="form-control @error('shipping_cost') is-invalid @enderror" 
+                                           id="shipping_cost" name="shipping_cost" value="{{ old('shipping_cost') }}" step="0.01" min="0" placeholder="0.00">
+                                    @error('shipping_cost')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <div class="form-text">Only applicable if free shipping is disabled</div>
+                                </div>
+                            </div>
+
+                            <!-- Warranty -->
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="warranty_period" class="form-label">Warranty Period</label>
+                                    <input type="text" class="form-control @error('warranty_period') is-invalid @enderror" 
+                                           id="warranty_period" name="warranty_period" value="{{ old('warranty_period') }}" placeholder="e.g., 1 Year, 6 Months, Lifetime">
+                                    @error('warranty_period')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="warranty_terms" class="form-label">Warranty Terms</label>
+                                    <textarea class="form-control @error('warranty_terms') is-invalid @enderror" 
+                                              id="warranty_terms" name="warranty_terms" rows="3" placeholder="Warranty terms and conditions">{{ old('warranty_terms') }}</textarea>
+                                    @error('warranty_terms')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -1253,15 +1606,23 @@ $(document).ready(function() {
     let uploadedImages = [];
     let primaryImageIndex = 0;
 
-    // Auto-generate slug from product name
+    // Auto-generate slug from product name (only if slug is empty)
     $('#name').on('input', function() {
         const name = $(this).val();
-        const slug = name.toLowerCase()
-            .replace(/[^a-z0-9\s-]/g, '')
-            .replace(/\s+/g, '-')
-            .replace(/-+/g, '-')
-            .trim('-');
-        $('#slug').val(slug);
+        const currentSlug = $('#slug').val();
+        
+        // Only auto-generate if slug field is empty or was previously auto-generated
+        if (!currentSlug || currentSlug === '' || $('#slug').data('auto-generated')) {
+            const slug = generateSlugFromName(name);
+            $('#slug').val(slug).data('auto-generated', true);
+            
+            // Check availability if slug is not empty
+            if (slug) {
+                checkSlugAvailability(slug);
+            } else {
+                clearSlugFeedback();
+            }
+        }
         
         // Auto-generate SKU
         if (name && !$('#sku').val()) {
@@ -1271,6 +1632,677 @@ $(document).ready(function() {
             $('#sku').val(sku);
         }
     });
+
+    // Manual slug generation button
+    $('#generate-slug-btn').on('click', function() {
+        const name = $('#name').val();
+        if (name) {
+            const slug = generateSlugFromName(name);
+            $('#slug').val(slug).data('auto-generated', true);
+            checkSlugAvailability(slug);
+        } else {
+            showToast('Please enter a product name first', 'warning');
+        }
+    });
+
+    // Mark slug as manually edited when user types in it
+    let slugCheckTimeout;
+    $('#slug').on('input', function() {
+        $(this).data('auto-generated', false);
+        
+        const slug = $(this).val();
+        if (slug) {
+            // Clear previous timeout
+            clearTimeout(slugCheckTimeout);
+            
+            // Set new timeout for slug checking
+            slugCheckTimeout = setTimeout(() => {
+                checkSlugAvailability(slug);
+            }, 500);
+        } else {
+            clearSlugFeedback();
+        }
+    });
+
+    // Function to check slug availability
+    function checkSlugAvailability(slug) {
+        if (!slug) return;
+        
+        const $slugField = $('#slug');
+        const $feedback = $slugField.siblings('.slug-feedback');
+        
+        // Create feedback element if doesn't exist
+        if ($feedback.length === 0) {
+            $slugField.parent().append('<div class="slug-feedback"></div>');
+        }
+        
+        // Show loading
+        $slugField.parent().find('.slug-feedback').html('<small class="text-muted"><i class="fas fa-spinner fa-spin"></i> Checking availability...</small>');
+        
+        $.ajax({
+            url: '{{ route('admin.products.check-slug') }}',
+            method: 'GET',
+            data: { slug: slug },
+            success: function(response) {
+                const $feedbackEl = $slugField.parent().find('.slug-feedback');
+                if (response.available) {
+                    $feedbackEl.html('<small class="text-success"><i class="fas fa-check-circle"></i> ' + response.message + '</small>');
+                    $slugField.removeClass('is-invalid').addClass('is-valid');
+                } else {
+                    $feedbackEl.html('<small class="text-danger"><i class="fas fa-exclamation-circle"></i> ' + response.message + '</small>');
+                    $slugField.removeClass('is-valid').addClass('is-invalid');
+                }
+            },
+            error: function() {
+                const $feedbackEl = $slugField.parent().find('.slug-feedback');
+                $feedbackEl.html('<small class="text-danger"><i class="fas fa-exclamation-triangle"></i> Error checking slug availability</small>');
+            }
+        });
+    }
+
+    // Function to clear slug feedback
+    function clearSlugFeedback() {
+        $('#slug').removeClass('is-valid is-invalid').parent().find('.slug-feedback').empty();
+    }
+
+    // Function to show toast notifications
+    function showToast(message, type = 'info') {
+        // Create toast if it doesn't exist
+        if ($('#toast-container').length === 0) {
+            $('body').append('<div id="toast-container" class="position-fixed top-0 end-0 p-3" style="z-index: 9999;"></div>');
+        }
+        
+        const toastId = 'toast-' + Date.now();
+        const toast = `
+            <div id="${toastId}" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <i class="fas fa-${type === 'warning' ? 'exclamation-triangle text-warning' : 'info-circle text-info'}"></i>
+                    <strong class="ms-2 me-auto">Notification</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">${message}</div>
+            </div>
+        `;
+        
+        $('#toast-container').append(toast);
+        const toastElement = new bootstrap.Toast(document.getElementById(toastId));
+        toastElement.show();
+        
+        // Remove toast element after it's hidden
+        document.getElementById(toastId).addEventListener('hidden.bs.toast', function() {
+            this.remove();
+        });
+    }
+
+    // Function to generate slug from name
+    function generateSlugFromName(name) {
+        return name.toLowerCase()
+            .replace(/[^a-z0-9\s-]/g, '')
+            .replace(/\s+/g, '-')
+            .replace(/-+/g, '-')
+            .trim('-');
+    }
+
+    // Handle free shipping toggle
+    $('#free_shipping').on('change', function() {
+        const isChecked = $(this).is(':checked');
+        const shippingCostField = $('#shipping_cost');
+        
+        if (isChecked) {
+            shippingCostField.val('0').prop('disabled', true);
+        } else {
+            shippingCostField.prop('disabled', false);
+        }
+    });
+
+    // Initialize free shipping on page load
+    if ($('#free_shipping').is(':checked')) {
+        $('#shipping_cost').val('0').prop('disabled', true);
+    }
+
+    // Add click events for better user experience and reduce confusion
+    
+    // Show tooltip on slug field click
+    $('#slug').on('click focus', function() {
+        if (!$(this).val()) {
+            showTooltip($(this), 'Slug will be auto-generated from product name. You can also customize it manually (e.g., "ami-vat-khai")');
+        }
+    });
+
+    // Show tooltip on SKU field click
+    $('#sku').on('click focus', function() {
+        if (!$(this).val()) {
+            showTooltip($(this), 'SKU will be auto-generated when you enter the product name. You can also enter it manually.');
+        }
+    });
+
+    // Show price calculation helper on PV points click
+    $('#pv_points').on('click focus', function() {
+        const price = $('#price').val();
+        if (price && !$(this).val()) {
+            const suggestedPV = (price * 0.7).toFixed(2);
+            showTooltip($(this), `Suggested PV Points: ${suggestedPV} (70% of price: ৳${price})`);
+            $(this).attr('placeholder', suggestedPV);
+        }
+    });
+
+    // Show BV points helper
+    $('#bv_points').on('click focus', function() {
+        const pvPoints = $('#pv_points').val();
+        const price = $('#price').val();
+        if ((pvPoints || price) && !$(this).val()) {
+            const suggestedBV = pvPoints || (price * 0.7).toFixed(2);
+            showTooltip($(this), `Suggested BV Points: ${suggestedBV} (usually same as PV Points)`);
+            $(this).attr('placeholder', suggestedBV);
+        }
+    });
+
+    // Show category selection help
+    $('#category_id').on('click', function() {
+        if ($(this).val() === '') {
+            showTooltip($(this), 'Please select a category for your product. This helps customers find your product easily.');
+        }
+    });
+
+    // Show vendor selection help
+    $('#vendor_id').on('click', function() {
+        if ($(this).val() === '') {
+            showTooltip($(this), 'Select the vendor who will supply this product. This is required for order processing.');
+        }
+    });
+
+    // Show unit selection help
+    $('#unit_id').on('click', function() {
+        showTooltip($(this), 'Select the unit of measurement for this product (e.g., Piece, Kilogram, Meter)');
+    });
+
+    // Show shipping cost help when clicked
+    $('#shipping_cost').on('click focus', function() {
+        if ($('#free_shipping').is(':checked')) {
+            showTooltip($(this), 'Shipping cost is disabled because "Free Shipping" is enabled. Uncheck "Free Shipping" to set a cost.');
+        } else {
+            showTooltip($(this), 'Enter the shipping cost for this product in Taka (৳). Leave 0 for free shipping.');
+        }
+    });
+
+    // Show weight help
+    $('#weight, #shipping_weight').on('click focus', function() {
+        const fieldName = $(this).attr('id') === 'weight' ? 'actual weight' : 'shipping weight';
+        showTooltip($(this), `Enter the ${fieldName} of the product in kilograms. This helps calculate shipping costs.`);
+    });
+
+    // Show dimensions help
+    $('#length, #width, #height').on('click focus', function() {
+        showTooltip($(this), 'Enter product dimensions in centimeters. This helps customers understand the product size.');
+    });
+
+    // Show condition help
+    $('#condition').on('click', function() {
+        showTooltip($(this), 'Select the condition of the product:\n• New: Brand new product\n• Used: Previously used but functional\n• Refurbished: Restored to working condition\n• Damaged: Has some defects');
+    });
+
+    // Show starter kit tier help
+    $('#starter_kit_tier').on('click', function() {
+        if ($('#is_starter_kit').is(':checked')) {
+            showTooltip($(this), 'Select the tier level for this starter kit:\n• Basic: ৳2,000\n• Standard: ৳5,000\n• Premium: ৳10,000\n• Platinum: ৳20,000');
+        }
+    });
+
+    // Auto-fill price based on starter kit tier selection
+    $('#starter_kit_tier').on('change', function() {
+        const tier = $(this).val();
+        const priceField = $('#price');
+        
+        if (tier && !priceField.val()) {
+            let suggestedPrice = '';
+            switch(tier) {
+                case 'basic':
+                    suggestedPrice = '2000';
+                    break;
+                case 'standard':
+                    suggestedPrice = '5000';
+                    break;
+                case 'premium':
+                    suggestedPrice = '10000';
+                    break;
+                case 'platinum':
+                    suggestedPrice = '20000';
+                    break;
+            }
+            
+            if (suggestedPrice && confirm(`Would you like to set the price to ৳${suggestedPrice} based on the ${tier} tier?`)) {
+                priceField.val(suggestedPrice).trigger('input');
+            }
+        }
+    });
+
+    // Show meta fields help
+    $('#meta_title').on('click focus', function() {
+        const productName = $('#name').val();
+        if (productName && !$(this).val()) {
+            showTooltip($(this), `Suggested: "${productName} - Buy Online | Your Store Name". Keep it under 60 characters for better SEO.`);
+        }
+    });
+
+    // Auto-suggest meta description
+    $('#meta_description').on('click focus', function() {
+        const productName = $('#name').val();
+        const shortDesc = $('#short_description').val();
+        if ((productName || shortDesc) && !$(this).val()) {
+            const suggestion = shortDesc || `Buy ${productName} online with fast delivery and best price.`;
+            showTooltip($(this), `Suggested: "${suggestion}". Keep it between 150-160 characters.`);
+        }
+    });
+
+    // Function to show helpful tooltips
+    function showTooltip(element, message) {
+        // Remove existing tooltip
+        $('.custom-tooltip').remove();
+        
+        const tooltip = $(`
+            <div class="custom-tooltip" style="
+                position: absolute;
+                background: #333;
+                color: white;
+                padding: 8px 12px;
+                border-radius: 4px;
+                font-size: 12px;
+                max-width: 300px;
+                z-index: 9999;
+                white-space: pre-line;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            ">${message}</div>
+        `);
+        
+        $('body').append(tooltip);
+        
+        const offset = element.offset();
+        tooltip.css({
+            top: offset.top - tooltip.outerHeight() - 8,
+            left: offset.left
+        });
+        
+        // Auto-hide after 5 seconds
+        setTimeout(() => {
+            tooltip.fadeOut(300, function() {
+                $(this).remove();
+            });
+        }, 5000);
+        
+        // Hide on click elsewhere
+        $(document).on('click.tooltip', function(e) {
+            if (!$(e.target).is(element)) {
+                tooltip.remove();
+                $(document).off('click.tooltip');
+            }
+        });
+    }
+
+    // Add visual feedback for required fields
+    $('input[required], select[required]').on('blur', function() {
+        if (!$(this).val()) {
+            $(this).addClass('border-warning');
+            showTooltip($(this), 'This field is required!');
+        } else {
+            $(this).removeClass('border-warning');
+        }
+    });
+
+    // Show image upload help
+    $('#image-upload-area').on('click', function() {
+        if ($('#image-preview-grid').children().length === 0) {
+            showTooltip($(this), 'Click to upload product images. First image will be the main product image. You can upload multiple images and reorder them.');
+        }
+    });
+
+    // Color Options Suggestions
+    $('.color-suggestion').on('click', function() {
+        const colors = $(this).data('colors');
+        const currentColors = $('#color_options').val();
+        
+        if (currentColors.trim() === '') {
+            $('#color_options').val(colors);
+        } else {
+            $('#color_options').val(currentColors + ', ' + colors);
+        }
+        
+        // Trigger input event to update preview
+        $('#color_options').trigger('input');
+        showToast('Colors added successfully!', 'success');
+    });
+
+    // Clear colors
+    $('#clear-colors').on('click', function() {
+        $('#color_options').val('');
+        // Trigger input event to update preview
+        $('#color_options').trigger('input');
+        showToast('Colors cleared', 'info');
+    });
+
+    // Custom color picker
+    $('#custom-color-picker').on('click', function() {
+        showColorPickerModal();
+    });
+
+    // Update color preview when text changes
+    $('#color_options').on('input', function() {
+        updateColorPreview();
+    });
+
+    // Function to update color preview
+    function updateColorPreview() {
+        const colorsText = $('#color_options').val();
+        const colorPreview = $('#color-preview');
+        const colorSwatches = $('#color-swatches');
+        
+        if (!colorsText || colorsText.trim() === '') {
+            colorPreview.hide();
+            return;
+        }
+        
+        const colors = colorsText.split(',').map(c => c.trim()).filter(c => c !== '');
+        
+        // Enhanced color mapping with more colors
+        const colorMap = {
+            // Basic Colors
+            'red': '#FF0000', 'blue': '#0000FF', 'green': '#008000', 'black': '#000000', 'white': '#FFFFFF',
+            
+            // Premium Colors  
+            'navy': '#000080', 'maroon': '#800000', 'forest green': '#228B22', 'charcoal': '#36454F', 'cream': '#FFFDD0',
+            
+            // Vibrant Colors
+            'pink': '#FFC0CB', 'purple': '#800080', 'orange': '#FFA500', 'yellow': '#FFFF00', 'turquoise': '#40E0D0',
+            
+            // Neutral Colors
+            'beige': '#F5F5DC', 'brown': '#A52A2A', 'grey': '#808080', 'gray': '#808080', 'khaki': '#F0E68C', 'olive': '#808000',
+            
+            // Fashion Colors
+            'rose gold': '#E8B4A0', 'champagne': '#F7E7CE', 'burgundy': '#800020', 'emerald': '#50C878', 
+            'sapphire': '#0F52BA', 'coral': '#FF7F50', 'mint': '#98FB98', 'lavender': '#E6E6FA',
+            'gold': '#FFD700', 'silver': '#C0C0C0', 'copper': '#B87333', 'platinum': '#E5E4E2'
+        };
+        
+        colorSwatches.empty();
+        
+        if (colors.length === 0) {
+            colorPreview.hide();
+            return;
+        }
+        
+        colors.forEach((color, index) => {
+            const colorLower = color.toLowerCase().trim();
+            let hexColor = colorMap[colorLower];
+            
+            // If color not found in map, try to detect if it's already a hex color
+            if (!hexColor) {
+                if (color.match(/^#[0-9A-Fa-f]{6}$/)) {
+                    hexColor = color;
+                } else {
+                    hexColor = '#CCCCCC'; // Default gray for unknown colors
+                }
+            }
+            
+            const swatch = $(`
+                <div class="color-swatch-container d-inline-block me-1 mb-1" title="${color}">
+                    <span class="color-swatch" style="
+                        display: inline-block;
+                        width: 24px;
+                        height: 24px;
+                        background-color: ${hexColor};
+                        border: 2px solid #ddd;
+                        border-radius: 4px;
+                        cursor: pointer;
+                        transition: all 0.2s ease;
+                        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+                    " data-color="${color}" data-hex="${hexColor}"></span>
+                    <small class="d-block text-center mt-1" style="font-size: 10px; color: #666;">${color}</small>
+                </div>
+            `);
+            
+            // Add special styling for light colors
+            if (hexColor === '#FFFFFF' || hexColor === '#FFFDD0' || hexColor === '#F5F5DC' || hexColor === '#CCCCCC') {
+                swatch.find('.color-swatch').css('border-color', '#999');
+            }
+            
+            // Add click handler to show color details
+            swatch.find('.color-swatch').on('click', function() {
+                const colorName = $(this).data('color');
+                const colorHex = $(this).data('hex');
+                showToast(`Color: ${colorName} (${colorHex})`, 'info');
+            });
+            
+            colorSwatches.append(swatch);
+        });
+        
+        // Show the preview container
+        colorPreview.show();
+        
+        // Add a summary
+        const summaryText = `${colors.length} color${colors.length > 1 ? 's' : ''} selected`;
+        colorPreview.find('small').first().text(summaryText);
+    }
+
+    // Function to show color picker modal
+    function showColorPickerModal() {
+        const modal = $(`
+            <div class="modal fade" id="colorPickerModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Select Colors</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Popular Colors</h6>
+                                    <div class="popular-colors d-flex flex-wrap gap-2">
+                                        ${generateColorButtons([
+                                            {name: 'Red', hex: '#FF0000'},
+                                            {name: 'Blue', hex: '#0000FF'},
+                                            {name: 'Green', hex: '#008000'},
+                                            {name: 'Black', hex: '#000000'},
+                                            {name: 'White', hex: '#FFFFFF'},
+                                            {name: 'Yellow', hex: '#FFFF00'},
+                                            {name: 'Pink', hex: '#FFC0CB'},
+                                            {name: 'Purple', hex: '#800080'},
+                                            {name: 'Orange', hex: '#FFA500'},
+                                            {name: 'Brown', hex: '#A52A2A'},
+                                            {name: 'Grey', hex: '#808080'},
+                                            {name: 'Navy', hex: '#000080'}
+                                        ])}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Fashion Colors</h6>
+                                    <div class="fashion-colors d-flex flex-wrap gap-2">
+                                        ${generateColorButtons([
+                                            {name: 'Rose Gold', hex: '#E8B4A0'},
+                                            {name: 'Champagne', hex: '#F7E7CE'},
+                                            {name: 'Burgundy', hex: '#800020'},
+                                            {name: 'Emerald', hex: '#50C878'},
+                                            {name: 'Sapphire', hex: '#0F52BA'},
+                                            {name: 'Coral', hex: '#FF7F50'},
+                                            {name: 'Mint', hex: '#98FB98'},
+                                            {name: 'Lavender', hex: '#E6E6FA'},
+                                            {name: 'Gold', hex: '#FFD700'},
+                                            {name: 'Silver', hex: '#C0C0C0'},
+                                            {name: 'Copper', hex: '#B87333'},
+                                            {name: 'Platinum', hex: '#E5E4E2'}
+                                        ])}
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="selected-colors-display">
+                                <h6>Selected Colors: <span id="selected-colors-count">0</span></h6>
+                                <div id="selected-colors-list" class="text-muted">None selected</div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" id="apply-selected-colors">Apply Colors</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `);
+        
+        $('body').append(modal);
+        
+        let selectedColors = [];
+        
+        // Handle color selection
+        modal.find('.color-btn').on('click', function() {
+            const colorName = $(this).data('color');
+            
+            if (selectedColors.includes(colorName)) {
+                selectedColors = selectedColors.filter(c => c !== colorName);
+                $(this).removeClass('selected');
+            } else {
+                selectedColors.push(colorName);
+                $(this).addClass('selected');
+            }
+            
+            updateSelectedColorsDisplay();
+        });
+        
+        function updateSelectedColorsDisplay() {
+            $('#selected-colors-count').text(selectedColors.length);
+            $('#selected-colors-list').text(selectedColors.length > 0 ? selectedColors.join(', ') : 'None selected');
+        }
+        
+        // Apply colors
+        modal.find('#apply-selected-colors').on('click', function() {
+            if (selectedColors.length > 0) {
+                const currentColors = $('#color_options').val();
+                const newColors = selectedColors.join(', ');
+                
+                if (currentColors.trim() === '') {
+                    $('#color_options').val(newColors);
+                } else {
+                    $('#color_options').val(currentColors + ', ' + newColors);
+                }
+                
+                // Trigger input event to update preview
+                $('#color_options').trigger('input');
+                showToast(`${selectedColors.length} colors added!`, 'success');
+            } else {
+                showToast('Please select at least one color', 'warning');
+                return;
+            }
+            
+            modal.modal('hide');
+        });
+        
+        // Show modal
+        const modalInstance = new bootstrap.Modal(modal[0]);
+        modalInstance.show();
+        
+        // Clean up when modal is hidden
+        modal.on('hidden.bs.modal', function() {
+            modal.remove();
+        });
+    }
+
+    // Generate color buttons HTML
+    function generateColorButtons(colors) {
+        return colors.map(color => `
+            <button type="button" class="btn btn-outline-secondary btn-sm color-btn" 
+                    data-color="${color.name}" 
+                    style="border-color: ${color.hex}; position: relative;">
+                <span style="display: inline-block; width: 12px; height: 12px; background-color: ${color.hex}; border-radius: 2px; margin-right: 4px; border: 1px solid #ccc;"></span>
+                ${color.name}
+            </button>
+        `).join('');
+    }
+
+    // Initialize color preview on page load
+    updateColorPreview();
+
+    // Helper function to copy colors to clipboard
+    window.copyColorsToClipboard = function() {
+        const colorsText = $('#color_options').val();
+        if (colorsText) {
+            navigator.clipboard.writeText(colorsText).then(function() {
+                showToast('Colors copied to clipboard!', 'success');
+            }).catch(function() {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = colorsText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showToast('Colors copied to clipboard!', 'success');
+            });
+        } else {
+            showToast('No colors to copy', 'warning');
+        }
+    };
+
+    // Helper function to show color details
+    window.showColorDetails = function() {
+        const colorsText = $('#color_options').val();
+        if (!colorsText) {
+            showToast('No colors selected', 'warning');
+            return;
+        }
+        
+        const colors = colorsText.split(',').map(c => c.trim()).filter(c => c !== '');
+        let details = `Color Details (${colors.length} colors):\n\n`;
+        
+        colors.forEach((color, index) => {
+            details += `${index + 1}. ${color}\n`;
+        });
+        
+        alert(details);
+    };
+
+    // Size Chart Suggestions
+    $('.size-suggestion').on('click', function() {
+        const template = $(this).data('template');
+        let sizeChartText = '';
+        
+        switch(template) {
+            case 'clothing':
+                sizeChartText = `Size Guide:
+S: Chest 36", Waist 30", Length 27"
+M: Chest 38", Waist 32", Length 28"
+L: Chest 40", Waist 34", Length 29"
+XL: Chest 42", Waist 36", Length 30"
+XXL: Chest 44", Waist 38", Length 31"
+
+Model is wearing size M (Height: 5'8", Chest: 38")
+Fabric has slight stretch. Size up for loose fit.`;
+                break;
+                
+            case 'shoes':
+                sizeChartText = `Shoe Size Chart:
+US 6 = UK 5.5 = EU 38 = CM 23
+US 7 = UK 6.5 = EU 39 = CM 24
+US 8 = UK 7.5 = EU 40 = CM 25
+US 9 = UK 8.5 = EU 41 = CM 26
+US 10 = UK 9.5 = EU 42 = CM 27
+
+Half sizes available. True to size fit.
+For wide feet, order half size up.`;
+                break;
+                
+            case 'electronics':
+                sizeChartText = `Technical Specifications:
+Dimensions: L x W x H (in cm)
+Screen Size: Diagonal measurement
+Weight: Net weight without packaging
+Battery: Capacity and life
+Compatibility: Supported devices/OS
+Warranty: Period and coverage terms`;
+                break;
+        }
+        
+        $('#size_chart').val(sizeChartText);
+        showToast('Size chart template added!', 'success');
+    });
     
     // Handle starter kit tier visibility and animations
     $('#is_starter_kit').on('change', function() {
@@ -1279,16 +2311,18 @@ $(document).ready(function() {
         const levelSection = $('#starter_kit_level_section');
         
         if (isChecked) {
-            tierSection.slideDown(300);
+            tierSection.slideDown(300).addClass('highlight');
             levelSection.slideDown(300);
             tierSection.find('select').focus();
+            showToast('Starter Kit enabled! Please select a tier level.', 'info');
         } else {
-            tierSection.slideUp(300);
+            tierSection.slideUp(300).removeClass('highlight');
             levelSection.slideUp(300);
             $('#starter_kit_tier').val('');
             $('#starter_kit_level').val('');
             // Reset price and points when unchecking starter kit
             $('#price, #pv_points, #bv_points').val('');
+            showToast('Starter Kit disabled.', 'info');
         }
     });
     
@@ -1933,6 +2967,72 @@ $(document).ready(function() {
             showToast('Failed to optimize images', 'danger');
         });
     };
+
+    // Add progress indicator for form completion
+    function updateFormProgress() {
+        const requiredFields = $('input[required], select[required]');
+        const filledFields = requiredFields.filter(function() {
+            return $(this).val() && $(this).val().trim() !== '';
+        });
+        
+        const progress = Math.round((filledFields.length / requiredFields.length) * 100);
+        
+        // Create or update progress bar
+        if ($('.form-progress').length === 0) {
+            $('.page-title').after(`
+                <div class="form-progress mt-2">
+                    <div class="progress" style="height: 6px;">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: ${progress}%"></div>
+                    </div>
+                    <small class="text-muted">Form completion: ${progress}% (${filledFields.length}/${requiredFields.length} required fields)</small>
+                </div>
+            `);
+        } else {
+            $('.progress-bar').css('width', progress + '%');
+            $('.form-progress small').text(`Form completion: ${progress}% (${filledFields.length}/${requiredFields.length} required fields)`);
+        }
+    }
+
+    // Update progress on field changes
+    $(document).on('input change', 'input[required], select[required]', function() {
+        updateFormProgress();
+    });
+
+    // Initial progress check
+    updateFormProgress();
+
+    // Add keyboard shortcuts
+    $(document).on('keydown', function(e) {
+        // Ctrl + S to save (prevent default and show toast)
+        if (e.ctrlKey && e.key === 's') {
+            e.preventDefault();
+            showToast('Use the "Create Product" button to save', 'info');
+            $('button[type="submit"]').focus().addClass('btn-pulse');
+            setTimeout(() => {
+                $('button[type="submit"]').removeClass('btn-pulse');
+            }, 1000);
+        }
+        
+        // Ctrl + G to generate slug
+        if (e.ctrlKey && e.key === 'g') {
+            e.preventDefault();
+            $('#generate-slug-btn').click();
+        }
+    });
+
+    // Add CSS for pulse effect
+    $('head').append(`
+        <style>
+            .btn-pulse {
+                animation: pulse-btn 0.5s infinite;
+            }
+            @keyframes pulse-btn {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+        </style>
+    `);
 });
 </script>
 @endpush

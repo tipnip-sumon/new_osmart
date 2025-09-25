@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Brand;
 use App\Models\Attribute;
 use App\Models\Tag;
+use App\Models\Unit;
 use App\Models\MlmProductSetting;
 use App\Traits\HandlesImageUploads;
 use Illuminate\Http\Request;
@@ -257,6 +258,15 @@ class ProductController extends Controller
                 $tags = collect();
             }
 
+            // Get units with error handling
+            $units = collect();
+            try {
+                $units = \App\Models\Unit::where('is_active', 1)->orderBy('name')->get();
+            } catch (\Exception $e) {
+                Log::warning('Failed to load units: ' . $e->getMessage());
+                $units = collect();
+            }
+
             // If no categories exist, create some default ones
             if ($categories->isEmpty()) {
                 try {
@@ -288,7 +298,7 @@ class ProductController extends Controller
                 'tags_count' => $tags->count()
             ]);
             
-            return view('admin.products.create', compact('categories', 'vendors', 'brands', 'attributes', 'tags'));
+            return view('admin.products.create', compact('categories', 'vendors', 'brands', 'attributes', 'tags', 'units'));
             
         } catch (\Exception $e) {
             Log::error('Error loading product create form: ' . $e->getMessage());
@@ -301,8 +311,9 @@ class ProductController extends Controller
             $brands = collect();
             $attributes = collect();
             $tags = collect();
+            $units = collect();
             
-            return view('admin.products.create', compact('categories', 'vendors', 'brands', 'attributes', 'tags'))
+            return view('admin.products.create', compact('categories', 'vendors', 'brands', 'attributes', 'tags', 'units'))
                 ->with('warning', 'Some data could not be loaded. Please check your database configuration.');
         }
     }
@@ -346,6 +357,36 @@ class ProductController extends Controller
                 'is_featured' => false
             ]);
         }
+    }
+
+    /**
+     * Check if slug is available
+     */
+    public function checkSlug(Request $request)
+    {
+        $slug = $request->get('slug');
+        $productId = $request->get('product_id'); // For update scenarios
+        
+        if (!$slug) {
+            return response()->json([
+                'available' => false,
+                'message' => 'Slug is required'
+            ]);
+        }
+
+        $query = Product::where('slug', $slug);
+        
+        // If updating, exclude current product
+        if ($productId) {
+            $query->where('id', '!=', $productId);
+        }
+        
+        $exists = $query->exists();
+        
+        return response()->json([
+            'available' => !$exists,
+            'message' => $exists ? 'This slug is already taken' : 'Slug is available'
+        ]);
     }
 
     public function store(Request $request)
@@ -397,8 +438,16 @@ class ProductController extends Controller
             'size' => 'nullable|string|max:50',
             'color' => 'nullable|string|max:50',
             'material' => 'nullable|string|max:100',
+            'size_chart' => 'nullable|string|max:500',
+            'color_options' => 'nullable|string|max:500',
+            'dimensions' => 'nullable|string|max:200',
+            'unit_id' => 'nullable|integer|exists:units,id',
             'free_shipping' => 'boolean',
             'shipping_cost' => 'nullable|numeric|min:0',
+            
+            // Warranty
+            'warranty_period' => 'nullable|string|max:100',
+            'warranty_terms' => 'nullable|string|max:1000',
             
             // Product types
             'is_digital' => 'boolean',
@@ -568,8 +617,16 @@ class ProductController extends Controller
                 'size' => $request->size,
                 'color' => $request->color,
                 'material' => $request->material,
+                'size_chart' => $request->size_chart,
+                'color_options' => $request->color_options,
+                'dimensions' => $request->dimensions,
+                'unit_id' => $request->unit_id,
                 'free_shipping' => $request->boolean('free_shipping'),
                 'shipping_cost' => $request->shipping_cost,
+                
+                // Warranty
+                'warranty_period' => $request->warranty_period,
+                'warranty_terms' => $request->warranty_terms,
                 
                 // Product types
                 'is_digital' => $request->boolean('is_digital'),

@@ -536,34 +536,51 @@ $galleryImages = getProductGalleryImages($product);
                                 @endif
                             </div>
                             <div class="tf-product-info-variant-picker">
-                                @if($product->variants && count($product->variants) > 0)
-                                    @php
-                                        $variantTypes = collect($product->variants)->groupBy('type');
-                                    @endphp
-                                    
-                                    @foreach($variantTypes as $type => $variants)
-                                    <div class="variant-picker-item">
-                                        <div class="variant-picker-label">
-                                            Choose {{ ucfirst($type) }}: <span class="selected-variant-{{ $type }}">{{ $variants->first()->value }}</span>
+                                @php
+                                    $availableAttributes = $product->getAvailableAttributes();
+                                @endphp
+                                
+                                @if($availableAttributes->isNotEmpty())
+                                    @foreach($availableAttributes as $attributeName => $attributeData)
+                                        @php
+                                            $attribute = $attributeData['attribute'] ?? null;
+                                            $values = $attributeData['values'] ?? collect();
+                                        @endphp
+                                        @if($attribute && $values->isNotEmpty())
+                                        <div class="variant-picker-item">
+                                            <div class="variant-picker-label">
+                                                Choose {{ $attribute->display_name ?: $attribute->name }}: 
+                                                <span class="selected-variant-{{ strtolower($attribute->name) }}">
+                                                    {{ optional($values->first())->display_name ?? optional($values->first())->value ?? 'Select' }}
+                                                </span>
+                                            </div>
+                                            <div class="variant-picker-values">
+                                                @foreach($values as $index => $value)
+                                                    @if($value && strtolower($attribute->type) === 'color')
+                                                        <input type="radio" class="btn-check" name="{{ strtolower($attribute->name) }}" 
+                                                               id="{{ strtolower($attribute->name) }}_{{ $value->id }}" 
+                                                               value="{{ $value->id }}" {{ $index === 0 ? 'checked' : '' }}>
+                                                        <label class="btn variant-picker-item color-swatch" 
+                                                               for="{{ strtolower($attribute->name) }}_{{ $value->id }}" 
+                                                               style="background-color: {{ $value->color_code ?? '#ccc' }};" 
+                                                               title="{{ $value->display_name ?: $value->value }}">
+                                                        </label>
+                                                    @elseif($value)
+                                                        <input type="radio" class="btn-check" name="{{ strtolower($attribute->name) }}" 
+                                                               id="{{ strtolower($attribute->name) }}_{{ $value->id }}" 
+                                                               value="{{ $value->id }}" {{ $index === 0 ? 'checked' : '' }}>
+                                                        <label class="btn style-text variant-picker-item" 
+                                                               for="{{ strtolower($attribute->name) }}_{{ $value->id }}">
+                                                            {{ $value->display_name ?: $value->value }}
+                                                        </label>
+                                                    @endif
+                                                @endforeach
+                                            </div>
                                         </div>
-                                        <div class="variant-picker-values">
-                                            @foreach($variants as $index => $variant)
-                                                @if(strtolower($type) === 'color')
-                                                    <input type="radio" class="btn-check" name="{{ $type }}" id="{{ $type }}_{{ $variant->id }}" value="{{ $variant->id }}" {{ $index === 0 ? 'checked' : '' }}>
-                                                    <label class="btn variant-picker-item color-swatch" for="{{ $type }}_{{ $variant->id }}" 
-                                                           style="background-color: {{ $variant->color_code ?? $variant->value }};" 
-                                                           title="{{ $variant->value }}">
-                                                    </label>
-                                                @else
-                                                    <input type="radio" class="btn-check" name="{{ $type }}" id="{{ $type }}_{{ $variant->id }}" value="{{ $variant->id }}" {{ $index === 0 ? 'checked' : '' }}>
-                                                    <label class="btn style-text variant-picker-item" for="{{ $type }}_{{ $variant->id }}">{{ $variant->value }}</label>
-                                                @endif
-                                            @endforeach
-                                        </div>
-                                    </div>
+                                        @endif
                                     @endforeach
                                 @else
-                                    <!-- Default variant options if no variants exist -->
+                                    <!-- Default variant options when no dynamic attributes exist -->
                                     <div class="variant-picker-item">
                                         <div class="variant-picker-label">
                                             Choose Size: <span class="selected-variant-size">M</span>
@@ -589,7 +606,7 @@ $galleryImages = getProductGalleryImages($product);
                                                    style="background-color: #000000;" title="Black"></label>
                                             <input type="radio" class="btn-check" name="color" id="color_white" value="White">
                                             <label class="btn variant-picker-item color-swatch" for="color_white" 
-                                                   style="background-color: #ffffff;" title="White"></label>
+                                                   style="background-color: #ffffff; border: 1px solid #ccc;" title="White"></label>
                                             <input type="radio" class="btn-check" name="color" id="color_blue" value="Blue">
                                             <label class="btn variant-picker-item color-swatch" for="color_blue" 
                                                    style="background-color: #007bff;" title="Blue"></label>

@@ -199,6 +199,80 @@ class Product extends Model
         return $this->belongsTo(Category::class, 'subcategory_id');
     }
 
+    // Get available attributes from the attributes column
+    public function getAvailableAttributes()
+    {
+        try {
+            if (empty($this->attributes)) {
+                return collect();
+            }
+            
+            $attributeData = is_string($this->attributes) ? json_decode($this->attributes, true) : $this->attributes;
+            
+            if (empty($attributeData) || !is_array($attributeData)) {
+                return collect();
+            }
+            
+            $attributes = collect();
+            foreach ($attributeData as $attrName => $values) {
+                if (empty($attrName) || empty($values)) {
+                    continue;
+                }
+                
+                $attribute = Attribute::where('name', $attrName)->orWhere('slug', $attrName)->first();
+                if (!$attribute) {
+                    continue;
+                }
+                
+                $valuesList = is_array($values) ? $values : [$values];
+                $attributeValues = AttributeValue::where('attribute_id', $attribute->id)
+                    ->whereIn('value', $valuesList)
+                    ->active()
+                    ->orderBy('sort_order')
+                    ->get();
+                
+                if ($attributeValues->isNotEmpty()) {
+                    $attributes->put($attribute->name, [
+                        'attribute' => $attribute,
+                        'values' => $attributeValues
+                    ]);
+                }
+            }
+            
+            return $attributes;
+        } catch (\Exception $e) {
+            Log::error('Error getting available attributes for product ' . $this->id . ': ' . $e->getMessage());
+            return collect();
+        }
+    }
+
+    // Slug mutator to ensure proper slug generation
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = $value;
+        if (empty($this->attributes['slug'])) {
+            $this->attributes['slug'] = $this->generateSlug($value);
+        }
+    }
+
+    public function setSlugAttribute($value)
+    {
+        $this->attributes['slug'] = $this->generateSlug($value ?: $this->name);
+    }
+
+    private function generateSlug($name)
+    {
+        $slug = \Illuminate\Support\Str::slug($name);
+        $originalSlug = $slug;
+        $count = 1;
+        
+        while (static::where('slug', $slug)->where('id', '!=', $this->id ?? 0)->exists()) {
+            $slug = $originalSlug . '-' . $count++;
+        }
+        
+        return $slug;
+    }
+
     public function parentProduct()
     {
         return $this->belongsTo(Product::class, 'parent_product_id');
