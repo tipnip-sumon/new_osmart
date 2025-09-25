@@ -30,6 +30,47 @@
     }
 }
 
+/* Quick View Modal Fix */
+.modal#quick_view {
+    z-index: 9999 !important;
+}
+
+.modal#quick_view .modal-dialog {
+    max-width: 90vw;
+    width: 100%;
+    margin: 20px auto;
+}
+
+.modal#quick_view .modal-content {
+    border: none;
+    border-radius: 10px;
+    min-height: 500px;
+}
+
+.modal#quick_view .header {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+}
+
+.modal#quick_view .icon-close-popup {
+    background: rgba(255,255,255,0.9);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    color: #333;
+}
+
+.modal#quick_view .icon-close-popup:hover {
+    background: rgba(255,255,255,1);
+}
+
 /* Flash Sale Styles */
 .flash-sale-card {
     background: #fff;
@@ -429,10 +470,12 @@ function getCategoryImageSrc($category, $defaultImage = 'assets/ecomus/images/co
                                         <span class="tooltip">Add to Compare</span>
                                         <span class="icon icon-check"></span>
                                     </a>
-                                    <a href="#quick_view" data-bs-toggle="modal" class="box-icon bg_white quickview tf-btn-loading">
+                                    <button type="button" class="box-icon bg_white quickview tf-btn-loading" 
+                                            data-bs-toggle="modal" data-bs-target="#quick_view"
+                                            data-action="quick-view" data-product-id="{{ $product->id }}" data-product-slug="{{ $product->slug }}">
                                         <span class="icon icon-view"></span>
                                         <span class="tooltip">Quick View</span>
-                                    </a>
+                                    </button>
                                 </div>
                                 @if($product->discount > 0)
                                 <div class="on-sale-wrap">
@@ -811,11 +854,40 @@ function getCategoryImageSrc($category, $defaultImage = 'assets/ecomus/images/co
     </div>
 </section>
 <!-- /Instagram -->
+
 @endsection
 
 @push('scripts')
 <script>
 $(document).ready(function() {
+    console.log('Document ready, jQuery version:', $.fn.jquery); // Debug log
+    console.log('Bootstrap version:', typeof bootstrap !== 'undefined' ? 'loaded' : 'not loaded'); // Debug log
+    console.log('Quick view modal exists:', $('#quick_view').length > 0); // Debug log
+    
+    // Test modal manually after 3 seconds (for debugging)
+    setTimeout(function() {
+        console.log('Testing modal display...');
+        const modal = $('#quick_view');
+        if (modal.length > 0) {
+            console.log('Modal found, trying to show...');
+            // Try both Bootstrap 5 and 4 methods
+            if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+                console.log('Using Bootstrap 5 Modal');
+                const bsModal = new bootstrap.Modal(modal[0]);
+                // Uncomment the next line to test modal display
+                // bsModal.show();
+            } else if (modal.modal) {
+                console.log('Using jQuery/Bootstrap 4 Modal');
+                // Uncomment the next line to test modal display
+                // modal.modal('show');
+            } else {
+                console.log('No modal method available');
+            }
+        } else {
+            console.log('Modal not found in DOM');
+        }
+    }, 3000);
+    
     // Initialize cart count
     // Use global functions for count updates
     if (typeof window.updateCartCount === 'function') {
@@ -824,6 +896,396 @@ $(document).ready(function() {
     if (typeof window.updateWishlistCount === 'function') {
         window.updateWishlistCount();
     }
+
+    // Handle quick view functionality - simplified for testing
+    $(document).on('click', '[data-action="quick-view"]', function(e) {
+        console.log('Quick view clicked'); // Debug log
+        
+        const button = $(this);
+        const productId = button.data('product-id');
+        const productSlug = button.data('product-slug');
+        
+        console.log('Product ID:', productId, 'Product Slug:', productSlug); // Debug log
+        console.log('Button attributes:', {
+            'data-bs-toggle': button.attr('data-bs-toggle'),
+            'data-bs-target': button.attr('data-bs-target')
+        });
+        
+        // Store product info in modal
+        const modal = $('#quick_view');
+        modal.data('product-id', productId).data('product-slug', productSlug || '');
+        
+        console.log('Modal element:', modal.length > 0 ? 'found' : 'not found');
+        console.log('Modal visibility before:', modal.is(':visible'));
+        
+        // Force show modal for testing (uncomment to test)
+        // setTimeout(() => {
+        //     console.log('Force showing modal...');
+        //     if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+        //         const bsModal = new bootstrap.Modal(modal[0]);
+        //         bsModal.show();
+        //     } else {
+        //         modal.modal('show');
+        //     }
+        // }, 100);
+    });
+
+    // Handle modal show event to load product data
+    $('#quick_view').on('show.bs.modal', function (e) {
+        console.log('Modal show event triggered'); // Debug log
+        console.log('Modal element:', this); // Debug log
+        console.log('Event:', e); // Debug log
+        
+        const modal = $(this);
+        let productId = modal.data('product-id');
+        let productSlug = modal.data('product-slug');
+        
+        console.log('Modal data - ID:', productId, 'Slug:', productSlug); // Debug log
+        
+        // If no data on modal, try to get from the trigger button
+        if (!productId) {
+            const relatedTarget = e.relatedTarget; // Button that triggered the modal
+            if (relatedTarget) {
+                productId = $(relatedTarget).data('product-id');
+                productSlug = $(relatedTarget).data('product-slug');
+                console.log('Got from trigger button - ID:', productId, 'Slug:', productSlug); // Debug log
+                
+                // Store in modal for future reference
+                modal.data('product-id', productId).data('product-slug', productSlug || '');
+            }
+        }
+        
+        console.log('Final product data - ID:', productId, 'Slug:', productSlug); // Debug log
+        
+        if (!productId) {
+            console.log('No product ID found, showing static modal'); // Debug log
+            return;
+        }
+        
+        // Reset modal to loading state
+        resetModalToLoading();
+        
+        // Use product ID as fallback if slug is not URL-friendly
+        let apiUrl = `/api/products/${productId}/quick-view`;
+        if (productSlug && productSlug.match(/^[a-zA-Z0-9-_]+$/)) {
+            // Only use slug if it contains valid URL characters
+            apiUrl = `/api/products/${productSlug}/quick-view`;
+        }
+        
+        console.log('API URL:', apiUrl); // Debug log
+        
+        // Fetch product data via AJAX
+        $.ajax({
+            url: apiUrl,
+            method: 'GET',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                'Accept': 'application/json'
+            },
+            success: function(response) {
+                console.log('API Response:', response); // Debug log
+                
+                if (response.success && response.data) {
+                    const product = response.data;
+                    console.log('Product data received:', product); // Debug log
+                    // Update modal content
+                    updateQuickViewModal(product);
+                } else {
+                    console.error('Invalid response from server');
+                    // Show error message
+                    $('#quick_view .tf-product-info-title h5 a').text('Product not available');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Quick view failed:', error, xhr.responseText);
+                // Show error message
+                $('#quick_view .tf-product-info-title h5 a').text('Failed to load product details');
+            }
+        });
+    });
+
+    function resetModalToLoading() {
+        const modal = $('#quick_view');
+        // Update the title (it's inside tf-product-info-list)
+        modal.find('.tf-product-info-title h5 a').text('Loading...').attr('href', '#');
+        // Update the price
+        modal.find('.tf-product-info-price').html('<div class="price">Loading...</div>');
+        // Update the description
+        modal.find('.tf-product-description p').text('Loading product details...');
+        
+        // Reset images to default
+        modal.find('.swiper-wrapper').html(`
+            <div class="swiper-slide">
+                <div class="item">
+                    <img src="/assets/ecomus/images/products/default-product.jpg" alt="Loading..." class="quick-view-image">
+                </div>
+            </div>
+        `);
+    }
+
+    function updateQuickViewModal(product) {
+        const modal = $('#quick_view');
+        console.log('Updating modal with product:', product); // Debug log
+        
+        if (!modal.length) {
+            console.error('Quick view modal not found!');
+            return;
+        }
+        
+        console.log('Modal found, checking elements:');
+        console.log('- Title element:', modal.find('.tf-product-info-title h5 a').length);
+        console.log('- Price element:', modal.find('.tf-product-info-price').length);
+        console.log('- Description element:', modal.find('.tf-product-description p').length);
+        console.log('- Swiper wrapper:', modal.find('.swiper-wrapper').length);
+        
+        // Process product images using comprehensive logic
+        const processedImages = processProductImages(product);
+        console.log('Processed images:', processedImages); // Debug log
+        
+        // Update product images with comprehensive handling
+        let imagesHtml = '';
+        
+        if (processedImages.length > 0) {
+            processedImages.forEach((imageUrl, index) => {
+                imagesHtml += `
+                    <div class="swiper-slide">
+                        <div class="item">
+                            <img src="${imageUrl}" alt="${product.name || 'Product'}" 
+                                 onerror="this.src='/assets/ecomus/images/products/default-product.jpg'; this.onerror=null;"
+                                 loading="lazy">
+                        </div>
+                    </div>
+                `;
+            });
+        } else {
+            // Final fallback
+            imagesHtml = `
+                <div class="swiper-slide">
+                    <div class="item">
+                        <img src="/assets/ecomus/images/products/default-product.jpg" alt="${product.name || 'Product'}">
+                    </div>
+                </div>
+            `;
+        }
+        
+        const swiperWrapper = modal.find('.swiper-wrapper');
+        if (swiperWrapper.length) {
+            swiperWrapper.html(imagesHtml);
+            console.log('Updated swiper wrapper with images'); // Debug log
+        } else {
+            console.error('Swiper wrapper not found in modal');
+        }
+        
+        // Update product title and link
+        const productLink = `/products/${product.slug}`;
+        modal.find('.tf-product-info-title h5 a')
+            .text(product.name || 'Product')
+            .attr('href', productLink);
+        
+        // Update price with proper formatting
+        let priceHtml = '';
+        if (product.sale_price && parseFloat(product.sale_price) < parseFloat(product.price)) {
+            priceHtml = `
+                <div class="price-on-sale fw-6">$${parseFloat(product.sale_price).toFixed(2)}</div>
+                <div class="compare-at-price">$${parseFloat(product.price).toFixed(2)}</div>
+            `;
+        } else {
+            priceHtml = `<div class="price fw-6">$${parseFloat(product.price || 0).toFixed(2)}</div>`;
+        }
+        modal.find('.tf-product-info-price').html(priceHtml);
+        
+        // Update description
+        if (product.short_description) {
+            modal.find('.tf-product-description p').text(product.short_description);
+        } else if (product.description) {
+            // Truncate long description for quick view
+            const truncatedDesc = product.description.length > 150 ? 
+                product.description.substring(0, 150) + '...' : 
+                product.description;
+            modal.find('.tf-product-description p').text(truncatedDesc);
+        } else {
+            modal.find('.tf-product-description p').text('No description available.');
+        }
+        
+        // Update variant picker if product has variants
+        updateVariantPickers(modal, product);
+        
+        // Update buy button with product data
+        modal.find('.btn-add-to-cart').data('product-id', product.id);
+        const finalPrice = product.sale_price || product.price || 0;
+        modal.find('.tf-qty-price').text(`$${parseFloat(finalPrice).toFixed(2)}`);
+        
+        // Update view full details link
+        modal.find('.tf-btn.btn-line').attr('href', productLink);
+        
+        // Update stock status if available
+        if (product.stock_quantity !== undefined) {
+            if (product.stock_quantity <= 0) {
+                modal.find('.btn-add-to-cart').addClass('disabled').text('Out of Stock');
+            } else if (product.stock_quantity <= 5) {
+                modal.find('.product-status-content p').text(`Only ${product.stock_quantity} left in stock!`);
+            }
+        }
+        
+        // Reinitialize Swiper if needed
+        if (typeof Swiper !== 'undefined') {
+            setTimeout(() => {
+                // Destroy existing swiper if any
+                const swiperContainer = modal.find('.tf-single-slide')[0];
+                if (swiperContainer && swiperContainer.swiper) {
+                    swiperContainer.swiper.destroy(true, true);
+                }
+                
+                // Initialize new swiper
+                new Swiper(swiperContainer, {
+                    navigation: {
+                        nextEl: '.single-slide-prev',
+                        prevEl: '.single-slide-next',
+                    },
+                    loop: processedImages.length > 1,
+                    spaceBetween: 0,
+                    effect: 'slide'
+                });
+            }, 100);
+        }
+    }
+
+    function updateVariantPickers(modal, product) {
+        const variantSection = modal.find('.tf-product-info-variant-picker');
+        
+        // For now, hide variant pickers if no variants
+        if (!product.variants || product.variants.length === 0) {
+            variantSection.hide();
+        } else {
+            variantSection.show();
+            // TODO: Implement variant picker logic based on your product variant structure
+        }
+    }
+
+    function processProductImages(product) {
+        // Process images using the same logic as home page
+        let processedImages = [];
+        
+        console.log('Processing images for product:', product); // Debug log
+        
+        // First try images array
+        if (product.images && product.images) {
+            let images = product.images;
+            
+            // Handle string JSON
+            if (typeof images === 'string') {
+                try {
+                    images = JSON.parse(images);
+                } catch (e) {
+                    console.error('Failed to parse images JSON:', e);
+                    images = [];
+                }
+            }
+            
+            console.log('Parsed images:', images); // Debug log
+            
+            if (Array.isArray(images) && images.length > 0) {
+                images.forEach((image, index) => {
+                    let legacyImageUrl = '';
+                    
+                    console.log(`Processing image ${index}:`, image); // Debug log
+                    
+                    // Handle complex nested structure first - exact same logic as home page
+                    if (image && typeof image === 'object' && image.sizes && image.sizes.medium && image.sizes.medium.storage_url) {
+                        // New complex structure - use medium size storage_url
+                        legacyImageUrl = image.sizes.medium.storage_url;
+                    } else if (image && typeof image === 'object' && image.sizes && image.sizes.original && image.sizes.original.storage_url) {
+                        // Fallback to original if medium not available
+                        legacyImageUrl = image.sizes.original.storage_url;
+                    } else if (image && typeof image === 'object' && image.sizes && image.sizes.large && image.sizes.large.storage_url) {
+                        // Fallback to large if original not available
+                        legacyImageUrl = image.sizes.large.storage_url;
+                    } else if (image && typeof image === 'object' && image.urls && image.urls.medium) {
+                        // Legacy complex URL structure - use medium size
+                        legacyImageUrl = image.urls.medium;
+                    } else if (image && typeof image === 'object' && image.urls && image.urls.original) {
+                        // Legacy fallback to original if medium not available
+                        legacyImageUrl = image.urls.original;
+                    } else if (image && typeof image === 'object' && image.url && typeof image.url === 'string') {
+                        legacyImageUrl = image.url;
+                    } else if (image && typeof image === 'object' && image.path && typeof image.path === 'string') {
+                        legacyImageUrl = `/storage/${image.path}`;
+                    } else if (typeof image === 'string') {
+                        // Simple string path
+                        if (image.startsWith('http')) {
+                            legacyImageUrl = image;
+                        } else {
+                            legacyImageUrl = `/storage/${image}`;
+                        }
+                    }
+                    
+                    console.log(`Processed image URL:`, legacyImageUrl); // Debug log
+                    
+                    if (legacyImageUrl) {
+                        processedImages.push(legacyImageUrl);
+                    }
+                });
+            }
+        }
+        
+        // Fallback to image accessor if no images processed
+        if (processedImages.length === 0) {
+            console.log('No images from array, trying product.image:', product.image); // Debug log
+            
+            const productImage = product.image;
+            if (productImage && productImage !== 'products/product1.jpg') {
+                const legacyImageUrl = productImage.startsWith('http') ? productImage : `/storage/${productImage}`;
+                processedImages.push(legacyImageUrl);
+            } else {
+                // Final fallback to default image
+                processedImages.push('/assets/ecomus/images/products/default-product.jpg');
+            }
+        }
+        
+        console.log('Final processed images:', processedImages); // Debug log
+        return processedImages;
+    }
+
+    function getImageUrl(image) {
+        // Handle different image formats using the same logic as home page
+        let legacyImageUrl = '';
+        
+        if (typeof image === 'string') {
+            // Simple string path
+            legacyImageUrl = image.startsWith('http') ? image : `/storage/${image}`;
+        } else if (image && typeof image === 'object') {
+            // Handle complex nested structure first - exact same logic as home page
+            if (image.sizes && image.sizes.medium && image.sizes.medium.storage_url) {
+                // New complex structure - use medium size storage_url
+                legacyImageUrl = image.sizes.medium.storage_url;
+            } else if (image.sizes && image.sizes.original && image.sizes.original.storage_url) {
+                // Fallback to original if medium not available
+                legacyImageUrl = image.sizes.original.storage_url;
+            } else if (image.sizes && image.sizes.large && image.sizes.large.storage_url) {
+                // Fallback to large if original not available
+                legacyImageUrl = image.sizes.large.storage_url;
+            } else if (image.urls && image.urls.medium) {
+                // Legacy complex URL structure - use medium size
+                legacyImageUrl = image.urls.medium;
+            } else if (image.urls && image.urls.original) {
+                // Legacy fallback to original if medium not available
+                legacyImageUrl = image.urls.original;
+            } else if (image.url && typeof image.url === 'string') {
+                legacyImageUrl = image.url;
+            } else if (image.path && typeof image.path === 'string') {
+                legacyImageUrl = `/storage/${image.path}`;
+            }
+        }
+        
+        // Final fallback to default image if nothing found
+        if (!legacyImageUrl) {
+            legacyImageUrl = '/assets/ecomus/images/products/default-product.jpg';
+        }
+        
+        return legacyImageUrl;
+    }
+
+
 });
 </script>
 @endpush

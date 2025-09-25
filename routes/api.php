@@ -21,6 +21,68 @@ Route::get('/auth-check', function () {
     ]);
 });
 
+// Product API routes
+Route::prefix('products')->group(function () {
+    Route::get('/{slug}/quick-view', function ($slug) {
+        try {
+            // Find product by ID or slug
+            $product = null;
+            
+            if (is_numeric($slug)) {
+                $product = App\Models\Product::with(['category', 'brand', 'variants'])
+                    ->where('id', $slug)
+                    ->where('status', 'active')
+                    ->first();
+            } else {
+                $product = App\Models\Product::with(['category', 'brand', 'variants'])
+                    ->where('slug', $slug)
+                    ->where('status', 'active')
+                    ->first();
+            }
+
+            if (!$product) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Product not found'
+                ], 404);
+            }
+
+            // Prepare product data for quick view
+            $productData = [
+                'id' => $product->id,
+                'name' => $product->name,
+                'slug' => $product->slug,
+                'price' => $product->price,
+                'sale_price' => $product->sale_price,
+                'short_description' => $product->short_description,
+                'description' => $product->description,
+                'sku' => $product->sku,
+                'stock_quantity' => $product->stock_quantity,
+                'images' => $product->images ? (is_string($product->images) ? json_decode($product->images, true) : $product->images) : [],
+                'category' => $product->category,
+                'brand' => $product->brand,
+                'variants' => $product->variants,
+                'discount' => $product->discount_percentage ?? 0,
+                'featured' => $product->is_featured ?? false,
+                'status' => $product->status
+            ];
+
+            return response()->json([
+                'success' => true,
+                'data' => $productData
+            ]);
+
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Quick view error: ' . $e->getMessage());
+            
+            return response()->json([
+                'success' => false,
+                'message' => 'An error occurred while fetching product data'
+            ], 500);
+        }
+    });
+});
+
 // Real-time Binary MLM API routes
 Route::middleware('auth:sanctum')->prefix('binary')->group(function () {
     Route::get('/volumes', [RealTimeBinaryController::class, 'getBinaryVolumes']);
