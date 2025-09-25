@@ -2,22 +2,89 @@
 
 @section('title', 'Edit Product')
 
-@section('styles')
+@push('styles')
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
 <style>
+    /* International Standard Form Styles */
+    .form-control:focus, .form-select:focus {
+        border-color: #0066cc;
+        box-shadow: 0 0 0 0.15rem rgba(0, 102, 204, 0.15);
+        transition: all 0.2s ease-in-out;
+    }
+
+    .form-control.is-invalid {
+        border-color: #dc3545;
+        box-shadow: 0 0 0 0.15rem rgba(220, 53, 69, 0.15);
+    }
+
+    .form-control.is-valid {
+        border-color: #28a745;
+        box-shadow: 0 0 0 0.15rem rgba(40, 167, 69, 0.15);
+    }
+
+    /* Standard Form Section Styling */
+    .form-section {
+        background: #ffffff;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+    }
+
+    .form-section-header {
+        background: #f8f9fa;
+        border-bottom: 1px solid #dee2e6;
+        padding: 1rem 1.25rem;
+        border-radius: 8px 8px 0 0;
+    }
+
+    .form-section-title {
+        font-weight: 600;
+        font-size: 1.1rem;
+        color: #495057;
+        margin: 0;
+    }
+
+    .form-section-body {
+        padding: 1.25rem;
+    }
+
+    /* Field Labels with Standard Marking */
+    .field-required {
+        color: #dc3545;
+        font-weight: 500;
+    }
+
+    .field-optional {
+        color: #6c757d;
+        font-weight: normal;
+        font-size: 0.875rem;
+    }
+
+    .field-help {
+        color: #6c757d;
+        font-size: 0.8125rem;
+        margin-top: 0.25rem;
+    }
+
     /* Image Upload Styles */
     .image-upload-container {
         border: 2px dashed #dee2e6;
         border-radius: 8px;
-        padding: 20px;
+        padding: 30px;
         text-align: center;
         background: #f8f9fa;
         transition: all 0.3s ease;
         cursor: pointer;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     .image-upload-container:hover {
-        border-color: #007bff;
+        border-color: #0066cc;
         background: #e7f3ff;
     }
 
@@ -28,8 +95,8 @@
 
     .image-preview-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 15px;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 12px;
         margin-top: 20px;
     }
 
@@ -41,6 +108,7 @@
         background: white;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         transition: all 0.3s ease;
+        height: 120px;
     }
 
     .image-preview-item:hover {
@@ -218,6 +286,65 @@
         padding: 30px;
         border-radius: 8px;
         text-align: center;
+    }
+
+    /* Standard Button Styling */
+    .btn-suggestion {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+        margin: 0.125rem;
+        border-radius: 4px;
+        border: 1px solid #dee2e6;
+        background: #ffffff;
+        color: #495057;
+        transition: all 0.15s ease-in-out;
+    }
+
+    .btn-suggestion:hover {
+        background: #e9ecef;
+        border-color: #adb5bd;
+        color: #495057;
+    }
+
+    /* Standard Color Display */
+    .color-display-area {
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        padding: 0.75rem;
+    }
+
+    .color-swatch {
+        width: 20px;
+        height: 20px;
+        border: 1px solid #adb5bd;
+        border-radius: 3px;
+        display: inline-block;
+        margin: 0.125rem;
+        transition: border-color 0.15s ease-in-out;
+    }
+
+    .color-swatch:hover {
+        border-color: #495057;
+    }
+
+    /* Progress Indicator */
+    .form-progress {
+        background: #ffffff;
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+    }
+
+    /* International Standard Color System */
+    :root {
+        --primary-color: #0066cc;
+        --success-color: #28a745;
+        --danger-color: #dc3545;
+        --warning-color: #ffc107;
+        --info-color: #17a2b8;
+        --secondary-color: #6c757d;
     }
 
     /* Modern Tags Input Styling */
@@ -434,20 +561,36 @@
         gap: 5px !important;
     }
 </style>
-@endsection
+@endpush
 @section('content')
     <div class="container-fluid">
         <!-- Page Header -->
         <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-            <h1 class="page-title fw-semibold fs-18 mb-0">Edit Product</h1>
+            <div>
+                <h1 class="page-title fw-semibold fs-20 mb-1 text-dark">Edit Product</h1>
+                <p class="text-muted mb-0">Update product information and settings</p>
+            </div>
             <div class="ms-md-1 ms-0">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('admin.products.index') }}">Products</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Edit</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}" class="text-decoration-none">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.products.index') }}" class="text-decoration-none">Products</a></li>
+                        <li class="breadcrumb-item active text-primary" aria-current="page">Edit</li>
                     </ol>
                 </nav>
+            </div>
+        </div>
+        
+        <!-- Field Legend -->
+        <div class="alert alert-light border border-primary-subtle mb-4">
+            <div class="d-flex align-items-center">
+                <i class="ti ti-info-circle text-primary me-2"></i>
+                <div>
+                    <strong class="text-dark">Field Requirements:</strong>
+                    <span class="field-required ms-3">* Required Field</span>
+                    <span class="field-optional ms-3">(Optional)</span>
+                    <span class="text-muted ms-3">• Standard fields follow international e-commerce standards</span>
+                </div>
             </div>
         </div>
         <!-- Page Header Close -->
@@ -460,67 +603,89 @@
             @method('PUT')
             
             <div class="row">
-                <!-- Basic Information -->
-                <div class="col-xl-8">
-                    <div class="card custom-card">
-                        <div class="card-header">
-                            <div class="card-title">Basic Information</div>
+                <!-- Main Content -->
+                <div class="col-lg-12 col-md-12">
+                    <div class="form-section">
+                        <div class="form-section-header">
+                            <h4 class="form-section-title">
+                                <i class="ti ti-package text-primary me-2"></i>
+                                Basic Information
+                            </h4>
                         </div>
-                        <div class="card-body">
+                        <div class="form-section-body">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="name" class="form-label">Product Name <span class="text-danger">*</span></label>
+                                    <label for="name" class="form-label fw-medium">
+                                        Product Name <span class="field-required">*</span>
+                                    </label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror" 
                                            id="name" name="name" value="{{ old('name', $product->name) }}" placeholder="Enter product name" required>
                                     @error('name')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
+                                    <div class="field-help">Enter a clear, descriptive product name</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="slug" class="form-label">Slug</label>
-                                    <input type="text" class="form-control @error('slug') is-invalid @enderror" 
-                                           id="slug" name="slug" value="{{ old('slug', $product->slug) }}" placeholder="Auto-generated from name">
+                                    <label for="slug" class="form-label fw-medium">
+                                        URL Slug <span class="field-optional">(Optional)</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control @error('slug') is-invalid @enderror" 
+                                               id="slug" name="slug" value="{{ old('slug', $product->slug) }}" placeholder="Auto-generated from name">
+                                        <button class="btn btn-outline-secondary" type="button" id="generate-slug-btn" title="Generate slug from product name">
+                                            <i class="ti ti-refresh"></i>
+                                        </button>
+                                    </div>
                                     @error('slug')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                    <div class="form-text">Leave empty to auto-generate from product name</div>
+                                    <div class="field-help">Leave empty to auto-generate, or customize (e.g., "my-product-name")</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="sku" class="form-label">SKU</label>
+                                    <label for="sku" class="form-label fw-medium">
+                                        SKU <span class="field-optional">(Optional)</span>
+                                    </label>
                                     <input type="text" class="form-control @error('sku') is-invalid @enderror" 
-                                           id="sku" name="sku" value="{{ old('sku', $product->sku) }}" placeholder="Stock Keeping Unit">
+                                           id="sku" name="sku" value="{{ old('sku', $product->sku) }}" placeholder="Auto-generated">
                                     @error('sku')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                    <div class="form-text">Stock Keeping Unit</div>
+                                    <div class="field-help">Stock Keeping Unit - Leave empty to auto-generate</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="barcode" class="form-label">Barcode</label>
+                                    <label for="barcode" class="form-label fw-medium">
+                                        Barcode <span class="field-optional">(Optional)</span>
+                                    </label>
                                     <input type="text" class="form-control @error('barcode') is-invalid @enderror" 
                                            id="barcode" name="barcode" value="{{ old('barcode', $product->barcode) }}" placeholder="Product barcode">
                                     @error('barcode')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
+                                    <div class="field-help">Product barcode or UPC code</div>
                                 </div>
                                 <div class="col-md-12 mb-3">
-                                    <label for="short_description" class="form-label">Short Description</label>
+                                    <label for="short_description" class="form-label fw-medium">
+                                        Short Description <span class="field-optional">(Optional)</span>
+                                    </label>
                                     <textarea class="form-control @error('short_description') is-invalid @enderror" 
                                               id="short_description" name="short_description" rows="3" 
-                                              placeholder="Brief description of the product">{{ old('short_description', $product->short_description) }}</textarea>
+                                              placeholder="Brief product description for listings">{{ old('short_description', $product->short_description) }}</textarea>
                                     @error('short_description')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                    <div class="form-text">This appears in product listings (max 500 characters)</div>
+                                    <div class="field-help">Appears in product listings (recommended: 150-300 characters)</div>
                                 </div>
                                 <div class="col-md-12 mb-3">
-                                    <label for="description" class="form-label">Description</label>
+                                    <label for="description" class="form-label fw-medium">
+                                        Detailed Description <span class="field-optional">(Optional)</span>
+                                    </label>
                                     <textarea class="form-control @error('description') is-invalid @enderror" 
                                               id="description" name="description" rows="6" 
-                                              placeholder="Detailed product description">{{ old('description', $product->description) }}</textarea>
+                                              placeholder="Comprehensive product description with features and benefits">{{ old('description', $product->description) }}</textarea>
                                     @error('description')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                    <div class="form-text">Detailed product information for customers</div>
+                                    <div class="field-help">Detailed product information for customers</div>
                                 </div>
                             </div>
                         </div>
@@ -542,95 +707,119 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="sale_price" class="form-label">Sale Price</label>
-                                    <input type="number" class="form-control @error('sale_price') is-invalid @enderror" 
-                                           id="sale_price" name="sale_price" value="{{ old('sale_price', $product->sale_price) }}" step="0.01" min="0" placeholder="0.00">
+                                    <label for="sale_price" class="form-label fw-medium">
+                                        Sale Price <span class="field-optional">(Optional)</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light">৳</span>
+                                        <input type="number" class="form-control @error('sale_price') is-invalid @enderror" 
+                                               id="sale_price" name="sale_price" value="{{ old('sale_price', $product->sale_price) }}" step="0.01" min="0" 
+                                               placeholder="0.00">
+                                    </div>
                                     @error('sale_price')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                    <div class="form-text">Leave empty if no sale price</div>
+                                    <div class="field-help">Discounted price (must be less than regular price)</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="cost_price" class="form-label">Cost Price</label>
-                                    <input type="number" class="form-control @error('cost_price') is-invalid @enderror" 
-                                           id="cost_price" name="cost_price" value="{{ old('cost_price', $product->cost_price) }}" step="0.01" min="0" placeholder="0.00">
+                                    <label for="cost_price" class="form-label fw-medium">
+                                        Cost Price <span class="field-optional">(Optional)</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light">৳</span>
+                                        <input type="number" class="form-control @error('cost_price') is-invalid @enderror" 
+                                               id="cost_price" name="cost_price" value="{{ old('cost_price', $product->cost_price) }}" step="0.01" min="0" 
+                                               placeholder="0.00">
+                                    </div>
                                     @error('cost_price')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                    <div class="form-text">Your cost for this product</div>
+                                    <div class="field-help">Your cost for this product (for profit calculation)</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="compare_price" class="form-label">Compare at Price</label>
-                                    <input type="number" class="form-control @error('compare_price') is-invalid @enderror" 
-                                           id="compare_price" name="compare_price" value="{{ old('compare_price', $product->compare_price) }}" step="0.01" min="0" placeholder="0.00">
+                                    <label for="compare_price" class="form-label fw-medium">
+                                        Compare at Price <span class="field-optional">(Optional)</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light">৳</span>
+                                        <input type="number" class="form-control @error('compare_price') is-invalid @enderror" 
+                                               id="compare_price" name="compare_price" value="{{ old('compare_price', $product->compare_price) }}" step="0.01" min="0" 
+                                               placeholder="0.00">
+                                    </div>
                                     @error('compare_price')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                    <div class="form-text">Original price before discount</div>
+                                    <div class="field-help">Original price to show savings (for marketing)</div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Inventory Management -->
-                    <div class="card custom-card">
-                        <div class="card-header">
-                            <div class="card-title">Inventory Management</div>
+                    <div class="form-section">
+                        <div class="form-section-header">
+                            <h4 class="form-section-title">
+                                <i class="ti ti-package text-info me-2"></i>
+                                Inventory Management
+                            </h4>
                         </div>
-                        <div class="card-body">
+                        <div class="form-section-body">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="stock_quantity" class="form-label">Stock Quantity <span class="text-danger">*</span></label>
+                                    <label for="stock_quantity" class="form-label fw-medium">
+                                        Stock Quantity <span class="field-required">*</span>
+                                    </label>
                                     <input type="number" class="form-control @error('stock_quantity') is-invalid @enderror" 
                                            id="stock_quantity" name="stock_quantity" value="{{ old('stock_quantity', $product->stock_quantity) }}" min="0" required>
                                     @error('stock_quantity')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
+                                    <div class="field-help">Current available quantity in stock</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="min_stock_level" class="form-label">Minimum Stock Level</label>
+                                    <label for="min_stock_level" class="form-label fw-medium">
+                                        Minimum Stock Level <span class="field-optional">(Optional)</span>
+                                    </label>
                                     <input type="number" class="form-control @error('min_stock_level') is-invalid @enderror" 
                                            id="min_stock_level" name="min_stock_level" value="{{ old('min_stock_level', $product->min_stock_level) }}" min="0">
                                     @error('min_stock_level')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                    <div class="form-text">Alert when stock falls below this level</div>
+                                    <div class="field-help">Alert when stock falls below this level</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" id="track_quantity" name="track_quantity" value="1" 
                                                {{ old('track_quantity', $product->track_quantity) ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="track_quantity">
+                                        <label class="form-check-label fw-medium" for="track_quantity">
                                             Track Quantity
                                         </label>
                                     </div>
-                                    <div class="form-text">Automatically reduce stock when orders are placed</div>
+                                    <div class="field-help">Automatically reduce stock when orders are placed</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" id="allow_backorder" name="allow_backorder" value="1" 
                                                {{ old('allow_backorder', $product->allow_backorder) ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="allow_backorder">
+                                        <label class="form-check-label fw-medium" for="allow_backorder">
                                             Allow Backorders
                                         </label>
                                     </div>
-                                    <div class="form-text">Allow sales when out of stock</div>
+                                    <div class="field-help">Allow sales when out of stock</div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- MLM Commission Settings -->
-                    <div class="card custom-card">
-                        <div class="card-header">
-                            <div class="card-title">
-                                <span class="mlm-badge">
-                                    <i class="ti ti-network me-1"></i>
-                                    MLM Commission Settings
-                                </span>
-                            </div>
+                    <div class="form-section">
+                        <div class="form-section-header">
+                            <h4 class="form-section-title">
+                                <i class="ti ti-network text-purple me-2"></i>
+                                MLM Commission Settings
+                            </h4>
                         </div>
-                        <div class="card-body">
+                        <div class="form-section-body">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check form-switch">
@@ -653,7 +842,9 @@
                                     <div class="form-text">Special product for new member registration</div>
                                 </div>
                                 <div class="col-md-6 mb-3" id="starter_kit_tier_section" style="{{ old('is_starter_kit', $product->is_starter_kit) ? '' : 'display: none;' }}">
-                                    <label for="starter_kit_tier" class="form-label">Starter Kit Tier</label>
+                                    <label for="starter_kit_tier" class="form-label fw-medium">
+                                        Starter Kit Tier <span class="field-optional">(Optional)</span>
+                                    </label>
                                     <select class="form-select @error('starter_kit_tier') is-invalid @enderror" 
                                             id="starter_kit_tier" name="starter_kit_tier">
                                         <option value="">Select Tier</option>
@@ -665,17 +856,19 @@
                                     @error('starter_kit_tier')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                    <div class="form-text">Select the tier for this starter kit</div>
+                                    <div class="field-help">Select the tier for this starter kit</div>
                                 </div>
                                 <div class="col-md-12 mb-3" id="starter_kit_level_section" style="{{ old('is_starter_kit', $product->is_starter_kit) ? '' : 'display: none;' }}">
-                                    <label for="starter_kit_level" class="form-label">Custom Starter Kit Level</label>
+                                    <label for="starter_kit_level" class="form-label fw-medium">
+                                        Custom Starter Kit Level <span class="field-optional">(Optional)</span>
+                                    </label>
                                     <input type="text" class="form-control @error('starter_kit_level') is-invalid @enderror" 
                                            id="starter_kit_level" name="starter_kit_level" value="{{ old('starter_kit_level', $product->starter_kit_level) }}" 
                                            placeholder="e.g., Silver Package, Gold Package, etc.">
                                     @error('starter_kit_level')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                    <div class="form-text">Optional: Enter a custom level name for this starter kit</div>
+                                    <div class="field-help">Optional: Enter a custom level name for this starter kit</div>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="pv_points" class="form-label">PV Points</label>
@@ -709,54 +902,64 @@
                     </div>
 
                     <!-- SEO Information -->
-                    <div class="card custom-card">
-                        <div class="card-header">
-                            <div class="card-title">SEO Information</div>
+                    <div class="form-section">
+                        <div class="form-section-header">
+                            <h4 class="form-section-title">
+                                <i class="ti ti-seo text-warning me-2"></i>
+                                SEO Information
+                            </h4>
                         </div>
-                        <div class="card-body">
+                        <div class="form-section-body">
                             <div class="mb-3">
-                                <label for="meta_title" class="form-label">Meta Title</label>
+                                <label for="meta_title" class="form-label fw-medium">
+                                    Meta Title <span class="field-optional">(Optional)</span>
+                                </label>
                                 <input type="text" class="form-control @error('meta_title') is-invalid @enderror" 
                                        id="meta_title" name="meta_title" value="{{ old('meta_title', $product->meta_title) }}" 
                                        placeholder="SEO friendly title">
                                 @error('meta_title')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-                                <div class="form-text">Recommended length: 50-60 characters</div>
+                                <div class="field-help">Recommended length: 50-60 characters</div>
                             </div>
 
                             <div class="mb-3">
-                                <label for="meta_description" class="form-label">Meta Description</label>
+                                <label for="meta_description" class="form-label fw-medium">
+                                    Meta Description <span class="field-optional">(Optional)</span>
+                                </label>
                                 <textarea class="form-control @error('meta_description') is-invalid @enderror" 
                                           id="meta_description" name="meta_description" rows="3" 
                                           placeholder="SEO friendly description">{{ old('meta_description', $product->meta_description) }}</textarea>
                                 @error('meta_description')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-                                <div class="form-text">Recommended length: 150-160 characters</div>
+                                <div class="field-help">Recommended length: 150-160 characters</div>
                             </div>
 
                             <div class="mb-3">
-                                <label for="meta_keywords" class="form-label">Meta Keywords</label>
+                                <label for="meta_keywords" class="form-label fw-medium">
+                                    Meta Keywords <span class="field-optional">(Optional)</span>
+                                </label>
                                 <input type="text" class="form-control @error('meta_keywords') is-invalid @enderror" 
                                        id="meta_keywords" name="meta_keywords" value="{{ old('meta_keywords', $product->meta_keywords) }}" 
                                        placeholder="keyword1, keyword2, keyword3">
                                 @error('meta_keywords')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-                                <div class="form-text">Separate keywords with commas</div>
+                                <div class="field-help">Separate keywords with commas</div>
                             </div>
                         </div>
                     </div>
-                </div>
-<!-- Right Column - Categories, Tags, Status, Dimensions, Images -->
-                <div class="col-xl-4">
-                    <!-- Categories & Tags -->
-                    <div class="card custom-card">
-                        <div class="card-header">
-                            <div class="card-title">Classifications</div>
+
+                    <!-- Classifications -->
+                    <div class="form-section">
+                        <div class="form-section-header">
+                            <h4 class="form-section-title">
+                                <i class="ti ti-category text-info me-2"></i>
+                                Classifications
+                            </h4>
                         </div>
-                        <div class="card-body">
+                        <div class="form-section-body">
                             <div class="mb-3">
                                 <label for="category_id" class="form-label">Category <span class="text-danger">*</span></label>
                                 <select class="form-select @error('category_id') is-invalid @enderror" 
@@ -1243,7 +1446,7 @@ window.optimizeImages = function() {
     showToast('Feature Coming Soon', 'Image optimization will be available soon.', 'info');
 };
 
-$(document).ready(function() {
+// Function to generate slug from name\nfunction generateSlugFromName(name) {\n    return name.toLowerCase()\n        .replace(/[^a-z0-9\\s-]/g, '')\n        .replace(/\\s+/g, '-')\n        .replace(/-+/g, '-')\n        .trim('-');\n}\n\n$(document).ready(function() {
     // Wait a bit to ensure all scripts are loaded
     setTimeout(function() {
         console.log('Initializing page scripts...');
