@@ -29,10 +29,107 @@
         font-size: 0.9rem;
     }
 }
+
+/* Flash Sale Styles */
+.flash-sale-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    margin: 10px;
+    overflow: hidden;
+}
+
+.flash-sale-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+.flash-sale-card .card-body {
+    padding: 15px;
+    text-align: center;
+}
+
+.flash-sale-card .product-title {
+    display: block;
+    font-weight: 600;
+    margin: 10px 0 5px;
+    color: #333;
+    text-decoration: none;
+}
+
+.flash-sale-card .sale-price {
+    color: #e74c3c;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.flash-sale-card .real-price {
+    color: #999;
+    text-decoration: line-through;
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+.flash-sale-card a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.owl-carousel .owl-item {
+    padding: 5px;
+}
 </style>
 @endpush
 
 @section('content')
+@php
+// Helper function to safely get product image using comprehensive legacy format handling
+function getProductImageSrc($product, $defaultImage = 'assets/ecomus/images/products/default-product.jpg') {
+    // First try to get the images array
+    if (isset($product->images) && $product->images) {
+        $images = is_string($product->images) ? json_decode($product->images, true) : $product->images;
+        
+        if (is_array($images) && !empty($images)) {
+            $image = $images[0]; // Get first image
+            
+            // Handle legacy format with type checking
+            $legacyImageUrl = '';
+            if (is_string($image)) {
+                // Try storage path first, then uploads
+                $legacyImageUrl = asset('storage/' . $image);
+            } elseif (is_array($image) && isset($image['url']) && is_string($image['url'])) {
+                $legacyImageUrl = $image['url'];
+            } elseif (is_array($image) && isset($image['path']) && is_string($image['path'])) {
+                $legacyImageUrl = asset('storage/' . $image['path']);
+            } else {
+                $legacyImageUrl = asset($defaultImage); // Use provided default
+            }
+            
+            return $legacyImageUrl;
+        }
+    }
+    
+    // Fallback to the image accessor
+    $productImage = $product->image;
+    if ($productImage && $productImage !== 'products/product1.jpg') {
+        // Use actual product image
+        return str_starts_with($productImage, 'http') ? $productImage : asset('storage/' . $productImage);
+    }
+    
+    // Final fallback to default image
+    return asset($defaultImage);
+}
+
+// Helper function for category images
+function getCategoryImageSrc($category, $defaultImage = 'assets/ecomus/images/collections/default-category.jpg') {
+    if ($category && $category->image) {
+        return str_starts_with($category->image, 'http') ? $category->image : asset('storage/' . $category->image);
+    }
+    return asset($defaultImage);
+}
+@endphp
 <!-- Announcement Bar -->
 <div class="announcement-bar bg_violet">
     <div class="wrap-announcement-bar">
@@ -262,72 +359,87 @@
         <div class="hover-sw-nav hover-sw-2">
             <div dir="ltr" class="swiper tf-sw-collection" data-preview="6" data-tablet="3" data-mobile="2" data-space-lg="50" data-space-md="30" data-space="15" data-loop="false" data-auto-play="false">
                 <div class="swiper-wrapper">
+                    @forelse($categories ?? [] as $category)
                     <div class="swiper-slide" lazy="true">
                         <div class="collection-item-circle hover-img">
-                            <a href="{{ route('categories.show', 'women') }}" class="collection-image img-style">
+                            <a href="{{ route('categories.show', $category->slug) }}" class="collection-image img-style">
+                                <img class="lazyload" data-src="{{ getCategoryImageSrc($category, 'assets/ecomus/images/collections/collection-circle-' . (($loop->index % 6) + 1) . '.jpg') }}" src="{{ getCategoryImageSrc($category, 'assets/ecomus/images/collections/collection-circle-' . (($loop->index % 6) + 1) . '.jpg') }}" alt="{{ $category->name }}">
+                            </a>
+                            <div class="collection-content text-center">
+                                <a href="{{ route('categories.show', $category->slug) }}" class="link title fw-5">{{ $category->name }}</a>
+                                <div class="count">{{ $category->products_count ?? 0 }} items</div>
+                            </div>
+                        </div>
+                    </div>
+                    @empty
+                    <!-- Default Categories -->
+                    <div class="swiper-slide" lazy="true">
+                        <div class="collection-item-circle hover-img">
+                            <a href="{{ route('shop.index') }}" class="collection-image img-style">
                                 <img class="lazyload" data-src="{{ asset('assets/ecomus/images/collections/collection-circle-1.jpg') }}" src="{{ asset('assets/ecomus/images/collections/collection-circle-1.jpg') }}" alt="collection-img">
                             </a>
                             <div class="collection-content text-center">
-                                <a href="{{ route('categories.show', 'women') }}" class="link title fw-5">Women's</a>
+                                <a href="{{ route('shop.index') }}" class="link title fw-5">Women's</a>
                                 <div class="count">23 items</div>
                             </div>
                         </div>
                     </div>
                     <div class="swiper-slide" lazy="true">
                         <div class="collection-item-circle hover-img">
-                            <a href="{{ route('categories.show', 'men') }}" class="collection-image img-style">
+                            <a href="{{ route('shop.index') }}" class="collection-image img-style">
                                 <img class="lazyload" data-src="{{ asset('assets/ecomus/images/collections/collection-circle-2.jpg') }}" src="{{ asset('assets/ecomus/images/collections/collection-circle-2.jpg') }}" alt="collection-img">
                             </a>
                             <div class="collection-content text-center">
-                                <a href="{{ route('categories.show', 'men') }}" class="link title fw-5">Men's</a>
+                                <a href="{{ route('shop.index') }}" class="link title fw-5">Men's</a>
                                 <div class="count">9 items</div>
                             </div>
                         </div>
                     </div>
                     <div class="swiper-slide" lazy="true">
                         <div class="collection-item-circle hover-img">
-                            <a href="{{ route('categories.show', 'accessories') }}" class="collection-image img-style">
-                                <img class="lazyload" data-src="{{ asset('assets/ecomus/images/collections/collection-circle-3.jpg') }}" src="{{ asset('assets/assets/ecomus/images/collections/collection-circle-3.jpg') }}" alt="collection-img">
+                            <a href="{{ route('shop.index') }}" class="collection-image img-style">
+                                <img class="lazyload" data-src="{{ asset('assets/ecomus/images/collections/collection-circle-3.jpg') }}" src="{{ asset('assets/ecomus/images/collections/collection-circle-3.jpg') }}" alt="collection-img">
                             </a>
                             <div class="collection-content text-center">
-                                <a href="{{ route('categories.show', 'accessories') }}" class="link title fw-5">Accessories</a>
+                                <a href="{{ route('shop.index') }}" class="link title fw-5">Accessories</a>
                                 <div class="count">12 items</div>
                             </div>
                         </div>
                     </div>
                     <div class="swiper-slide" lazy="true">
                         <div class="collection-item-circle hover-img">
-                            <a href="{{ route('categories.show', 'shoes') }}" class="collection-image img-style">
+                            <a href="{{ route('shop.index') }}" class="collection-image img-style">
                                 <img class="lazyload" data-src="{{ asset('assets/ecomus/images/collections/collection-circle-4.jpg') }}" src="{{ asset('assets/ecomus/images/collections/collection-circle-4.jpg') }}" alt="collection-img">
                             </a>
                             <div class="collection-content text-center">
-                                <a href="{{ route('categories.show', 'shoes') }}" class="link title fw-5">Shoes</a>
+                                <a href="{{ route('shop.index') }}" class="link title fw-5">Shoes</a>
                                 <div class="count">16 items</div>
                             </div>
                         </div>
                     </div>
                     <div class="swiper-slide" lazy="true">
                         <div class="collection-item-circle hover-img">
-                            <a href="{{ route('categories.show', 'bags') }}" class="collection-image img-style">
+                            <a href="{{ route('shop.index') }}" class="collection-image img-style">
                                 <img class="lazyload" data-src="{{ asset('assets/ecomus/images/collections/collection-circle-5.jpg') }}" src="{{ asset('assets/ecomus/images/collections/collection-circle-5.jpg') }}" alt="collection-img">
                             </a>
                             <div class="collection-content text-center">
-                                <a href="{{ route('categories.show', 'bags') }}" class="link title fw-5">Bags</a>
+                                <a href="{{ route('shop.index') }}" class="link title fw-5">Bags</a>
                                 <div class="count">8 items</div>
                             </div>
                         </div>
                     </div>
                     <div class="swiper-slide" lazy="true">
                         <div class="collection-item-circle hover-img">
-                            <a href="{{ route('categories.show', 'jewelry') }}" class="collection-image img-style">
+                            <a href="{{ route('shop.index') }}" class="collection-image img-style">
                                 <img class="lazyload" data-src="{{ asset('assets/ecomus/images/collections/collection-circle-6.jpg') }}" src="{{ asset('assets/ecomus/images/collections/collection-circle-6.jpg') }}" alt="collection-img">
                             </a>
                             <div class="collection-content text-center">
-                                <a href="{{ route('categories.show', 'jewelry') }}" class="link title fw-5">Jewelry</a>
+                                <a href="{{ route('shop.index') }}" class="link title fw-5">Jewelry</a>
                                 <div class="count">14 items</div>
                             </div>
                         </div>
                     </div>
+                    @endforelse
                 </div>
             </div>
             <div class="nav-sw nav-next-slider nav-next-collection box-icon w_46 round"><span class="icon icon-arrow-left"></span></div>
@@ -348,24 +460,107 @@
         <div class="hover-sw-nav hover-sw-2">
             <div dir="ltr" class="swiper tf-sw-product-sell wrap-sw-over" data-preview="4" data-tablet="3" data-mobile="2" data-space-lg="30" data-space-md="15" data-pagination="2" data-pagination-md="3" data-pagination-lg="3">
                 <div class="swiper-wrapper">
-                    @foreach($featuredProducts as $product)
+                    @forelse($bestSellingProducts ?? $featuredProducts ?? [] as $product  )
+                    @php
+                        // Dynamic image handling for featured products
+                        $legacyImageUrl = '';
+                        
+                        // First try images array
+                        if (isset($product->images) && $product->images) {
+                            $images = is_string($product->images) ? json_decode($product->images, true) : $product->images;
+                            if (is_array($images) && !empty($images)) {
+                                $image = $images[0]; // Get first image
+                                
+                                // Handle complex nested structure first
+                                if (is_array($image) && isset($image['sizes']['medium']['storage_url'])) {
+                                    // New complex structure - use medium size storage_url
+                                    $legacyImageUrl = $image['sizes']['medium']['storage_url'];
+                                } elseif (is_array($image) && isset($image['sizes']['original']['storage_url'])) {
+                                    // Fallback to original if medium not available
+                                    $legacyImageUrl = $image['sizes']['original']['storage_url'];
+                                } elseif (is_array($image) && isset($image['sizes']['large']['storage_url'])) {
+                                    // Fallback to large if original not available
+                                    $legacyImageUrl = $image['sizes']['large']['storage_url'];
+                                } elseif (is_array($image) && isset($image['urls']['medium'])) {
+                                    // Legacy complex URL structure - use medium size
+                                    $legacyImageUrl = $image['urls']['medium'];
+                                } elseif (is_array($image) && isset($image['urls']['original'])) {
+                                    // Legacy fallback to original if medium not available
+                                    $legacyImageUrl = $image['urls']['original'];
+                                } elseif (is_array($image) && isset($image['url']) && is_string($image['url'])) {
+                                    $legacyImageUrl = $image['url'];
+                                } elseif (is_array($image) && isset($image['path']) && is_string($image['path'])) {
+                                    $legacyImageUrl = asset('storage/' . $image['path']);
+                                } elseif (is_string($image)) {
+                                    // Simple string path
+                                    $legacyImageUrl = asset('storage/' . $image);
+                                }
+                            }
+                        }
+                        
+                        // Fallback to image accessor
+                        if (empty($legacyImageUrl)) {
+                            $productImage = $product->image;
+                            if ($productImage && $productImage !== 'products/product1.jpg') {
+                                $legacyImageUrl = str_starts_with($productImage, 'http') ? $productImage : asset('storage/' . $productImage);
+                            } else {
+                                $legacyImageUrl = asset('assets/img/product/5.png'); // Default for featured
+                            }
+                        }
+                        
+                        // Handle hover image (second image from gallery)
+                        $hoverImageUrl = $legacyImageUrl; // Default to same image
+                        if (isset($product->images) && $product->images) {
+                            $images = is_string($product->images) ? json_decode($product->images, true) : $product->images;
+                            if (is_array($images) && count($images) > 1) {
+                                $hoverImage = $images[1]; // Get second image
+                                
+                                // Handle complex nested structure for hover image
+                                if (is_array($hoverImage) && isset($hoverImage['sizes']['medium']['storage_url'])) {
+                                    $hoverImageUrl = $hoverImage['sizes']['medium']['storage_url'];
+                                } elseif (is_array($hoverImage) && isset($hoverImage['sizes']['original']['storage_url'])) {
+                                    $hoverImageUrl = $hoverImage['sizes']['original']['storage_url'];
+                                } elseif (is_array($hoverImage) && isset($hoverImage['sizes']['large']['storage_url'])) {
+                                    $hoverImageUrl = $hoverImage['sizes']['large']['storage_url'];
+                                } elseif (is_array($hoverImage) && isset($hoverImage['urls']['medium'])) {
+                                    $hoverImageUrl = $hoverImage['urls']['medium'];
+                                } elseif (is_array($hoverImage) && isset($hoverImage['urls']['original'])) {
+                                    $hoverImageUrl = $hoverImage['urls']['original'];
+                                } elseif (is_array($hoverImage) && isset($hoverImage['url']) && is_string($hoverImage['url'])) {
+                                    $hoverImageUrl = $hoverImage['url'];
+                                } elseif (is_array($hoverImage) && isset($hoverImage['path']) && is_string($hoverImage['path'])) {
+                                    $hoverImageUrl = asset('storage/' . $hoverImage['path']);
+                                } elseif (is_string($hoverImage)) {
+                                    $hoverImageUrl = asset('storage/' . $hoverImage);
+                                }
+                            }
+                        }
+                    @endphp
                     <div class="swiper-slide" lazy="true">
-                        <div class="card-product">
+                        <div class="card-product" data-product-id="{{ $product->id }}">
                             <div class="card-product-wrapper">
                                 <a href="{{ route('products.show', $product->slug) }}" class="product-img">
-                                    <img class="lazyload img-product" data-src="{{ $product->image }}" src="{{ $product->image }}" alt="{{ $product->name }}">
-                                    <img class="lazyload img-hover" data-src="{{ $product->gallery_images[0] ?? $product->image }}" src="{{ $product->gallery_images[0] ?? $product->image }}" alt="{{ $product->name }}">
+                                    <img class="lazyload img-product" 
+                                         data-src="{{ $legacyImageUrl }}" 
+                                         src="{{ $legacyImageUrl }}" 
+                                         alt="{{ $product->name }}"
+                                         onerror="this.src='{{ asset('assets/ecomus/images/products/default-product.jpg') }}'; this.onerror=null;">
+                                    <img class="lazyload img-hover" 
+                                         data-src="{{ $hoverImageUrl }}" 
+                                         src="{{ $hoverImageUrl }}" 
+                                         alt="{{ $product->name }}"
+                                         onerror="this.src='{{ asset('assets/ecomus/images/products/default-product.jpg') }}'; this.onerror=null;">
                                 </a>
                                 <div class="list-product-btn">
-                                    <a href="#quick_add" data-bs-toggle="modal" class="box-icon bg_white quick-add tf-btn-loading">
+                                    <button type="button" class="box-icon bg_white quick-add tf-btn-loading" data-action="add-to-cart" data-product-id="{{ $product->id }}">
                                         <span class="icon icon-bag"></span>
                                         <span class="tooltip">Quick Add</span>
-                                    </a>
-                                    <a href="javascript:void(0);" class="box-icon bg_white wishlist btn-icon-action">
+                                    </button>
+                                    <button type="button" class="box-icon bg_white wishlist btn-icon-action" data-action="add-to-wishlist" data-product-id="{{ $product->id }}">
                                         <span class="icon icon-heart"></span>
                                         <span class="tooltip">Add to Wishlist</span>
                                         <span class="icon icon-delete"></span>
-                                    </a>
+                                    </button>
                                     <a href="#compare" data-bs-toggle="offcanvas" aria-controls="offcanvasLeft" class="box-icon bg_white compare btn-icon-action">
                                         <span class="icon icon-compare"></span>
                                         <span class="tooltip">Add to Compare</span>
@@ -386,16 +581,26 @@
                                 <a href="{{ route('products.show', $product->slug) }}" class="title link">{{ $product->name }}</a>
                                 <span class="price">
                                     @if($product->sale_price)
-                                        <span class="compare-at-price">${{ number_format($product->price, 2) }}</span>
-                                        <span class="price-on-sale fw-6">${{ number_format($product->sale_price, 2) }}</span>
+                                        <span class="compare-at-price">{{ formatCurrency($product->price) }}</span>
+                                        <span class="price-on-sale fw-6">{{ formatCurrency($product->sale_price) }}</span>
                                     @else
-                                        <span class="fw-6">${{ number_format($product->price, 2) }}</span>
+                                        <span class="fw-6">{{ formatCurrency($product->price) }}</span>
                                     @endif
                                 </span>
                             </div>
                         </div>
                     </div>
-                    @endforeach
+                    @empty
+                    <!-- No products available -->
+                    <div class="swiper-slide">
+                        <div class="text-center py-5">
+                            <p class="text-muted">No products available at the moment.</p>
+                            <a href="{{ route('shop.index') }}" class="tf-btn btn-outline animate-hover-btn">
+                                <span>Browse All Products</span>
+                            </a>
+                        </div>
+                    </div>
+                    @endforelse
                 </div>
             </div>
             <div class="nav-sw nav-next-slider nav-next-product box-icon w_46 round"><span class="icon icon-arrow-left"></span></div>
@@ -404,6 +609,93 @@
     </div>
 </section>
 <!-- /Product -->
+@endif
+
+@if(isset($flashSaleProducts) && $flashSaleProducts->count() > 0)
+<!-- Flash Sale Products -->
+<section class="flat-spacing-1 bg_grey-3">
+    <div class="container">
+        <div class="flat-title wow fadeInUp" data-wow-delay="0s">
+            <span class="title">Flash Sale</span>
+            <p class="sub-title">Limited time offers - Grab them before they're gone!</p>
+        </div>
+        <div class="flash-sale-slide owl-carousel">
+            @forelse($flashSaleProducts ?? [] as $product)
+            <!-- Flash Sale Card -->
+            <div class="card flash-sale-card">
+                <div class="card-body">
+                    <a href="{{ route('products.show', $product->slug) }}">
+                        @php
+                            // Dynamic image handling for flash sale products
+                            $legacyImageUrl = '';
+                            
+                            // First try images array
+                            if (isset($product->images) && $product->images) {
+                                $images = is_string($product->images) ? json_decode($product->images, true) : $product->images;
+                                if (is_array($images) && !empty($images)) {
+                                    $image = $images[0]; // Get first image
+                                    
+                                    // Handle complex nested structure first
+                                    if (is_array($image) && isset($image['sizes']['medium']['storage_url'])) {
+                                        // New complex structure - use medium size storage_url
+                                        $legacyImageUrl = $image['sizes']['medium']['storage_url'];
+                                    } elseif (is_array($image) && isset($image['sizes']['original']['storage_url'])) {
+                                        // Fallback to original if medium not available
+                                        $legacyImageUrl = $image['sizes']['original']['storage_url'];
+                                    } elseif (is_array($image) && isset($image['sizes']['large']['storage_url'])) {
+                                        // Fallback to large if original not available
+                                        $legacyImageUrl = $image['sizes']['large']['storage_url'];
+                                    } elseif (is_array($image) && isset($image['urls']['medium'])) {
+                                        // Legacy complex URL structure - use medium size
+                                        $legacyImageUrl = $image['urls']['medium'];
+                                    } elseif (is_array($image) && isset($image['urls']['original'])) {
+                                        // Legacy fallback to original if medium not available
+                                        $legacyImageUrl = $image['urls']['original'];
+                                    } elseif (is_array($image) && isset($image['url']) && is_string($image['url'])) {
+                                        $legacyImageUrl = $image['url'];
+                                    } elseif (is_array($image) && isset($image['path']) && is_string($image['path'])) {
+                                        $legacyImageUrl = asset('storage/' . $image['path']);
+                                    } elseif (is_string($image)) {
+                                        // Simple string path
+                                        $legacyImageUrl = asset('storage/' . $image);
+                                    }
+                                }
+                            }
+                            
+                            // Fallback to image accessor
+                            if (empty($legacyImageUrl)) {
+                                $productImage = $product->image;
+                                if ($productImage && $productImage !== 'products/product1.jpg') {
+                                    $legacyImageUrl = str_starts_with($productImage, 'http') ? $productImage : asset('storage/' . $productImage);
+                                } else {
+                                    $legacyImageUrl = asset('assets/img/product/1.png'); // Default for flash sale
+                                }
+                            }
+                        @endphp
+                        <img src="{{ $legacyImageUrl }}" 
+                             alt="{{ $product->name }}"
+                             style="width: 100%; height: 120px; object-fit: cover;"
+                             onerror="this.src='{{ asset('assets/img/product/1.png') }}'">
+                        <span class="product-title">{{ Str::limit($product->name, 15) }}</span>
+                        @if($product->sale_price && $product->sale_price < $product->price)
+                            <p class="sale-price">৳{{ number_format($product->sale_price, 0) }}</p>
+                            <p class="real-price">৳{{ number_format($product->price, 0) }}</p>
+                        @else
+                            <p class="sale-price">৳{{ number_format($product->price, 0) }}</p>
+                        @endif
+                    </a>
+                </div>
+            </div>
+            @empty
+            <!-- No flash sale products -->
+            <div class="col-12 text-center py-4">
+                <p class="text-muted">No flash sale products available at the moment.</p>
+            </div>
+            @endforelse
+        </div>
+    </div>
+</section>
+<!-- /Flash Sale Products -->
 @endif
 
 <!-- Banner Collection -->
@@ -656,6 +948,7 @@
     </div>
 </section>
 <!-- /Instagram -->
+@endsection
 
 @push('scripts')
 <script>
@@ -690,5 +983,3 @@ $(document).ready(function() {
 });
 </script>
 @endpush
-
-@endsection

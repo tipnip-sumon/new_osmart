@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ShippingController;
 use App\Http\Controllers\Api\RealTimeBinaryController;
+use App\Http\Controllers\Api\DeliveryChargeController;
 
 // Authentication check route for AJAX requests
 Route::get('/auth-check', function () {
@@ -33,6 +34,14 @@ Route::prefix('shipping')->group(function () {
     Route::post('/calculate', [ShippingController::class, 'calculateShipping']);
     Route::post('/check-free-shipping', [ShippingController::class, 'checkFreeShipping']);
     Route::get('/config', [ShippingController::class, 'getShippingConfig']);
+});
+
+// Delivery Charge API routes
+Route::prefix('delivery')->group(function () {
+    Route::get('/charge', [DeliveryChargeController::class, 'getShippingCharge']);
+    Route::get('/districts', [DeliveryChargeController::class, 'getDistricts']);
+    Route::get('/upazilas', [DeliveryChargeController::class, 'getUpazilas']);
+    Route::get('/wards', [DeliveryChargeController::class, 'getWards']);
 });
 
 // Cart API routes

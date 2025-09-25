@@ -17,6 +17,11 @@ use App\Http\Controllers\Auth\LogoutController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+// Test Routes
+Route::get('/cart-modal-test', function () {
+    return view('cart-modal-test');
+})->name('cart.modal.test');
+
 // Marketing Plan Routes - Public Access (No Authentication Required)
 Route::get('/marketing-plan', function() {
     return response()->file(base_path('marketing-plan.html'));
@@ -526,7 +531,7 @@ Route::get('/products/{identifier}', function ($identifier) {
         ->limit(4)
         ->get();
     
-    return view('products.show', compact('identifier', 'product', 'relatedProducts'));
+    return view('products.show-ecomus', compact('identifier', 'product', 'relatedProducts'));
 })->name('products.show');
 
 // Review routes
@@ -672,6 +677,31 @@ Route::get('/cart/count', function () {
     return response()->json(['count' => $count]);
 })->name('cart.count');
 
+Route::get('/cart/items', function () {
+    $cart = session()->get('cart', []);
+    $cartItems = [];
+    $subtotal = 0;
+    
+    foreach ($cart as $productId => $item) {
+        $cartItems[] = [
+            'id' => $productId,
+            'name' => $item['name'],
+            'price' => $item['price'],
+            'quantity' => $item['quantity'],
+            'image' => $item['image'] ?? null,
+            'total' => $item['price'] * $item['quantity']
+        ];
+        $subtotal += $item['price'] * $item['quantity'];
+    }
+    
+    return response()->json([
+        'success' => true,
+        'items' => $cartItems,
+        'subtotal' => $subtotal,
+        'count' => array_sum(array_column($cart, 'quantity'))
+    ]);
+})->name('cart.items');
+
 Route::post('/cart/update', function (Request $request) {
     $productId = $request->input('product_id');
     $quantity = $request->input('quantity');
@@ -776,9 +806,38 @@ Route::get('/orders/success/{id?}', [CheckoutController::class, 'orderSuccess'])
 
 // Wishlist routes
 Route::post('/wishlist/add', [WishlistController::class, 'add'])->name('wishlist.add');
+Route::post('/wishlist/toggle', function (Request $request) {
+    // Simple wishlist toggle for demo - in production use proper controller
+    $productId = $request->input('product_id');
+    $wishlist = session()->get('wishlist', []);
+    
+    if (in_array($productId, $wishlist)) {
+        $wishlist = array_filter($wishlist, function($id) use ($productId) {
+            return $id != $productId;
+        });
+        $action = 'removed';
+        $message = 'Product removed from wishlist';
+    } else {
+        $wishlist[] = $productId;
+        $action = 'added';
+        $message = 'Product added to wishlist';
+    }
+    
+    session()->put('wishlist', array_values($wishlist));
+    
+    return response()->json([
+        'success' => true,
+        'action' => $action,
+        'message' => $message,
+        'count' => count($wishlist)
+    ]);
+})->name('wishlist.toggle');
 Route::post('/wishlist/remove', [WishlistController::class, 'remove'])->name('wishlist.remove');
 Route::post('/wishlist/clear', [WishlistController::class, 'clear'])->name('wishlist.clear');
-Route::get('/wishlist/count', [WishlistController::class, 'count'])->name('wishlist.count');
+Route::get('/wishlist/count', function () {
+    $wishlist = session()->get('wishlist', []);
+    return response()->json(['count' => count($wishlist)]);
+})->name('wishlist.count');
 
 Route::get('/cart/add/{id}', function ($id) {
     return redirect()->back()->with('success', 'Product added to cart');
@@ -794,6 +853,11 @@ Route::get('/test-shipping', function () {
 Route::get('/cart-test', function () {
     return view('cart-test');
 });
+
+// Simple cart test page
+Route::get('/test-cart-ui', function () {
+    return view('cart-test');
+})->name('test.cart');
 
 // Add test items to cart
 Route::get('/add-test-items', function () {

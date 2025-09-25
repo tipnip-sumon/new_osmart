@@ -364,7 +364,7 @@ class GeneralSetting extends Model
      */
     public static function getCurrencySymbol()
     {
-        return self::getSetting('cur_sym', '$');
+        return self::getSetting('cur_sym', '৳'); // Default to BDT symbol
     }
 
     /**
@@ -372,7 +372,7 @@ class GeneralSetting extends Model
      */
     public static function getCurrencyText()
     {
-        return self::getSetting('cur_text', 'USD');
+        return self::getSetting('cur_text', 'BDT'); // Default to BDT
     }
 
     /**
