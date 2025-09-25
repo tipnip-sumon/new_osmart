@@ -130,7 +130,7 @@ function getWishlistHoverImageSrc($product, $fallback = null) {
                                      onload="console.log('Hover image loaded successfully: {{ $hoverImageUrl }}');">
                             </a>
                             <div class="list-product-btn type-wishlist">
-                                <button type="button" class="box-icon bg_white wishlist remove-wishlist-btn" 
+                                <button type="button" class="box-icon bg_white wishlist-remove-btn" 
                                         data-product-id="{{ $product->id }}" 
                                         title="Remove from Wishlist">
                                     <span class="tooltip">Remove Wishlist</span>
@@ -320,10 +320,11 @@ function getWishlistHoverImageSrc($product, $fallback = null) {
 document.addEventListener('DOMContentLoaded', function() {
     // Handle wishlist removal with confirmation
     document.addEventListener('click', function(e) {
-        if (e.target.closest('.remove-wishlist-btn')) {
+        if (e.target.closest('.wishlist-remove-btn')) {
             e.preventDefault();
+            e.stopPropagation(); // Prevent event bubbling to other handlers
             
-            const button = e.target.closest('.remove-wishlist-btn');
+            const button = e.target.closest('.wishlist-remove-btn');
             const productId = button.dataset.productId;
             
             if (!productId) {
