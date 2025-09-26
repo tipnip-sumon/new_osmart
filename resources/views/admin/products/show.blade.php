@@ -1291,7 +1291,7 @@
                                 <div class="d-flex flex-wrap gap-2">
                                     @foreach($product->tags as $tag)
                                         <span class="badge bg-light-blue text-primary py-1 px-2">
-                                            <i class="ti ti-tag me-1"></i>{{ $tag->name }}
+                                            <i class="ti ti-tag me-1"></i>{{ is_string($tag) ? $tag : ($tag->name ?? $tag) }}
                                         </span>
                                     @endforeach
                                 </div>
