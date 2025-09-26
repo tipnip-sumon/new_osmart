@@ -102,4 +102,56 @@ class CollectionsController extends Controller
             ]
         ]);
     }
+
+    /**
+     * Display Summer Collection - special collection page
+     */
+    public function summer()
+    {
+        // Get summer-related products or create a virtual summer collection
+        $query = Product::where('status', 'active')
+            ->with(['category', 'brand']);
+        
+        // You can customize this query to filter summer products
+        // For example, filter by categories, tags, or specific criteria
+        // $query->whereHas('categories', function($q) {
+        //     $q->whereIn('slug', ['summer-wear', 'swimwear', 'sandals', 'sunglasses']);
+        // });
+        
+        // Or filter by season/collection field if you have one
+        // $query->where('season', 'summer');
+        
+        // Apply sorting
+        $sort = request('sort', 'newest');
+        switch ($sort) {
+            case 'oldest':
+                $query->orderBy('created_at', 'asc');
+                break;
+            case 'price_low':
+                $query->orderBy('sale_price', 'asc')->orderBy('price', 'asc');
+                break;
+            case 'price_high':
+                $query->orderBy('sale_price', 'desc')->orderBy('price', 'desc');
+                break;
+            case 'name_asc':
+                $query->orderBy('name', 'asc');
+                break;
+            case 'name_desc':
+                $query->orderBy('name', 'desc');
+                break;
+            case 'rating':
+                $query->orderBy('average_rating', 'desc');
+                break;
+            case 'newest':
+            default:
+                $query->orderBy('created_at', 'desc');
+                break;
+        }
+
+        // Pagination
+        $perPage = request('per_page', 12);
+        $products = $query->paginate($perPage);
+
+        return view('collections.summer', compact('products'));
+    }
 }

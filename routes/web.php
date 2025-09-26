@@ -541,6 +541,9 @@ Route::post('/reviews/{review}/helpful', [App\Http\Controllers\ReviewController:
 
 Route::get('/collections', [CollectionsController::class, 'index'])->name('collections.index');
 
+// Summer Collection specific route
+Route::get('/collections/summer', [CollectionsController::class, 'summer'])->name('collections.summer');
+
 Route::get('/collections/{collection:slug}', [CollectionsController::class, 'show'])->name('collections.show');
 
 // AJAX route for getting products by collection
