@@ -380,7 +380,7 @@
                     @endguest
 
                     <h5 class="fw-5 mb_20">Billing details</h5>
-                    <form class="form-checkout" method="POST" action="{{ auth()->check() && auth()->user()->role === 'affiliate' ? route('member.orders.store') : route('orders.store') }}">
+                    <form class="form-checkout" method="POST" action="{{ route('orders.store') }}">>
                         @csrf
                         <input type="hidden" name="checkout_type" id="checkout-type-input" value="{{ auth()->check() ? 'authenticated' : 'guest' }}">
                         
@@ -2153,7 +2153,6 @@
                 return response.json();
             })
             .then(data => {
-                console.log('Coupon validation response:', data);
                 
                 if (data.success) {
                     // Store applied coupon
@@ -2336,7 +2335,6 @@
             const discount = parseFloat(document.getElementById('discount-amount')?.textContent?.replace(/[-৳,]/g, '') || 0);
             const total = subtotal + shipping - discount;
             
-            console.log('Order total calculation:', { subtotal, shipping, discount, total });
             
             document.getElementById('total-amount').textContent = `৳${total.toLocaleString()}`;
         }
@@ -2514,7 +2512,6 @@
                 }
             }
             
-            console.log('Final cart items for order:', cartItems);
             
             if (cartItems.length === 0) {
                 showToast('Your cart is empty. Please add items to your cart first.', 'error');
@@ -2735,7 +2732,6 @@
                 });
             }
             
-            console.log('Order data prepared for backend validation:', orderData);
             
             // Handle affiliate registration separately for better UX
             if (checkoutType === 'register') {
@@ -2745,20 +2741,37 @@
             }
             
             // For guest or authenticated checkout, directly process order
-            const actionUrl = form.action || '{{ route("orders.store") }}';
-            
-            console.log('Using action URL:', actionUrl, 'for checkout type:', checkoutType);
+            // Always use the public orders.store route to avoid middleware issues
+            let actionUrl = '{{ route("orders.store") }}';
             
             // Submit order
             fetch(actionUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || document.querySelector('input[name="_token"]')?.value
+                    'X-CSRF-TOKEN': csrfToken,
+                    'Accept': 'application/json'
                 },
                 body: JSON.stringify(orderData)
             })
-            .then(response => response.json())
+            .then(response => {
+                // Check if response is ok
+                if (!response.ok) {
+                    return response.text().then(text => {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    });
+                }
+                
+                // Check if response is JSON
+                const contentType = response.headers.get('content-type');
+                if (!contentType || !contentType.includes('application/json')) {
+                    return response.text().then(text => {
+                        throw new Error('Server returned non-JSON response. Please check your login status and try again.');
+                    });
+                }
+                
+                return response.json();
+            })
             .then(data => {
                 if (data.success) {
                     // Clear cart and coupon data
@@ -2777,7 +2790,27 @@
             })
             .catch(error => {
                 console.error('Order submission error:', error);
-                showToast(error.message || 'Error processing order. Please try again.', 'error');
+                
+                // Provide more specific error messages
+                let errorMessage = 'Error processing order. Please try again.';
+                
+                if (error.message.includes('HTTP error! status: 401')) {
+                    errorMessage = 'Authentication required. Please log in and try again.';
+                } else if (error.message.includes('HTTP error! status: 403')) {
+                    errorMessage = 'Access denied. Please check your permissions.';
+                } else if (error.message.includes('HTTP error! status: 422')) {
+                    errorMessage = 'Invalid order data. Please check all required fields.';
+                } else if (error.message.includes('HTTP error! status: 500')) {
+                    errorMessage = 'Server error. Please try again later or contact support.';
+                } else if (error.message.includes('non-JSON response')) {
+                    errorMessage = 'Server error. You may have been logged out. Please refresh the page and log in again.';
+                } else if (error.message.includes('Failed to fetch')) {
+                    errorMessage = 'Network error. Please check your internet connection.';
+                } else if (error.message) {
+                    errorMessage = error.message;
+                }
+                
+                showToast(errorMessage, 'error');
                 
                 // Reset button
                 button.innerHTML = originalText;
@@ -2822,11 +2855,9 @@
                 body: JSON.stringify(affiliateData)
             })
             .then(response => {
-                console.log('Registration response status:', response.status);
                 
                 // Handle redirect responses (success case)
                 if (response.redirected) {
-                    console.log('Registration successful - redirected to:', response.url);
                     showToast('✅ Account created successfully!', 'success');
                     setupOrderFormAfterRegistration(orderData, button, originalText);
                     return null;
@@ -2856,7 +2887,6 @@
 
         // Step 2: Setup order form after successful registration
         function setupOrderFormAfterRegistration(orderData, button, originalText) {
-            console.log('Setting up order form after registration...');
             
             // Switch to guest checkout mode (user is now registered)
             selectCheckoutType('guest');
@@ -2923,7 +2953,6 @@
 
         // Step 3: Automatically submit order after registration
         function submitOrderAfterRegistration(orderData, button, originalText) {
-            console.log('Auto-submitting order after registration...');
             
             // Show processing state
             button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting Order...';
@@ -2952,10 +2981,10 @@
                 bank_transaction_ref: orderData.bank_transaction_ref
             };
             
-            console.log('Clean order data for submission:', cleanOrderData);
-            
             // Submit the order
-            fetch('{{ route("orders.store") }}', {
+            // Always use the public orders.store route to avoid middleware issues
+            const submitUrl = '{{ route("orders.store") }}';
+            fetch(submitUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -2963,7 +2992,20 @@
                 },
                 body: JSON.stringify(cleanOrderData)
             })
-            .then(response => response.json())
+            .then(response => {
+                // Check if response is ok
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                // Check if response is JSON
+                const contentType = response.headers.get('content-type');
+                if (!contentType || !contentType.includes('application/json')) {
+                    throw new Error('Server returned non-JSON response. Please check your login status and try again.');
+                }
+                
+                return response.json();
+            })
             .then(data => {
                 if (data.success) {
                     // Clear cart and coupon data
@@ -2982,7 +3024,29 @@
             })
             .catch(error => {
                 console.error('Auto order submission error:', error);
-                showToast('Registration successful but order submission failed: ' + error.message, 'error');
+                
+                // Provide more specific error messages
+                let errorMessage = 'Registration successful but order submission failed. ';
+                
+                if (error.message.includes('HTTP error! status: 401')) {
+                    errorMessage += 'Authentication required. Please log in and try again.';
+                } else if (error.message.includes('HTTP error! status: 403')) {
+                    errorMessage += 'Access denied. Please check your permissions.';
+                } else if (error.message.includes('HTTP error! status: 422')) {
+                    errorMessage += 'Invalid order data. Please check all required fields.';
+                } else if (error.message.includes('HTTP error! status: 500')) {
+                    errorMessage += 'Server error. Please try again later or contact support.';
+                } else if (error.message.includes('non-JSON response')) {
+                    errorMessage += 'Server error. You may have been logged out. Please refresh the page and log in again.';
+                } else if (error.message.includes('Failed to fetch')) {
+                    errorMessage += 'Network error. Please check your internet connection.';
+                } else if (error.message) {
+                    errorMessage += error.message;
+                } else {
+                    errorMessage += 'Please try again.';
+                }
+                
+                showToast(errorMessage, 'error');
                 
                 // Reset button for manual retry
                 button.innerHTML = originalText;

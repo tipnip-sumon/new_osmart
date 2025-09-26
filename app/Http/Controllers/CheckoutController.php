@@ -738,6 +738,16 @@ class CheckoutController extends Controller
     public function processOrder(Request $request)
     {
         try {
+            // Log incoming request for debugging
+            Log::info('ProcessOrder method called', [
+                'auth_check' => Auth::check(),
+                'user_id' => Auth::id(),
+                'checkout_type' => $request->checkout_type ?? 'not_provided',
+                'customer_email' => $request->customer_email ?? 'not_provided',
+                'request_size' => strlen(json_encode($request->all())),
+                'user_agent' => $request->userAgent()
+            ]);
+            
             // Validate request data
             $validationRules = [
                 'customer_name' => 'required|string|max:255',
@@ -814,56 +824,13 @@ class CheckoutController extends Controller
                     'checkout_type' => $request->checkout_type
                 ]);
             } elseif ($request->checkout_type === 'register') {
-                // Guest user wants to register as affiliate during checkout
-                // Check if user with this email already exists
-                $existingUser = User::where('email', $request->customer_email)->first();
-                
-                if ($existingUser) {
-                    DB::rollback();
-                    return response()->json([
-                        'success' => false,
-                        'message' => 'An account with this email already exists. Please login or use guest checkout.'
-                    ], 422);
-                }
-
-                
-
-                // COMMENTED OUT: Regular customer account creation
-                // We use affiliate registration instead for checkout_type === 'register'
-                /*
-                // Create new user account
-                $userData = [
-                    'name' => $request->customer_name,
-                    'username' => $request->username,
-                    'email' => $request->customer_email,
-                    'password' => Hash::make($request->password),
-                    'phone' => $request->customer_phone,
-                    'ref_by' => 1, // Default referrer ID
-                    'email_verified_at' => now(), // Auto-verify for checkout users
-                    'status' => 'active',
-                    'role' => 'customer',
-                    // Address information from checkout
-                    'address' => $request->shipping_address['address'] ?? null,
-                    'city' => $request->shipping_address['city'] ?? null,
-                    'state' => $request->shipping_address['state'] ?? null,
-                    'postal_code' => $request->shipping_address['postal_code'] ?? null,
-                    'country' => $request->shipping_address['country'] ?? 'Bangladesh',
-                ];
-
-                $newUser = User::create($userData);
-                
-                // Log in the newly created user
-                Auth::login($newUser);
-                
-                $customerId = $newUser->id;
-                
-                Log::info('New user registered during checkout:', [
-                    'user_id' => $newUser->id,
-                    'username' => $newUser->username,
-                    'email' => $newUser->email,
-                    'ref_by' => $newUser->ref_by
-                ]);
-                */
+                // For register checkout type, user should already be registered via affiliate registration
+                // during the frontend flow and be authenticated. If not, return error.
+                DB::rollback();
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Registration required. Please complete your account registration first.'
+                ], 401);
             } else {
                 // Guest checkout - use a default guest customer ID
                 $customerId = 1; // Default guest customer ID
@@ -1083,16 +1050,40 @@ class CheckoutController extends Controller
         } catch (\Exception $e) {
             DB::rollback();
             
+            // Determine error type and provide appropriate HTTP status code
+            $statusCode = 500;
+            $errorType = 'server_error';
+            
+            if (strpos($e->getMessage(), 'validation') !== false || strpos($e->getMessage(), 'required') !== false) {
+                $statusCode = 422;
+                $errorType = 'validation_error';
+            } elseif (strpos($e->getMessage(), 'authentication') !== false || strpos($e->getMessage(), 'login') !== false) {
+                $statusCode = 401;
+                $errorType = 'authentication_error';
+            } elseif (strpos($e->getMessage(), 'permission') !== false || strpos($e->getMessage(), 'access') !== false) {
+                $statusCode = 403;
+                $errorType = 'permission_error';
+            }
+            
             Log::error('Order processing failed:', [
                 'error' => $e->getMessage(),
+                'error_type' => $errorType,
+                'status_code' => $statusCode,
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'auth_check' => Auth::check(),
+                'user_id' => Auth::id(),
+                'checkout_type' => $request->checkout_type ?? 'not_provided',
+                'customer_email' => $request->customer_email ?? 'not_provided',
                 'trace' => $e->getTraceAsString(),
-                'request_data' => $request->all()
+                'request_data_keys' => array_keys($request->all())
             ]);
             
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to process order: ' . $e->getMessage()
-            ], 500);
+                'message' => 'Failed to process order: ' . $e->getMessage(),
+                'error_type' => $errorType
+            ], $statusCode);
         }
     }
 
