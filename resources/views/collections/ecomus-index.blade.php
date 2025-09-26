@@ -64,138 +64,26 @@
     }
 }
 
-/* Ecomus Collection Grid Layout */
-.tf-grid-layout.xl-col-3.tf-col-2 {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin: 2rem 0;
-}
-
-@media (min-width: 1200px) {
-    .tf-grid-layout.xl-col-3.tf-col-2 {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .tf-grid-layout.xl-col-3.tf-col-2 {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-}
-
-/* Collection Item Styling */
-.collection-item.hover-img {
+/* Collection Card Styles */
+.collection-item {
     position: relative;
+    background: #fff;
+    border-radius: 20px;
     overflow: hidden;
-    border-radius: 0;
-    background: transparent;
-}
-
-.collection-inner {
-    position: relative;
-    width: 100%;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     height: 400px;
-    overflow: hidden;
-}
-
-.collection-image.img-style {
-    display: block;
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-
-.collection-image.img-style img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.collection-item.hover-img:hover .collection-image.img-style img {
-    transform: scale(1.05);
-}
-
-.collection-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    text-align: center;
-}
-
-.tf-btn.collection-title.hover-icon {
-    background: white;
-    color: #333;
-    padding: 12px 24px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 16px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-.tf-btn.collection-title.hover-icon:hover {
-    background: #333;
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-}
-
-.tf-btn.collection-title.hover-icon .icon {
-    font-size: 14px;
-    transition: transform 0.3s ease;
-}
-
-.tf-btn.collection-title.hover-icon:hover .icon {
-    transform: translate(2px, -2px);
-}
-
-/* Pagination Styles */
-.tf-pagination-wrap.tf-pagination-list {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    margin: 3rem 0;
-    list-style: none;
-    padding: 0;
+    flex-direction: column;
 }
 
-.tf-pagination-wrap.tf-pagination-list li {
-    display: inline-block;
+.collection-item:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
 }
 
-.tf-pagination-wrap.tf-pagination-list .pagination-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border: 1px solid #e5e5e5;
-    color: #333;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    font-weight: 500;
-}
-
-.tf-pagination-wrap.tf-pagination-list li.active .pagination-link {
-    background: #333;
-    color: white;
-    border-color: #333;
-}
-
-.tf-pagination-wrap.tf-pagination-list .pagination-link.animate-hover-btn:hover {
-    background: #333;
-    color: white;
-    border-color: #333;
+.collection-item:hover .img-style {
+    transform: scale(1.08);
 }
 
 .collection-item:hover .collection-content {
@@ -328,24 +216,8 @@
 
 .stat-card {
     text-align: center;
-    padding: 25px 20px;
+    padding: 20px 15px;
     border-right: 1px solid #ecf0f1;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.stat-card:hover {
-    transform: translateY(-3px);
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-right-color: transparent;
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-    border-radius: 15px;
-}
-
-.stat-card:hover .stat-number,
-.stat-card:hover .stat-label {
-    color: white;
 }
 
 .stat-card:last-child {
@@ -357,7 +229,6 @@
     font-weight: 700;
     color: #3498db;
     margin-bottom: 8px;
-    line-height: 1.2;
 }
 
 .stat-label {
@@ -366,67 +237,26 @@
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    line-height: 1.3;
 }
 
 @media (max-width: 768px) {
     .stats-container {
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        padding: 25px 15px;
     }
     
     .stat-card {
         border-right: none;
+        border-bottom: 1px solid #ecf0f1;
+        margin-bottom: 10px;
+    }
+    
+    .stat-card:nth-child(even) {
+        border-right: 1px solid #ecf0f1;
+    }
+    
+    .stat-card:nth-last-child(-n+2) {
         border-bottom: none;
-        padding: 20px 15px;
         margin-bottom: 0;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border-radius: 15px;
-        color: white;
-        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
-    }
-    
-    .stat-card .stat-number {
-        color: white;
-        font-size: 2.2rem;
-    }
-    
-    .stat-card .stat-label {
-        color: rgba(255, 255, 255, 0.9);
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .stats-container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-        padding: 20px 10px;
-    }
-    
-    .stat-card {
-        border-right: none;
-        border-bottom: none;
-        padding: 18px 12px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border-radius: 12px;
-        color: white;
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.2);
-    }
-    
-    .stat-card .stat-number {
-        color: white;
-        font-size: 1.8rem;
-    }
-    
-    .stat-card .stat-label {
-        color: rgba(255, 255, 255, 0.9);
-        font-size: 0.8rem;
-    }
-    
-    .stat-card:last-child {
-        border-bottom: none;
     }
 }
 
@@ -485,68 +315,68 @@
 <!-- Collections Section -->
 <section class="flat-spacing-2">
     <div class="container">
-
-        <!-- Collections Grid - Ecomus Style -->
+        <!-- Collections Stats -->
         @if($collections->count() > 0)
-            <div class="tf-grid-layout xl-col-3 tf-col-2">
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-number">{{ $collections->count() }}</div>
+                <div class="stat-label">Collections</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">{{ $collections->sum('products_count') }}</div>
+                <div class="stat-label">Total Products</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">{{ $collections->where('is_featured', true)->count() }}</div>
+                <div class="stat-label">Featured</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">{{ $collections->avg('products_count') ? number_format($collections->avg('products_count'), 1) : '0' }}</div>
+                <div class="stat-label">Avg Products</div>
+            </div>
+        </div>
+        @endif
+
+        <!-- Collections Grid -->
+        @if($collections->count() > 0)
+            <div class="tf-grid-layout grid-3">
                 @foreach($collections as $collection)
-                <div class="collection-item hover-img">
-                    <div class="collection-inner">
-                        <a href="{{ route('collections.show', $collection->slug ?? $collection->id) }}" class="collection-image img-style">
-                            @php
-                                // Handle collection image using same system as products
-                                $collectionImageUrl = asset('assets/ecomus/images/collections/collection-1.jpg'); // Default
-                                
-                                if ($collection->image) {
-                                    if (str_starts_with($collection->image, 'http')) {
-                                        $collectionImageUrl = $collection->image;
-                                    } elseif (file_exists(public_path('storage/' . $collection->image))) {
-                                        $collectionImageUrl = asset('storage/' . $collection->image);
-                                    } elseif (file_exists(public_path('uploads/collections/' . $collection->image))) {
-                                        $collectionImageUrl = asset('uploads/collections/' . $collection->image);
-                                    }
-                                }
-                            @endphp
-                            
-                            <img class="lazyload" data-src="{{ $collectionImageUrl }}" 
-                                 src="{{ $collectionImageUrl }}" alt="{{ $collection->name }}">
-                        </a>
-                        <div class="collection-content">
-                            <a href="{{ route('collections.show', $collection->slug ?? $collection->id) }}" 
-                               class="tf-btn collection-title hover-icon">
-                               <span>{{ $collection->name }}</span>
-                               <i class="icon icon-arrow1-top-left"></i>
-                            </a>
+                <div class="collection-item">
+                    @php
+                        // Handle collection image using same system as products
+                        $collectionImageUrl = asset('assets/ecomus/images/collections/collection-1.jpg'); // Default
+                        
+                        if ($collection->image) {
+                            if (str_starts_with($collection->image, 'http')) {
+                                $collectionImageUrl = $collection->image;
+                            } else {
+                                $collectionImageUrl = asset('storage/' . $collection->image);
+                            }
+                        }
+                    @endphp
+                    
+                    <img class="lazyload img-style" 
+                         data-src="{{ $collectionImageUrl }}" 
+                         src="{{ $collectionImageUrl }}" 
+                         alt="{{ $collection->name }}"
+                         loading="lazy"
+                         onerror="this.src='{{ asset('assets/ecomus/images/collections/collection-1.jpg') }}'; this.onerror=null;">
+                    
+                    <div class="collection-content">
+                        <div class="product-count">
+                            <i class="icon-bag"></i>
+                            {{ $collection->products_count }} {{ Str::plural('Product', $collection->products_count) }}
                         </div>
+                        <h5>{{ $collection->name }}</h5>
+                        <p>{{ Str::limit($collection->description ?? 'Explore our curated selection of premium products.', 80) }}</p>
+                        <a href="{{ route('collections.show', $collection->slug) }}" class="tf-btn">
+                            <span>View Collection</span>
+                            <i class="icon icon-arrow1-top-left"></i>
+                        </a>
                     </div>
                 </div>
                 @endforeach
             </div>
-            
-            <!-- Pagination -->
-            @if($collections instanceof \Illuminate\Pagination\LengthAwarePaginator)
-                <ul class="tf-pagination-wrap tf-pagination-list">
-                    @if ($collections->onFirstPage())
-                        <li><span class="pagination-link">‹</span></li>
-                    @else
-                        <li><a href="{{ $collections->previousPageUrl() }}" class="pagination-link animate-hover-btn">‹</a></li>
-                    @endif
-
-                    @foreach ($collections->getUrlRange(1, $collections->lastPage()) as $page => $url)
-                        @if ($page == $collections->currentPage())
-                            <li class="active"><a href="#" class="pagination-link">{{ $page }}</a></li>
-                        @else
-                            <li><a href="{{ $url }}" class="pagination-link animate-hover-btn">{{ $page }}</a></li>
-                        @endif
-                    @endforeach
-
-                    @if ($collections->hasMorePages())
-                        <li><a href="{{ $collections->nextPageUrl() }}" class="pagination-link animate-hover-btn"><span class="icon icon-arrow-right"></span></a></li>
-                    @else
-                        <li><span class="pagination-link">›</span></li>
-                    @endif
-                </ul>
-            @endif
         @else
             <!-- Empty State -->
             <div class="empty-collections">
@@ -562,9 +392,73 @@
         @endif
     </div>
 </section>
+
+<!-- Featured Products Section -->
+@if($featuredProducts && $featuredProducts->count() > 0)
+<section class="tf-section-2">
+    <div class="container">
+        <div class="tf-heading-section">
+            <h2 class="heading">Featured Products</h2>
+            <p class="sub-heading">Handpicked products from our most popular collections</p>
+        </div>
+        
+        <div class="tf-grid-layout" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
+            @foreach($featuredProducts as $product)
+            <div class="card-product" style="background: #fff; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: all 0.3s ease;">
+                <div style="position: relative; overflow: hidden; height: 250px;">
+                    @php
+                        // Use same image handling as shop grid
+                        $imageUrl = '';
+                        
+                        if (isset($product->images) && $product->images) {
+                            $images = is_string($product->images) ? json_decode($product->images, true) : $product->images;
+                            if (is_array($images) && !empty($images)) {
+                                $image = $images[0];
+                                if (is_array($image) && isset($image['sizes']['medium']['storage_url'])) {
+                                    $imageUrl = $image['sizes']['medium']['storage_url'];
+                                } elseif (is_array($image) && isset($image['url']) && is_string($image['url'])) {
+                                    $imageUrl = $image['url'];
+                                } elseif (is_string($image)) {
+                                    $imageUrl = asset('storage/' . $image);
+                                }
+                            }
+                        }
+                        
+                        if (empty($imageUrl)) {
+                            $productImage = $product->image;
+                            if ($productImage && $productImage !== 'products/product1.jpg') {
+                                $imageUrl = str_starts_with($productImage, 'http') ? $productImage : asset('storage/' . $productImage);
+                            } else {
+                                $imageUrl = asset('assets/ecomus/images/products/default-product.jpg');
+                            }
+                        }
+                    @endphp
+                    
+                    <a href="{{ route('products.show', $product->slug) }}">
+                        <img style="width: 100%; height: 100%; object-fit: cover; transition: all 0.3s ease;" 
+                             src="{{ $imageUrl }}" 
+                             alt="{{ $product->name }}"
+                             onerror="this.src='{{ asset('assets/ecomus/images/products/default-product.jpg') }}'; this.onerror=null;">
+                    </a>
+                </div>
+                
+                <div style="padding: 20px;">
+                    <a href="{{ route('products.show', $product->slug) }}" style="font-size: 1rem; font-weight: 600; color: #2c3e50; text-decoration: none; display: block; margin-bottom: 8px;">
+                        {{ Str::limit($product->name, 50) }}
+                    </a>
+                    <div style="font-size: 1.1rem; font-weight: 700; color: #e74c3c;">
+                        {{ formatCurrency($product->price) }}
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
 @endsection
 
-@push('scripts')
+@section('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Lazy loading for images
@@ -633,4 +527,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
-@endpush
+@endsection
