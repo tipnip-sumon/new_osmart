@@ -497,6 +497,101 @@
                                 <option value="American Express" {{ $order['payment_method'] == 'American Express' ? 'selected' : '' }}>American Express</option>
                             </select>
                         </div>
+
+                        @php
+                            $paymentDetails = $order['payment_details'] ?? [];
+                            $hasReceipt = false;
+                            $receiptUrl = '';
+                            $receiptType = '';
+                            
+                            // Check for mobile banking receipt
+                            if (!empty($paymentDetails['receipt_url'])) {
+                                $hasReceipt = true;
+                                $receiptUrl = $paymentDetails['receipt_url'];
+                                $receiptType = 'Mobile Banking Receipt';
+                            }
+                            // Check for bank transfer receipt
+                            elseif (!empty($paymentDetails['bank_receipt_url'])) {
+                                $hasReceipt = true;
+                                $receiptUrl = $paymentDetails['bank_receipt_url'];
+                                $receiptType = 'Bank Transfer Receipt';
+                            }
+                            
+                            // Handle different URL formats like in product images
+                            if ($hasReceipt && $receiptUrl) {
+                                if (str_starts_with($receiptUrl, '/storage/')) {
+                                    $path = str_replace('/storage/', '', $receiptUrl);
+                                    $receiptUrl = '/direct-storage/' . $path;
+                                } elseif (!str_starts_with($receiptUrl, 'http')) {
+                                    $receiptUrl = asset('storage/' . ltrim($receiptUrl, '/'));
+                                }
+                            }
+                        @endphp
+
+                        @if($hasReceipt)
+                        <div class="mb-3">
+                            <label class="form-label text-muted">{{ $receiptType }}</label>
+                            <div class="receipt-container">
+                                <div class="d-flex align-items-center gap-2">
+                                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="viewReceipt('{{ $receiptUrl }}', '{{ $receiptType }}')">
+                                        <i class="ri-image-line me-1"></i> View Receipt
+                                    </button>
+                                    <a href="{{ $receiptUrl }}" target="_blank" class="btn btn-sm btn-outline-secondary">
+                                        <i class="ri-download-line me-1"></i> Download
+                                    </a>
+                                </div>
+                                <div class="receipt-thumbnail mt-2">
+                                    @if(str_ends_with(strtolower($receiptUrl), '.pdf'))
+                                        <div class="pdf-preview border rounded p-2 d-inline-block">
+                                            <i class="ri-file-pdf-line text-danger" style="font-size: 2rem;"></i>
+                                            <small class="d-block text-muted">PDF Receipt</small>
+                                        </div>
+                                    @else
+                                        <img src="{{ $receiptUrl }}" alt="Payment Receipt" 
+                                             style="max-width: 150px; max-height: 100px; object-fit: cover; cursor: pointer;" 
+                                             class="border rounded receipt-thumb"
+                                             onclick="viewReceipt('{{ $receiptUrl }}', '{{ $receiptType }}')">
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+
+                        @if(!empty($paymentDetails['transaction_id']))
+                        <div class="mb-3">
+                            <label class="form-label text-muted">Transaction ID</label>
+                            <div class="fw-semibold">{{ $paymentDetails['transaction_id'] }}</div>
+                        </div>
+                        @endif
+
+                        @if(!empty($paymentDetails['bank_transaction_ref']))
+                        <div class="mb-3">
+                            <label class="form-label text-muted">Bank Transaction Reference</label>
+                            <div class="fw-semibold">{{ $paymentDetails['bank_transaction_ref'] }}</div>
+                        </div>
+                        @endif
+
+                        @if(!empty($paymentDetails['sender_phone']))
+                        <div class="mb-3">
+                            <label class="form-label text-muted">Sender Phone</label>
+                            <div>{{ $paymentDetails['sender_phone'] }}</div>
+                        </div>
+                        @endif
+
+                        @if(!empty($paymentDetails['payment_datetime']) || !empty($paymentDetails['transfer_datetime']))
+                        <div class="mb-3">
+                            <label class="form-label text-muted">Payment Date & Time</label>
+                            <div>{{ $paymentDetails['payment_datetime'] ?? $paymentDetails['transfer_datetime'] }}</div>
+                        </div>
+                        @endif
+
+                        @if(!empty($paymentDetails['payment_notes']) || !empty($paymentDetails['transfer_notes']))
+                        <div class="mb-3">
+                            <label class="form-label text-muted">Payment Notes</label>
+                            <div class="text-muted">{{ $paymentDetails['payment_notes'] ?? $paymentDetails['transfer_notes'] }}</div>
+                        </div>
+                        @endif
+
                         @if($order['tracking_number'])
                         <div class="mb-3">
                             <label class="form-label text-muted">Tracking Number</label>
@@ -1574,5 +1669,87 @@
             button.disabled = false;
         });
     }
+
+    // Receipt viewer functions
+    function viewReceipt(receiptUrl, receiptType) {
+        const modal = document.getElementById('receiptModal');
+        const modalTitle = modal.querySelector('.modal-title');
+        const modalBody = modal.querySelector('.modal-body');
+        
+        modalTitle.textContent = receiptType;
+        
+        if (receiptUrl.toLowerCase().endsWith('.pdf')) {
+            modalBody.innerHTML = `
+                <div class="text-center">
+                    <iframe src="${receiptUrl}" width="100%" height="600px" style="border: none;"></iframe>
+                    <div class="mt-2">
+                        <a href="${receiptUrl}" target="_blank" class="btn btn-primary">
+                            <i class="ri-external-link-line me-1"></i> Open in New Tab
+                        </a>
+                    </div>
+                </div>
+            `;
+        } else {
+            modalBody.innerHTML = `
+                <div class="text-center">
+                    <img src="${receiptUrl}" alt="${receiptType}" class="img-fluid receipt-full-image" style="max-height: 80vh; cursor: zoom-in;">
+                    <div class="mt-2">
+                        <a href="${receiptUrl}" target="_blank" class="btn btn-primary">
+                            <i class="ri-download-line me-1"></i> Download Full Size
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+        
+        new bootstrap.Modal(modal).show();
+    }
+</script>
+
+<!-- Receipt Viewer Modal -->
+<div class="modal fade" id="receiptModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Payment Receipt</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Receipt content will be loaded here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.receipt-container {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.receipt-thumb {
+    transition: transform 0.2s ease;
+}
+
+.receipt-thumb:hover {
+    transform: scale(1.05);
+}
+
+.pdf-preview {
+    text-align: center;
+    min-width: 100px;
+    transition: background-color 0.2s ease;
+}
+
+.pdf-preview:hover {
+    background-color: #f8f9fa;
+}
+
+.receipt-full-image {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+</style>
 </script>
 @endpush

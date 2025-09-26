@@ -423,8 +423,17 @@ class CheckoutController extends Controller
             // Online payment fields
             'online_payment_type' => 'required_if:payment_method,online_payment|string|in:bkash,nagad,rocket',
             'transaction_id' => 'required_if:payment_method,online_payment|string|max:100',
+            'sender_phone' => 'nullable|string|max:20',
+            'payment_datetime' => 'nullable|date',
+            'payment_notes' => 'nullable|string|max:500',
+            'receipt_path' => 'nullable|string|max:500',
+            'receipt_url' => 'nullable|string|max:500',
             // Bank transfer fields
             'bank_transaction_ref' => 'required_if:payment_method,bank_transfer|string|max:100',
+            'transfer_datetime' => 'nullable|date',
+            'transfer_notes' => 'nullable|string|max:500',
+            'bank_receipt_path' => 'nullable|string|max:500',
+            'bank_receipt_url' => 'nullable|string|max:500',
         ]);
 
         if ($validator->fails()) {
@@ -656,19 +665,44 @@ class CheckoutController extends Controller
                     'zip_code' => $request->zip_code,
                 ],
                 'payment_details' => [
-                    'payment_method' => $request->payment_method,
+                    'method' => $request->payment_method,
+                    'status' => $request->payment_method === 'cash_on_delivery' ? 'pending' : 'pending',
                     'online_payment_type' => $request->online_payment_type ?? null,
                     'transaction_id' => $request->transaction_id ?? null,
+                    'sender_phone' => $request->sender_phone ?? null,
+                    'payment_datetime' => $request->payment_datetime ?? null,
+                    'payment_notes' => $request->payment_notes ?? null,
+                    'receipt_path' => $request->receipt_path ?? null,
+                    'receipt_url' => $request->receipt_url ?? null,
                     'bank_transaction_ref' => $request->bank_transaction_ref ?? null,
+                    'transfer_datetime' => $request->transfer_datetime ?? null,
+                    'transfer_notes' => $request->transfer_notes ?? null,
+                    'bank_receipt_path' => $request->bank_receipt_path ?? null,
+                    'bank_receipt_url' => $request->bank_receipt_url ?? null,
                     'payment_gateway' => $request->payment_method === 'online_payment' ? $request->online_payment_type : null,
+                    'customer_ip' => $request->ip(),
+                    'user_agent' => $request->userAgent(),
+                    'created_at' => now()->toDateTimeString()
                 ],
                 'notes' => $request->order_notes ?? ('Items: ' . json_encode($orderItems)),
             ];
 
+            // Debug: Log the order data before creation
+            Log::info('Order data before creation:', $orderData);
+            Log::info('Payment details specifically:', $orderData['payment_details']);
+            
             // Create the order
             $order = Order::create($orderData);
             
             Log::info('Order created successfully:', ['order_id' => $order->id, 'order_number' => $orderNumber]);
+            
+            // Debug: Verify the payment_details were saved
+            $order->refresh();
+            Log::info('Order payment_details after creation:', [
+                'order_id' => $order->id,
+                'payment_details' => $order->payment_details,
+                'raw_payment_details' => $order->getAttributes()['payment_details'] ?? 'NULL'
+            ]);
 
             // Record coupon usage
             if ($couponId) {
@@ -774,6 +808,21 @@ class CheckoutController extends Controller
                 'coupon_code' => 'sometimes|string',
                 // Checkout type - allow 'authenticated' for logged-in users
                 'checkout_type' => 'required|in:guest,register,authenticated',
+                // Online payment fields
+                'online_payment_type' => 'required_if:payment_method,online_payment|string|in:bkash,nagad,rocket',
+                'transaction_id' => 'required_if:payment_method,online_payment|string|max:100',
+                'sender_phone' => 'nullable|string|max:20',
+                'payment_datetime' => 'nullable|date',
+                'payment_notes' => 'nullable|string|max:500',
+                'receipt_path' => 'nullable|string|max:500',
+                'receipt_url' => 'nullable|string|max:500',
+                // Bank transfer fields
+                'bank_transaction_ref' => 'required_if:payment_method,bank_transfer|string|max:100',
+                'bank_reference' => 'nullable|string|max:100',
+                'transfer_datetime' => 'nullable|date',
+                'transfer_notes' => 'nullable|string|max:500',
+                'bank_receipt_path' => 'required_if:payment_method,bank_transfer|string|max:500',
+                'bank_receipt_url' => 'required_if:payment_method,bank_transfer|string|max:500',
             ];
 
             // Only add registration validation if user is not authenticated and checkout_type is register
@@ -815,17 +864,28 @@ class CheckoutController extends Controller
             DB::beginTransaction();
 
             // Determine customer ID based on authentication status and checkout type
-            if (Auth::check()) {
+            $customerId = null;
+            $authenticatedUser = Auth::user();
+            
+            if (Auth::check() && $authenticatedUser) {
                 // User is already logged in - use their ID
                 $customerId = Auth::id();
-                Log::info('Checkout by authenticated user:', [
+                Log::info('PROCESSORDER: Checkout by authenticated user:', [
                     'user_id' => $customerId,
-                    'email' => Auth::user()->email,
+                    'email' => $authenticatedUser->email,
+                    'username' => $authenticatedUser->username ?? 'N/A',
+                    'role' => $authenticatedUser->role ?? 'N/A',
                     'checkout_type' => $request->checkout_type
                 ]);
             } elseif ($request->checkout_type === 'register') {
                 // For register checkout type, user should already be registered via affiliate registration
                 // during the frontend flow and be authenticated. If not, return error.
+                Log::error('PROCESSORDER: Registration checkout but user not authenticated:', [
+                    'auth_check' => Auth::check(),
+                    'auth_id' => Auth::id(),
+                    'checkout_type' => $request->checkout_type,
+                    'customer_email' => $request->customer_email ?? 'N/A'
+                ]);
                 DB::rollback();
                 return response()->json([
                     'success' => false,
@@ -834,10 +894,20 @@ class CheckoutController extends Controller
             } else {
                 // Guest checkout - use a default guest customer ID
                 $customerId = 1; // Default guest customer ID
-                Log::info('Guest checkout:', [
+                Log::info('PROCESSORDER: Guest checkout:', [
                     'customer_email' => $request->customer_email,
-                    'checkout_type' => 'guest'
+                    'checkout_type' => 'guest',
+                    'assigned_customer_id' => $customerId
                 ]);
+            }
+            
+            if (!$customerId) {
+                Log::error('PROCESSORDER: Failed to determine customer ID');
+                DB::rollback();
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Failed to determine customer information'
+                ], 400);
             }
 
             // Generate unique order number
@@ -853,17 +923,58 @@ class CheckoutController extends Controller
             if ($request->payment_method === 'online_payment') {
                 $paymentDetails['online_payment_type'] = $request->online_payment_type ?? null;
                 $paymentDetails['transaction_id'] = $request->transaction_id ?? null;
+                $paymentDetails['sender_phone'] = $request->sender_phone ?? null;
+                $paymentDetails['payment_datetime'] = $request->payment_datetime ?? null;
+                $paymentDetails['payment_notes'] = $request->payment_notes ?? null;
+                $paymentDetails['receipt_path'] = $request->receipt_path ?? null;
+                $paymentDetails['receipt_url'] = $request->receipt_url ?? null;
+                $paymentDetails['payment_gateway'] = $request->online_payment_type ?? null;
             } elseif ($request->payment_method === 'bank_transfer') {
                 $paymentDetails['bank_reference'] = $request->bank_reference ?? null;
+                $paymentDetails['bank_transaction_ref'] = $request->bank_transaction_ref ?? null;
+                $paymentDetails['transfer_datetime'] = $request->transfer_datetime ?? null;
+                $paymentDetails['transfer_notes'] = $request->transfer_notes ?? null;
+                $paymentDetails['bank_receipt_path'] = $request->bank_receipt_path ?? null;
+                $paymentDetails['bank_receipt_url'] = $request->bank_receipt_url ?? null;
+                
+                // Log warning if receipt is missing for bank transfer
+                if (empty($request->bank_receipt_path) && empty($request->bank_receipt_url)) {
+                    Log::warning('PROCESSORDER: Bank transfer order missing receipt files:', [
+                        'bank_transaction_ref' => $request->bank_transaction_ref,
+                        'has_bank_receipt_path' => $request->has('bank_receipt_path'),
+                        'has_bank_receipt_url' => $request->has('bank_receipt_url'),
+                        'all_bank_fields' => [
+                            'bank_reference' => $request->bank_reference ?? 'NULL',
+                            'bank_transaction_ref' => $request->bank_transaction_ref ?? 'NULL',
+                            'transfer_datetime' => $request->transfer_datetime ?? 'NULL',
+                            'transfer_notes' => $request->transfer_notes ?? 'NULL',
+                            'bank_receipt_path' => $request->bank_receipt_path ?? 'NULL',
+                            'bank_receipt_url' => $request->bank_receipt_url ?? 'NULL'
+                        ]
+                    ]);
+                }
             }
 
             // Add customer IP and user agent for security
             $paymentDetails['customer_ip'] = $request->ip();
             $paymentDetails['user_agent'] = $request->userAgent();
             $paymentDetails['created_at'] = now()->toDateTimeString();
+            
+            // DEBUG: Log payment details being prepared
+            Log::info('PROCESSORDER: Payment details prepared:', [
+                'payment_method' => $request->payment_method,
+                'payment_details' => $paymentDetails,
+                'request_has_transaction_id' => $request->has('transaction_id'),
+                'transaction_id_value' => $request->transaction_id ?? 'NULL',
+                'request_has_bank_receipt_path' => $request->has('bank_receipt_path'),
+                'bank_receipt_path_value' => $request->bank_receipt_path ?? 'NULL',
+                'request_has_bank_receipt_url' => $request->has('bank_receipt_url'),
+                'bank_receipt_url_value' => $request->bank_receipt_url ?? 'NULL',
+                'all_request_keys' => array_keys($request->all())
+            ]);
 
-            // Create order
-            $order = Order::create([
+            // Create order data array
+            $orderData = [
                 'order_number' => $orderNumber,
                 'customer_id' => $customerId,
                 'vendor_id' => 1, // Default vendor - adjust based on your multi-vendor logic
@@ -882,6 +993,29 @@ class CheckoutController extends Controller
                 'billing_address' => $request->billing_address ?? $request->shipping_address,
                 'payment_details' => $paymentDetails,
                 'notes' => $request->notes ?? null,
+            ];
+            
+            // DEBUG: Log order data before creation
+            Log::info('PROCESSORDER: Order data before creation:', [
+                'order_number' => $orderNumber,
+                'customer_id' => $customerId,
+                'payment_method' => $request->payment_method,
+                'payment_details' => $orderData['payment_details'],
+                'has_transaction_id' => isset($paymentDetails['transaction_id']),
+                'transaction_id_value' => $paymentDetails['transaction_id'] ?? 'NULL'
+            ]);
+            
+            // Create order
+            $order = Order::create($orderData);
+            
+            // DEBUG: Verify the payment_details were saved
+            $order->refresh();
+            Log::info('PROCESSORDER: Order created and refreshed:', [
+                'order_id' => $order->id,
+                'order_number' => $order->order_number,
+                'payment_details_saved' => $order->payment_details,
+                'raw_payment_details' => $order->getAttributes()['payment_details'] ?? 'NULL',
+                'payment_details_is_null' => is_null($order->payment_details)
             ]);
 
             // Create order items and update inventory

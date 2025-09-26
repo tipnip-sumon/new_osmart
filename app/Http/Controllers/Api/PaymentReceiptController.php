@@ -55,13 +55,11 @@ class PaymentReceiptController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Receipt uploaded successfully',
-                'data' => [
-                    'path' => $uploadResult['sizes']['original']['path'] ?? $uploadResult['sizes']['original']['path'],
-                    'url' => $uploadResult['sizes']['original']['url'] ?? $uploadResult['sizes']['original']['storage_url'],
-                    'filename' => $uploadResult['filename'],
-                    'file_size' => $uploadResult['file_size'],
-                    'upload_time' => $uploadResult['uploaded_at']
-                ]
+                'path' => $uploadResult['sizes']['original']['path'] ?? $uploadResult['folder'] . '/' . $uploadResult['filename'],
+                'url' => $uploadResult['sizes']['original']['url'] ?? $uploadResult['sizes']['original']['storage_url'] ?? asset('storage/' . $uploadResult['folder'] . '/' . $uploadResult['filename']),
+                'filename' => $uploadResult['filename'],
+                'file_size' => $uploadResult['file_size'],
+                'upload_time' => $uploadResult['uploaded_at']
             ]);
 
         } catch (\Exception $e) {
@@ -120,13 +118,11 @@ class PaymentReceiptController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Bank receipt uploaded successfully',
-                'data' => [
-                    'path' => $uploadResult['sizes']['original']['path'] ?? $uploadResult['sizes']['original']['path'],
-                    'url' => $uploadResult['sizes']['original']['url'] ?? $uploadResult['sizes']['original']['storage_url'],
-                    'filename' => $uploadResult['filename'],
-                    'file_size' => $uploadResult['file_size'],
-                    'upload_time' => $uploadResult['uploaded_at']
-                ]
+                'path' => $uploadResult['sizes']['original']['path'] ?? $uploadResult['folder'] . '/' . $uploadResult['filename'],
+                'url' => $uploadResult['sizes']['original']['url'] ?? $uploadResult['sizes']['original']['storage_url'] ?? asset('storage/' . $uploadResult['folder'] . '/' . $uploadResult['filename']),
+                'filename' => $uploadResult['filename'],
+                'file_size' => $uploadResult['file_size'],
+                'upload_time' => $uploadResult['uploaded_at']
             ]);
 
         } catch (\Exception $e) {

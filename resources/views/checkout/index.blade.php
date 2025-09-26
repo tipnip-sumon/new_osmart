@@ -2695,10 +2695,22 @@
                 }
             } else if (paymentMethod === 'bank_transfer') {
                 const bankRef = document.querySelector('input[name="bank_transaction_ref"]').value.trim();
+                const bankReceiptPath = document.querySelector('input[name="bank_receipt_path"]')?.value;
+                const bankReceiptUrl = document.querySelector('input[name="bank_receipt_url"]')?.value;
                 
                 if (!bankRef) {
                     showToast('Please enter bank transaction reference', 'error');
                     document.querySelector('input[name="bank_transaction_ref"]').focus();
+                    return;
+                }
+                
+                if (!bankReceiptPath || !bankReceiptUrl) {
+                    showToast('Please upload bank transfer receipt before placing order', 'error');
+                    // Try to open the bank transfer modal
+                    const bankTransferModal = new bootstrap.Modal(document.getElementById('bankTransferModal'));
+                    bankTransferModal.show();
+                    button.innerHTML = originalText;
+                    button.disabled = false;
                     return;
                 }
             }
@@ -2825,11 +2837,53 @@
             if (paymentMethod === 'online_payment') {
                 const onlinePaymentType = document.querySelector('input[name="online_payment_type"]:checked').value;
                 const transactionId = document.querySelector('input[name="transaction_id"]').value;
+                const senderPhone = document.querySelector('input[name="sender_phone"]')?.value;
+                const paymentDateTime = document.querySelector('input[name="payment_datetime"]')?.value;
+                const paymentNotes = document.querySelector('textarea[name="payment_notes"]')?.value;
+                const receiptPath = document.querySelector('input[name="receipt_path"]')?.value;
+                const receiptUrl = document.querySelector('input[name="receipt_url"]')?.value;
+                
                 orderData.online_payment_type = onlinePaymentType;
                 orderData.transaction_id = transactionId;
+                
+                // Add optional mobile banking fields if they exist
+                if (senderPhone) {
+                    orderData.sender_phone = senderPhone;
+                }
+                if (paymentDateTime) {
+                    orderData.payment_datetime = paymentDateTime;
+                }
+                if (paymentNotes) {
+                    orderData.payment_notes = paymentNotes;
+                }
+                if (receiptPath) {
+                    orderData.receipt_path = receiptPath;
+                }
+                if (receiptUrl) {
+                    orderData.receipt_url = receiptUrl;
+                }
             } else if (paymentMethod === 'bank_transfer') {
                 const bankTransactionRef = document.querySelector('input[name="bank_transaction_ref"]').value;
+                const bankReceiptPath = document.querySelector('input[name="bank_receipt_path"]')?.value;
+                const bankReceiptUrl = document.querySelector('input[name="bank_receipt_url"]')?.value;
+                const transferDateTime = document.querySelector('input[name="transfer_datetime"]')?.value;
+                const transferNotes = document.querySelector('textarea[name="transfer_notes"]')?.value;
+                
                 orderData.bank_transaction_ref = bankTransactionRef;
+                
+                // Add receipt information if available
+                if (bankReceiptPath) {
+                    orderData.bank_receipt_path = bankReceiptPath;
+                }
+                if (bankReceiptUrl) {
+                    orderData.bank_receipt_url = bankReceiptUrl;
+                }
+                if (transferDateTime) {
+                    orderData.transfer_datetime = transferDateTime;
+                }
+                if (transferNotes) {
+                    orderData.transfer_notes = transferNotes;
+                }
             }
             
             // Add account creation data if register checkout type
@@ -3327,9 +3381,12 @@
             const providerName = selectedProvider.querySelector('small').textContent;
             const totalAmount = document.getElementById('total-amount').textContent;
             
+            // Debug log to ensure this function is called
+            console.log('Opening payment modal for provider:', provider);
+            
             title.textContent = `Pay with ${providerName}`;
             
-            // Create payment form with upload functionality
+            // Create payment form with upload functionality - ALWAYS WITH RECEIPT UPLOAD
             body.innerHTML = `
                 <div class="payment-instructions mb-4">
                     <div class="alert alert-info">
@@ -3400,116 +3457,31 @@
                 </form>
             `;
             
+            // Footer with ONLY the receipt upload button
             footer.innerHTML = `
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
                 <button type="button" class="tf-btn btn-fill" onclick="submitMobilePayment()" id="submit-payment-btn">
-                    <i class="icon-check me-2"></i>Confirm Payment
+                    <i class="icon-check me-2"></i>Confirm Payment & Upload Receipt
                 </button>
             `;
             
             // Set current date and time
             const now = new Date();
             now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-            document.querySelector('input[name="payment_datetime"]').value = now.toISOString().slice(0, 16);
+            const datetimeInput = document.querySelector('input[name="payment_datetime"]');
+            if (datetimeInput) {
+                datetimeInput.value = now.toISOString().slice(0, 16);
+            }
             
             const paymentModal = new bootstrap.Modal(modal);
             paymentModal.show();
         }
 
-        // Get payment content based on provider
-        function getPaymentContent(provider, total) {
-            const instructions = getPaymentInstructions(provider);
-            
-            return `
-                <div class="payment-instructions mb-4">
-                    <div class="alert alert-primary">
-                        <h6><i class="icon-info me-2"></i>Payment Amount</h6>
-                        <h4 class="mb-0">${total}</h4>
-                    </div>
-                </div>
-                
-                <div class="payment-steps mb-4">
-                    <h6 class="fw-6 mb-3">${instructions.title}</h6>
-                    <ol class="list-group list-group-numbered">
-                        ${instructions.steps.map(step => `<li class="list-group-item">${step}</li>`).join('')}
-                    </ol>
-                </div>
 
-                <form id="paymentForm">
-                    <input type="hidden" name="payment_provider" value="${provider}">
-                    <div class="mb-3">
-                        <label class="form-label">Transaction ID *</label>
-                        <input type="text" class="form-control rounded" name="transaction_id" placeholder="Enter Transaction ID" required>
-                        <small class="text-muted">Enter the transaction ID you received after completing the payment</small>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label class="form-label">Your Phone Number *</label>
-                        <input type="tel" class="form-control rounded" name="sender_phone" placeholder="Phone number used for payment" required>
-                        <small class="text-muted">Enter the phone number you used to make the payment</small>
-                    </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Payment Time</label>
-                        <input type="datetime-local" class="form-control rounded" name="payment_time" required>
-                    </div>
-                </form>
-            `;
-        }
 
-        // Get payment footer buttons
-        function getPaymentFooter(provider) {
-            return `
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="tf-btn btn-fill" onclick="submitPayment('${provider}')">
-                    <i class="icon-check me-2"></i>Confirm Payment
-                </button>
-            `;
-        }
 
-        // Get payment instructions for each provider
-        function getPaymentInstructions(provider) {
-            const instructions = {
-                bkash: {
-                    title: 'bKash Payment Instructions',
-                    steps: [
-                        'Dial *247# or open bKash app',
-                        'Select "Send Money"',
-                        'Enter Merchant Number: 01XXXXXXXXX',
-                        'Enter Amount: (shown above)',
-                        'Enter PIN to confirm',
-                        'Copy the Transaction ID from SMS',
-                        'Enter the Transaction ID below'
-                    ]
-                },
-                nagad: {
-                    title: 'Nagad Payment Instructions',
-                    steps: [
-                        'Dial *167# or open Nagad app',
-                        'Select "Send Money"',
-                        'Enter Merchant Number: 01XXXXXXXXX',
-                        'Enter Amount: (shown above)',
-                        'Enter PIN to confirm',
-                        'Copy the Transaction ID from SMS',
-                        'Enter the Transaction ID below'
-                    ]
-                },
-                rocket: {
-                    title: 'Rocket Payment Instructions',
-                    steps: [
-                        'Dial *322# or open Rocket app',
-                        'Select "Payment"',
-                        'Enter Merchant Number: 01XXXXXXXXX',
-                        'Enter Amount: (shown above)',
-                        'Enter PIN to confirm',
-                        'Copy the Transaction ID from SMS',
-                        'Enter the Transaction ID below'
-                    ]
-                }
-            };
 
-            return instructions[provider] || instructions.bkash;
-        }
 
         // Submit payment information
         // Get payment number for each provider
@@ -3723,12 +3695,13 @@
                 // Add payment data to main form
                 const mainForm = document.querySelector('.form-checkout');
                 
-                // Remove existing payment fields
+                // Remove existing mobile banking payment fields specifically
                 mainForm.querySelectorAll('input[name^="transaction_"]').forEach(input => input.remove());
                 mainForm.querySelectorAll('input[name^="sender_"]').forEach(input => input.remove());
                 mainForm.querySelectorAll('input[name^="payment_"]').forEach(input => input.remove());
                 mainForm.querySelectorAll('input[name^="online_payment_"]').forEach(input => input.remove());
-                mainForm.querySelectorAll('input[name^="receipt_"]').forEach(input => input.remove());
+                mainForm.querySelectorAll('input[name="receipt_path"]').forEach(input => input.remove());
+                mainForm.querySelectorAll('input[name="receipt_url"]').forEach(input => input.remove());
 
                 // Add new payment fields
                 addHiddenInput(mainForm, 'transaction_id', formData.get('transaction_id'));
@@ -3753,40 +3726,6 @@
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalBtnText;
             }
-        }
-
-        function submitPayment(provider) {
-            const form = document.getElementById('paymentForm');
-            const formData = new FormData(form);
-
-            if (!form.checkValidity()) {
-                form.reportValidity();
-                return;
-            }
-
-            // Add payment data to main form
-            const mainForm = document.querySelector('.form-checkout');
-            
-            // Remove existing payment fields
-            mainForm.querySelectorAll('input[name^="transaction_"]').forEach(input => input.remove());
-            mainForm.querySelectorAll('input[name^="sender_"]').forEach(input => input.remove());
-            mainForm.querySelectorAll('input[name^="payment_"]').forEach(input => input.remove());
-
-            // Add new payment fields
-            const transactionId = formData.get('transaction_id');
-            const senderPhone = formData.get('sender_phone');
-            const paymentTime = formData.get('payment_time');
-
-            addHiddenInput(mainForm, 'transaction_id', transactionId);
-            addHiddenInput(mainForm, 'sender_phone', senderPhone);
-            addHiddenInput(mainForm, 'payment_time', paymentTime);
-            addHiddenInput(mainForm, 'online_payment_type', provider);
-
-            // Close modal
-            const modal = bootstrap.Modal.getInstance(document.getElementById('paymentModal'));
-            modal.hide();
-
-            showToast(`${provider.toUpperCase()} payment information saved! You can now place your order.`, 'success');
         }
 
         // Open bank transfer modal
@@ -3839,10 +3778,9 @@
                 // Add bank transfer data to main form
                 const mainForm = document.querySelector('.form-checkout');
                 
-                // Remove existing bank transfer fields
+                // Remove existing bank transfer fields specifically
                 mainForm.querySelectorAll('input[name^="bank_"]').forEach(input => input.remove());
                 mainForm.querySelectorAll('input[name^="transfer_"]').forEach(input => input.remove());
-                mainForm.querySelectorAll('input[name^="receipt_"]').forEach(input => input.remove());
 
                 // Add new bank transfer fields
                 addHiddenInput(mainForm, 'bank_transaction_ref', formData.get('bank_transaction_ref'));

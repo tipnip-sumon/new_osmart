@@ -1124,6 +1124,7 @@ class OrderController extends Controller
                 ];
             }),
             'commission_info' => $commissionInfo,
+            'payment_details' => $order->payment_details,
             'payment_history' => $order->payments->map(function($payment) {
                 return [
                     'id' => $payment->id,
