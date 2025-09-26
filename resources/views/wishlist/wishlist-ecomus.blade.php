@@ -174,9 +174,9 @@ function getWishlistHoverImageSrc($product, $fallback = null) {
                         <div class="card-product-info">
                             <a href="{{ route('products.show', $product->slug ?? $product->id) }}" class="title link">{{ $product->name }}</a>
                             <span class="price">
-                                @if($product->sale_price)
-                                    <span class="compare-at-price">{{ formatCurrency($product->price) }}</span>
+                                @if($product->sale_price && $product->sale_price < $product->price)
                                     <span class="price-on-sale fw-6">{{ formatCurrency($product->sale_price) }}</span>
+                                    <span class="compare-at-price" style="text-decoration: line-through; text-decoration-color: #e74c3c; text-decoration-thickness: 2px; color: #666; margin-left: 8px;">{{ formatCurrency($product->price) }}</span>
                                 @else
                                     <span class="fw-6">{{ formatCurrency($product->price) }}</span>
                                 @endif

@@ -327,34 +327,57 @@
 
 @section('content')
 @php
-// Helper function for product images - same as home page
+// Helper function to safely get product image using comprehensive legacy format handling
 function getProductImageSrc($product, $defaultImage = 'assets/ecomus/images/products/default-product.jpg') {
+    // First try to get the images array
     if (isset($product->images) && $product->images) {
         $images = is_string($product->images) ? json_decode($product->images, true) : $product->images;
         
         if (is_array($images) && !empty($images)) {
-            $image = $images[0];
+            $image = $images[0]; // Get first image
             
+            // Handle legacy format with type checking
             $legacyImageUrl = '';
-            if (is_string($image)) {
+            
+            // Handle complex nested structure first
+            if (is_array($image) && isset($image['sizes']['medium']['storage_url'])) {
+                // New complex structure - use medium size storage_url
+                $legacyImageUrl = $image['sizes']['medium']['storage_url'];
+            } elseif (is_array($image) && isset($image['sizes']['original']['storage_url'])) {
+                // Fallback to original if medium not available
+                $legacyImageUrl = $image['sizes']['original']['storage_url'];
+            } elseif (is_array($image) && isset($image['sizes']['large']['storage_url'])) {
+                // Fallback to large if original not available
+                $legacyImageUrl = $image['sizes']['large']['storage_url'];
+            } elseif (is_array($image) && isset($image['urls']['medium'])) {
+                // Legacy complex URL structure - use medium size
+                $legacyImageUrl = $image['urls']['medium'];
+            } elseif (is_array($image) && isset($image['urls']['original'])) {
+                // Legacy fallback to original if medium not available
+                $legacyImageUrl = $image['urls']['original'];
+            } elseif (is_string($image)) {
+                // Try storage path first, then uploads
                 $legacyImageUrl = asset('storage/' . $image);
             } elseif (is_array($image) && isset($image['url']) && is_string($image['url'])) {
                 $legacyImageUrl = $image['url'];
             } elseif (is_array($image) && isset($image['path']) && is_string($image['path'])) {
                 $legacyImageUrl = asset('storage/' . $image['path']);
             } else {
-                $legacyImageUrl = asset($defaultImage);
+                $legacyImageUrl = asset($defaultImage); // Use provided default
             }
             
             return $legacyImageUrl;
         }
     }
     
+    // Fallback to the image accessor
     $productImage = $product->image;
     if ($productImage && $productImage !== 'products/product1.jpg') {
+        // Use actual product image
         return str_starts_with($productImage, 'http') ? $productImage : asset('storage/' . $productImage);
     }
     
+    // Final fallback to default image
     return asset($defaultImage);
 }
 @endphp
@@ -435,9 +458,8 @@ function getProductImageSrc($product, $defaultImage = 'assets/ecomus/images/prod
 <section class="flat-spacing-1">
     <div class="container">
         <div id="products-container">
-            @if(isset($products) && $products->count() > 0)
             <div class="product-grid">
-                @foreach($products as $product)
+                @forelse($products ?? [] as $product)
                 <div class="card-product">
                     <div class="card-product-wrapper">
                         <a href="{{ route('products.show', $product->slug) }}">
@@ -490,30 +512,30 @@ function getProductImageSrc($product, $defaultImage = 'assets/ecomus/images/prod
                         </h6>
                         <div class="price">
                             @if($product->sale_price && $product->sale_price < $product->price)
-                                <span class="price-on-sale">${{ number_format($product->sale_price, 2) }}</span>
-                                <span class="compare-at-price">${{ number_format($product->price, 2) }}</span>
+                                <span class="price-on-sale">{{ formatCurrency($product->sale_price) }}</span>
+                                <span class="compare-at-price" style="text-decoration: line-through; text-decoration-color: #e74c3c; text-decoration-thickness: 2px; color: #666; margin-left: 8px;">{{ formatCurrency($product->price) }}</span>
                             @else
-                                <span class="price-regular">${{ number_format($product->price, 2) }}</span>
+                                <span class="price-regular">{{ formatCurrency($product->price) }}</span>
                             @endif
                         </div>
                     </div>
                 </div>
-                @endforeach
+                @empty
+                <!-- Fallback when no products found -->
+                <div class="col-12 text-center py-5">
+                    <h4 class="mb-3">No products found in Summer Collection</h4>
+                    <p class="text-muted mb-4">We're working on adding amazing summer products. Check back soon!</p>
+                    <a href="{{ route('home') }}" class="tf-btn animate-hover-btn">
+                        <span>Continue Shopping</span>
+                    </a>
+                </div>
+                @endforelse
             </div>
 
             <!-- Pagination -->
-            @if($products->hasPages())
+            @if(isset($products) && $products->hasPages())
             <div class="pagination-wrapper">
                 {{ $products->appends(request()->query())->links('pagination::bootstrap-4') }}
-            </div>
-            @endif
-            @else
-            <div class="text-center py-5">
-                <h4 class="mb-3">No products found in Summer Collection</h4>
-                <p class="text-muted mb-4">We're working on adding amazing summer products. Check back soon!</p>
-                <a href="{{ route('home') }}" class="tf-btn animate-hover-btn">
-                    <span>Continue Shopping</span>
-                </a>
             </div>
             @endif
         </div>
@@ -614,16 +636,258 @@ $(document).ready(function() {
         });
     };
 
-    // Quick View Modal - reuse from home page
+    // Quick View Modal - comprehensive implementation like home page
     $(document).on('click', '[data-action="quick-view"]', function(e) {
+        e.preventDefault();
         const button = $(this);
         const productId = button.data('product-id');
         const productSlug = button.data('product-slug');
         
+        console.log('Quick view clicked - ID:', productId, 'Slug:', productSlug);
+        
         // Store product info in modal
         const modal = $('#quick_view');
         modal.data('product-id', productId).data('product-slug', productSlug || '');
+        
+        // Trigger modal show
+        modal.modal('show');
     });
+
+    // Handle modal show event to load product data
+    $('#quick_view').on('show.bs.modal', function (e) {
+        console.log('Modal show event triggered');
+        
+        const modal = $(this);
+        let productId = modal.data('product-id');
+        let productSlug = modal.data('product-slug');
+        
+        // If no data on modal, try to get from the trigger button
+        if (!productId) {
+            const relatedTarget = e.relatedTarget;
+            if (relatedTarget) {
+                productId = $(relatedTarget).data('product-id');
+                productSlug = $(relatedTarget).data('product-slug');
+                
+                // Store in modal for future reference
+                modal.data('product-id', productId).data('product-slug', productSlug || '');
+            }
+        }
+        
+        console.log('Final product data - ID:', productId, 'Slug:', productSlug);
+        
+        if (!productId) {
+            console.log('No product ID found, showing static modal');
+            return;
+        }
+        
+        // Reset modal to loading state
+        resetModalToLoading();
+        
+        // Use product ID as fallback if slug is not URL-friendly
+        let apiUrl = `/api/products/${productId}/quick-view`;
+        if (productSlug && productSlug.match(/^[a-zA-Z0-9-_]+$/)) {
+            apiUrl = `/api/products/${productSlug}/quick-view`;
+        }
+        
+        console.log('API URL:', apiUrl);
+        
+        // Fetch product data via AJAX
+        $.ajax({
+            url: apiUrl,
+            method: 'GET',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                'Accept': 'application/json'
+            },
+            success: function(response) {
+                console.log('API Response:', response);
+                
+                if (response.success && response.data) {
+                    const product = response.data;
+                    console.log('Product data received:', product);
+                    updateQuickViewModal(product);
+                } else {
+                    console.error('Invalid response from server');
+                    $('#quick_view .tf-product-info-title h5 a').text('Product not available');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Quick view failed:', error, xhr.responseText);
+                $('#quick_view .tf-product-info-title h5 a').text('Failed to load product details');
+            }
+        });
+    });
+
+    // Helper function to process product images
+    function processProductImages(product) {
+        const processedImages = [];
+        
+        if (product.images && Array.isArray(product.images) && product.images.length > 0) {
+            product.images.forEach(image => {
+                if (typeof image === 'string') {
+                    processedImages.push(asset('storage/' + image));
+                } else if (typeof image === 'object' && image !== null) {
+                    // Handle complex nested structure
+                    if (image.sizes && image.sizes.medium && image.sizes.medium.storage_url) {
+                        processedImages.push(image.sizes.medium.storage_url);
+                    } else if (image.sizes && image.sizes.original && image.sizes.original.storage_url) {
+                        processedImages.push(image.sizes.original.storage_url);
+                    } else if (image.sizes && image.sizes.large && image.sizes.large.storage_url) {
+                        processedImages.push(image.sizes.large.storage_url);
+                    } else if (image.urls && image.urls.medium) {
+                        processedImages.push(image.urls.medium);
+                    } else if (image.urls && image.urls.original) {
+                        processedImages.push(image.urls.original);
+                    } else if (image.url) {
+                        processedImages.push(image.url);
+                    } else if (image.path) {
+                        processedImages.push(asset('storage/' + image.path));
+                    }
+                }
+            });
+        }
+        
+        // Fallback to single image field
+        if (processedImages.length === 0 && product.image) {
+            if (product.image.startsWith('http')) {
+                processedImages.push(product.image);
+            } else {
+                processedImages.push(asset('storage/' + product.image));
+            }
+        }
+        
+        return processedImages;
+    }
+
+    function resetModalToLoading() {
+        const modal = $('#quick_view');
+        modal.find('.tf-product-info-title h5 a').text('Loading...').attr('href', '#');
+        modal.find('.tf-product-info-price').html('<div class="price">Loading...</div>');
+        modal.find('.tf-product-description p').text('Loading product details...');
+        
+        modal.find('.swiper-wrapper').html(`
+            <div class="swiper-slide">
+                <div class="item">
+                    <img src="{{ asset('assets/ecomus/images/products/default-product.jpg') }}" alt="Loading..." class="quick-view-image">
+                </div>
+            </div>
+        `);
+    }
+
+    function updateQuickViewModal(product) {
+        const modal = $('#quick_view');
+        console.log('Updating modal with product:', product);
+        
+        if (!modal.length) {
+            console.error('Quick view modal not found!');
+            return;
+        }
+        
+        // Process product images
+        const processedImages = processProductImages(product);
+        console.log('Processed images:', processedImages);
+        
+        // Update product images
+        let imagesHtml = '';
+        
+        if (processedImages.length > 0) {
+            processedImages.forEach((imageUrl, index) => {
+                imagesHtml += `
+                    <div class="swiper-slide">
+                        <div class="item">
+                            <img src="${imageUrl}" alt="${product.name || 'Product'}" 
+                                 onerror="this.src='{{ asset('assets/ecomus/images/products/default-product.jpg') }}'; this.onerror=null;"
+                                 loading="lazy">
+                        </div>
+                    </div>
+                `;
+            });
+        } else {
+            imagesHtml = `
+                <div class="swiper-slide">
+                    <div class="item">
+                        <img src="{{ asset('assets/ecomus/images/products/default-product.jpg') }}" alt="${product.name || 'Product'}">
+                    </div>
+                </div>
+            `;
+        }
+        
+        const swiperWrapper = modal.find('.swiper-wrapper');
+        if (swiperWrapper.length) {
+            swiperWrapper.html(imagesHtml);
+            console.log('Updated swiper wrapper with images');
+        }
+        
+        // Update product title and link
+        const productLink = `/products/${product.slug}`;
+        modal.find('.tf-product-info-title h5 a')
+            .text(product.name || 'Product')
+            .attr('href', productLink);
+        
+        // Update price with BDT currency using formatCurrency helper
+        let priceHtml = '';
+        if (product.sale_price && parseFloat(product.sale_price) < parseFloat(product.price)) {
+            priceHtml = `
+                <div class="price-on-sale fw-6">{{ '৳' }}${parseFloat(product.sale_price).toFixed(2)}</div>
+                <div class="compare-at-price" style="text-decoration: line-through; text-decoration-color: #e74c3c; text-decoration-thickness: 2px; color: #666;">{{ '৳' }}${parseFloat(product.price).toFixed(2)}</div>
+            `;
+        } else {
+            priceHtml = `<div class="price fw-6">{{ '৳' }}${parseFloat(product.price || 0).toFixed(2)}</div>`;
+        }
+        modal.find('.tf-product-info-price').html(priceHtml);
+        
+        // Update description
+        if (product.short_description) {
+            modal.find('.tf-product-description p').text(product.short_description);
+        } else if (product.description) {
+            const truncatedDesc = product.description.length > 150 ? 
+                product.description.substring(0, 150) + '...' : 
+                product.description;
+            modal.find('.tf-product-description p').text(truncatedDesc);
+        } else {
+            modal.find('.tf-product-description p').text('No description available.');
+        }
+        
+        // Update buy button with product data
+        modal.find('.btn-add-to-cart').data('product-id', product.id);
+        const finalPrice = product.sale_price || product.price || 0;
+        modal.find('.tf-qty-price').text(`{{ '৳' }}${parseFloat(finalPrice).toFixed(2)}`);
+        
+        // Update view full details link
+        modal.find('.tf-btn.btn-line').attr('href', productLink);
+        
+        // Update stock status if available
+        if (product.stock_quantity !== undefined) {
+            if (product.stock_quantity <= 0) {
+                modal.find('.btn-add-to-cart').addClass('disabled').text('Out of Stock');
+            } else if (product.stock_quantity <= 5) {
+                modal.find('.product-status-content p').text(`Only ${product.stock_quantity} left in stock!`);
+            }
+        }
+        
+        // Reinitialize Swiper if needed
+        if (typeof Swiper !== 'undefined') {
+            setTimeout(() => {
+                const swiperContainer = modal.find('.tf-single-slide')[0];
+                if (swiperContainer && swiperContainer.swiper) {
+                    swiperContainer.swiper.destroy(true, true);
+                }
+                
+                new Swiper(swiperContainer, {
+                    navigation: {
+                        nextEl: '.single-slide-prev',
+                        prevEl: '.single-slide-next',
+                    },
+                    loop: processedImages.length > 1,
+                });
+            }, 100);
+        }
+    }
+
+    // Helper function for asset URL
+    function asset(path) {
+        return `{{ config('app.url') }}/${path}`;
+    }
 });
 </script>
 @endpush
