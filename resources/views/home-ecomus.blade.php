@@ -433,84 +433,281 @@ function getBrandLogoSrc($brand, $defaultLogo = 'assets/ecomus/images/brand/defa
 
 @section('content')
 <!-- Slider -->
-<section class="tf-slideshow slideshow-effect slider-effect-fade position-relative">
-    <div dir="ltr" class="swiper tf-sw-effect">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide" lazy="true">
-                <div class="slider-effect wrap-slider">
-                    <div class="content-left">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-6 col-12">
-                                    <div class="box-content">
-                                        <h1 class="heading fade-item fade-item-1">Summer<br> Escapades</h1>
-                                        <p class="desc fade-item fade-item-2">Embrace the sun-kissed season with our collection of breezy</p>
-                                        <a href="{{ route('collections.summer', 'summer') }}" class="fade-item fade-item-3 tf-btn btn-light-icon animate-hover-btn btn-xl radius-3">
-                                            <span>Shop collection</span><i class="icon icon-arrow-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="img-slider">
-                        <img class="lazyload" data-src="{{ asset('assets/ecomus/images/slider/fashion-06-slide1.jpg') }}" alt="fashion-slideshow" src="{{ asset('assets/ecomus/images/slider/fashion-06-slide1.jpg') }}">
+<section class="tf-sw-slideshow slider-effect-fade slider-supplement position-relative">
+    <div class="wrap-slider">
+        <img class="lazyload" data-src="{{ asset('assets/ecomus/images/slider/supplement-1.jpg') }}" 
+             src="{{ asset('assets/ecomus/images/slider/supplement-1.jpg') }}"
+             alt="supplement-slideshow">
+        <div class="box-content">
+            <div class="container">
+                <div class="wrap">
+                    <p class="fade-item fade-item-1 subheading text-white fw-7 mb-0">NATURAL SUPPLEMENTS</p>
+                    <h1 class="fade-item fade-item-2 heading text-white fw-7 font-roboto-condensed fst-italic">
+                        UNLOCK YOUR <br> POTENTIAL</h1>
+                    <div class="fade-item fade-item-3">
+                        <a href="{{ route('shop.grid') }}"
+                            class="fw-7 tf-btn btn-light-icon animate-hover-btn btn-xl rounded-0 font-roboto-condensed">
+                            <span>SHOP NOW</span><i class="icon icon-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="swiper-slide" lazy="true">
-                <div class="slider-effect wrap-slider">
-                    <div class="content-left">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-6 col-12">
-                                    <div class="box-content">
-                                        <h1 class="heading fade-item fade-item-1">Multi-faceted<br> Beauty</h1>
-                                        <p class="desc fade-item fade-item-2">Embrace the sun-kissed season with our collection of breezy</p>
-                                        <a href="{{ route('collections.show', 'beauty') }}" class="fade-item fade-item-3 tf-btn btn-light-icon animate-hover-btn btn-xl radius-3">
-                                            <span>Shop collection</span><i class="icon icon-arrow-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="img-slider">
-                        <img class="lazyload" data-src="{{ asset('assets/ecomus/images/slider/fashion-06-slide2.jpg') }}" src="{{ asset('assets/ecomus/images/slider/fashion-06-slide2.jpg') }}" alt="fashion-slideshow">
-                    </div>
-                </div>
-            </div>
-            <div class="swiper-slide" lazy="true">
-                <div class="slider-effect wrap-slider">
-                    <div class="content-left">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-6 col-12">
-                                    <div class="box-content">
-                                        <h1 class="heading fade-item fade-item-1">Effortless<br> Elegance</h1>
-                                        <p class="desc fade-item fade-item-2">Embrace the sun-kissed season with our collection of breezy</p>
-                                        <a href="{{ route('collections.show', 'elegance') }}" class="fade-item fade-item-3 tf-btn btn-light-icon animate-hover-btn btn-xl radius-3">
-                                            <span>Shop collection</span><i class="icon icon-arrow-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="img-slider">
-                        <img class="lazyload" data-src="{{ asset('assets/ecomus/images/slider/fashion-06-slide3.jpg') }}" src="{{ asset('assets/ecomus/images/slider/fashion-06-slide3.jpg') }}" alt="fashion-slideshow">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="wrap-pagination">
-        <div class="container">
-            <div class="sw-dots line-pagination sw-pagination-slider"></div>
         </div>
     </div>
 </section>
 <!-- /Slider -->
+
+<!-- Countdown -->
+<section class="flat-spacing-34 bg_violet-3">
+    <div class="container">
+        <div class="tf-grid-layout md-col-2 align-items-center flat-wrap-countdown">
+            <div class="tf-content-wrap-v2 wow fadeInUp" data-wow-delay="0s">
+                <h4 class="heading font-roboto-condensed fw-7 fst-italic">ONE-TIME ONLY</h4>
+                <p class="description">Special Offers You Can't Miss: These deals won't last forever!</p>
+                <a href="{{ route('collections.index') }}" class="tf-btn btn-line font-roboto-condensed fw-7">SHOP
+                    NOW<i class="icon icon-arrow1-top-left"></i></a>
+            </div>
+            <div class="tf-countdown-v2 type-end wow fadeInUp" data-wow-delay="0s">
+                <div class="js-countdown" data-timer="8007500" data-labels="Days,Hours,Mins,Secs"></div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /Countdown -->
+
+@if(isset($featuredProducts) && $featuredProducts->count() > 0)
+<!-- Price -->
+<section class="flat-price flat-spacing-5">
+    <div class="container">
+        <div class="flat-title">
+            <span class="title wow fadeInUp fw-7 font-roboto-condensed fst-italic" data-wow-delay="0s">FEATURED
+                PRODUCT</span>
+        </div>
+        <div class="wrap-carousel wrap-mobile">
+            <div dir="ltr" class="swiper tf-sw-mobile-1" data-preview="1" data-space="15">
+                <div class="swiper-wrapper wrap-price">
+                    @forelse($featuredProducts->take(3) as $index => $product)
+                    @php
+                        // Dynamic image handling for featured price products
+                        $legacyImageUrl = '';
+                        
+                        // First try images array
+                        if (isset($product->images) && $product->images) {
+                            $images = is_string($product->images) ? json_decode($product->images, true) : $product->images;
+                            if (is_array($images) && !empty($images)) {
+                                $image = $images[0]; // Get first image
+                                
+                                // Handle complex nested structure first
+                                if (is_array($image) && isset($image['sizes']['medium']['storage_url'])) {
+                                    $legacyImageUrl = $image['sizes']['medium']['storage_url'];
+                                } elseif (is_array($image) && isset($image['sizes']['original']['storage_url'])) {
+                                    $legacyImageUrl = $image['sizes']['original']['storage_url'];
+                                } elseif (is_array($image) && isset($image['sizes']['large']['storage_url'])) {
+                                    $legacyImageUrl = $image['sizes']['large']['storage_url'];
+                                } elseif (is_array($image) && isset($image['urls']['medium'])) {
+                                    $legacyImageUrl = $image['urls']['medium'];
+                                } elseif (is_array($image) && isset($image['urls']['original'])) {
+                                    $legacyImageUrl = $image['urls']['original'];
+                                } elseif (is_array($image) && isset($image['url']) && is_string($image['url'])) {
+                                    $legacyImageUrl = $image['url'];
+                                } elseif (is_array($image) && isset($image['path']) && is_string($image['path'])) {
+                                    $legacyImageUrl = asset('storage/' . $image['path']);
+                                } elseif (is_string($image)) {
+                                    $legacyImageUrl = asset('storage/' . $image);
+                                }
+                            }
+                        }
+                        
+                        // Fallback to image accessor
+                        if (empty($legacyImageUrl)) {
+                            $productImage = $product->image;
+                            if ($productImage && $productImage !== 'products/product1.jpg') {
+                                $legacyImageUrl = str_starts_with($productImage, 'http') ? $productImage : asset('storage/' . $productImage);
+                            } else {
+                                $legacyImageUrl = asset('assets/ecomus/images/products/supplement-' . (($index % 3) + 1) . '.jpg');
+                            }
+                        }
+                        
+                        // Background classes array for variety
+                        $bgClasses = ['bg_grey-12', 'bg_red-4', 'bg_grey-12'];
+                        $bgClass = $bgClasses[$index % 3];
+                        
+                        // Badge types array for variety
+                        $badges = [
+                            ['text' => 'New!', 'class' => 'new'],
+                            ['text' => 'Best Seller!', 'class' => 'best-seller'], 
+                            ['text' => 'Recommend!', 'class' => 'recommend']
+                        ];
+                        $badge = $badges[$index % 3];
+                        
+                        // Button style classes
+                        $btnStyle = ($index % 3 === 1) ? 'absolute-2' : 'absolute-2 style-black';
+                        
+                        // List style classes
+                        $listStyle = ($index % 3 === 1) ? '' : 'line-top-black';
+                        $textColor = ($index % 3 === 1) ? '' : ' text_black';
+                        
+                        // Button color classes
+                        $btnColorClass = ($index % 3 === 0 || $index % 3 === 2) ? 'btn-fill' : '';
+                        
+                        // Generate product features based on product data or defaults
+                        $features = [
+                            // First product features
+                            [
+                                '24g protein per serve',
+                                '100% plant-based',
+                                'Zero sugar',
+                                '4g naturally occurring BCAAs',
+                                '9g naturally occurring EAAs',
+                                'Next Day Shipping'
+                            ],
+                            // Second product features  
+                            [
+                                '64g of protein',
+                                '108g of carbohydrates',
+                                '700 calories',
+                                'Gluten free',
+                                'Superior Quality',
+                                'Next Day Shipping'
+                            ],
+                            // Third product features
+                            [
+                                '24g protein per serve',
+                                '108g of carbohydrates',
+                                'Zero sugar',
+                                'Superior Quality',
+                                '9g naturally occurring EAAs',
+                                'Next Day Shipping'
+                            ]
+                        ];
+                        
+                        $productFeatures = $features[$index % 3];
+                    @endphp
+                    <div class="swiper-slide">
+                        <div class="card-product style-price {{ $bgClass }} rounded-0 overflow-hidden none-hover">
+                            <div class="card-product-wrapper rounded-0">
+                                <a href="{{ route('products.show', $product->slug) }}" class="product-img">
+                                    <img class="lazyload img-product" 
+                                         src="{{ $legacyImageUrl }}"
+                                         data-src="{{ $legacyImageUrl }}" 
+                                         alt="{{ $product->name }}"
+                                         onerror="this.src='{{ asset('assets/ecomus/images/products/supplement-' . (($index % 3) + 1) . '.jpg') }}'; this.onerror=null;">
+                                </a>
+                                <div class="list-product-btn {{ $btnStyle }}">
+                                    <button type="button" class="box-icon quick-add tf-btn-loading" data-action="add-to-cart" data-product-id="{{ $product->id }}">
+                                        <span class="icon icon-bag"></span>
+                                        <span class="tooltip">Quick Add</span>
+                                    </button>
+                                    <button type="button" class="box-icon wishlist btn-icon-action" data-action="add-to-wishlist" data-product-id="{{ $product->id }}">
+                                        <span class="icon icon-heart"></span>
+                                        <span class="tooltip">Add to Wishlist</span>
+                                        <span class="icon icon-delete"></span>
+                                    </button>
+                                    <a href="#compare" data-bs-toggle="offcanvas" aria-controls="offcanvasLeft"
+                                        class="box-icon compare btn-icon-action">
+                                        <span class="icon icon-compare"></span>
+                                        <span class="tooltip">Add to Compare</span>
+                                        <span class="icon icon-check"></span>
+                                    </a>
+                                    <button type="button" class="box-icon quickview tf-btn-loading" 
+                                            data-bs-toggle="modal" data-bs-target="#quick_view"
+                                            data-action="quick-view" data-product-id="{{ $product->id }}" data-product-slug="{{ $product->slug }}">
+                                        <span class="icon icon-view"></span>
+                                        <span class="tooltip">Quick View</span>
+                                    </button>
+                                </div>
+                                <div class="on-sale-wrap text-end">
+                                    <div class="on-sale-item fw-5 rounded-0 {{ $badge['class'] }}">{{ $badge['text'] }}</div>
+                                </div>
+                            </div>
+                            <div class="card-product-info">
+                                <a href="{{ route('collections.index') }}"
+                                    class="vendor fw-7 link{{ $textColor }}">{{ $product->brand ?? ($product->category->name ?? 'Premium Quality') }}</a>
+                                <a href="{{ route('products.show', $product->slug) }}" class="title fw-6 fst-italic link">{{ strtoupper($product->name) }}</a>
+                                <div class="price">
+                                    @if($product->sale_price && $product->sale_price < $product->price)
+                                        ৳{{ number_format($product->sale_price, 2) }}
+                                    @else
+                                        ৳{{ number_format($product->price, 2) }}
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="tf-price-table-contents">
+                                <ul class="{{ $listStyle }}">
+                                    @foreach($productFeatures as $feature)
+                                    <li class="fw-5 fs-16{{ $textColor }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="10"
+                                            viewBox="0 0 12 10" fill="none" class="hdt-hidden hdt-s-text">
+                                            <path
+                                                d="M4.59503 9.13837C4.48049 9.2536 4.32419 9.31788 4.16186 9.31788C3.99953 9.31788 3.84323 9.2536 3.72869 9.13837L0.26926 5.67837C-0.0897535 5.31935 -0.0897535 4.73718 0.26926 4.37885L0.702432 3.94556C1.06156 3.58655 1.64305 3.58655 2.00206 3.94556L4.16189 6.10548L9.99794 0.269261C10.3571 -0.0897535 10.9391 -0.0897535 11.2976 0.269261L11.7307 0.702547C12.0898 1.06156 12.0898 1.64362 11.7307 2.00206L4.59503 9.13837Z"
+                                                fill="CurrentColor"></path>
+                                        </svg>
+                                        {{ $feature }}
+                                    </li>
+                                    @endforeach
+                                </ul>
+                                <div class="tf-price-table-btn text-center">
+                                    <a href="{{ route('products.show', $product->slug) }}"
+                                        class="tf-btn btn-md rounded-0 fw-7 {{ $btnColorClass }} btn-icon animate-hover-btn font-roboto-condensed">VIEW
+                                        DETAILS</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @empty
+                    <!-- Fallback if no featured products -->
+                    <div class="swiper-slide">
+                        <div class="card-product style-price bg_grey-12 rounded-0 overflow-hidden none-hover">
+                            <div class="card-product-wrapper rounded-0">
+                                <a href="{{ route('shop.index') }}" class="product-img">
+                                    <img class="lazyload img-product" src="{{ asset('assets/ecomus/images/products/supplement-1.jpg') }}"
+                                        data-src="{{ asset('assets/ecomus/images/products/supplement-1.jpg') }}" alt="Featured Product">
+                                </a>
+                                <div class="list-product-btn absolute-2 style-black">
+                                    <button type="button" class="box-icon quick-add tf-btn-loading">
+                                        <span class="icon icon-bag"></span>
+                                        <span class="tooltip">Quick Add</span>
+                                    </button>
+                                </div>
+                                <div class="on-sale-wrap text-end">
+                                    <div class="on-sale-item fw-5 rounded-0 new">New!</div>
+                                </div>
+                            </div>
+                            <div class="card-product-info">
+                                <a href="{{ route('collections.index') }}" class="vendor fw-7 link text_black">Premium Quality</a>
+                                <a href="{{ route('shop.index') }}" class="title fw-6 fst-italic link">SAMPLE PRODUCT</a>
+                                <div class="price">৳99.99</div>
+                            </div>
+                            <div class="tf-price-table-contents">
+                                <ul class="line-top-black">
+                                    <li class="fw-5 fs-16 text_black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="10" viewBox="0 0 12 10" fill="none">
+                                            <path d="M4.59503 9.13837C4.48049 9.2536 4.32419 9.31788 4.16186 9.31788C3.99953 9.31788 3.84323 9.2536 3.72869 9.13837L0.26926 5.67837C-0.0897535 5.31935 -0.0897535 4.73718 0.26926 4.37885L0.702432 3.94556C1.06156 3.58655 1.64305 3.58655 2.00206 3.94556L4.16189 6.10548L9.99794 0.269261C10.3571 -0.0897535 10.9391 -0.0897535 11.2976 0.269261L11.7307 0.702547C12.0898 1.06156 12.0898 1.64362 11.7307 2.00206L4.59503 9.13837Z" fill="CurrentColor"></path>
+                                        </svg>
+                                        High Quality Product
+                                    </li>
+                                    <li class="fw-5 fs-16 text_black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="10" viewBox="0 0 12 10" fill="none">
+                                            <path d="M4.59503 9.13837C4.48049 9.2536 4.32419 9.31788 4.16186 9.31788C3.99953 9.31788 3.84323 9.2536 3.72869 9.13837L0.26926 5.67837C-0.0897535 5.31935 -0.0897535 4.73718 0.26926 4.37885L0.702432 3.94556C1.06156 3.58655 1.64305 3.58655 2.00206 3.94556L4.16189 6.10548L9.99794 0.269261C10.3571 -0.0897535 10.9391 -0.0897535 11.2976 0.269261L11.7307 0.702547C12.0898 1.06156 12.0898 1.64362 11.7307 2.00206L4.59503 9.13837Z" fill="CurrentColor"></path>
+                                        </svg>
+                                        Fast Delivery
+                                    </li>
+                                </ul>
+                                <div class="tf-price-table-btn text-center">
+                                    <a href="{{ route('shop.index') }}" class="tf-btn btn-md rounded-0 fw-7 btn-fill btn-icon animate-hover-btn font-roboto-condensed">VIEW DETAILS</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforelse
+                </div>
+            </div>
+            <div class="sw-dots style-2 sw-pagination-mb-1 justify-content-center"></div>
+        </div>
+    </div>
+</section>
+@endif
+<!-- /Price -->
 
 <!-- Collection -->
 <section class="flat-spacing-12 bg_grey-3">
