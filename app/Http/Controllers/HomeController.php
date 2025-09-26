@@ -81,6 +81,28 @@ class HomeController extends Controller
 
         // No fallback flash sale products - only show real sale products
 
+        // Get new arrivals (products created in last 30 days)
+        $newArrivals = Product::where('status', 'active')
+            ->where('created_at', '>=', now()->subDays(30))
+            ->with(['brand', 'category', 'vendor'])
+            ->orderBy('created_at', 'desc')
+            ->limit(12)
+            ->get();
+
+        // Get sale products (products with discount > 0 or sale_price < price)
+        $saleProducts = Product::where('status', 'active')
+            ->where(function($query) {
+                $query->where('discount', '>', 0)
+                      ->orWhere(function($q) {
+                          $q->whereNotNull('sale_price')
+                            ->whereColumn('sale_price', '<', 'price');
+                      });
+            })
+            ->with(['brand', 'category', 'vendor'])
+            ->orderBy('discount', 'desc')
+            ->limit(12)
+            ->get();
+
         // Get top vendors
         $topVendors = User::where('role', 'vendor')
             ->where('status', 'active')
@@ -115,6 +137,8 @@ class HomeController extends Controller
             'topVendors' => $topVendors,
             'featuredProducts' => $featuredProducts,
             'bestSellingProducts' => $bestSellingProducts,
+            'newArrivals' => $newArrivals,
+            'saleProducts' => $saleProducts,
             'collections' => $collections
         ]);
     }
