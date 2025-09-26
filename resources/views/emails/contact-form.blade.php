@@ -105,6 +105,15 @@
                 <div class="info-label">Subject:</div>
                 <div class="info-value">{{ ucfirst($subject) }} Inquiry</div>
                 
+                <div class="info-label">Newsletter Subscription:</div>
+                <div class="info-value">
+                    @if($subscribe_newsletter)
+                        <span style="color: #28a745; font-weight: bold;">✓ Yes - Wants to subscribe</span>
+                    @else
+                        <span style="color: #6c757d;">✗ No</span>
+                    @endif
+                </div>
+                
                 <div class="info-label">Submitted:</div>
                 <div class="info-value">{{ $submitted_at }}</div>
             </div>
