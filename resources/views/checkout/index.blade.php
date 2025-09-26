@@ -32,10 +32,10 @@
                                 </small>
                                 <div class="mt-1">
                                     <a href="{{ route('affiliate.logout') }}" class="btn btn-outline-secondary btn-sm" 
-                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                       onclick="event.preventDefault(); document.getElementById('affiliate-logout-form').submit();">
                                         <i class="icon-logout me-1"></i>Switch Account
                                     </a>
-                                    <form id="logout-form" action="{{ route('affiliate.logout') }}" method="POST" class="d-none">
+                                    <form id="affiliate-logout-form" action="{{ route('affiliate.logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
                                 </div>
@@ -384,19 +384,20 @@
                         @csrf
                         <input type="hidden" name="checkout_type" id="checkout-type-input" value="{{ auth()->check() ? 'authenticated' : 'guest' }}">
                         
-        <!-- Hidden fields for backend compatibility -->
-        <input type="hidden" name="city" id="city-hidden">
-        <input type="hidden" name="zip_code" id="zip-code-hidden">
-        <input type="hidden" name="state" id="state-hidden">
-        <input type="hidden" name="area" id="area-hidden">
-        <input type="hidden" name="shipping_method" id="shipping-method-hidden">
-        <input type="hidden" name="subtotal" id="subtotal-hidden">
-        <input type="hidden" name="shipping_cost" id="shipping-cost-hidden">
-        <input type="hidden" name="tax_amount" id="tax-amount-hidden">
-        <input type="hidden" name="total" id="total-hidden">
-        <input type="hidden" name="discount_amount" id="discount-amount-hidden">
-        <input type="hidden" name="order_notes" id="order-notes-hidden">
-        <!-- Cart items will be added dynamically as individual fields -->                        <div class="box grid-2">
+                        <!-- Hidden fields for backend compatibility -->
+                        <input type="hidden" name="city" id="city-hidden">
+                        <input type="hidden" name="zip_code" id="zip-code-hidden">
+                        <input type="hidden" name="state" id="state-hidden">
+                        <input type="hidden" name="area" id="area-hidden">
+                        <input type="hidden" name="shipping_method" id="shipping-method-hidden">
+                        <input type="hidden" name="subtotal" id="subtotal-hidden">
+                        <input type="hidden" name="shipping_cost" id="shipping-cost-hidden">
+                        <input type="hidden" name="tax_amount" id="tax-amount-hidden">
+                        <input type="hidden" name="total" id="total-hidden">
+                        <input type="hidden" name="discount_amount" id="discount-amount-hidden">
+                        <input type="hidden" name="order_notes" id="order-notes-hidden">
+                        <!-- Cart items will be added dynamically as individual fields -->                        
+                        <div class="box grid-2">
                             <fieldset class="fieldset">
                                 <label for="first_name">First Name</label>
                                 <input type="text" name="first_name" id="first_name" placeholder="First Name" 
@@ -603,6 +604,12 @@
                                         <label for="mobile-banking">
                                             <i class="icon-phone me-2"></i>Mobile Banking
                                             <small class="d-block text-muted">bKash, Nagad, Rocket</small>
+                                            <!-- International Card Support -->
+                                            <div class="payment-icons-row">
+                                                <small class="text-muted">Also supports:</small>
+                                                <img src="{{ asset('assets/ecomus/images/payments/visa.png') }}" alt="Visa" class="payment-logo-small">
+                                                <img src="{{ asset('assets/ecomus/images/payments/mastercard.png') }}" alt="MasterCard" class="payment-logo-small">
+                                            </div>
                                         </label>
                                         
                                         <!-- Mobile Banking Options -->
@@ -610,32 +617,32 @@
                                             <div class="row g-2">
                                                 <div class="col-4">
                                                     <div class="mobile-option border rounded p-2 text-center" data-provider="bkash">
-                                                        <img src="{{ asset('assets/images/bkash.png') }}" alt="bKash" class="mb-1" style="height: 30px;">
+                                                        <img src="{{ asset('assets/ecomus/images/payments/bkash.png') }}" alt="bKash" class="mb-1" style="height: 30px;">
                                                         <br><small>bKash</small>
                                                         <input type="radio" name="online_payment_type" value="bkash" style="display: none;">
                                                     </div>
                                                 </div>
                                                 <div class="col-4">
                                                     <div class="mobile-option border rounded p-2 text-center" data-provider="nagad">
-                                                        <img src="{{ asset('assets/images/nagad.png') }}" alt="Nagad" class="mb-1" style="height: 30px;">
+                                                        <img src="{{ asset('assets/ecomus/images/payments/nagad.png') }}" alt="Nagad" class="mb-1" style="height: 30px;">
                                                         <br><small>Nagad</small>
                                                         <input type="radio" name="online_payment_type" value="nagad" style="display: none;">
                                                     </div>
                                                 </div>
                                                 <div class="col-4">
                                                     <div class="mobile-option border rounded p-2 text-center" data-provider="rocket">
-                                                        <img src="{{ asset('assets/images/rocket.png') }}" alt="Rocket" class="mb-1" style="height: 30px;">
+                                                        <img src="{{ asset('assets/ecomus/images/payments/rocket.png') }}" alt="Rocket" class="mb-1" style="height: 30px;">
                                                         <br><small>Rocket</small>
                                                         <input type="radio" name="online_payment_type" value="rocket" style="display: none;">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="payment-instructions mt-3" id="payment-instructions" style="display: none;">
-                                                <!-- Payment instructions will be shown here -->
-                                            </div>
-                                            <div class="transaction-id-field mt-3" style="display: none;">
-                                                <input type="text" name="transaction_id" class="form-control" placeholder="Enter Transaction ID after payment">
-                                                <small class="text-muted">Please enter the transaction ID you received after making the payment</small>
+                                            
+                                            <!-- Payment Process Button -->
+                                            <div class="text-center mt-3">
+                                                <button type="button" class="tf-btn btn-fill animate-hover-btn" onclick="openPaymentModal()" id="proceed-payment-btn" style="display: none;">
+                                                    <i class="icon-credit-card me-2"></i>Proceed to Payment
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -646,20 +653,25 @@
                                         <label for="bank-transfer">
                                             <i class="icon-credit-card me-2"></i>Bank Transfer
                                             <small class="d-block text-muted">Direct bank transfer</small>
+                                            <!-- International Card Support -->
+                                            <div class="payment-icons-row">
+                                                <small class="text-muted">Cards accepted:</small>
+                                                <img src="{{ asset('assets/ecomus/images/payments/visa.png') }}" alt="Visa" class="payment-logo-small">
+                                                <img src="{{ asset('assets/ecomus/images/payments/mastercard.png') }}" alt="MasterCard" class="payment-logo-small">
+                                                <img src="{{ asset('assets/ecomus/images/payments/amex.png') }}" alt="American Express" class="payment-logo-small">
+                                            </div>
                                         </label>
                                         
                                         <!-- Bank Transfer Details -->
                                         <div class="bank-transfer-options mt-3" style="display: none;">
                                             <div class="alert-info p-3 rounded">
-                                                <h6 class="fw-6">Bank Details</h6>
-                                                <p class="mb-1"><strong>Bank:</strong> Dutch-Bangla Bank Limited</p>
-                                                <p class="mb-1"><strong>Account:</strong> 123-456-789-012</p>
-                                                <p class="mb-1"><strong>Account Name:</strong> OSmart Bangladesh</p>
-                                                <p class="mb-0"><strong>Branch:</strong> Dhaka Main Branch</p>
+                                                <h6 class="fw-6">Bank Transfer Information</h6>
+                                                <p class="mb-0">Click "Process Payment" to view bank details and complete your transfer.</p>
                                             </div>
-                                            <div class="mt-3">
-                                                <input type="text" name="bank_transaction_ref" class="form-control" placeholder="Bank Transaction Reference">
-                                                <small class="text-muted">Please enter your bank transaction reference number</small>
+                                            <div class="text-center mt-3">
+                                                <button type="button" class="tf-btn btn-fill animate-hover-btn" onclick="openBankTransferModal()">
+                                                    <i class="icon-credit-card me-2"></i>Process Bank Transfer
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -788,8 +800,113 @@
             </div>
         </div>
     </div>
+
+    <!-- Payment Processing Modal -->
+    <div class="modal fade" id="paymentModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="paymentModalTitle">Payment Processing</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="paymentModalBody">
+                    <!-- Payment content will be loaded here -->
+                </div>
+                <div class="modal-footer" id="paymentModalFooter">
+                    <!-- Footer buttons will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bank Transfer Modal -->
+    <div class="modal fade" id="bankTransferModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Bank Transfer Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="bank-details mb-4">
+                        <h6 class="fw-6 mb-3">Transfer to this Account</h6>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="info-card p-3 border rounded">
+                                    <strong>Bank Name</strong><br>
+                                    Dutch-Bangla Bank Limited
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-card p-3 border rounded">
+                                    <strong>Account Number</strong><br>
+                                    123-456-789-012
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-card p-3 border rounded">
+                                    <strong>Account Name</strong><br>
+                                    OSmart Bangladesh
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-card p-3 border rounded">
+                                    <strong>Branch</strong><br>
+                                    Dhaka Main Branch
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="amount-info mb-4">
+                        <div class="alert alert-info">
+                            <h6><i class="icon-info me-2"></i>Transfer Amount</h6>
+                            <h4 class="mb-0" id="transfer-amount">৳{{ number_format($total) }}</h4>
+                        </div>
+                    </div>
+
+                    <form id="bankTransferForm" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label class="form-label">Transaction Reference Number *</label>
+                            <input type="text" class="form-control rounded" name="bank_transaction_ref" placeholder="Enter your bank transaction reference" required>
+                            <small class="text-muted">Enter the reference number you received after completing the bank transfer</small>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Bank Transfer Receipt *</label>
+                            <div class="upload-area border rounded p-3 text-center" onclick="document.getElementById('bank-receipt').click()">
+                                <div id="bank-upload-placeholder">
+                                    <i class="icon-upload fs-2 text-muted mb-2"></i>
+                                    <p class="mb-1">Click to upload bank transfer receipt</p>
+                                    <small class="text-muted">Supported: JPG, PNG, PDF (Max 5MB)</small>
+                                </div>
+                                <div id="bank-upload-preview" style="display: none;"></div>
+                            </div>
+                            <input type="file" id="bank-receipt" name="bank_receipt" accept="image/*,application/pdf" style="display: none;" required onchange="handleBankReceiptUpload(this)">
+                            <div id="bank-upload-error" class="text-danger mt-2" style="display: none;"></div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Transfer Date & Time</label>
+                            <input type="datetime-local" class="form-control rounded" name="transfer_datetime" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Additional Notes (Optional)</label>
+                            <textarea class="form-control rounded" name="transfer_notes" rows="2" placeholder="Any additional information about the transfer"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="tf-btn btn-fill" onclick="submitBankTransfer()">Confirm Transfer</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @push('styles')
+    <link rel="stylesheet" href="{{ asset('assets/css/payment-logos.css') }}">
     <style>
         .checkout-option-card {
             cursor: pointer;
@@ -953,15 +1070,125 @@
         .placement-selection .form-check {
             margin-bottom: 0.5rem;
         }
+        
+        /* Specific rounded styling for payment and registration forms only - not main billing form */
+        .transaction-id-field .form-control,
+        .bank-transfer-options .form-control,
+        .mobile-banking-options .form-control,
+        #loginModal .form-control,
+        #account-creation-form .form-control {
+            border-radius: 8px !important;
+            border: 1px solid #e0e0e0;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .transaction-id-field .form-control:focus,
+        .bank-transfer-options .form-control:focus,
+        .mobile-banking-options .form-control:focus,
+        #loginModal .form-control:focus,
+        #account-creation-form .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb), 0.15);
+            outline: none;
+        }
+        
+        /* Payment form specific styling */
+        .transaction-id-field input,
+        .bank-transfer-options input {
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            padding: 12px 15px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .transaction-id-field input:focus,
+        .bank-transfer-options input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb), 0.15);
+            outline: none;
+        }
+        
+        /* Upload area styling */
+        .upload-area {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6 !important;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .upload-area:hover {
+            border-color: var(--primary-color) !important;
+            background: rgba(var(--primary-color-rgb), 0.05);
+        }
+        
+        .upload-area.has-file {
+            border-style: solid;
+            border-color: #28a745;
+            background: #f8fff9;
+        }
+        
+        #upload-placeholder,
+        #bank-upload-placeholder {
+            width: 100%;
+            text-align: center;
+        }
+        
+        #upload-preview,
+        #bank-upload-preview {
+            width: 100%;
+        }
+        
+        .info-card {
+            border: 1px solid #e0e6ed !important;
+            transition: all 0.3s ease;
+        }
+        
+        .info-card:hover {
+            border-color: var(--primary-color) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
     </style>
 @endpush
 @push('scripts')
     <script>
+        // CSRF Token for Ajax requests
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
             loadDistricts();
             initializePaymentMethods();
             initializeRegistrationValidation();
+            
+            // Handle mobile banking option selection
+            document.querySelectorAll('.mobile-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove selected class from all options
+                    document.querySelectorAll('.mobile-option').forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                    
+                    // Set selected provider
+                    selectedPaymentProvider = this.dataset.provider;
+                    
+                    // Check the hidden radio button
+                    this.querySelector('input[type="radio"]').checked = true;
+                    
+                    // Show proceed button
+                    const proceedBtn = document.getElementById('proceed-payment-btn');
+                    if (proceedBtn) {
+                        proceedBtn.style.display = 'block';
+                    }
+                });
+            });
             
             // Show login modal if there are login errors
             @if ($errors->has('email') || $errors->has('password'))
@@ -2085,7 +2312,7 @@
         let appliedCoupon = null;
         let currentDiscountAmount = 0;
         let currentShippingCost = 0;
-        const subtotal = {{ $subtotal }};
+        const subtotal = {{ json_encode($subtotal) }};
         
         // Apply coupon code
         function applyCoupon() {
@@ -3077,6 +3304,576 @@
                     toast.remove();
                 }
             }, 4000);
+        }
+
+        // New Payment Modal System Functions
+        let selectedPaymentProvider = null;
+
+        // Open payment modal for mobile banking
+        function openPaymentModal() {
+            // Get selected provider
+            const selectedProvider = document.querySelector('.mobile-option.selected');
+            if (!selectedProvider) {
+                showToast('Please select a payment method first', 'warning');
+                return;
+            }
+            
+            const modal = document.getElementById('paymentModal');
+            const title = document.getElementById('paymentModalTitle');
+            const body = document.getElementById('paymentModalBody');
+            const footer = document.getElementById('paymentModalFooter');
+            
+            const provider = selectedProvider.dataset.provider;
+            const providerName = selectedProvider.querySelector('small').textContent;
+            const totalAmount = document.getElementById('total-amount').textContent;
+            
+            title.textContent = `Pay with ${providerName}`;
+            
+            // Create payment form with upload functionality
+            body.innerHTML = `
+                <div class="payment-instructions mb-4">
+                    <div class="alert alert-info">
+                        <h6><i class="icon-info me-2"></i>Payment Instructions</h6>
+                        <p class="mb-2">1. Send <strong>${totalAmount}</strong> to the number below</p>
+                        <p class="mb-2">2. Take a screenshot or photo of the payment confirmation</p>
+                        <p class="mb-0">3. Upload the receipt below and submit</p>
+                    </div>
+                </div>
+
+                <div class="payment-details mb-4">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="info-card p-3 border rounded text-center">
+                                <img src="${selectedProvider.querySelector('img').src}" alt="${providerName}" style="height: 40px;" class="mb-2">
+                                <br><strong>Payment Number</strong><br>
+                                <span class="fs-5 fw-bold text-primary">${getPaymentNumber(provider)}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-card p-3 border rounded text-center">
+                                <i class="icon-dollar fs-2 text-success mb-2"></i>
+                                <br><strong>Amount to Send</strong><br>
+                                <span class="fs-4 fw-bold text-success">${totalAmount}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="mobilePaymentForm" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label class="form-label">Transaction ID *</label>
+                        <input type="text" class="form-control rounded" name="transaction_id" placeholder="Enter transaction ID from ${providerName}" required>
+                        <small class="text-muted">Enter the transaction ID you received after making the payment</small>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Payment Receipt/Screenshot *</label>
+                        <div class="upload-area border rounded p-3 text-center" onclick="document.getElementById('payment-receipt').click()">
+                            <div id="upload-placeholder">
+                                <i class="icon-upload fs-2 text-muted mb-2"></i>
+                                <p class="mb-1">Click to upload payment receipt</p>
+                                <small class="text-muted">Supported: JPG, PNG, PDF (Max 5MB)</small>
+                            </div>
+                            <div id="upload-preview" style="display: none;"></div>
+                        </div>
+                        <input type="file" id="payment-receipt" name="payment_receipt" accept="image/*,application/pdf" style="display: none;" required onchange="handleReceiptUpload(this)">
+                        <div id="upload-error" class="text-danger mt-2" style="display: none;"></div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Your Phone Number *</label>
+                        <input type="tel" class="form-control rounded" name="sender_phone" placeholder="Phone number used for payment" required>
+                        <small class="text-muted">Enter the phone number you used to make the payment</small>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Payment Date & Time</label>
+                        <input type="datetime-local" class="form-control rounded" name="payment_datetime" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Additional Notes (Optional)</label>
+                        <textarea class="form-control rounded" name="payment_notes" rows="2" placeholder="Any additional information about the payment"></textarea>
+                    </div>
+                    
+                    <input type="hidden" name="payment_provider" value="${provider}">
+                </form>
+            `;
+            
+            footer.innerHTML = `
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="tf-btn btn-fill" onclick="submitMobilePayment()" id="submit-payment-btn">
+                    <i class="icon-check me-2"></i>Confirm Payment
+                </button>
+            `;
+            
+            // Set current date and time
+            const now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            document.querySelector('input[name="payment_datetime"]').value = now.toISOString().slice(0, 16);
+            
+            const paymentModal = new bootstrap.Modal(modal);
+            paymentModal.show();
+        }
+
+        // Get payment content based on provider
+        function getPaymentContent(provider, total) {
+            const instructions = getPaymentInstructions(provider);
+            
+            return `
+                <div class="payment-instructions mb-4">
+                    <div class="alert alert-primary">
+                        <h6><i class="icon-info me-2"></i>Payment Amount</h6>
+                        <h4 class="mb-0">${total}</h4>
+                    </div>
+                </div>
+                
+                <div class="payment-steps mb-4">
+                    <h6 class="fw-6 mb-3">${instructions.title}</h6>
+                    <ol class="list-group list-group-numbered">
+                        ${instructions.steps.map(step => `<li class="list-group-item">${step}</li>`).join('')}
+                    </ol>
+                </div>
+
+                <form id="paymentForm">
+                    <input type="hidden" name="payment_provider" value="${provider}">
+                    <div class="mb-3">
+                        <label class="form-label">Transaction ID *</label>
+                        <input type="text" class="form-control rounded" name="transaction_id" placeholder="Enter Transaction ID" required>
+                        <small class="text-muted">Enter the transaction ID you received after completing the payment</small>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Your Phone Number *</label>
+                        <input type="tel" class="form-control rounded" name="sender_phone" placeholder="Phone number used for payment" required>
+                        <small class="text-muted">Enter the phone number you used to make the payment</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Payment Time</label>
+                        <input type="datetime-local" class="form-control rounded" name="payment_time" required>
+                    </div>
+                </form>
+            `;
+        }
+
+        // Get payment footer buttons
+        function getPaymentFooter(provider) {
+            return `
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="tf-btn btn-fill" onclick="submitPayment('${provider}')">
+                    <i class="icon-check me-2"></i>Confirm Payment
+                </button>
+            `;
+        }
+
+        // Get payment instructions for each provider
+        function getPaymentInstructions(provider) {
+            const instructions = {
+                bkash: {
+                    title: 'bKash Payment Instructions',
+                    steps: [
+                        'Dial *247# or open bKash app',
+                        'Select "Send Money"',
+                        'Enter Merchant Number: 01XXXXXXXXX',
+                        'Enter Amount: (shown above)',
+                        'Enter PIN to confirm',
+                        'Copy the Transaction ID from SMS',
+                        'Enter the Transaction ID below'
+                    ]
+                },
+                nagad: {
+                    title: 'Nagad Payment Instructions',
+                    steps: [
+                        'Dial *167# or open Nagad app',
+                        'Select "Send Money"',
+                        'Enter Merchant Number: 01XXXXXXXXX',
+                        'Enter Amount: (shown above)',
+                        'Enter PIN to confirm',
+                        'Copy the Transaction ID from SMS',
+                        'Enter the Transaction ID below'
+                    ]
+                },
+                rocket: {
+                    title: 'Rocket Payment Instructions',
+                    steps: [
+                        'Dial *322# or open Rocket app',
+                        'Select "Payment"',
+                        'Enter Merchant Number: 01XXXXXXXXX',
+                        'Enter Amount: (shown above)',
+                        'Enter PIN to confirm',
+                        'Copy the Transaction ID from SMS',
+                        'Enter the Transaction ID below'
+                    ]
+                }
+            };
+
+            return instructions[provider] || instructions.bkash;
+        }
+
+        // Submit payment information
+        // Get payment number for each provider
+        function getPaymentNumber(provider) {
+            const paymentNumbers = {
+                bkash: '01711-123456',
+                nagad: '01711-654321',
+                rocket: '01711-987654'
+            };
+            return paymentNumbers[provider] || '01711-000000';
+        }
+
+        // Handle receipt file upload
+        function handleReceiptUpload(input) {
+            const file = input.files[0];
+            const placeholder = document.getElementById('upload-placeholder');
+            const preview = document.getElementById('upload-preview');
+            const error = document.getElementById('upload-error');
+
+            // Reset error
+            error.style.display = 'none';
+            error.textContent = '';
+
+            if (!file) {
+                placeholder.style.display = 'block';
+                preview.style.display = 'none';
+                return;
+            }
+
+            // Validate file size (5MB limit)
+            if (file.size > 5 * 1024 * 1024) {
+                error.textContent = 'File size must be less than 5MB';
+                error.style.display = 'block';
+                input.value = '';
+                return;
+            }
+
+            // Validate file type
+            const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'];
+            if (!allowedTypes.includes(file.type)) {
+                error.textContent = 'Only JPG, PNG, and PDF files are allowed';
+                error.style.display = 'block';
+                input.value = '';
+                return;
+            }
+
+            // Show file preview
+            placeholder.style.display = 'none';
+            preview.style.display = 'block';
+            
+            if (file.type === 'application/pdf') {
+                preview.innerHTML = `
+                    <div class="text-center">
+                        <i class="icon-file-pdf fs-2 text-danger mb-2"></i>
+                        <p class="mb-1 fw-bold">${file.name}</p>
+                        <small class="text-muted">PDF Document (${formatFileSize(file.size)})</small>
+                        <br><button type="button" class="btn btn-sm btn-outline-danger mt-2" onclick="clearReceiptUpload()">Remove</button>
+                    </div>
+                `;
+            } else {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.innerHTML = `
+                        <div class="text-center">
+                            <img src="${e.target.result}" alt="Receipt preview" style="max-width: 200px; max-height: 150px;" class="rounded mb-2">
+                            <p class="mb-1 fw-bold">${file.name}</p>
+                            <small class="text-muted">${formatFileSize(file.size)}</small>
+                            <br><button type="button" class="btn btn-sm btn-outline-danger mt-2" onclick="clearReceiptUpload()">Remove</button>
+                        </div>
+                    `;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Handle bank receipt upload
+        function handleBankReceiptUpload(input) {
+            const file = input.files[0];
+            const placeholder = document.getElementById('bank-upload-placeholder');
+            const preview = document.getElementById('bank-upload-preview');
+            const error = document.getElementById('bank-upload-error');
+
+            // Reset error
+            error.style.display = 'none';
+            error.textContent = '';
+
+            if (!file) {
+                placeholder.style.display = 'block';
+                preview.style.display = 'none';
+                return;
+            }
+
+            // Validate file size (5MB limit)
+            if (file.size > 5 * 1024 * 1024) {
+                error.textContent = 'File size must be less than 5MB';
+                error.style.display = 'block';
+                input.value = '';
+                return;
+            }
+
+            // Validate file type
+            const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'];
+            if (!allowedTypes.includes(file.type)) {
+                error.textContent = 'Only JPG, PNG, and PDF files are allowed';
+                error.style.display = 'block';
+                input.value = '';
+                return;
+            }
+
+            // Show file preview
+            placeholder.style.display = 'none';
+            preview.style.display = 'block';
+            
+            if (file.type === 'application/pdf') {
+                preview.innerHTML = `
+                    <div class="text-center">
+                        <i class="icon-file-pdf fs-2 text-danger mb-2"></i>
+                        <p class="mb-1 fw-bold">${file.name}</p>
+                        <small class="text-muted">PDF Document (${formatFileSize(file.size)})</small>
+                        <br><button type="button" class="btn btn-sm btn-outline-danger mt-2" onclick="clearBankReceiptUpload()">Remove</button>
+                    </div>
+                `;
+            } else {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.innerHTML = `
+                        <div class="text-center">
+                            <img src="${e.target.result}" alt="Receipt preview" style="max-width: 200px; max-height: 150px;" class="rounded mb-2">
+                            <p class="mb-1 fw-bold">${file.name}</p>
+                            <small class="text-muted">${formatFileSize(file.size)}</small>
+                            <br><button type="button" class="btn btn-sm btn-outline-danger mt-2" onclick="clearBankReceiptUpload()">Remove</button>
+                        </div>
+                    `;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Clear receipt upload
+        function clearReceiptUpload() {
+            const input = document.getElementById('payment-receipt');
+            const placeholder = document.getElementById('upload-placeholder');
+            const preview = document.getElementById('upload-preview');
+            
+            input.value = '';
+            placeholder.style.display = 'block';
+            preview.style.display = 'none';
+        }
+
+        // Clear bank receipt upload
+        function clearBankReceiptUpload() {
+            const input = document.getElementById('bank-receipt');
+            const placeholder = document.getElementById('bank-upload-placeholder');
+            const preview = document.getElementById('bank-upload-preview');
+            
+            input.value = '';
+            placeholder.style.display = 'block';
+            preview.style.display = 'none';
+        }
+
+        // Format file size
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        // Submit mobile payment with file upload
+        async function submitMobilePayment() {
+            const form = document.getElementById('mobilePaymentForm');
+            const submitBtn = document.getElementById('submit-payment-btn');
+
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            // Check if receipt is uploaded
+            const receiptFile = document.getElementById('payment-receipt').files[0];
+            if (!receiptFile) {
+                showToast('Please upload payment receipt', 'error');
+                return;
+            }
+
+            // Disable submit button
+            submitBtn.disabled = true;
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="spinner-border spinner-border-sm me-2"></i>Uploading...';
+
+            try {
+                const formData = new FormData(form);
+                
+                // Upload receipt first
+                const uploadResponse = await fetch('/api/upload-payment-receipt', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken,
+                        'Accept': 'application/json'
+                    },
+                    body: formData
+                });
+
+                const uploadResult = await uploadResponse.json();
+
+                if (!uploadResponse.ok) {
+                    throw new Error(uploadResult.message || 'Upload failed');
+                }
+
+                // Add payment data to main form
+                const mainForm = document.querySelector('.form-checkout');
+                
+                // Remove existing payment fields
+                mainForm.querySelectorAll('input[name^="transaction_"]').forEach(input => input.remove());
+                mainForm.querySelectorAll('input[name^="sender_"]').forEach(input => input.remove());
+                mainForm.querySelectorAll('input[name^="payment_"]').forEach(input => input.remove());
+                mainForm.querySelectorAll('input[name^="online_payment_"]').forEach(input => input.remove());
+                mainForm.querySelectorAll('input[name^="receipt_"]').forEach(input => input.remove());
+
+                // Add new payment fields
+                addHiddenInput(mainForm, 'transaction_id', formData.get('transaction_id'));
+                addHiddenInput(mainForm, 'sender_phone', formData.get('sender_phone'));
+                addHiddenInput(mainForm, 'payment_datetime', formData.get('payment_datetime'));
+                addHiddenInput(mainForm, 'payment_notes', formData.get('payment_notes'));
+                addHiddenInput(mainForm, 'online_payment_type', formData.get('payment_provider'));
+                addHiddenInput(mainForm, 'receipt_path', uploadResult.path);
+                addHiddenInput(mainForm, 'receipt_url', uploadResult.url);
+
+                // Close modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('paymentModal'));
+                modal.hide();
+
+                showToast('Payment receipt uploaded successfully! You can now place your order.', 'success');
+
+            } catch (error) {
+                console.error('Upload error:', error);
+                showToast(error.message || 'Failed to upload receipt. Please try again.', 'error');
+            } finally {
+                // Re-enable submit button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+            }
+        }
+
+        function submitPayment(provider) {
+            const form = document.getElementById('paymentForm');
+            const formData = new FormData(form);
+
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            // Add payment data to main form
+            const mainForm = document.querySelector('.form-checkout');
+            
+            // Remove existing payment fields
+            mainForm.querySelectorAll('input[name^="transaction_"]').forEach(input => input.remove());
+            mainForm.querySelectorAll('input[name^="sender_"]').forEach(input => input.remove());
+            mainForm.querySelectorAll('input[name^="payment_"]').forEach(input => input.remove());
+
+            // Add new payment fields
+            const transactionId = formData.get('transaction_id');
+            const senderPhone = formData.get('sender_phone');
+            const paymentTime = formData.get('payment_time');
+
+            addHiddenInput(mainForm, 'transaction_id', transactionId);
+            addHiddenInput(mainForm, 'sender_phone', senderPhone);
+            addHiddenInput(mainForm, 'payment_time', paymentTime);
+            addHiddenInput(mainForm, 'online_payment_type', provider);
+
+            // Close modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('paymentModal'));
+            modal.hide();
+
+            showToast(`${provider.toUpperCase()} payment information saved! You can now place your order.`, 'success');
+        }
+
+        // Open bank transfer modal
+        function openBankTransferModal() {
+            const modal = new bootstrap.Modal(document.getElementById('bankTransferModal'));
+            modal.show();
+        }
+
+        // Submit bank transfer information with file upload
+        async function submitBankTransfer() {
+            const form = document.getElementById('bankTransferForm');
+            const submitBtn = document.querySelector('#bankTransferModal .tf-btn');
+
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            // Check if receipt is uploaded
+            const receiptFile = document.getElementById('bank-receipt').files[0];
+            if (!receiptFile) {
+                showToast('Please upload bank transfer receipt', 'error');
+                return;
+            }
+
+            // Disable submit button
+            submitBtn.disabled = true;
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="spinner-border spinner-border-sm me-2"></i>Uploading...';
+
+            try {
+                const formData = new FormData(form);
+                
+                // Upload receipt first
+                const uploadResponse = await fetch('/api/upload-bank-receipt', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken,
+                        'Accept': 'application/json'
+                    },
+                    body: formData
+                });
+
+                const uploadResult = await uploadResponse.json();
+
+                if (!uploadResponse.ok) {
+                    throw new Error(uploadResult.message || 'Upload failed');
+                }
+
+                // Add bank transfer data to main form
+                const mainForm = document.querySelector('.form-checkout');
+                
+                // Remove existing bank transfer fields
+                mainForm.querySelectorAll('input[name^="bank_"]').forEach(input => input.remove());
+                mainForm.querySelectorAll('input[name^="transfer_"]').forEach(input => input.remove());
+                mainForm.querySelectorAll('input[name^="receipt_"]').forEach(input => input.remove());
+
+                // Add new bank transfer fields
+                addHiddenInput(mainForm, 'bank_transaction_ref', formData.get('bank_transaction_ref'));
+                addHiddenInput(mainForm, 'transfer_datetime', formData.get('transfer_datetime'));
+                addHiddenInput(mainForm, 'transfer_notes', formData.get('transfer_notes'));
+                addHiddenInput(mainForm, 'bank_receipt_path', uploadResult.path);
+                addHiddenInput(mainForm, 'bank_receipt_url', uploadResult.url);
+
+                // Close modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('bankTransferModal'));
+                modal.hide();
+
+                showToast('Bank transfer receipt uploaded successfully! You can now place your order.', 'success');
+
+            } catch (error) {
+                console.error('Upload error:', error);
+                showToast(error.message || 'Failed to upload receipt. Please try again.', 'error');
+            } finally {
+                // Re-enable submit button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+            }
+        }
+
+        // Helper function to add hidden inputs
+        function addHiddenInput(form, name, value) {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = name;
+            input.value = value || '';
+            form.appendChild(input);
         }
     </script>
 @endpush

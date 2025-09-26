@@ -625,7 +625,7 @@ class CheckoutController extends Controller
                 'vendor_id' => 1, // Add vendor_id field (use 1 for testing)
                 'status' => 'pending',
                 'payment_status' => $request->payment_method === 'cash_on_delivery' ? 'pending' : 
-                                   ($request->payment_method === 'online_payment' ? 'paid' : 'pending'),
+                                   ($request->payment_method === 'online_payment' ? 'pending' : 'pending'),
                 'shipping_status' => 'not_shipped', // Use correct shipping status
                 'total_amount' => $finalTotal,
                 'tax_amount' => $taxAmount,
@@ -868,7 +868,7 @@ class CheckoutController extends Controller
                 'customer_id' => $customerId,
                 'vendor_id' => 1, // Default vendor - adjust based on your multi-vendor logic
                 'status' => 'pending',
-                'payment_status' => $request->payment_method === 'online_payment' ? 'paid' : 'pending',
+                'payment_status' => $request->payment_method === 'online_payment' ? 'pending' : 'pending',
                 'shipping_status' => 'not_shipped',
                 'subtotal' => $request->subtotal,
                 'tax_amount' => $request->tax_amount ?? 0,

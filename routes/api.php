@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\RealTimeBinaryController;
 use App\Http\Controllers\Api\DeliveryChargeController;
 use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\CouponController;
+use App\Http\Controllers\Api\PaymentReceiptController;
 
 // Authentication check route for AJAX requests
 Route::get('/auth-check', function () {
@@ -22,6 +23,10 @@ Route::get('/auth-check', function () {
         ] : null
     ]);
 });
+
+// Payment receipt upload routes
+Route::post('/upload-payment-receipt', [PaymentReceiptController::class, 'uploadPaymentReceipt']);
+Route::post('/upload-bank-receipt', [PaymentReceiptController::class, 'uploadBankReceipt']);
 
 // Product API routes
 Route::prefix('products')->group(function () {

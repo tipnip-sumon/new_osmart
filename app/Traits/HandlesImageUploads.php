@@ -358,4 +358,28 @@ trait HandlesImageUploads
             ]
         ];
     }
+
+    /**
+     * Upload payment receipt image (for mobile banking/bank transfer receipts)
+     */
+    protected function uploadPaymentReceiptImage(UploadedFile $file, string $folder = 'payment-receipts'): array
+    {
+        $sizes = [
+            'original' => ['width' => 1200, 'height' => 1600], // For high-quality viewing
+            'large' => ['width' => 800, 'height' => 1000],     // For modal display
+            'medium' => ['width' => 400, 'height' => 500],     // For thumbnails
+            'small' => ['width' => 200, 'height' => 250]       // For list view
+        ];
+        
+        return $this->processImageUpload($file, $folder, $sizes, 95); // Higher quality for receipts
+    }
+
+    /**
+     * Upload document/PDF receipt (no image processing)
+     */
+    protected function uploadReceiptDocument(UploadedFile $file, string $folder = 'payment-receipts'): array
+    {
+        // For PDF receipts, use the existing PDF upload method
+        return $this->processPdfUpload($file, $folder);
+    }
 }
