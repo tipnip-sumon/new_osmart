@@ -114,6 +114,9 @@
                     @endif
                 </div>
                 
+                <div class="info-label">Reference ID:</div>
+                <div class="info-value" style="font-family: monospace; background: #f8f9fa; padding: 2px 6px; border-radius: 3px;">{{ $reference_id }}</div>
+                
                 <div class="info-label">Submitted:</div>
                 <div class="info-value">{{ $submitted_at }}</div>
             </div>

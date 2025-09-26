@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use App\Models\GeneralSetting;
+use App\Models\Contact;
 use Exception;
 
 class ContactController extends Controller
@@ -71,6 +72,23 @@ class ContactController extends Controller
             // Convert newsletter subscription to boolean
             $subscribeNewsletter = $request->has('subscribe_newsletter') && $request->subscribe_newsletter;
             
+            // Generate reference ID
+            $referenceId = Contact::generateReferenceId();
+            
+            // Save contact form data to database
+            $contact = Contact::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'subject' => $request->subject,
+                'message' => $request->message,
+                'subscribe_newsletter' => $subscribeNewsletter,
+                'reference_id' => $referenceId,
+                'ip_address' => $request->ip(),
+                'user_agent' => $request->userAgent(),
+                'status' => 'new'
+            ]);
+            
             // Send email to admin
             $emailData = [
                 'name' => $request->name,
@@ -81,6 +99,7 @@ class ContactController extends Controller
                 'subscribe_newsletter' => $subscribeNewsletter,
                 'subscribe_newsletter_text' => $subscribeNewsletter ? 'Yes' : 'No',
                 'submitted_at' => now()->format('M d, Y h:i A'),
+                'reference_id' => $referenceId,
                 'ip_address' => $request->ip(),
                 'user_agent' => $request->userAgent()
             ];
@@ -121,7 +140,8 @@ class ContactController extends Controller
                     'newsletter_subscribed' => $subscribeNewsletter,
                     'data' => [
                         'submitted_at' => now()->format('M d, Y h:i A'),
-                        'reference_id' => 'CNT-' . now()->format('Ymd') . '-' . str_pad(rand(1, 9999), 4, '0', STR_PAD_LEFT)
+                        'reference_id' => $referenceId,
+                        'contact_id' => $contact->id
                     ]
                 ]);
             }
