@@ -964,6 +964,31 @@ Route::get('/privacy', function () {
     return view('pages.privacy');
 })->name('pages.privacy');
 
+// Additional utility pages
+Route::get('/size-guide', function () {
+    return view('pages.size-guide');
+})->name('pages.size-guide');
+
+Route::get('/warranty', function () {
+    return view('pages.warranty');
+})->name('pages.warranty');
+
+Route::get('/delivery-info', function () {
+    return view('pages.delivery-info');
+})->name('pages.delivery-info');
+
+Route::get('/customer-support', function () {
+    return view('pages.customer-support');
+})->name('pages.customer-support');
+
+Route::get('/brand-story', function () {
+    return view('pages.brand-story');
+})->name('pages.brand-story');
+
+Route::get('/careers', function () {
+    return view('pages.careers');
+})->name('pages.careers');
+
 // Auth routes - using Laravel Breeze or similar
 require __DIR__.'/auth.php';
 
