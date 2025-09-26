@@ -378,21 +378,11 @@
 }
 
 .list-product-btn {
-    position: absolute;
-    bottom: 15px;
-    left: 15px;
-    right: 15px;
     display: flex;
     gap: 10px;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: all 0.3s ease;
-    z-index: 3;
-}
-
-.card-product:hover .list-product-btn {
-    opacity: 1;
-    transform: translateY(0);
+    margin-top: auto;
+    padding-top: 15px;
+    border-top: 1px solid #f8f9fa;
 }
 
 .box-icon {
@@ -401,14 +391,13 @@
     justify-content: center;
     width: 40px;
     height: 40px;
-    background: #fff;
+    background: #f8f9fa;
     border: 1px solid #eee;
     border-radius: 50%;
     color: #666;
     text-decoration: none;
     transition: all 0.3s ease;
     position: relative;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .box-icon:hover {
@@ -416,7 +405,6 @@
     color: #fff;
     border-color: #3498db;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
 }
 
 .quick-add {
@@ -425,44 +413,12 @@
     border-color: #3498db;
     flex: 1;
     width: auto;
-    border-radius: 20px;
+    border-radius: 25px;
 }
 
 .quick-add:hover {
     background: #2980b9;
     border-color: #2980b9;
-}
-
-/* Tooltip styles */
-.tooltip {
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0,0,0,0.8);
-    color: #fff;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-    margin-bottom: 5px;
-}
-
-.tooltip::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 4px solid transparent;
-    border-top-color: rgba(0,0,0,0.8);
-}
-
-.box-icon:hover .tooltip {
-    opacity: 1;
 }
 
 /* Product badges */
@@ -709,79 +665,10 @@
                         <div class="card-product-wrapper">
                             <a href="{{ route('products.show', $product->slug) }}" class="product-img">
                                 @php
-                                    // Dynamic image handling - same system as home-ecomus.blade.php
-                                    $imageUrl = '';
-                                    
-                                    // First try images array
-                                    if (isset($product->images) && $product->images) {
-                                        $images = is_string($product->images) ? json_decode($product->images, true) : $product->images;
-                                        if (is_array($images) && !empty($images)) {
-                                            $image = $images[0]; // Get first image
-                                            
-                                            // Handle complex nested structure first
-                                            if (is_array($image) && isset($image['sizes']['medium']['storage_url'])) {
-                                                // New complex structure - use medium size storage_url
-                                                $imageUrl = $image['sizes']['medium']['storage_url'];
-                                            } elseif (is_array($image) && isset($image['sizes']['original']['storage_url'])) {
-                                                // Fallback to original if medium not available
-                                                $imageUrl = $image['sizes']['original']['storage_url'];
-                                            } elseif (is_array($image) && isset($image['sizes']['large']['storage_url'])) {
-                                                // Fallback to large if original not available
-                                                $imageUrl = $image['sizes']['large']['storage_url'];
-                                            } elseif (is_array($image) && isset($image['urls']['medium'])) {
-                                                // Legacy complex URL structure - use medium size
-                                                $imageUrl = $image['urls']['medium'];
-                                            } elseif (is_array($image) && isset($image['urls']['original'])) {
-                                                // Legacy fallback to original if medium not available
-                                                $imageUrl = $image['urls']['original'];
-                                            } elseif (is_array($image) && isset($image['url']) && is_string($image['url'])) {
-                                                $imageUrl = $image['url'];
-                                            } elseif (is_array($image) && isset($image['path']) && is_string($image['path'])) {
-                                                $imageUrl = asset('storage/' . $image['path']);
-                                            } elseif (is_string($image)) {
-                                                // Simple string path
-                                                $imageUrl = asset('storage/' . $image);
-                                            }
-                                        }
-                                    }
-                                    
-                                    // Fallback to image accessor
-                                    if (empty($imageUrl)) {
-                                        $productImage = $product->image;
-                                        if ($productImage && $productImage !== 'products/product1.jpg') {
-                                            $imageUrl = str_starts_with($productImage, 'http') ? $productImage : asset('storage/' . $productImage);
-                                        } else {
-                                            $imageUrl = asset('assets/img/product/1.png'); // Default
-                                        }
-                                    }
-                                    
-                                    // Handle hover image (second image from gallery)
-                                    $hoverImageUrl = $imageUrl; // Default to same image
-                                    if (isset($product->images) && $product->images) {
-                                        $images = is_string($product->images) ? json_decode($product->images, true) : $product->images;
-                                        if (is_array($images) && count($images) > 1) {
-                                            $hoverImage = $images[1]; // Get second image
-                                            
-                                            // Handle complex nested structure for hover image
-                                            if (is_array($hoverImage) && isset($hoverImage['sizes']['medium']['storage_url'])) {
-                                                $hoverImageUrl = $hoverImage['sizes']['medium']['storage_url'];
-                                            } elseif (is_array($hoverImage) && isset($hoverImage['sizes']['original']['storage_url'])) {
-                                                $hoverImageUrl = $hoverImage['sizes']['original']['storage_url'];
-                                            } elseif (is_array($hoverImage) && isset($hoverImage['sizes']['large']['storage_url'])) {
-                                                $hoverImageUrl = $hoverImage['sizes']['large']['storage_url'];
-                                            } elseif (is_array($hoverImage) && isset($hoverImage['urls']['medium'])) {
-                                                $hoverImageUrl = $hoverImage['urls']['medium'];
-                                            } elseif (is_array($hoverImage) && isset($hoverImage['urls']['original'])) {
-                                                $hoverImageUrl = $hoverImage['urls']['original'];
-                                            } elseif (is_array($hoverImage) && isset($hoverImage['url']) && is_string($hoverImage['url'])) {
-                                                $hoverImageUrl = $hoverImage['url'];
-                                            } elseif (is_array($hoverImage) && isset($hoverImage['path']) && is_string($hoverImage['path'])) {
-                                                $hoverImageUrl = asset('storage/' . $hoverImage['path']);
-                                            } elseif (is_string($hoverImage)) {
-                                                $hoverImageUrl = asset('storage/' . $hoverImage);
-                                            }
-                                        }
-                                    }
+                                    $primaryImage = $product->images->first();
+                                    $hoverImage = $product->images->skip(1)->first();
+                                    $imageUrl = $primaryImage ? asset('storage/' . $primaryImage->image_path) : asset('assets/ecomus/images/products/default-product.jpg');
+                                    $hoverImageUrl = $hoverImage ? asset('storage/' . $hoverImage->image_path) : $imageUrl;
                                 @endphp
                                 
                                 <img class="lazyload img-product" 
@@ -795,26 +682,6 @@
                                      alt="{{ $product->name }}"
                                      loading="lazy">
                             </a>
-                            
-                            <!-- Product Action Buttons - Overlay on Image -->
-                            <div class="list-product-btn">
-                                <a href="#" class="box-icon quick-add quick-add-btn" data-product-id="{{ $product->id }}">
-                                    <span class="icon icon-bag"></span>
-                                    <span class="tooltip">Quick add</span>
-                                </a>
-                                <a href="#" class="box-icon wishlist wishlist-btn" data-product-id="{{ $product->id }}">
-                                    <span class="icon icon-heart"></span>
-                                    <span class="tooltip">Wishlist</span>
-                                </a>
-                                <a href="#" class="box-icon compare compare-btn" data-product-id="{{ $product->id }}">
-                                    <span class="icon icon-compare"></span>
-                                    <span class="tooltip">Compare</span>
-                                </a>
-                                <a href="{{ route('products.show', $product->slug) }}" class="box-icon quickview">
-                                    <span class="icon icon-view"></span>
-                                    <span class="tooltip">Quick view</span>
-                                </a>
-                            </div>
                             
                             <!-- Product Badges -->
                             @if($product->is_featured)
@@ -830,64 +697,48 @@
                             <a href="{{ route('products.show', $product->slug) }}" class="title link">{{ $product->name }}</a>
                             <div class="price">
                                 @if($product->sale_price && $product->sale_price < $product->price)
-                                    <span class="original-price">{{ formatCurrency($product->price) }}</span>
-                                    <span class="current-price">{{ formatCurrency($product->sale_price) }}</span>
+                                    <span class="original-price">${{ number_format($product->price, 2) }}</span>
+                                    <span class="current-price">${{ number_format($product->sale_price, 2) }}</span>
                                 @else
-                                    <span class="current-price">{{ formatCurrency($product->price) }}</span>
+                                    <span class="current-price">${{ number_format($product->price, 2) }}</span>
                                 @endif
                             </div>
                             
                             <!-- Color Swatches -->
-                            @if(isset($product->variants) && $product->variants)
-                            @php
-                                // Handle variants safely
-                                $variants = is_string($product->variants) ? json_decode($product->variants, true) : $product->variants;
-                                $colorVariants = [];
-                                
-                                if (is_array($variants)) {
-                                    foreach ($variants as $variant) {
-                                        if (is_array($variant) && isset($variant['color']) && $variant['color']) {
-                                            $colorVariants[] = $variant;
-                                        }
-                                    }
-                                    $colorVariants = array_slice(array_unique($colorVariants, SORT_REGULAR), 0, 4);
-                                }
-                            @endphp
-                            @if(!empty($colorVariants))
+                            @if($product->variants->count() > 0)
                             <ul class="list-color-product">
-                                @foreach($colorVariants as $variant)
+                                @foreach($product->variants->unique('color')->take(4) as $variant)
                                 <li class="list-color-item color-swatch {{ $loop->first ? 'active' : '' }}">
-                                    <span class="swatch-value" style="background-color: {{ $variant['color_code'] ?? '#ccc' }}"></span>
+                                    <span class="swatch-value" style="background-color: {{ $variant->color_code ?? '#ccc' }}"></span>
                                 </li>
                                 @endforeach
                             </ul>
                             @endif
-                            @endif
                             
                             <!-- Size Options -->
-                            @if(isset($product->variants) && $product->variants)
-                            @php
-                                // Handle size variants safely
-                                $variants = is_string($product->variants) ? json_decode($product->variants, true) : $product->variants;
-                                $sizeVariants = [];
-                                
-                                if (is_array($variants)) {
-                                    foreach ($variants as $variant) {
-                                        if (is_array($variant) && isset($variant['size']) && $variant['size']) {
-                                            $sizeVariants[] = $variant['size'];
-                                        }
-                                    }
-                                    $sizeVariants = array_slice(array_unique($sizeVariants), 0, 5);
-                                }
-                            @endphp
-                            @if(!empty($sizeVariants))
+                            @if($product->variants->whereNotNull('size')->count() > 0)
                             <div class="size-list">
-                                @foreach($sizeVariants as $size)
+                                @foreach($product->variants->pluck('size')->unique()->take(5) as $size)
                                     <span class="size-item">{{ $size }}</span>
                                 @endforeach
                             </div>
                             @endif
-                            @endif
+                            
+                            <div class="list-product-btn">
+                                <a href="#" class="box-icon quick-add quick-add-btn" data-product-id="{{ $product->id }}">
+                                    <span class="icon icon-bag"></span>
+                                    <span>Quick add</span>
+                                </a>
+                                <a href="#" class="box-icon wishlist wishlist-btn" data-product-id="{{ $product->id }}">
+                                    <span class="icon icon-heart"></span>
+                                </a>
+                                <a href="#" class="box-icon compare compare-btn" data-product-id="{{ $product->id }}">
+                                    <span class="icon icon-compare"></span>
+                                </a>
+                                <a href="{{ route('products.show', $product->slug) }}" class="box-icon quickview">
+                                    <span class="icon icon-view"></span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     @endforeach
@@ -1090,7 +941,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Error handling for images
     document.querySelectorAll('.product-img img').forEach(img => {
         img.addEventListener('error', function() {
-            this.src = '{{ asset("assets/ecomus/images/products/white-1.jpg") }}';
+            this.src = '{{ asset("assets/ecomus/images/products/default-product.jpg") }}';
             this.alt = 'Product Image';
         });
     });

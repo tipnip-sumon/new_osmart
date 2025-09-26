@@ -1,13 +1,8 @@
-@extends('layouts.ecomus')
+@extends('layouts.app')
 
 @section('title', 'Shop Categories - ' . config('app.name'))
 
 @section('styles')
-<!-- Ecomus Icon Fonts -->
-<link rel="stylesheet" href="{{ asset('assets/ecomus/fonts/font-icons.css') }}">
-<!-- FontAwesome for backup icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 <style>
 /* Ecomus-inspired Category Styles */
 .tf-page-title {
@@ -454,7 +449,7 @@
                                 
                                 // Final fallback to default image
                                 if (empty($categoryImageUrl)) {
-                                    $categoryImageUrl = asset('assets/ecomus/images/collections/collection-1.jpg');
+                                    $categoryImageUrl = asset('assets/images/default-category.jpg');
                                 }
                             @endphp
                             
@@ -533,7 +528,7 @@
                             }
                             
                             if (empty($categoryImageUrl)) {
-                                $categoryImageUrl = asset('assets/ecomus/images/collections/collection-2.jpg');
+                                $categoryImageUrl = asset('assets/images/default-category.jpg');
                             }
                         @endphp
                         
@@ -615,7 +610,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Error handling for images
     document.querySelectorAll('.collection-image img').forEach(img => {
         img.addEventListener('error', function() {
-            this.src = '{{ asset("assets/ecomus/images/collections/collection-1.jpg") }}';
+            this.src = '{{ asset("assets/images/default-category.jpg") }}';
             this.alt = 'Category Image';
         });
     });

@@ -11,6 +11,24 @@ use App\Models\Product;
 use App\Models\UserActivePackage;
 use App\Models\PackageLinkSharingSetting;
 
+Route::get('/debug-products', function () {
+    $product = Product::first();
+    
+    if (!$product) {
+        return response()->json(['error' => 'No products found']);
+    }
+    
+    return response()->json([
+        'id' => $product->id,
+        'name' => $product->name,
+        'images' => $product->images,
+        'image_url' => $product->image_url,
+        'image_attribute' => $product->image,
+        'has_variants' => isset($product->variants),
+        'variants_count' => is_countable($product->variants) ? count($product->variants) : 'not countable'
+    ]);
+});
+
 // Temporary debug route - Remove after fixing the issue
 Route::get('/debug/storage', function () {
     $debug = [];
