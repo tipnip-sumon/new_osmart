@@ -288,6 +288,14 @@ Route::get('/pages/returns', function() { return view('pages.returns'); })->name
 Route::get('/pages/shipping', function() { return view('pages.shipping'); })->name('pages.shipping');
 Route::get('/pages/faq', function() { return view('pages.faq'); })->name('pages.faq');
 Route::get('/pages/store', function() { return view('pages.store'); })->name('pages.store');
+Route::get('/pages/terms-conditions', function() { 
+    $settings = \App\Models\GeneralSetting::getSettings();
+    return view('pages.terms-conditions', compact('settings')); 
+})->name('page.terms-conditions');
+Route::get('/pages/privacy-policy', function() { 
+    $settings = \App\Models\GeneralSetting::getSettings();
+    return view('pages.privacy-policy', compact('settings')); 
+})->name('page.privacy-policy');
 
 // Missing brand and search routes
 Route::get('/brands', function() { return redirect('/shop'); })->name('brands.index');

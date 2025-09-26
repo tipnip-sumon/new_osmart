@@ -451,3 +451,131 @@ if (!function_exists('maintenanceData')) {
         return \App\Models\GeneralSetting::getMaintenancePageData();
     }
 }
+
+if (!function_exists('cartTermsEnabled')) {
+    /**
+     * Check if cart terms and conditions checkbox is enabled.
+     *
+     * @return bool
+     */
+    function cartTermsEnabled()
+    {
+        return (bool) getSetting('cart_terms_enabled', true);
+    }
+}
+
+if (!function_exists('cartTermsMandatory')) {
+    /**
+     * Check if cart terms and conditions checkbox is mandatory.
+     *
+     * @return bool
+     */
+    function cartTermsMandatory()
+    {
+        return (bool) getSetting('cart_terms_mandatory', true);
+    }
+}
+
+if (!function_exists('cartTermsText')) {
+    /**
+     * Get cart terms and conditions text.
+     *
+     * @return string
+     */
+    function cartTermsText()
+    {
+        return getSetting('cart_terms_text', 'I agree with the');
+    }
+}
+
+if (!function_exists('cartTermsLink')) {
+    /**
+     * Get cart terms and conditions link.
+     *
+     * @return string|null
+     */
+    function cartTermsLink()
+    {
+        $link = getSetting('cart_terms_link');
+        if (!$link) {
+            return route('page.terms-conditions', [], false);
+        }
+        return $link;
+    }
+}
+
+if (!function_exists('cartTermsLinkText')) {
+    /**
+     * Get cart terms and conditions link text.
+     *
+     * @return string
+     */
+    function cartTermsLinkText()
+    {
+        return getSetting('cart_terms_link_text', 'terms and conditions');
+    }
+}
+
+if (!function_exists('cartPrivacyEnabled')) {
+    /**
+     * Check if cart privacy policy checkbox is enabled.
+     *
+     * @return bool
+     */
+    function cartPrivacyEnabled()
+    {
+        return (bool) getSetting('cart_privacy_enabled', false);
+    }
+}
+
+if (!function_exists('cartPrivacyMandatory')) {
+    /**
+     * Check if cart privacy policy checkbox is mandatory.
+     *
+     * @return bool
+     */
+    function cartPrivacyMandatory()
+    {
+        return (bool) getSetting('cart_privacy_mandatory', false);
+    }
+}
+
+if (!function_exists('cartPrivacyText')) {
+    /**
+     * Get cart privacy policy text.
+     *
+     * @return string
+     */
+    function cartPrivacyText()
+    {
+        return getSetting('cart_privacy_text', 'I agree with the');
+    }
+}
+
+if (!function_exists('cartPrivacyLink')) {
+    /**
+     * Get cart privacy policy link.
+     *
+     * @return string|null
+     */
+    function cartPrivacyLink()
+    {
+        $link = getSetting('cart_privacy_link');
+        if (!$link) {
+            return route('page.privacy-policy', [], false);
+        }
+        return $link;
+    }
+}
+
+if (!function_exists('cartPrivacyLinkText')) {
+    /**
+     * Get cart privacy policy link text.
+     *
+     * @return string
+     */
+    function cartPrivacyLinkText()
+    {
+        return getSetting('cart_privacy_link_text', 'privacy policy');
+    }
+}

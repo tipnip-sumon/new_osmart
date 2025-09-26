@@ -128,6 +128,13 @@ class GeneralSettingController extends Controller
                 'f_charge',
                 'p_charge',
                 'active_template',
+                // Cart terms and conditions fields
+                'cart_terms_text',
+                'cart_terms_link',
+                'cart_terms_link_text',
+                'cart_privacy_text',
+                'cart_privacy_link',
+                'cart_privacy_link_text',
             ]);
 
             // Handle boolean fields that actually exist in the database
@@ -136,7 +143,8 @@ class GeneralSettingController extends Controller
                 'secure_password', 'agree', 'registration', 'deposit_commission',
                 'investment_commission', 'invest_return_commission', 'signup_bonus_control',
                 'promotional_tool', 'push_notify', 'b_transfer', 'holiday_withdraw',
-                'language_switch'
+                'language_switch', 'cart_terms_enabled', 'cart_terms_mandatory',
+                'cart_privacy_enabled', 'cart_privacy_mandatory'
             ];
 
             foreach ($booleanFields as $field) {

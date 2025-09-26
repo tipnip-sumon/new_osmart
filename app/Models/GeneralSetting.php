@@ -195,6 +195,17 @@ class GeneralSetting extends Model
         'fund_upay_fee_amount',
         'fund_upay_minimum_amount',
         'fund_upay_maximum_amount',
+        // Cart Terms and Conditions Settings
+        'cart_terms_enabled',
+        'cart_terms_mandatory',
+        'cart_terms_text',
+        'cart_terms_link',
+        'cart_terms_link_text',
+        'cart_privacy_enabled',
+        'cart_privacy_mandatory',
+        'cart_privacy_text',
+        'cart_privacy_link',
+        'cart_privacy_link_text',
     ];
 
     /**

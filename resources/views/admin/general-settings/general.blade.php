@@ -93,6 +93,12 @@
                             </a>
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
+                            <a href="#cart-checkout-tab" class="btn btn-outline-primary w-100 h-100 d-flex flex-column align-items-center justify-content-center cart-checkout-tab-trigger">
+                                <i class="fas fa-shopping-cart fa-2x mb-2"></i>
+                                <span>Cart & Checkout</span>
+                            </a>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
                             <a href="{{ route('admin.general-settings.theme') }}" class="btn btn-outline-primary w-100 h-100 d-flex flex-column align-items-center justify-content-center">
                                 <i class="fas fa-palette fa-2x mb-2"></i>
                                 <span>Theme</span>
@@ -172,6 +178,11 @@
                         <li class="nav-item">
                             <a class="nav-link" data-bs-toggle="tab" href="#sms-tab" role="tab">
                                 <i class="ri-message-line me-2"></i>SMS
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#cart-checkout-tab" role="tab">
+                                <i class="ri-shopping-cart-line me-2"></i>Cart & Checkout
                             </a>
                         </li>
                         <li class="nav-item">
@@ -455,6 +466,182 @@
                                             <label for="sms_body" class="form-label">SMS Template</label>
                                             <textarea class="form-control" id="sms_body" name="sms_body" rows="5">{{ old('sms_body', $settings->sms_body) }}</textarea>
                                             <div class="form-text">Available placeholders: </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Cart & Checkout Settings Tab -->
+                            <div class="tab-pane fade" id="cart-checkout-tab" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h5 class="mb-3">
+                                            <i class="ri-shopping-cart-line me-2"></i>
+                                            Cart & Checkout Terms and Conditions
+                                        </h5>
+                                        <p class="text-muted mb-4">
+                                            Configure the terms and conditions checkbox that appears in the cart modal and checkout process.
+                                        </p>
+                                    </div>
+
+                                    <!-- Terms and Conditions Section -->
+                                    <div class="col-12">
+                                        <div class="card border-primary mb-4">
+                                            <div class="card-header bg-primary-subtle">
+                                                <h6 class="card-title mb-0 text-primary">
+                                                    <i class="ri-file-text-line me-2"></i>
+                                                    Terms and Conditions Settings
+                                                </h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-check form-switch mb-3">
+                                                            <input class="form-check-input" type="checkbox" id="cart_terms_enabled" name="cart_terms_enabled" 
+                                                                    {{ ($settings->cart_terms_enabled ?? true) ? 'checked' : '' }}>
+                                                            <label class="form-check-label" for="cart_terms_enabled">
+                                                                <strong>Enable Terms & Conditions Checkbox</strong>
+                                                            </label>
+                                                            <div class="form-text">Show terms and conditions checkbox in cart modal</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-check form-switch mb-3">
+                                                            <input class="form-check-input" type="checkbox" id="cart_terms_mandatory" name="cart_terms_mandatory" 
+                                                                    {{ ($settings->cart_terms_mandatory ?? true) ? 'checked' : '' }}>
+                                                            <label class="form-check-label" for="cart_terms_mandatory">
+                                                                <strong>Make Terms & Conditions Mandatory</strong>
+                                                            </label>
+                                                            <div class="form-text">Require users to accept terms before checkout</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                            <label for="cart_terms_text" class="form-label">Terms Checkbox Text</label>
+                                                            <input type="text" class="form-control" id="cart_terms_text" name="cart_terms_text" 
+                                                                    value="{{ old('cart_terms_text', $settings->cart_terms_text ?? 'I agree with the') }}" 
+                                                                    placeholder="I agree with the">
+                                                            <div class="form-text">Text that appears before the terms link</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                            <label for="cart_terms_link_text" class="form-label">Terms Link Text</label>
+                                                            <input type="text" class="form-control" id="cart_terms_link_text" name="cart_terms_link_text" 
+                                                                    value="{{ old('cart_terms_link_text', $settings->cart_terms_link_text ?? 'terms and conditions') }}" 
+                                                                    placeholder="terms and conditions">
+                                                            <div class="form-text">Text for the clickable terms link</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="mb-3">
+                                                            <label for="cart_terms_link" class="form-label">Terms & Conditions Link</label>
+                                                            <input type="url" class="form-control" id="cart_terms_link" name="cart_terms_link" 
+                                                                    value="{{ old('cart_terms_link', $settings->cart_terms_link) }}" 
+                                                                    placeholder="https://example.com/terms-conditions or leave empty for default page">
+                                                            <div class="form-text">URL for terms page (leave empty to use default terms page)</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Privacy Policy Section -->
+                                    <div class="col-12">
+                                        <div class="card border-success mb-4">
+                                            <div class="card-header bg-success-subtle">
+                                                <h6 class="card-title mb-0 text-success">
+                                                    <i class="ri-shield-check-line me-2"></i>
+                                                    Privacy Policy Settings
+                                                </h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-check form-switch mb-3">
+                                                            <input class="form-check-input" type="checkbox" id="cart_privacy_enabled" name="cart_privacy_enabled" 
+                                                                    {{ ($settings->cart_privacy_enabled ?? false) ? 'checked' : '' }}>
+                                                            <label class="form-check-label" for="cart_privacy_enabled">
+                                                                <strong>Enable Privacy Policy Checkbox</strong>
+                                                            </label>
+                                                            <div class="form-text">Show privacy policy checkbox in cart modal</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-check form-switch mb-3">
+                                                            <input class="form-check-input" type="checkbox" id="cart_privacy_mandatory" name="cart_privacy_mandatory" 
+                                                                    {{ ($settings->cart_privacy_mandatory ?? false) ? 'checked' : '' }}>
+                                                            <label class="form-check-label" for="cart_privacy_mandatory">
+                                                                <strong>Make Privacy Policy Mandatory</strong>
+                                                            </label>
+                                                            <div class="form-text">Require users to accept privacy policy before checkout</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                            <label for="cart_privacy_text" class="form-label">Privacy Checkbox Text</label>
+                                                            <input type="text" class="form-control" id="cart_privacy_text" name="cart_privacy_text" 
+                                                                    value="{{ old('cart_privacy_text', $settings->cart_privacy_text ?? 'I agree with the') }}" 
+                                                                    placeholder="I agree with the">
+                                                            <div class="form-text">Text that appears before the privacy policy link</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                            <label for="cart_privacy_link_text" class="form-label">Privacy Policy Link Text</label>
+                                                            <input type="text" class="form-control" id="cart_privacy_link_text" name="cart_privacy_link_text" 
+                                                                    value="{{ old('cart_privacy_link_text', $settings->cart_privacy_link_text ?? 'privacy policy') }}" 
+                                                                    placeholder="privacy policy">
+                                                            <div class="form-text">Text for the clickable privacy policy link</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="mb-3">
+                                                            <label for="cart_privacy_link" class="form-label">Privacy Policy Link</label>
+                                                            <input type="url" class="form-control" id="cart_privacy_link" name="cart_privacy_link" 
+                                                                    value="{{ old('cart_privacy_link', $settings->cart_privacy_link) }}" 
+                                                                    placeholder="https://example.com/privacy-policy or leave empty for default page">
+                                                            <div class="form-text">URL for privacy policy page (leave empty to use default privacy page)</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Preview Section -->
+                                    <div class="col-12">
+                                        <div class="card border-info">
+                                            <div class="card-header bg-info-subtle">
+                                                <h6 class="card-title mb-0 text-info">
+                                                    <i class="ri-eye-line me-2"></i>
+                                                    Preview
+                                                </h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="alert alert-info">
+                                                    <h6>Cart Modal Checkbox Preview:</h6>
+                                                    <div class="tf-cart-checkbox-preview mt-2">
+                                                        <div class="form-check mb-2" id="terms-preview" style="{{ ($settings->cart_terms_enabled ?? true) ? '' : 'display: none;' }}">
+                                                            <input class="form-check-input" type="checkbox" id="preview-terms" disabled {{ ($settings->cart_terms_mandatory ?? true) ? 'required' : '' }}>
+                                                            <label class="form-check-label" for="preview-terms">
+                                                                <span id="terms-text-preview">{{ $settings->cart_terms_text ?? 'I agree with the' }}</span>
+                                                                <a href="#" class="text-primary" id="terms-link-preview">{{ $settings->cart_terms_link_text ?? 'terms and conditions' }}</a>
+                                                                <span class="text-danger">{{ ($settings->cart_terms_mandatory ?? true) ? '*' : '' }}</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check" id="privacy-preview" style="{{ ($settings->cart_privacy_enabled ?? false) ? '' : 'display: none;' }}">
+                                                            <input class="form-check-input" type="checkbox" id="preview-privacy" disabled {{ ($settings->cart_privacy_mandatory ?? false) ? 'required' : '' }}>
+                                                            <label class="form-check-label" for="preview-privacy">
+                                                                <span id="privacy-text-preview">{{ $settings->cart_privacy_text ?? 'I agree with the' }}</span>
+                                                                <a href="#" class="text-primary" id="privacy-link-preview">{{ $settings->cart_privacy_link_text ?? 'privacy policy' }}</a>
+                                                                <span class="text-danger">{{ ($settings->cart_privacy_mandatory ?? false) ? '*' : '' }}</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -819,5 +1006,96 @@ function resetForm() {
             form.reset();
         }
     }
-}</script>
+}
+
+// Cart & Checkout Settings Preview Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Cart and checkout tab trigger from settings navigation
+    const cartCheckoutTrigger = document.querySelector('.cart-checkout-tab-trigger');
+    if (cartCheckoutTrigger) {
+        cartCheckoutTrigger.addEventListener('click', function(e) {
+            e.preventDefault();
+            const cartCheckoutTab = document.querySelector('[data-bs-toggle="tab"][href="#cart-checkout-tab"]');
+            if (cartCheckoutTab) {
+                cartCheckoutTab.click();
+            }
+        });
+    }
+
+    // Terms and Conditions Preview Updates
+    const cartTermsEnabled = document.getElementById('cart_terms_enabled');
+    const cartTermsMandatory = document.getElementById('cart_terms_mandatory');
+    const cartTermsText = document.getElementById('cart_terms_text');
+    const cartTermsLinkText = document.getElementById('cart_terms_link_text');
+    
+    const termsPreview = document.getElementById('terms-preview');
+    const termsTextPreview = document.getElementById('terms-text-preview');
+    const termsLinkPreview = document.getElementById('terms-link-preview');
+    const previewTermsCheckbox = document.getElementById('preview-terms');
+
+    if (cartTermsEnabled && termsPreview) {
+        cartTermsEnabled.addEventListener('change', function() {
+            termsPreview.style.display = this.checked ? '' : 'none';
+        });
+    }
+
+    if (cartTermsMandatory && previewTermsCheckbox) {
+        cartTermsMandatory.addEventListener('change', function() {
+            const requiredSpan = termsPreview.querySelector('.text-danger');
+            if (requiredSpan) {
+                requiredSpan.textContent = this.checked ? '*' : '';
+            }
+        });
+    }
+
+    if (cartTermsText && termsTextPreview) {
+        cartTermsText.addEventListener('input', function() {
+            termsTextPreview.textContent = this.value || 'I agree with the';
+        });
+    }
+
+    if (cartTermsLinkText && termsLinkPreview) {
+        cartTermsLinkText.addEventListener('input', function() {
+            termsLinkPreview.textContent = this.value || 'terms and conditions';
+        });
+    }
+
+    // Privacy Policy Preview Updates
+    const cartPrivacyEnabled = document.getElementById('cart_privacy_enabled');
+    const cartPrivacyMandatory = document.getElementById('cart_privacy_mandatory');
+    const cartPrivacyText = document.getElementById('cart_privacy_text');
+    const cartPrivacyLinkText = document.getElementById('cart_privacy_link_text');
+    
+    const privacyPreview = document.getElementById('privacy-preview');
+    const privacyTextPreview = document.getElementById('privacy-text-preview');
+    const privacyLinkPreview = document.getElementById('privacy-link-preview');
+    const previewPrivacyCheckbox = document.getElementById('preview-privacy');
+
+    if (cartPrivacyEnabled && privacyPreview) {
+        cartPrivacyEnabled.addEventListener('change', function() {
+            privacyPreview.style.display = this.checked ? '' : 'none';
+        });
+    }
+
+    if (cartPrivacyMandatory && previewPrivacyCheckbox) {
+        cartPrivacyMandatory.addEventListener('change', function() {
+            const requiredSpan = privacyPreview.querySelector('.text-danger');
+            if (requiredSpan) {
+                requiredSpan.textContent = this.checked ? '*' : '';
+            }
+        });
+    }
+
+    if (cartPrivacyText && privacyTextPreview) {
+        cartPrivacyText.addEventListener('input', function() {
+            privacyTextPreview.textContent = this.value || 'I agree with the';
+        });
+    }
+
+    if (cartPrivacyLinkText && privacyLinkPreview) {
+        cartPrivacyLinkText.addEventListener('input', function() {
+            privacyLinkPreview.textContent = this.value || 'privacy policy';
+        });
+    }
+});</script>
 @endsection

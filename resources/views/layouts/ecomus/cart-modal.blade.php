@@ -165,19 +165,62 @@
                             </div>
                             <div class="tf-cart-tax">Taxes and <a href="#">shipping</a> calculated at checkout</div>
                             <div class="tf-mini-cart-line"></div>
-                            <div class="tf-cart-checkbox">
-                                <div class="tf-checkbox-wrapp">
-                                    <input class="" type="checkbox" id="CartDrawer-Form_agree"
-                                        name="agree_checkbox">
-                                    <div>
-                                        <i class="icon-check"></i>
-                                    </div>
+                            @if(cartTermsEnabled() || cartPrivacyEnabled())
+                                <div class="tf-cart-checkboxes">
+                                    @if(cartTermsEnabled())
+                                        <div class="tf-cart-checkbox mb-2">
+                                            <div class="tf-checkbox-wrapp">
+                                                <input class="cart-terms-checkbox" type="checkbox" id="CartDrawer-Form_agree_terms"
+                                                        name="agree_terms_checkbox" {{ cartTermsMandatory() ? 'required' : '' }}>
+                                                <div>
+                                                    <i class="icon-check"></i>
+                                                </div>
+                                            </div>
+                                            <label for="CartDrawer-Form_agree_terms">
+                                                {{ cartTermsText() }}
+                                                <a href="{{ cartTermsLink() }}" target="_blank" title="{{ cartTermsLinkText() }}">{{ cartTermsLinkText() }}</a>
+                                                @if(cartTermsMandatory())
+                                                    <span class="text-danger">*</span>
+                                                @endif
+                                            </label>
+                                        </div>
+                                    @endif
+                                    
+                                    @if(cartPrivacyEnabled())
+                                        <div class="tf-cart-checkbox">
+                                            <div class="tf-checkbox-wrapp">
+                                                <input class="cart-privacy-checkbox" type="checkbox" id="CartDrawer-Form_agree_privacy"
+                                                        name="agree_privacy_checkbox" {{ cartPrivacyMandatory() ? 'required' : '' }}>
+                                                <div>
+                                                    <i class="icon-check"></i>
+                                                </div>
+                                            </div>
+                                            <label for="CartDrawer-Form_agree_privacy">
+                                                {{ cartPrivacyText() }}
+                                                <a href="{{ cartPrivacyLink() }}" target="_blank" title="{{ cartPrivacyLinkText() }}">{{ cartPrivacyLinkText() }}</a>
+                                                @if(cartPrivacyMandatory())
+                                                    <span class="text-danger">*</span>
+                                                @endif
+                                            </label>
+                                        </div>
+                                    @endif
                                 </div>
-                                <label for="CartDrawer-Form_agree">
-                                    I agree with the
-                                    <a href="#" title="Terms of Service">terms and conditions</a>
-                                </label>
-                            </div>
+                            @else
+                                <!-- Fallback to old static checkbox if all disabled -->
+                                <div class="tf-cart-checkbox">
+                                    <div class="tf-checkbox-wrapp">
+                                        <input class="" type="checkbox" id="CartDrawer-Form_agree"
+                                                name="agree_checkbox">
+                                        <div>
+                                            <i class="icon-check"></i>
+                                        </div>
+                                    </div>
+                                    <label for="CartDrawer-Form_agree">
+                                        I agree with the
+                                        <a href="#" title="Terms of Service">terms and conditions</a>
+                                    </label>
+                                </div>
+                            @endif
                             <div class="tf-mini-cart-view-checkout">
                                 <a href="{{ route('cart.index') }}"
                                     class="tf-btn btn-outline radius-3 link w-100 justify-content-center">View
@@ -857,6 +900,113 @@
                                     }
                                     return 1000; // Default fallback
                                 }
+                            });
+
+                            // Dynamic Cart Terms and Conditions Validation
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const checkoutBtn = document.querySelector('a[href="{{ route('checkout.index') }}"]');
+                                const viewCartBtn = document.querySelector('a[href="{{ route('cart.index') }}"]');
+                                
+                                if (checkoutBtn) {
+                                    checkoutBtn.addEventListener('click', function(e) {
+                                        // Check for mandatory checkboxes
+                                        let validationFailed = false;
+                                        let errorMessage = '';
+                                        
+                                        @if(cartTermsEnabled() && cartTermsMandatory())
+                                            const termsCheckbox = document.getElementById('CartDrawer-Form_agree_terms');
+                                            if (termsCheckbox && !termsCheckbox.checked) {
+                                                validationFailed = true;
+                                                errorMessage += 'Please accept the {{ cartTermsLinkText() }}.\n';
+                                            }
+                                        @endif
+                                        
+                                        @if(cartPrivacyEnabled() && cartPrivacyMandatory())
+                                            const privacyCheckbox = document.getElementById('CartDrawer-Form_agree_privacy');
+                                            if (privacyCheckbox && !privacyCheckbox.checked) {
+                                                validationFailed = true;
+                                                errorMessage += 'Please accept the {{ cartPrivacyLinkText() }}.\n';
+                                            }
+                                        @endif
+                                        
+                                        if (validationFailed) {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+                                            
+                                            // Show error message
+                                            if (typeof Swal !== 'undefined') {
+                                                Swal.fire({
+                                                    title: 'Required Agreement',
+                                                    text: errorMessage.trim(),
+                                                    icon: 'warning',
+                                                    confirmButtonText: 'OK',
+                                                    confirmButtonColor: '#007bff'
+                                                });
+                                            } else {
+                                                alert('Required Agreement:\n' + errorMessage);
+                                            }
+                                            
+                                            // Highlight unchecked required checkboxes
+                                            @if(cartTermsEnabled() && cartTermsMandatory())
+                                                const termsCheckbox = document.getElementById('CartDrawer-Form_agree_terms');
+                                                if (termsCheckbox && !termsCheckbox.checked) {
+                                                    const termsWrapper = termsCheckbox.closest('.tf-cart-checkbox');
+                                                    if (termsWrapper) {
+                                                        termsWrapper.style.border = '2px solid #dc3545';
+                                                        termsWrapper.style.borderRadius = '6px';
+                                                        termsWrapper.style.padding = '8px';
+                                                        termsWrapper.style.backgroundColor = '#f8f9fa';
+                                                        
+                                                        // Remove highlight after user interaction
+                                                        termsCheckbox.addEventListener('change', function() {
+                                                            if (this.checked) {
+                                                                termsWrapper.style.border = '';
+                                                                termsWrapper.style.borderRadius = '';
+                                                                termsWrapper.style.padding = '';
+                                                                termsWrapper.style.backgroundColor = '';
+                                                            }
+                                                        }, { once: true });
+                                                    }
+                                                }
+                                            @endif
+                                            
+                                            @if(cartPrivacyEnabled() && cartPrivacyMandatory())
+                                                const privacyCheckbox = document.getElementById('CartDrawer-Form_agree_privacy');
+                                                if (privacyCheckbox && !privacyCheckbox.checked) {
+                                                    const privacyWrapper = privacyCheckbox.closest('.tf-cart-checkbox');
+                                                    if (privacyWrapper) {
+                                                        privacyWrapper.style.border = '2px solid #dc3545';
+                                                        privacyWrapper.style.borderRadius = '6px';
+                                                        privacyWrapper.style.padding = '8px';
+                                                        privacyWrapper.style.backgroundColor = '#f8f9fa';
+                                                        
+                                                        // Remove highlight after user interaction
+                                                        privacyCheckbox.addEventListener('change', function() {
+                                                            if (this.checked) {
+                                                                privacyWrapper.style.border = '';
+                                                                privacyWrapper.style.borderRadius = '';
+                                                                privacyWrapper.style.padding = '';
+                                                                privacyWrapper.style.backgroundColor = '';
+                                                            }
+                                                        }, { once: true });
+                                                    }
+                                                }
+                                            @endif
+                                            
+                                            return false;
+                                        }
+                                    });
+                                }
+                                
+                                // Optional: Also validate for view cart button if needed
+                                // This is typically not required but can be enabled if needed
+                                /*
+                                if (viewCartBtn) {
+                                    viewCartBtn.addEventListener('click', function(e) {
+                                        // Similar validation logic if needed for cart view
+                                    });
+                                }
+                                */
                             });
                             </script>
                         </div>
