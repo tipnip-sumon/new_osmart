@@ -2495,8 +2495,14 @@
             
             console.log('Order data prepared for backend validation:', orderData);
             
-            // Always use CheckoutController for order processing
-            // The CheckoutController will handle affiliate registration internally when needed
+            // Handle affiliate registration separately for better UX
+            if (checkoutType === 'register') {
+                // Step 1: Register affiliate account first
+                registerAffiliateAccount(orderData, button, originalText);
+                return;
+            }
+            
+            // For guest or authenticated checkout, directly process order
             const actionUrl = form.action || '{{ route("orders.store") }}';
             
             console.log('Using action URL:', actionUrl, 'for checkout type:', checkoutType);
@@ -2534,6 +2540,214 @@
                 // Reset button
                 button.innerHTML = originalText;
                 button.disabled = false;
+            });
+        }
+
+        // Step 1: Register affiliate account
+        function registerAffiliateAccount(orderData, button, originalText) {
+            console.log('Starting affiliate registration...');
+            
+            // Prepare affiliate registration data
+            const affiliateData = {
+                sponsor_id: orderData.sponsor_id,
+                username: orderData.username,
+                firstname: orderData.firstname,
+                lastname: orderData.lastname,
+                email: orderData.email,
+                phone: orderData.phone,
+                password: orderData.password,
+                password_confirmation: orderData.password_confirmation,
+                country: orderData.country || 'BD',
+                address: orderData.address,
+                position: orderData.position,
+                placement: orderData.placement,
+                upline_username: orderData.upline_username,
+                marketing: orderData.marketing,
+                terms: orderData.terms,
+                _token: document.querySelector('meta[name="csrf-token"]')?.content || document.querySelector('input[name="_token"]')?.value
+            };
+            
+            console.log('Sending affiliate registration request...');
+            
+            // Register affiliate
+            fetch('{{ route("affiliate.register") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': affiliateData._token,
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(affiliateData)
+            })
+            .then(response => {
+                console.log('Registration response status:', response.status);
+                
+                // Handle redirect responses (success case)
+                if (response.redirected) {
+                    console.log('Registration successful - redirected to:', response.url);
+                    showToast('✅ Account created successfully!', 'success');
+                    setupOrderFormAfterRegistration(orderData, button, originalText);
+                    return null;
+                }
+                
+                return response.json();
+            })
+            .then(data => {
+                if (data) {
+                    if (data.success) {
+                        showToast('✅ Account created successfully!', 'success');
+                        setupOrderFormAfterRegistration(orderData, button, originalText);
+                    } else {
+                        throw new Error(data.message || 'Registration failed');
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Registration error:', error);
+                showToast('Registration failed: ' + error.message, 'error');
+                
+                // Reset button
+                button.innerHTML = originalText;
+                button.disabled = false;
+            });
+        }
+
+        // Step 2: Setup order form after successful registration
+        function setupOrderFormAfterRegistration(orderData, button, originalText) {
+            console.log('Setting up order form after registration...');
+            
+            // Switch to guest checkout mode (user is now registered)
+            selectCheckoutType('guest');
+            
+            // Pre-fill billing form with registered user data
+            document.getElementById('first_name').value = orderData.firstname || '';
+            document.getElementById('last_name').value = orderData.lastname || '';
+            document.getElementById('email').value = orderData.email || '';
+            document.getElementById('phone').value = orderData.phone || '';
+            document.getElementById('address').value = orderData.address || '';
+            
+            // Auto-check marketing consent and terms checkboxes
+            const marketingCheckbox = document.getElementById('marketing-consent'); // Registration form checkbox
+            const termsCheckboxMain = document.getElementById('check-agree'); // Main checkout form checkbox
+            const termsCheckboxRegistration = document.getElementById('agree-terms'); // Registration form checkbox
+            
+            if (marketingCheckbox) {
+                marketingCheckbox.checked = true;
+                console.log('✅ Marketing consent auto-checked');
+            }
+            
+            if (termsCheckboxMain) {
+                termsCheckboxMain.checked = true;
+                console.log('✅ Main checkout terms & conditions auto-checked');
+            }
+            
+            if (termsCheckboxRegistration) {
+                termsCheckboxRegistration.checked = true;
+                console.log('✅ Registration terms & conditions auto-checked');
+            }
+            
+            // Reset and enable the place order button
+            button.innerHTML = originalText;
+            button.disabled = false;
+            
+            // Show success message
+            showToast('✅ Your account has been created! Now automatically submitting your order...', 'success');
+            
+            // Automatically submit the order after a short delay
+            setTimeout(() => {
+                submitOrderAfterRegistration(orderData, button, originalText);
+            }, 2000);
+            
+            // Scroll to billing section for better UX
+            const billingSection = document.querySelector('.billing-info-section') || document.querySelector('.form-checkout');
+            if (billingSection) {
+                billingSection.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            }
+            
+            // Add visual indicator that registration is complete
+            const accountCreationForm = document.getElementById('account-creation-form');
+            if (accountCreationForm) {
+                // Add success badge
+                const successBadge = document.createElement('div');
+                successBadge.className = 'alert alert-success mt-3';
+                successBadge.innerHTML = '<i class="fas fa-check-circle me-2"></i><strong>Account Created Successfully!</strong> You can now complete your order below.';
+                accountCreationForm.style.display = 'none';
+                accountCreationForm.parentNode.insertBefore(successBadge, accountCreationForm.nextSibling);
+            }
+        }
+
+        // Step 3: Automatically submit order after registration
+        function submitOrderAfterRegistration(orderData, button, originalText) {
+            console.log('Auto-submitting order after registration...');
+            
+            // Show processing state
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting Order...';
+            button.disabled = true;
+            
+            // Prepare clean order data (remove registration fields)
+            const cleanOrderData = {
+                customer_name: orderData.customer_name,
+                customer_email: orderData.customer_email,
+                customer_phone: orderData.customer_phone,
+                shipping_address: orderData.shipping_address,
+                billing_address: orderData.billing_address,
+                payment_method: orderData.payment_method,
+                shipping_method: orderData.shipping_method,
+                cart_items: orderData.cart_items,
+                subtotal: orderData.subtotal,
+                shipping_cost: orderData.shipping_cost,
+                tax_amount: orderData.tax_amount,
+                discount_amount: orderData.discount_amount,
+                total_amount: orderData.total_amount,
+                checkout_type: 'guest', // User is now registered but we process as guest
+                order_notes: orderData.order_notes,
+                coupon_code: orderData.coupon_code,
+                online_payment_type: orderData.online_payment_type,
+                transaction_id: orderData.transaction_id,
+                bank_transaction_ref: orderData.bank_transaction_ref
+            };
+            
+            console.log('Clean order data for submission:', cleanOrderData);
+            
+            // Submit the order
+            fetch('{{ route("orders.store") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || document.querySelector('input[name="_token"]')?.value
+                },
+                body: JSON.stringify(cleanOrderData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Clear cart and coupon data
+                    sessionStorage.removeItem('cart');
+                    sessionStorage.removeItem('applied_coupon');
+                    
+                    showToast('🎉 Order placed successfully! Redirecting...', 'success');
+                    
+                    // Redirect to success page
+                    setTimeout(() => {
+                        window.location.href = data.redirect_url || '{{ route("orders.success") }}';
+                    }, 1500);
+                } else {
+                    throw new Error(data.message || 'Order processing failed');
+                }
+            })
+            .catch(error => {
+                console.error('Auto order submission error:', error);
+                showToast('Registration successful but order submission failed: ' + error.message, 'error');
+                
+                // Reset button for manual retry
+                button.innerHTML = originalText;
+                button.disabled = false;
+                
+                // Show manual instruction
+                showToast('Please click "Place Order" to complete your purchase manually.', 'warning');
             });
         }
 
