@@ -241,6 +241,85 @@
     text-decoration: none;
     color: inherit;
 }
+
+/* Dynamic Countdown Timer Styles */
+.countdown__item {
+    transition: all 0.3s ease;
+}
+
+.countdown__value {
+    transition: all 0.2s ease;
+    display: inline-block;
+    min-width: 2em;
+    text-align: center;
+}
+
+.countdown-expired {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.dynamic-countdown .countdown__item:hover {
+    transform: scale(1.05);
+}
+
+.dynamic-countdown .countdown__value {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+/* Brand Section Styles */
+.brand-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    height: 100px;
+}
+
+.brand-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.brand-item img {
+    max-width: 100%;
+    max-height: 70px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: grayscale(50%);
+    transition: all 0.3s ease;
+}
+
+.brand-item:hover img {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+}
+
+.brand-item a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+@media (max-width: 768px) {
+    .brand-item {
+        padding: 10px;
+        height: 80px;
+    }
+    
+    .brand-item img {
+        max-height: 50px;
+    }
+}
 </style>
 @endpush
 
@@ -289,6 +368,66 @@ function getCategoryImageSrc($category, $defaultImage = 'assets/ecomus/images/co
         return str_starts_with($category->image, 'http') ? $category->image : asset('storage/' . $category->image);
     }
     return asset($defaultImage);
+}
+
+// Helper function to get brand logo using comprehensive legacy format handling - same as product images
+function getBrandLogoSrc($brand, $defaultLogo = 'assets/ecomus/images/brand/default-brand.png') {
+    if (!$brand) {
+        return asset($defaultLogo);
+    }
+    
+    // First try logo_data array (new format)
+    if (isset($brand->logo_data) && $brand->logo_data) {
+        $logoData = is_string($brand->logo_data) ? json_decode($brand->logo_data, true) : $brand->logo_data;
+        
+        if (is_array($logoData)) {
+            // Try different size variations
+            if (isset($logoData['sizes']['medium']['url'])) {
+                return $logoData['sizes']['medium']['url'];
+            }
+            if (isset($logoData['sizes']['original']['url'])) {
+                return $logoData['sizes']['original']['url'];
+            }
+            if (isset($logoData['sizes']['large']['url'])) {
+                return $logoData['sizes']['large']['url'];
+            }
+            if (isset($logoData['sizes']['small']['url'])) {
+                return $logoData['sizes']['small']['url'];
+            }
+            
+            // Check for legacy format within logo_data
+            if (isset($logoData['url']) && is_string($logoData['url'])) {
+                return $logoData['url'];
+            }
+            if (isset($logoData['path']) && is_string($logoData['path'])) {
+                return asset('storage/' . $logoData['path']);
+            }
+        }
+    }
+    
+    // Fallback to direct logo field (legacy format)
+    if ($brand->logo) {
+        $logoPath = $brand->logo;
+        // Handle different path formats
+        if (str_starts_with($logoPath, 'http')) {
+            return $logoPath; // Full URL
+        } elseif (str_starts_with($logoPath, 'storage/')) {
+            return asset($logoPath); // Already includes storage/
+        } else {
+            return asset('storage/' . $logoPath); // Add storage prefix
+        }
+    }
+    
+    // Try logo_url accessor if available
+    if (method_exists($brand, 'getLogoUrlAttribute')) {
+        $logoUrl = $brand->logo_url;
+        if ($logoUrl && !str_contains($logoUrl, 'data:image/svg+xml')) {
+            return $logoUrl;
+        }
+    }
+    
+    // Final fallback to default image
+    return asset($defaultLogo);
 }
 @endphp
 
@@ -1485,7 +1624,10 @@ function getCategoryImageSrc($category, $defaultImage = 'assets/ecomus/images/co
                     
                     @if($bannerCollection->show_countdown && $bannerCollection->is_countdown_active)
                     <div class="tf-countdown-v2 justify-content-center">
-                        <div class="js-countdown" data-timer="{{ $bannerCollection->countdown_timer }}" data-labels=" :  :  : ">
+                        <div class="js-countdown dynamic-countdown" 
+                             data-timer="{{ $bannerCollection->countdown_timer }}" 
+                             data-end-date="{{ $bannerCollection->countdown_end_date->timestamp }}"
+                             data-labels=" :  :  : ">
                             @php $remaining = $bannerCollection->time_remaining; @endphp
                             <div class="countdown__item">
                                 <span class="countdown__value countdown-days">{{ $remaining['days'] ?? 0 }}</span>
@@ -1540,9 +1682,12 @@ function getCategoryImageSrc($category, $defaultImage = 'assets/ecomus/images/co
                     <h2 class="heading">The Summer Sale</h2>
                     <p class="text-paragraph">Discover the hottest trends and must-have styles of the season.</p>
                     <div class="tf-countdown-v2 justify-content-center">
-                        <div class="js-countdown" data-timer="1007500" data-labels=" :  :  : ">
+                        <div class="js-countdown dynamic-countdown" 
+                             data-timer="1007500" 
+                             data-end-date="{{ now()->addDays(7)->timestamp }}"
+                             data-labels=" :  :  : ">
                             <div class="countdown__item">
-                                <span class="countdown__value countdown-days">0</span>
+                                <span class="countdown__value countdown-days">7</span>
                                 <span class="countdown__label">Days</span>
                             </div>
                             <div class="countdown__item">
@@ -1572,7 +1717,64 @@ function getCategoryImageSrc($category, $defaultImage = 'assets/ecomus/images/co
 </section>
 <!-- /Banner Collection -->
 @endif
+<!-- Icon box -->
+<section class="flat-spacing-1 flat-iconbox">
+    <div class="container">
+        <div class="wrap-carousel wrap-mobile wow fadeInUp" data-wow-delay="0s">
+            <div dir="ltr" class="swiper tf-sw-mobile" data-preview="1" data-space="15">
+                <div class="swiper-wrapper wrap-iconbox">
+                    <div class="swiper-slide">
+                        <div class="tf-icon-box style-row">
+                            <div class="icon">
+                                <i class="icon-shipping"></i>
+                            </div>
+                            <div class="content">
+                                <div class="title fw-4">Free Shipping</div>
+                                <p>Free shipping over order $120</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="tf-icon-box style-row">
+                            <div class="icon">
+                                <i class="icon-payment fs-22"></i>
+                            </div>
+                            <div class="content">
+                                <div class="title fw-4">Flexible Payment</div>
+                                <p>Pay with Multiple Credit Cards</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="tf-icon-box style-row">
+                            <div class="icon">
+                                <i class="icon-return fs-20"></i>
+                            </div>
+                            <div class="content">
+                                <div class="title fw-4">14 Day Returns</div>
+                                <p>Within 30 days for an exchange</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="tf-icon-box style-row">
+                            <div class="icon">
+                                <i class="icon-suport"></i>
+                            </div>
+                            <div class="content">
+                                <div class="title fw-4">Premium Support</div>
+                                <p>Outstanding premium support</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+            </div>
+            <div class="sw-dots style-2 sw-pagination-mb justify-content-center"></div>
+        </div>
+    </div>
+</section>
+<!-- /Icon box -->
 <!-- Testimonial -->
 <section class="flat-spacing-2 pt_0">
     <div class="container">
@@ -1783,6 +1985,128 @@ function getCategoryImageSrc($category, $defaultImage = 'assets/ecomus/images/co
 </section>
 <!-- /Instagram -->
 
+@if(isset($brands) && $brands->count() > 0)
+<!-- brand -->
+<section class="flat-spacing-1">
+    <div class="container">
+        <div dir="ltr" class="swiper tf-sw-brand" data-loop="false" data-play="false" data-preview="6"
+            data-tablet="3" data-mobile="2" data-space-lg="0" data-space-md="0">
+            <div class="swiper-wrapper">
+                @forelse($brands as $brand)
+                <div class="swiper-slide">
+                    <div class="brand-item">
+                        @if($brand->website_url)
+                        <a href="{{ $brand->website_url }}" target="_blank" rel="noopener noreferrer" title="{{ $brand->name }}">
+                            <img class="lazyload" 
+                                 data-src="{{ getBrandLogoSrc($brand) }}"
+                                 src="{{ getBrandLogoSrc($brand) }}" 
+                                 alt="{{ $brand->name }}"
+                                 onerror="this.src='{{ asset('assets/ecomus/images/brand/default-brand.png') }}'; this.onerror=null;">
+                        </a>
+                        @else
+                        <img class="lazyload" 
+                             data-src="{{ getBrandLogoSrc($brand) }}"
+                             src="{{ getBrandLogoSrc($brand) }}" 
+                             alt="{{ $brand->name }}"
+                             onerror="this.src='{{ asset('assets/ecomus/images/brand/default-brand.png') }}'; this.onerror=null;">
+                        @endif
+                    </div>
+                </div>
+                @empty
+                <!-- Fallback brands when no dynamic brands available -->
+                <div class="swiper-slide">
+                    <div class="brand-item">
+                        <img class="lazyload" data-src="{{ asset('assets/ecomus/images/brand/brand-01.png') }}"
+                            src="{{ asset('assets/ecomus/images/brand/brand-01.png') }}" alt="Brand">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="brand-item">
+                        <img class="lazyload" data-src="{{ asset('assets/ecomus/images/brand/brand-02.png') }}"
+                            src="{{ asset('assets/ecomus/images/brand/brand-02.png') }}" alt="Brand">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="brand-item">
+                        <img class="lazyload" data-src="{{ asset('assets/ecomus/images/brand/brand-03.png') }}"
+                            src="{{ asset('assets/ecomus/images/brand/brand-03.png') }}" alt="Brand">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="brand-item">
+                        <img class="lazyload" data-src="{{ asset('assets/ecomus/images/brand/brand-04.png') }}"
+                            src="{{ asset('assets/ecomus/images/brand/brand-04.png') }}" alt="Brand">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="brand-item">
+                        <img class="lazyload" data-src="{{ asset('assets/ecomus/images/brand/brand-05.png') }}"
+                            src="{{ asset('assets/ecomus/images/brand/brand-05.png') }}" alt="Brand">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="brand-item">
+                        <img class="lazyload" data-src="{{ asset('assets/ecomus/images/brand/brand-06.png') }}"
+                            src="{{ asset('assets/ecomus/images/brand/brand-06.png') }}" alt="Brand">
+                    </div>
+                </div>
+                @endforelse
+            </div>
+        </div>
+        <div class="sw-dots style-2 sw-pagination-brand justify-content-center"></div>
+    </div>
+</section>
+<!-- /brand -->
+@else
+<!-- Fallback brand section when no brands available -->
+<section class="flat-spacing-1">
+    <div class="container">
+        <div dir="ltr" class="swiper tf-sw-brand" data-loop="false" data-play="false" data-preview="6"
+            data-tablet="3" data-mobile="2" data-space-lg="0" data-space-md="0">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="brand-item">
+                        <img class="lazyload" data-src="{{ asset('assets/ecomus/images/brand/brand-01.png') }}"
+                            src="{{ asset('assets/ecomus/images/brand/brand-01.png') }}" alt="Brand">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="brand-item">
+                        <img class="lazyload" data-src="{{ asset('assets/ecomus/images/brand/brand-02.png') }}"
+                            src="{{ asset('assets/ecomus/images/brand/brand-02.png') }}" alt="Brand">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="brand-item">
+                        <img class="lazyload" data-src="{{ asset('assets/ecomus/images/brand/brand-03.png') }}"
+                            src="{{ asset('assets/ecomus/images/brand/brand-03.png') }}" alt="Brand">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="brand-item">
+                        <img class="lazyload" data-src="{{ asset('assets/ecomus/images/brand/brand-04.png') }}"
+                            src="{{ asset('assets/ecomus/images/brand/brand-04.png') }}" alt="Brand">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="brand-item">
+                        <img class="lazyload" data-src="{{ asset('assets/ecomus/images/brand/brand-05.png') }}"
+                            src="{{ asset('assets/ecomus/images/brand/brand-05.png') }}" alt="Brand">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="brand-item">
+                        <img class="lazyload" data-src="{{ asset('assets/ecomus/images/brand/brand-06.png') }}"
+                            src="{{ asset('assets/ecomus/images/brand/brand-06.png') }}" alt="Brand">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sw-dots style-2 sw-pagination-brand justify-content-center"></div>
+    </div>
+</section>
+<!-- /brand -->
+@endif
 @endsection
 
 @push('scripts')
@@ -1791,6 +2115,9 @@ $(document).ready(function() {
     console.log('Document ready, jQuery version:', $.fn.jquery); // Debug log
     console.log('Bootstrap version:', typeof bootstrap !== 'undefined' ? 'loaded' : 'not loaded'); // Debug log
     console.log('Quick view modal exists:', $('#quick_view').length > 0); // Debug log
+    
+    // Initialize Dynamic Countdown Timers
+    initializeDynamicCountdowns();
     
     // Test modal manually after 3 seconds (for debugging)
     setTimeout(function() {
@@ -2211,6 +2538,78 @@ $(document).ready(function() {
         }
         
         return legacyImageUrl;
+    }
+
+    // Dynamic Countdown Timer Functions
+    function initializeDynamicCountdowns() {
+        console.log('Initializing dynamic countdown timers...');
+        
+        $('.dynamic-countdown').each(function() {
+            const $countdown = $(this);
+            const endDate = parseInt($countdown.data('end-date')) * 1000; // Convert to milliseconds
+            
+            console.log('Found countdown with end date:', new Date(endDate));
+            
+            if (!endDate || endDate <= Date.now()) {
+                console.log('Countdown expired or invalid date');
+                $countdown.find('.countdown__value').text('0');
+                return;
+            }
+            
+            // Start the countdown interval
+            const countdownInterval = setInterval(function() {
+                updateCountdownDisplay($countdown, endDate, countdownInterval);
+            }, 1000);
+            
+            // Update immediately
+            updateCountdownDisplay($countdown, endDate, countdownInterval);
+        });
+    }
+    
+    function updateCountdownDisplay($countdown, endDate, intervalId) {
+        const now = Date.now();
+        const timeLeft = endDate - now;
+        
+        if (timeLeft <= 0) {
+            // Countdown finished
+            clearInterval(intervalId);
+            $countdown.find('.countdown-days').text('0');
+            $countdown.find('.countdown-hours').text('0');
+            $countdown.find('.countdown-minutes').text('0');
+            $countdown.find('.countdown-seconds').text('0');
+            
+            // Optional: Add expired message or hide countdown
+            $countdown.append('<div class="countdown-expired text-danger mt-2"><small>Offer Expired!</small></div>');
+            
+            console.log('Countdown expired');
+            return;
+        }
+        
+        // Calculate time units
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+        
+        // Update the display with animation
+        updateCountdownValue($countdown.find('.countdown-days'), days);
+        updateCountdownValue($countdown.find('.countdown-hours'), hours);
+        updateCountdownValue($countdown.find('.countdown-minutes'), minutes);
+        updateCountdownValue($countdown.find('.countdown-seconds'), seconds);
+    }
+    
+    function updateCountdownValue($element, newValue) {
+        const currentValue = parseInt($element.text()) || 0;
+        
+        if (currentValue !== newValue) {
+            // Add a subtle animation when value changes
+            $element.fadeOut(100, function() {
+                $element.text(newValue < 10 ? '0' + newValue : newValue).fadeIn(100);
+            });
+        } else {
+            // Just update without animation if no change
+            $element.text(newValue < 10 ? '0' + newValue : newValue);
+        }
     }
 
 

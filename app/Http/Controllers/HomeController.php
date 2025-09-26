@@ -9,6 +9,7 @@ use App\Models\Collection;
 use App\Models\User;
 use App\Models\Banner;
 use App\Models\BannerCollection;
+use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -130,6 +131,21 @@ class HomeController extends Controller
             ->ordered()
             ->get();
 
+        // Get featured brands for display
+        $brands = Brand::active()
+            ->featured()
+            ->ordered()
+            ->limit(12)
+            ->get();
+
+        // If no featured brands, get any active brands
+        if ($brands->isEmpty()) {
+            $brands = Brand::active()
+                ->ordered()
+                ->limit(12)
+                ->get();
+        }
+
         // Pass heroBanners as banners for the view
         return view('home-ecomus', [
             'banners' => $heroBanners,
@@ -141,7 +157,8 @@ class HomeController extends Controller
             'newArrivals' => $newArrivals,
             'saleProducts' => $saleProducts,
             'collections' => $collections,
-            'bannerCollections' => $bannerCollections
+            'bannerCollections' => $bannerCollections,
+            'brands' => $brands
         ]);
     }
 }
