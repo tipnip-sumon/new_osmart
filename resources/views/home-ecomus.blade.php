@@ -292,10 +292,61 @@ function getCategoryImageSrc($category, $defaultImage = 'assets/ecomus/images/co
             <div dir="ltr" class="swiper tf-sw-collection" data-preview="6" data-tablet="3" data-mobile="2" data-space-lg="50" data-space-md="30" data-space="15" data-loop="false" data-auto-play="false">
                 <div class="swiper-wrapper">
                     @forelse($categories ?? [] as $category)
+                    @php
+                        // Dynamic image handling for categories (similar to products)
+                        $categoryImageUrl = '';
+                        
+                        // First try images array if category uses complex image structure
+                        if (isset($category->images) && $category->images) {
+                            $images = is_string($category->images) ? json_decode($category->images, true) : $category->images;
+                            if (is_array($images) && !empty($images)) {
+                                $image = $images[0]; // Get first image
+                                
+                                // Handle complex nested structure first
+                                if (is_array($image) && isset($image['sizes']['medium']['storage_url'])) {
+                                    // New complex structure - use medium size storage_url
+                                    $categoryImageUrl = $image['sizes']['medium']['storage_url'];
+                                } elseif (is_array($image) && isset($image['sizes']['original']['storage_url'])) {
+                                    // Fallback to original if medium not available
+                                    $categoryImageUrl = $image['sizes']['original']['storage_url'];
+                                } elseif (is_array($image) && isset($image['sizes']['large']['storage_url'])) {
+                                    // Fallback to large if original not available
+                                    $categoryImageUrl = $image['sizes']['large']['storage_url'];
+                                } elseif (is_array($image) && isset($image['urls']['medium'])) {
+                                    // Legacy complex URL structure - use medium size
+                                    $categoryImageUrl = $image['urls']['medium'];
+                                } elseif (is_array($image) && isset($image['urls']['original'])) {
+                                    // Legacy fallback to original if medium not available
+                                    $categoryImageUrl = $image['urls']['original'];
+                                } elseif (is_array($image) && isset($image['url']) && is_string($image['url'])) {
+                                    $categoryImageUrl = $image['url'];
+                                } elseif (is_array($image) && isset($image['path']) && is_string($image['path'])) {
+                                    $categoryImageUrl = asset('storage/' . $image['path']);
+                                } elseif (is_string($image)) {
+                                    // Simple string path
+                                    $categoryImageUrl = asset('storage/' . $image);
+                                }
+                            }
+                        }
+                        
+                        // Fallback to simple image field
+                        if (empty($categoryImageUrl) && isset($category->image) && $category->image) {
+                            $categoryImageUrl = str_starts_with($category->image, 'http') ? $category->image : asset('storage/' . $category->image);
+                        }
+                        
+                        // Final fallback to default theme images
+                        if (empty($categoryImageUrl)) {
+                            $categoryImageUrl = asset('assets/ecomus/images/collections/collection-circle-' . (($loop->index % 6) + 1) . '.jpg');
+                        }
+                    @endphp
                     <div class="swiper-slide" lazy="true">
                         <div class="collection-item-circle hover-img">
                             <a href="{{ route('categories.show', $category->slug) }}" class="collection-image img-style">
-                                <img class="lazyload" data-src="{{ getCategoryImageSrc($category, 'assets/ecomus/images/collections/collection-circle-' . (($loop->index % 6) + 1) . '.jpg') }}" src="{{ getCategoryImageSrc($category, 'assets/ecomus/images/collections/collection-circle-' . (($loop->index % 6) + 1) . '.jpg') }}" alt="{{ $category->name }}">
+                                <img class="lazyload" 
+                                     data-src="{{ $categoryImageUrl }}" 
+                                     src="{{ $categoryImageUrl }}" 
+                                     alt="{{ $category->name }}"
+                                     onerror="this.src='{{ asset('assets/ecomus/images/collections/collection-circle-' . (($loop->index % 6) + 1) . '.jpg') }}'; this.onerror=null;">
                             </a>
                             <div class="collection-content text-center">
                                 <a href="{{ route('categories.show', $category->slug) }}" class="link title fw-5">{{ $category->name }}</a>
@@ -304,7 +355,7 @@ function getCategoryImageSrc($category, $defaultImage = 'assets/ecomus/images/co
                         </div>
                     </div>
                     @empty
-                    <!-- Default Categories -->
+                    <!-- Default Categories - Only show if no categories from database -->
                     <div class="swiper-slide" lazy="true">
                         <div class="collection-item-circle hover-img">
                             <a href="{{ route('shop.index') }}" class="collection-image img-style">
