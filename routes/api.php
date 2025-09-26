@@ -410,6 +410,7 @@ Route::get('/check-phone', function (Request $request) {
 // Upline username validation for manual placement
 Route::post('/validate-upline-username', function (Request $request) {
     $username = $request->input('username');
+    $sponsorId = $request->input('sponsor_id'); // Optional sponsor validation
     
     if (!$username) {
         return response()->json(['valid' => false, 'message' => 'Upline username is required']);
@@ -424,8 +425,39 @@ Route::post('/validate-upline-username', function (Request $request) {
         return response()->json(['valid' => false, 'message' => 'Upline username not found or inactive']);
     }
     
-    // Additional check: ensure upline can accept new downlines
-    // You can add more business logic here like checking if upline has space for new members
+    // If sponsor_id is provided, validate MLM hierarchy to prevent cross-linking
+    if ($sponsorId) {
+        $sponsorUser = \App\Models\User::where('username', $sponsorId)
+                                     ->orWhere('id', $sponsorId)
+                                     ->where('status', 'active')
+                                     ->first();
+        
+        if ($sponsorUser) {
+            // Check if upline user is in the valid hierarchy for the sponsor
+            $isValidHierarchy = false;
+            
+            // Method 1: Allow if upline IS the sponsor (direct placement under sponsor)
+            if ($uplineUser->id == $sponsorUser->id || $uplineUser->username == $sponsorUser->username) {
+                $isValidHierarchy = true;
+            }
+            // Method 2: Allow if upline is directly sponsored by the sponsor (same sponsor)
+            else if ($uplineUser->sponsor_id == $sponsorUser->id) {
+                $isValidHierarchy = true;
+            } 
+            // Method 3: Check if upline is in sponsor's downline tree (recursive check)
+            else {
+                $isValidHierarchy = isInDownlineTree($sponsorUser->id, $uplineUser->id);
+            }
+            
+            if (!$isValidHierarchy) {
+                return response()->json([
+                    'valid' => false, 
+                    'message' => 'Cross-linking detected! Upline user "' . $username . '" is not in the downline structure of sponsor "' . $sponsorId . '". Please select an upline from your sponsor\'s downline network, or use your sponsor as the upline.',
+                    'cross_link_error' => true
+                ]);
+            }
+        }
+    }
     
     return response()->json([
         'valid' => true,
@@ -433,7 +465,8 @@ Route::post('/validate-upline-username', function (Request $request) {
             'id' => $uplineUser->id,
             'name' => $uplineUser->name ?? $uplineUser->firstname . ' ' . $uplineUser->lastname,
             'username' => $uplineUser->username,
-            'status' => $uplineUser->status
+            'status' => $uplineUser->status,
+            'sponsor_id' => $uplineUser->sponsor_id
         ],
         'message' => 'Valid upline username'
     ]);
@@ -443,6 +476,7 @@ Route::post('/validate-upline-username', function (Request $request) {
 Route::post('/check-position-availability', function (Request $request) {
     $uplineUsername = $request->input('upline_username');
     $position = $request->input('position'); // 'left' or 'right'
+    $sponsorId = $request->input('sponsor_id'); // Optional sponsor validation
     
     if (!$uplineUsername || !$position) {
         return response()->json([
@@ -461,6 +495,40 @@ Route::post('/check-position-availability', function (Request $request) {
             'available' => false, 
             'message' => 'Upline user not found or inactive'
         ]);
+    }
+    
+    // If sponsor_id is provided, validate MLM hierarchy to prevent cross-linking
+    if ($sponsorId) {
+        $sponsorUser = \App\Models\User::where('username', $sponsorId)
+                                     ->orWhere('id', $sponsorId)
+                                     ->where('status', 'active')
+                                     ->first();
+        
+        if ($sponsorUser) {
+            // Check if upline user is in the valid hierarchy for the sponsor
+            $isValidHierarchy = false;
+            
+            // Method 1: Allow if upline IS the sponsor (direct placement under sponsor)
+            if ($uplineUser->id == $sponsorUser->id || $uplineUser->username == $sponsorUser->username) {
+                $isValidHierarchy = true;
+            }
+            // Method 2: Allow if upline is directly sponsored by the sponsor (same sponsor)
+            else if ($uplineUser->sponsor_id == $sponsorUser->id) {
+                $isValidHierarchy = true;
+            } 
+            // Method 3: Check if upline is in sponsor's downline tree (recursive check)
+            else {
+                $isValidHierarchy = isInDownlineTree($sponsorUser->id, $uplineUser->id);
+            }
+            
+            if (!$isValidHierarchy) {
+                return response()->json([
+                    'available' => false,
+                    'message' => 'Cross-linking detected! Upline user "' . $uplineUsername . '" is not in the downline structure of sponsor "' . $sponsorId . '". Please select an upline from your sponsor\'s downline network, or use your sponsor as the upline.',
+                    'cross_link_error' => true
+                ]);
+            }
+        }
     }
     
     // Check if the position is already taken
@@ -555,6 +623,35 @@ Route::post('/check-auto-placement-availability', function (Request $request) {
         'message' => 'No available positions found in the ' . $preferredPosition . ' leg. Please try the other position.'
     ]);
 });
+
+// Helper function to check if a user is in the downline tree of another user (recursive)
+if (!function_exists('isInDownlineTree')) {
+    function isInDownlineTree($sponsorId, $targetUserId, $maxDepth = 10, $currentDepth = 0) {
+        // Prevent infinite recursion
+        if ($currentDepth >= $maxDepth) {
+            return false;
+        }
+        
+        // Get all direct downlines of the sponsor
+        $downlines = \App\Models\User::where('sponsor_id', $sponsorId)
+                                   ->where('status', 'active')
+                                   ->get();
+        
+        foreach ($downlines as $downline) {
+            // Direct match found
+            if ($downline->id == $targetUserId) {
+                return true;
+            }
+            
+            // Recursive check in this downline's subtree
+            if (isInDownlineTree($downline->id, $targetUserId, $maxDepth, $currentDepth + 1)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+}
 
 // Banner Collections API routes
 Route::prefix('banner-collections')->group(function () {

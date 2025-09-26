@@ -298,14 +298,16 @@
                                         <label class="form-label">Preferred Position *</label>
                                         <div class="position-selection mt-2">
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="position" value="left" id="position-left" checked>
+                                                <input class="form-check-input" type="radio" name="position" value="left" id="position-left" checked onchange="validatePositionAvailability()">
                                                 <label class="form-check-label" for="position-left">Left</label>
                                             </div>
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="position" value="right" id="position-right">
+                                                <input class="form-check-input" type="radio" name="position" value="right" id="position-right" onchange="validatePositionAvailability()">
                                                 <label class="form-check-label" for="position-right">Right</label>
                                             </div>
                                         </div>
+                                        <!-- Position validation info -->
+                                        <div id="position-validation-info"></div>
                                     </div>
                                 </div>
                                 
@@ -1017,6 +1019,11 @@
             if (manualPlacement.checked) {
                 manualSection.style.display = 'block';
                 uplineInput.setAttribute('required', 'required');
+                
+                // If upline is already filled and valid, trigger position validation
+                if (uplineInput.value.trim()) {
+                    validatePositionAvailability();
+                }
             } else {
                 manualSection.style.display = 'none';
                 uplineInput.removeAttribute('required');
@@ -1225,21 +1232,43 @@
             
             showUplineChecking();
             
+            // Get sponsor ID for cross-link validation
+            const sponsorIdInput = document.getElementById('sponsor-id');
+            const sponsorId = sponsorIdInput ? sponsorIdInput.value.trim() : '';
+            
+            const requestData = {
+                username: username
+            };
+            
+            // Include sponsor ID if available for hierarchy validation
+            if (sponsorId) {
+                requestData.sponsor_id = sponsorId;
+            }
+            
             fetch(`/api/validate-upline-username`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '{{ csrf_token() }}'
                 },
-                body: JSON.stringify({ username: username })
+                body: JSON.stringify(requestData)
             })
                 .then(response => response.json())
                 .then(data => {
                     if (data.valid) {
                         showUplineValidation('success', 'Valid upline user found!');
                         showUplineInfo(data.upline);
+                        
+                        // After successful upline validation, check position availability
+                        validatePositionAvailability();
                     } else {
-                        showUplineValidation('error', data.message || 'Upline user not found');
+                        if (data.cross_link_error) {
+                            // Special handling for cross-link errors
+                            showUplineValidation('error', data.message);
+                            showCrossLinkWarning();
+                        } else {
+                            showUplineValidation('error', data.message || 'Upline user not found');
+                        }
                         hideUplineInfo();
                     }
                 })
@@ -1249,9 +1278,84 @@
                 });
         }
         
+        // Validate position availability for the selected upline
+        function validatePositionAvailability() {
+            const uplineInput = document.getElementById('upline-username');
+            const uplineUsername = uplineInput.value.trim();
+            const positionRadio = document.querySelector('input[name="position"]:checked');
+            
+            if (!uplineUsername || !positionRadio) {
+                return; // Not enough data to validate position
+            }
+            
+            const position = positionRadio.value;
+            
+            // Get sponsor ID for additional validation
+            const sponsorIdInput = document.getElementById('sponsor-id');
+            const sponsorId = sponsorIdInput ? sponsorIdInput.value.trim() : '';
+            
+            // Show checking state for position
+            showPositionChecking();
+            
+            const requestData = {
+                upline_username: uplineUsername,
+                position: position
+            };
+            
+            // Include sponsor ID if available for hierarchy validation
+            if (sponsorId) {
+                requestData.sponsor_id = sponsorId;
+            }
+            
+            fetch(`/api/check-position-availability`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '{{ csrf_token() }}'
+                },
+                body: JSON.stringify(requestData)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.available) {
+                        showPositionValidation('success', data.message);
+                    } else {
+                        showPositionValidation('error', data.message);
+                        if (data.occupied_by) {
+                            showOccupiedPositionInfo(data.occupied_by, position);
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Position validation error:', error);
+                    showPositionValidation('error', 'Error checking position availability');
+                });
+        }
+        
+        // Show cross-link warning
+        function showCrossLinkWarning() {
+            const uplineInfo = document.getElementById('upline-info');
+            if (uplineInfo) {
+                uplineInfo.innerHTML = `
+                    <div class="alert alert-warning mt-2">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <strong>Cross-Link Prevention:</strong><br>
+                        <small>
+                            In MLM structures, you can only place new members under users who are in your sponsor's downline network. 
+                            This prevents cross-linking and maintains proper hierarchy.
+                            <br><br>
+                            <strong>Solution:</strong> Please select an upline username from your sponsor's downline tree.
+                        </small>
+                    </div>
+                `;
+                uplineInfo.style.display = 'block';
+            }
+        }
+        
         function clearUplineValidation() {
             clearValidationState('upline');
             hideUplineInfo();
+            clearPositionValidation();
         }
         
         function showUplineChecking() {
@@ -1260,6 +1364,121 @@
         
         function showUplineValidation(type, message) {
             showValidationResult('upline', type, message);
+        }
+        
+        // Position validation support functions
+        function showPositionChecking() {
+            const positionInfo = document.getElementById('position-validation-info');
+            if (positionInfo) {
+                positionInfo.innerHTML = '<div class="text-info"><i class="fas fa-spinner fa-spin me-2"></i>Checking position availability...</div>';
+                positionInfo.className = 'mt-2 p-2 bg-light rounded';
+            }
+        }
+        
+        function showPositionValidation(type, message) {
+            const positionInfo = document.getElementById('position-validation-info');
+            if (positionInfo) {
+                const alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
+                const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-triangle';
+                positionInfo.innerHTML = `<div class="alert ${alertClass} py-2 mb-0"><i class="fas ${icon} me-2"></i>${message}</div>`;
+                positionInfo.className = 'mt-2';
+            }
+        }
+        
+        function clearPositionValidation() {
+            const positionInfo = document.getElementById('position-validation-info');
+            if (positionInfo) {
+                positionInfo.innerHTML = '';
+                positionInfo.className = '';
+            }
+        }
+        
+        function showOccupiedPositionInfo(occupiedBy, position) {
+            const positionInfo = document.getElementById('position-validation-info');
+            if (positionInfo) {
+                positionInfo.innerHTML += `
+                    <div class="mt-2 p-2 bg-warning-light rounded">
+                        <strong>Position Details:</strong><br>
+                        <small>
+                            ${occupiedBy.name} (@${occupiedBy.username})<br>
+                            Joined: ${occupiedBy.joined_at}
+                        </small>
+                    </div>
+                `;
+            }
+        }
+        
+        // Validate position availability specifically for registration process
+        function validatePositionAvailabilityForRegistration(orderData, button, originalText) {
+            const uplineInput = document.getElementById('upline-username');
+            const uplineUsername = uplineInput.value.trim();
+            const positionRadio = document.querySelector('input[name="position"]:checked');
+            
+            if (!uplineUsername || !positionRadio) {
+                showToast('Upline username and position selection are required', 'error');
+                button.innerHTML = originalText;
+                button.disabled = false;
+                return;
+            }
+            
+            const position = positionRadio.value;
+            
+            // Get sponsor ID for hierarchy validation
+            const sponsorIdInput = document.getElementById('sponsor-id');
+            const sponsorId = sponsorIdInput ? sponsorIdInput.value.trim() : '';
+            
+            const requestData = {
+                upline_username: uplineUsername,
+                position: position
+            };
+            
+            // Include sponsor ID if available for hierarchy validation
+            if (sponsorId) {
+                requestData.sponsor_id = sponsorId;
+            }
+            
+            fetch(`/api/check-position-availability`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '{{ csrf_token() }}'
+                },
+                body: JSON.stringify(requestData)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.available) {
+                        showPositionValidation('success', data.message);
+                        // Position is available, proceed with registration
+                        registerAffiliateAccount(orderData, button, originalText);
+                    } else {
+                        showPositionValidation('error', data.message);
+                        
+                        if (data.cross_link_error) {
+                            showToast('Cross-linking detected! Please select an upline from your sponsor\'s downline network.', 'error');
+                            showCrossLinkWarning();
+                        } else {
+                            showToast(`${position.charAt(0).toUpperCase() + position.slice(1)} position is already occupied. Please select a different position.`, 'error');
+                        }
+                        
+                        if (data.occupied_by) {
+                            showOccupiedPositionInfo(data.occupied_by, position);
+                        }
+                        
+                        // Reset button
+                        button.innerHTML = originalText;
+                        button.disabled = false;
+                    }
+                })
+                .catch(error => {
+                    console.error('Position validation error:', error);
+                    showPositionValidation('error', 'Error checking position availability');
+                    showToast('Error validating position availability. Please try again.', 'error');
+                    
+                    // Reset button
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                });
         }
         
         function showUplineInfo(upline) {
@@ -2470,6 +2689,29 @@
                     button.innerHTML = originalText;
                     button.disabled = false;
                     return;
+                }
+                
+                // For manual placement, verify position availability before proceeding
+                if (placement === 'manual') {
+                    // Check if position validation has been done and if it's available
+                    const positionInfo = document.getElementById('position-validation-info');
+                    const hasPositionError = positionInfo && positionInfo.innerHTML.includes('alert-danger');
+                    
+                    if (hasPositionError) {
+                        showToast('Selected position is not available. Please choose a different position or upline user.', 'error');
+                        button.innerHTML = originalText;
+                        button.disabled = false;
+                        return;
+                    }
+                    
+                    // If position validation hasn't been done yet, do it now
+                    if (!positionInfo || !positionInfo.innerHTML.includes('alert-success')) {
+                        showToast('Please wait while we validate position availability...', 'info');
+                        
+                        // Validate position availability and then proceed
+                        validatePositionAvailabilityForRegistration(orderData, button, originalText);
+                        return;
+                    }
                 }
                 
                 // Add registration data to order - use field names expected by AffiliateLoginController
