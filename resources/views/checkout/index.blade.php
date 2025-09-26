@@ -147,43 +147,229 @@
                             </div>
                             
                             <div class="row g-3">
+                                <!-- Sponsor ID -->
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-label">Sponsor ID (Optional)</label>
-                                        <input type="text" class="form-control" name="sponsor_id" id="sponsor-id" placeholder="Enter sponsor username">
-                                        <small class="text-muted">Leave blank if no sponsor</small>
+                                        <label class="form-label">Sponsor ID (Required) *</label>
+                                        <div class="position-relative">
+                                            <input type="text" class="form-control" name="sponsor_id" id="sponsor-id" 
+                                                   placeholder="Enter sponsor username or referral code" required
+                                                   onblur="validateSponsor()" oninput="clearSponsorValidation()">
+                                            <div id="sponsor-validation-spinner" class="validation-spinner" style="display: none;">
+                                                <i class="spinner-border spinner-border-sm"></i>
+                                            </div>
+                                            <div id="sponsor-validation-icon" class="validation-icon" style="display: none;">
+                                                <i class="icon-check text-success" id="sponsor-success-icon" style="display: none;"></i>
+                                                <i class="icon-close text-danger" id="sponsor-error-icon" style="display: none;"></i>
+                                            </div>
+                                        </div>
+                                        <div id="sponsor-validation-message" class="validation-message" style="display: none;"></div>
+                                        <div id="sponsor-info" class="sponsor-info mt-2" style="display: none;"></div>
                                     </div>
                                 </div>
+                                
+                                <!-- Username -->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-label">Username *</label>
-                                        <input type="text" class="form-control" name="username" id="registration-username" required>
-                                        <small class="text-muted">Choose a unique username</small>
+                                        <div class="position-relative">
+                                            <input type="text" class="form-control" name="username" id="registration-username" required
+                                                   placeholder="Choose a unique username"
+                                                   onblur="validateUsername()" oninput="clearUsernameValidation()">
+                                            <div id="username-validation-spinner" class="validation-spinner" style="display: none;">
+                                                <i class="spinner-border spinner-border-sm"></i>
+                                            </div>
+                                            <div id="username-validation-icon" class="validation-icon" style="display: none;">
+                                                <i class="icon-check text-success" id="username-success-icon" style="display: none;"></i>
+                                                <i class="icon-close text-danger" id="username-error-icon" style="display: none;"></i>
+                                            </div>
+                                        </div>
+                                        <div id="username-validation-message" class="validation-message" style="display: none;"></div>
+                                        <small class="text-muted">Letters, numbers, and underscores only</small>
                                     </div>
                                 </div>
+                                
+                                <!-- First Name -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">First Name *</label>
+                                        <input type="text" class="form-control" name="firstname" id="registration-firstname" required
+                                               placeholder="Enter your first name">
+                                    </div>
+                                </div>
+                                
+                                <!-- Last Name -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Last Name *</label>
+                                        <input type="text" class="form-control" name="lastname" id="registration-lastname" required
+                                               placeholder="Enter your last name">
+                                    </div>
+                                </div>
+                                
+                                <!-- Email -->
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-label">Email Address *</label>
+                                        <div class="position-relative">
+                                            <input type="email" class="form-control" name="email" id="registration-email" required
+                                                   placeholder="Enter your email address"
+                                                   onblur="validateRegistrationEmail()" oninput="clearRegistrationEmailValidation()">
+                                            <div id="registration-email-validation-spinner" class="validation-spinner" style="display: none;">
+                                                <i class="spinner-border spinner-border-sm"></i>
+                                            </div>
+                                            <div id="registration-email-validation-icon" class="validation-icon" style="display: none;">
+                                                <i class="icon-check text-success" id="registration-email-success-icon" style="display: none;"></i>
+                                                <i class="icon-close text-danger" id="registration-email-error-icon" style="display: none;"></i>
+                                            </div>
+                                        </div>
+                                        <div id="registration-email-validation-message" class="validation-message" style="display: none;"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Phone -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Phone Number *</label>
+                                        <div class="position-relative">
+                                            <input type="tel" class="form-control" name="phone" id="registration-phone" required
+                                                   placeholder="Enter your phone number"
+                                                   onblur="validatePhone()" oninput="clearPhoneValidation()">
+                                            <div id="phone-validation-spinner" class="validation-spinner" style="display: none;">
+                                                <i class="spinner-border spinner-border-sm"></i>
+                                            </div>
+                                            <div id="phone-validation-icon" class="validation-icon" style="display: none;">
+                                                <i class="icon-check text-success" id="phone-success-icon" style="display: none;"></i>
+                                                <i class="icon-close text-danger" id="phone-error-icon" style="display: none;"></i>
+                                            </div>
+                                        </div>
+                                        <div id="phone-validation-message" class="validation-message" style="display: none;"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Country -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Country</label>
+                                        <select class="form-control" name="country" id="registration-country">
+                                            <option value="">Select Country</option>
+                                            <option value="BD" selected>Bangladesh</option>
+                                            <option value="IN">India</option>
+                                            <option value="PK">Pakistan</option>
+                                            <option value="US">United States</option>
+                                            <option value="CA">Canada</option>
+                                            <option value="GB">United Kingdom</option>
+                                            <option value="AU">Australia</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <!-- Password -->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-label">Password *</label>
-                                        <input type="password" class="form-control" name="password" id="registration-password" required>
+                                        <input type="password" class="form-control" name="password" id="registration-password" required
+                                               placeholder="Enter password" minlength="8">
                                         <small class="text-muted">Minimum 8 characters</small>
                                     </div>
                                 </div>
+                                
+                                <!-- Confirm Password -->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-label">Confirm Password *</label>
-                                        <input type="password" class="form-control" name="password_confirmation" required>
+                                        <input type="password" class="form-control" name="password_confirmation" required
+                                               placeholder="Confirm password">
                                     </div>
                                 </div>
-                                <div class="col-12">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="subscribe_newsletter" checked>
-                                        <label class="form-check-label">Subscribe to newsletter for exclusive offers</label>
+                                
+                                <!-- Address -->
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-label">Address</label>
+                                        <textarea class="form-control" name="address" id="registration-address" rows="2"
+                                                  placeholder="Enter your complete address"></textarea>
                                     </div>
                                 </div>
+                                
+                                <!-- Position Selection -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Preferred Position *</label>
+                                        <div class="position-selection mt-2">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="position" value="left" id="position-left" checked>
+                                                <label class="form-check-label" for="position-left">Left</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="position" value="right" id="position-right">
+                                                <label class="form-check-label" for="position-right">Right</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Placement Type -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Placement Type *</label>
+                                        <div class="placement-selection mt-2">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="placement" value="auto" id="placement-auto" checked
+                                                       onchange="toggleManualPlacement()">
+                                                <label class="form-check-label" for="placement-auto">
+                                                    Auto Placement <small class="text-muted">(Recommended)</small>
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="placement" value="manual" id="placement-manual"
+                                                       onchange="toggleManualPlacement()">
+                                                <label class="form-check-label" for="placement-manual">
+                                                    Manual Placement
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Manual Placement Username (Hidden by default) -->
+                                <div class="col-md-12" id="manual-placement-section" style="display: none;">
+                                    <div class="form-group">
+                                        <label class="form-label">Upline Username *</label>
+                                        <div class="position-relative">
+                                            <input type="text" class="form-control" name="upline_username" id="upline-username"
+                                                   placeholder="Enter upline username for manual placement"
+                                                   onblur="validateUplineUsername()" oninput="clearUplineValidation()">
+                                            <div id="upline-validation-spinner" class="validation-spinner" style="display: none;">
+                                                <i class="spinner-border spinner-border-sm"></i>
+                                            </div>
+                                            <div id="upline-validation-icon" class="validation-icon" style="display: none;">
+                                                <i class="icon-check text-success" id="upline-success-icon" style="display: none;"></i>
+                                                <i class="icon-close text-danger" id="upline-error-icon" style="display: none;"></i>
+                                            </div>
+                                        </div>
+                                        <div id="upline-validation-message" class="validation-message" style="display: none;"></div>
+                                        <div id="upline-info" class="upline-info mt-2" style="display: none;"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Marketing Consent -->
                                 <div class="col-12">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="agree_terms" required>
-                                        <label class="form-check-label">I agree to <a href="#">Terms & Conditions</a> *</label>
+                                        <input class="form-check-input" type="checkbox" name="marketing" id="marketing-consent">
+                                        <label class="form-check-label" for="marketing-consent">
+                                            I agree to receive marketing communications and newsletters
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <!-- Terms & Conditions -->
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="terms" id="agree-terms" required>
+                                        <label class="form-check-label" for="agree-terms">
+                                            I agree to the <a href="{{ route('page.terms-conditions') }}" target="_blank">Terms & Conditions</a> *
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -688,6 +874,83 @@
             color: #6c757d;
             font-style: italic;
         }
+        
+        /* Real-time Validation Styles */
+        .position-relative {
+            position: relative;
+        }
+        
+        .validation-spinner,
+        .validation-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 5;
+        }
+        
+        .validation-message {
+            font-size: 13px;
+            margin-top: 5px;
+        }
+        
+        .validation-message.success {
+            color: #28a745;
+        }
+        
+        .validation-message.error {
+            color: #dc3545;
+        }
+        
+        .validation-message.warning {
+            color: #ffc107;
+        }
+        
+        .form-control.valid {
+            border-color: #28a745;
+            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+        }
+        
+        .form-control.invalid {
+            border-color: #dc3545;
+            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+        }
+        
+        .form-control.checking {
+            border-color: #ffc107;
+            box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
+        }
+        
+        .sponsor-info,
+        .upline-info {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 8px 12px;
+        }
+        
+        .sponsor-info .sponsor-details,
+        .upline-info .upline-details {
+            display: flex;
+            align-items: center;
+            font-size: 13px;
+        }
+        
+        .sponsor-info .sponsor-avatar,
+        .upline-info .upline-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .position-selection .form-check-inline {
+            margin-right: 1rem;
+        }
+        
+        .placement-selection .form-check {
+            margin-bottom: 0.5rem;
+        }
     </style>
 @endpush
 @push('scripts')
@@ -696,6 +959,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             loadDistricts();
             initializePaymentMethods();
+            initializeRegistrationValidation();
             
             // Show login modal if there are login errors
             @if ($errors->has('email') || $errors->has('password'))
@@ -715,6 +979,389 @@
                 }, 500);
             @endif
         });
+        
+        // Initialize registration form validation
+        function initializeRegistrationValidation() {
+            // Auto-sync billing form with registration data
+            setupRegistrationSync();
+        }
+        
+        // Setup sync between registration and billing forms
+        function setupRegistrationSync() {
+            const registrationFields = [
+                { reg: 'registration-firstname', bill: 'first_name' },
+                { reg: 'registration-lastname', bill: 'last_name' },
+                { reg: 'registration-email', bill: 'email' },
+                { reg: 'registration-phone', bill: 'phone' },
+                { reg: 'registration-address', bill: 'address' }
+            ];
+            
+            registrationFields.forEach(field => {
+                const regInput = document.getElementById(field.reg);
+                const billInput = document.getElementById(field.bill);
+                
+                if (regInput && billInput) {
+                    regInput.addEventListener('input', function() {
+                        billInput.value = this.value;
+                    });
+                }
+            });
+        }
+        
+        // Toggle manual placement section
+        function toggleManualPlacement() {
+            const manualPlacement = document.getElementById('placement-manual');
+            const manualSection = document.getElementById('manual-placement-section');
+            const uplineInput = document.getElementById('upline-username');
+            
+            if (manualPlacement.checked) {
+                manualSection.style.display = 'block';
+                uplineInput.setAttribute('required', 'required');
+            } else {
+                manualSection.style.display = 'none';
+                uplineInput.removeAttribute('required');
+                clearUplineValidation();
+            }
+        }
+        
+        // Validation functions for each field
+        
+        // Sponsor validation
+        function validateSponsor() {
+            const sponsorInput = document.getElementById('sponsor-id');
+            const sponsorId = sponsorInput.value.trim();
+            
+            if (!sponsorId) {
+                showSponsorValidation('error', 'Sponsor ID is required');
+                return;
+            }
+            
+            showSponsorChecking();
+            
+            fetch(`/api/validate-sponsor?sponsor_id=${encodeURIComponent(sponsorId)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.valid) {
+                        showSponsorValidation('success', 'Valid sponsor found!');
+                        showSponsorInfo(data.sponsor);
+                    } else {
+                        showSponsorValidation('error', data.message || 'Sponsor not found');
+                        hideSponsorInfo();
+                    }
+                })
+                .catch(error => {
+                    console.error('Sponsor validation error:', error);
+                    showSponsorValidation('error', 'Unable to validate sponsor');
+                });
+        }
+        
+        function clearSponsorValidation() {
+            clearValidationState('sponsor');
+        }
+        
+        function showSponsorChecking() {
+            showValidationChecking('sponsor', 'Validating sponsor...');
+        }
+        
+        function showSponsorValidation(type, message) {
+            showValidationResult('sponsor', type, message);
+        }
+        
+        function showSponsorInfo(sponsor) {
+            const infoDiv = document.getElementById('sponsor-info');
+            infoDiv.innerHTML = `
+                <div class="sponsor-details">
+                    <img src="${sponsor.avatar}" alt="${sponsor.name}" class="sponsor-avatar">
+                    <div>
+                        <strong>${sponsor.name}</strong> (@${sponsor.username})<br>
+                        <small class="text-muted">Status: ${sponsor.status} • Role: ${sponsor.role}</small>
+                    </div>
+                </div>
+            `;
+            infoDiv.style.display = 'block';
+        }
+        
+        function hideSponsorInfo() {
+            document.getElementById('sponsor-info').style.display = 'none';
+        }
+        
+        // Username validation
+        function validateUsername() {
+            const usernameInput = document.getElementById('registration-username');
+            const username = usernameInput.value.trim();
+            
+            if (!username) {
+                showUsernameValidation('error', 'Username is required');
+                return;
+            }
+            
+            if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+                showUsernameValidation('error', 'Username can only contain letters, numbers, and underscores');
+                return;
+            }
+            
+            showUsernameChecking();
+            
+            fetch(`/api/check-username?username=${encodeURIComponent(username)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.available) {
+                        showUsernameValidation('success', 'Username is available!');
+                    } else {
+                        showUsernameValidation('error', data.message || 'Username is not available');
+                    }
+                })
+                .catch(error => {
+                    console.error('Username validation error:', error);
+                    showUsernameValidation('error', 'Unable to validate username');
+                });
+        }
+        
+        function clearUsernameValidation() {
+            clearValidationState('username');
+        }
+        
+        function showUsernameChecking() {
+            showValidationChecking('username', 'Checking username availability...');
+        }
+        
+        function showUsernameValidation(type, message) {
+            showValidationResult('username', type, message);
+        }
+        
+        // Email validation
+        function validateRegistrationEmail() {
+            const emailInput = document.getElementById('registration-email');
+            const email = emailInput.value.trim();
+            
+            if (!email) {
+                showRegistrationEmailValidation('error', 'Email is required');
+                return;
+            }
+            
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showRegistrationEmailValidation('error', 'Please enter a valid email address');
+                return;
+            }
+            
+            showRegistrationEmailChecking();
+            
+            fetch(`/api/check-email?email=${encodeURIComponent(email)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.available) {
+                        showRegistrationEmailValidation('success', 'Email is available!');
+                    } else {
+                        showRegistrationEmailValidation('error', data.message || 'Email is not available');
+                    }
+                })
+                .catch(error => {
+                    console.error('Email validation error:', error);
+                    showRegistrationEmailValidation('error', 'Unable to validate email');
+                });
+        }
+        
+        function clearRegistrationEmailValidation() {
+            clearValidationState('registration-email');
+        }
+        
+        function showRegistrationEmailChecking() {
+            showValidationChecking('registration-email', 'Checking email availability...');
+        }
+        
+        function showRegistrationEmailValidation(type, message) {
+            showValidationResult('registration-email', type, message);
+        }
+        
+        // Phone validation
+        function validatePhone() {
+            const phoneInput = document.getElementById('registration-phone');
+            const phone = phoneInput.value.trim();
+            
+            if (!phone) {
+                showPhoneValidation('error', 'Phone number is required');
+                return;
+            }
+            
+            showPhoneChecking();
+            
+            fetch(`/api/check-phone?phone=${encodeURIComponent(phone)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.available) {
+                        showPhoneValidation('success', 'Phone number is available!');
+                    } else {
+                        showPhoneValidation('error', data.message || 'Phone number is not available');
+                    }
+                })
+                .catch(error => {
+                    console.error('Phone validation error:', error);
+                    showPhoneValidation('error', 'Unable to validate phone number');
+                });
+        }
+        
+        function clearPhoneValidation() {
+            clearValidationState('phone');
+        }
+        
+        function showPhoneChecking() {
+            showValidationChecking('phone', 'Checking phone availability...');
+        }
+        
+        function showPhoneValidation(type, message) {
+            showValidationResult('phone', type, message);
+        }
+        
+        // Upline username validation (for manual placement)
+        function validateUplineUsername() {
+            const uplineInput = document.getElementById('upline-username');
+            const username = uplineInput.value.trim();
+            
+            if (!username) {
+                showUplineValidation('error', 'Upline username is required for manual placement');
+                return;
+            }
+            
+            showUplineChecking();
+            
+            fetch(`/api/validate-upline-username`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({ username: username })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.valid) {
+                        showUplineValidation('success', 'Valid upline user found!');
+                        showUplineInfo(data.upline);
+                    } else {
+                        showUplineValidation('error', data.message || 'Upline user not found');
+                        hideUplineInfo();
+                    }
+                })
+                .catch(error => {
+                    console.error('Upline validation error:', error);
+                    showUplineValidation('error', 'Unable to validate upline username');
+                });
+        }
+        
+        function clearUplineValidation() {
+            clearValidationState('upline');
+            hideUplineInfo();
+        }
+        
+        function showUplineChecking() {
+            showValidationChecking('upline', 'Validating upline user...');
+        }
+        
+        function showUplineValidation(type, message) {
+            showValidationResult('upline', type, message);
+        }
+        
+        function showUplineInfo(upline) {
+            const infoDiv = document.getElementById('upline-info');
+            infoDiv.innerHTML = `
+                <div class="upline-details">
+                    <div>
+                        <strong>${upline.name}</strong> (@${upline.username})<br>
+                        <small class="text-muted">Status: ${upline.status}</small>
+                    </div>
+                </div>
+            `;
+            infoDiv.style.display = 'block';
+        }
+        
+        function hideUplineInfo() {
+            document.getElementById('upline-info').style.display = 'none';
+        }
+        
+        // Generic validation helper functions
+        function clearValidationState(field) {
+            const input = document.getElementById(field === 'registration-email' ? 'registration-email' : 
+                                              field === 'phone' ? 'registration-phone' :
+                                              field === 'username' ? 'registration-username' :
+                                              field === 'sponsor' ? 'sponsor-id' :
+                                              field === 'upline' ? 'upline-username' : field);
+            const spinner = document.getElementById(`${field}-validation-spinner`);
+            const icon = document.getElementById(`${field}-validation-icon`);
+            const message = document.getElementById(`${field}-validation-message`);
+            
+            if (input) input.classList.remove('valid', 'invalid', 'checking');
+            if (spinner) spinner.style.display = 'none';
+            if (icon) icon.style.display = 'none';
+            if (message) message.style.display = 'none';
+        }
+        
+        function showValidationChecking(field, message) {
+            const input = document.getElementById(field === 'registration-email' ? 'registration-email' : 
+                                              field === 'phone' ? 'registration-phone' :
+                                              field === 'username' ? 'registration-username' :
+                                              field === 'sponsor' ? 'sponsor-id' :
+                                              field === 'upline' ? 'upline-username' : field);
+            const spinner = document.getElementById(`${field}-validation-spinner`);
+            const icon = document.getElementById(`${field}-validation-icon`);
+            const messageDiv = document.getElementById(`${field}-validation-message`);
+            
+            if (input) {
+                input.classList.remove('valid', 'invalid');
+                input.classList.add('checking');
+            }
+            
+            if (spinner) spinner.style.display = 'block';
+            if (icon) icon.style.display = 'none';
+            
+            if (messageDiv) {
+                messageDiv.textContent = message;
+                messageDiv.className = 'validation-message warning';
+                messageDiv.style.display = 'block';
+            }
+        }
+        
+        function showValidationResult(field, type, message) {
+            const input = document.getElementById(field === 'registration-email' ? 'registration-email' : 
+                                              field === 'phone' ? 'registration-phone' :
+                                              field === 'username' ? 'registration-username' :
+                                              field === 'sponsor' ? 'sponsor-id' :
+                                              field === 'upline' ? 'upline-username' : field);
+            const spinner = document.getElementById(`${field}-validation-spinner`);
+            const icon = document.getElementById(`${field}-validation-icon`);
+            const messageDiv = document.getElementById(`${field}-validation-message`);
+            const successIcon = document.getElementById(`${field}-success-icon`);
+            const errorIcon = document.getElementById(`${field}-error-icon`);
+            
+            // Clear checking state
+            if (input) input.classList.remove('checking');
+            if (spinner) spinner.style.display = 'none';
+            
+            // Set validation state
+            if (type === 'success') {
+                if (input) {
+                    input.classList.remove('invalid');
+                    input.classList.add('valid');
+                }
+                if (successIcon) successIcon.style.display = 'block';
+                if (errorIcon) errorIcon.style.display = 'none';
+            } else {
+                if (input) {
+                    input.classList.remove('valid');
+                    input.classList.add('invalid');
+                }
+                if (successIcon) successIcon.style.display = 'none';
+                if (errorIcon) errorIcon.style.display = 'block';
+            }
+            
+            // Show icon and message
+            if (icon) icon.style.display = 'block';
+            if (messageDiv) {
+                messageDiv.innerHTML = message;
+                messageDiv.className = `validation-message ${type}`;
+                messageDiv.style.display = 'block';
+            }
+        }
 
         // Checkout type selection
         function selectCheckoutType(type) {
@@ -1744,24 +2391,115 @@
             
             // Add account creation data if register checkout type
             if (checkoutType === 'register') {
-                const username = document.getElementById('username')?.value;
-                const password = document.getElementById('password')?.value;
-                const passwordConfirmation = document.getElementById('password_confirmation')?.value;
+                // Get registration form data
+                const sponsorId = document.getElementById('sponsor-id')?.value?.trim() || '';
+                const username = document.getElementById('registration-username')?.value?.trim() || '';
+                const firstname = document.getElementById('registration-firstname')?.value?.trim() || '';
+                const lastname = document.getElementById('registration-lastname')?.value?.trim() || '';
+                const registrationEmail = document.getElementById('registration-email')?.value?.trim() || '';
+                const registrationPhone = document.getElementById('registration-phone')?.value?.trim() || '';
+                const country = document.getElementById('registration-country')?.value || 'BD';
+                const password = document.getElementById('registration-password')?.value || '';
+                const passwordConfirmation = document.querySelector('input[name="password_confirmation"]')?.value || '';
+                const registrationAddress = document.getElementById('registration-address')?.value?.trim() || '';
+                const position = document.querySelector('input[name="position"]:checked')?.value || 'left';
+                const placement = document.querySelector('input[name="placement"]:checked')?.value || 'auto';
+                const uplineUsername = document.getElementById('upline-username')?.value?.trim() || '';
+                const marketing = document.getElementById('marketing-consent')?.checked || false;
+                const terms = document.getElementById('agree-terms')?.checked || false;
                 
-                if (username && password) {
-                    orderData.create_account = true;
-                    orderData.username = username;
-                    orderData.password = password;
-                    orderData.password_confirmation = passwordConfirmation;
-                    orderData.subscribe_newsletter = document.getElementById('newsletter')?.checked || false;
-                    orderData.agree_terms = document.getElementById('check-agree')?.checked || false;
+                // Validate required registration fields
+                if (!sponsorId) {
+                    showToast('Sponsor ID is required for account creation', 'error');
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                    return;
                 }
+                
+                if (!username) {
+                    showToast('Username is required for account creation', 'error');
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                    return;
+                }
+                
+                if (!firstname || !lastname) {
+                    showToast('First name and last name are required for account creation', 'error');
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                    return;
+                }
+                
+                if (!registrationEmail) {
+                    showToast('Email is required for account creation', 'error');
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                    return;
+                }
+                
+                if (!registrationPhone) {
+                    showToast('Phone number is required for account creation', 'error');
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                    return;
+                }
+                
+                if (!password || password.length < 8) {
+                    showToast('Password must be at least 8 characters long', 'error');
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                    return;
+                }
+                
+                if (password !== passwordConfirmation) {
+                    showToast('Password confirmation does not match', 'error');
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                    return;
+                }
+                
+                if (!terms) {
+                    showToast('You must agree to the terms and conditions', 'error');
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                    return;
+                }
+                
+                if (placement === 'manual' && !uplineUsername) {
+                    showToast('Upline username is required for manual placement', 'error');
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                    return;
+                }
+                
+                // Add registration data to order - use field names expected by AffiliateLoginController
+                Object.assign(orderData, {
+                    // Registration fields expected by AffiliateLoginController::register()
+                    sponsor_id: sponsorId,
+                    username: username,
+                    firstname: firstname,
+                    lastname: lastname,
+                    email: registrationEmail, // This will override customer_email for registration
+                    phone: registrationPhone, // This will override customer_phone for registration
+                    password: password,
+                    password_confirmation: passwordConfirmation,
+                    country: country,
+                    address: registrationAddress,
+                    position: position,
+                    placement: placement,
+                    upline_username: uplineUsername,
+                    marketing: marketing,
+                    terms: terms ? '1' : '0' // Convert boolean to string for Laravel's accepted validation
+                });
             }
             
             console.log('Order data prepared for backend validation:', orderData);
             
-            // Get the form action URL
+            // Always use CheckoutController for order processing
+            // The CheckoutController will handle affiliate registration internally when needed
             const actionUrl = form.action || '{{ route("orders.store") }}';
+            
+            console.log('Using action URL:', actionUrl, 'for checkout type:', checkoutType);
             
             // Submit order
             fetch(actionUrl, {

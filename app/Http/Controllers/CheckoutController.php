@@ -814,7 +814,7 @@ class CheckoutController extends Controller
                     'checkout_type' => $request->checkout_type
                 ]);
             } elseif ($request->checkout_type === 'register') {
-                // Guest user wants to register during checkout
+                // Guest user wants to register as affiliate during checkout
                 // Check if user with this email already exists
                 $existingUser = User::where('email', $request->customer_email)->first();
                 
@@ -826,6 +826,89 @@ class CheckoutController extends Controller
                     ], 422);
                 }
 
+                // For affiliate registration, we need to call AffiliateLoginController::register()
+                // Create affiliate account using AffiliateLoginController
+                $affiliateController = new \App\Http\Controllers\Auth\AffiliateLoginController();
+                
+                // Prepare request for affiliate registration
+                $affiliateRequest = new \Illuminate\Http\Request();
+                $affiliateRequest->merge([
+                    'sponsor_id' => $request->sponsor_id,
+                    'username' => $request->username,
+                    'firstname' => $request->firstname,
+                    'lastname' => $request->lastname,
+                    'email' => $request->email, // Use the registration email
+                    'phone' => $request->phone, // Use the registration phone
+                    'password' => $request->password,
+                    'password_confirmation' => $request->password_confirmation,
+                    'country' => $request->country ?? 'BD',
+                    'address' => $request->address,
+                    'position' => $request->position ?? 'left',
+                    'placement' => $request->placement ?? 'auto',
+                    'upline_username' => $request->upline_username,
+                    'marketing' => $request->marketing ?? false,
+                    'terms' => $request->terms ?? '0',
+                ]);
+                
+                try {
+                    // Call affiliate registration
+                    $affiliateResponse = $affiliateController->register($affiliateRequest);
+                    
+                    // If affiliate registration fails, return error
+                    if ($affiliateResponse instanceof \Illuminate\Http\RedirectResponse) {
+                        // Check if there are validation errors
+                        if ($affiliateResponse->getSession()->get('errors')) {
+                            DB::rollback();
+                            $errors = $affiliateResponse->getSession()->get('errors');
+                            return response()->json([
+                                'success' => false,
+                                'message' => 'Affiliate registration failed: ' . $errors->first(),
+                                'errors' => $errors->toArray()
+                            ], 422);
+                        }
+                    }
+                    
+                    // Get the newly created user (should be logged in after registration)
+                    $newUser = Auth::user();
+                    if (!$newUser) {
+                        // If user is not logged in, try to find by email
+                        $newUser = User::where('email', $request->email)->first();
+                        if ($newUser) {
+                            Auth::login($newUser);
+                        }
+                    }
+                    
+                    if (!$newUser) {
+                        throw new \Exception('Failed to create affiliate account');
+                    }
+                    
+                    $customerId = $newUser->id;
+                    
+                    Log::info('New affiliate registered during checkout:', [
+                        'user_id' => $newUser->id,
+                        'username' => $newUser->username,
+                        'email' => $newUser->email,
+                        'role' => $newUser->role,
+                        'sponsor_id' => $newUser->sponsor_id,
+                        'position' => $newUser->position
+                    ]);
+                    
+                } catch (\Exception $e) {
+                    DB::rollback();
+                    Log::error('Affiliate registration during checkout failed:', [
+                        'error' => $e->getMessage(),
+                        'request_data' => $affiliateRequest->all()
+                    ]);
+                    
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Failed to create affiliate account: ' . $e->getMessage()
+                    ], 422);
+                }
+
+                // COMMENTED OUT: Regular customer account creation
+                // We use affiliate registration instead for checkout_type === 'register'
+                /*
                 // Create new user account
                 $userData = [
                     'name' => $request->customer_name,
@@ -858,6 +941,7 @@ class CheckoutController extends Controller
                     'email' => $newUser->email,
                     'ref_by' => $newUser->ref_by
                 ]);
+                */
             } else {
                 // Guest checkout - use a default guest customer ID
                 $customerId = 1; // Default guest customer ID
