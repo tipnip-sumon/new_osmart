@@ -589,9 +589,31 @@
                                 <div class="wd-check-payment">
                                     <h6 class="fw-5 mb_15">Payment Method</h6>
                                     
+                                    @auth
+                                    @if(auth()->user()->deposit_wallet > 0)
+                                    <!-- Wallet Payment -->
+                                    <div class="fieldset-radio mb_15 payment-method" data-method="wallet_payment">
+                                        <input type="radio" name="payment_method" id="wallet-payment" class="tf-check" value="wallet_payment" checked>
+                                        <label for="wallet-payment">
+                                            <i class="icon-wallet me-2"></i>Wallet Payment
+                                            <small class="d-block text-muted">Pay with your wallet balance</small>
+                                            <div class="wallet-balance-info mt-2">
+                                                <div class="d-flex justify-content-between align-items-center p-2 bg-light rounded">
+                                                    <span class="small text-muted">Available Balance:</span>
+                                                    <span class="fw-bold text-success">৳{{ number_format(auth()->user()->deposit_wallet, 2) }}</span>
+                                                </div>
+                                                <div class="wallet-payment-status mt-2" id="wallet-payment-status" style="display: none;">
+                                                    <!-- Status will be updated by JavaScript -->
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    @endif
+                                    @endauth
+                                    
                                     <!-- Cash on Delivery -->
                                     <div class="fieldset-radio mb_15 payment-method" data-method="cash_on_delivery">
-                                        <input type="radio" name="payment_method" id="cod" class="tf-check" value="cash_on_delivery" checked>
+                                        <input type="radio" name="payment_method" id="cod" class="tf-check" value="cash_on_delivery" @auth @if(auth()->user()->deposit_wallet <= 0) checked @endif @else checked @endauth>
                                         <label for="cod">
                                             <i class="icon-dollar me-2"></i>Cash on Delivery
                                             <small class="d-block text-muted">Pay when you receive your order</small>
@@ -2196,9 +2218,18 @@
                         this.closest('.payment-method').querySelector('.mobile-banking-options').style.display = 'block';
                     } else if (this.value === 'bank_transfer') {
                         this.closest('.payment-method').querySelector('.bank-transfer-options').style.display = 'block';
+                    } else if (this.value === 'wallet_payment') {
+                        // Check wallet balance and update status
+                        checkWalletBalance();
                     }
                 });
             });
+            
+            // Initial wallet balance check if wallet payment is already selected
+            const walletPaymentRadio = document.getElementById('wallet-payment');
+            if (walletPaymentRadio && walletPaymentRadio.checked) {
+                checkWalletBalance();
+            }
 
             // Mobile banking provider selection
             document.querySelectorAll('.mobile-option').forEach(option => {
@@ -2313,6 +2344,41 @@
         let currentDiscountAmount = 0;
         let currentShippingCost = 0;
         const subtotal = {{ json_encode($subtotal) }};
+        
+        // Wallet payment functions
+        function checkWalletBalance() {
+            @auth
+            const walletBalance = {{ auth()->user()->deposit_wallet ?? 0 }};
+            const orderTotal = parseFloat(document.getElementById('total-amount').textContent.replace(/[৳,]/g, ''));
+            const statusDiv = document.getElementById('wallet-payment-status');
+            
+            if (statusDiv) {
+                statusDiv.style.display = 'block';
+                
+                if (walletBalance >= orderTotal) {
+                    statusDiv.innerHTML = `
+                        <div class="alert alert-success py-2 mb-0">
+                            <i class="icon-check-circle me-2"></i>
+                            <strong>Sufficient Balance!</strong> You can complete this order with wallet payment.
+                            <br><small>Amount will be deducted: ৳${orderTotal.toLocaleString()}</small>
+                        </div>
+                    `;
+                } else {
+                    const shortfall = orderTotal - walletBalance;
+                    statusDiv.innerHTML = `
+                        <div class="alert alert-warning py-2 mb-0">
+                            <i class="icon-alert-triangle me-2"></i>
+                            <strong>Insufficient Balance!</strong> You need ৳${shortfall.toLocaleString()} more.
+                            <br><small>Available: ৳${walletBalance.toLocaleString()}, Required: ৳${orderTotal.toLocaleString()}</small>
+                        </div>
+                    `;
+                }
+            }
+            @else
+            // Guest users don't have wallet access
+            console.log('Guest user - no wallet access');
+            @endauth
+        }
         
         // Apply coupon code
         function applyCoupon() {
@@ -2679,7 +2745,21 @@
             }
             
             // Validate payment method specific requirements
-            if (paymentMethod === 'online_payment') {
+            if (paymentMethod === 'wallet_payment') {
+                @auth
+                const walletBalance = {{ auth()->user()->deposit_wallet ?? 0 }};
+                const orderTotal = parseFloat(document.getElementById('total-amount').textContent.replace(/[৳,]/g, ''));
+                
+                if (walletBalance < orderTotal) {
+                    const shortfall = orderTotal - walletBalance;
+                    showToast(`Insufficient wallet balance! You need ৳${shortfall.toLocaleString()} more. Available: ৳${walletBalance.toLocaleString()}`, 'error');
+                    return;
+                }
+                @else
+                showToast('Please login to use wallet payment', 'error');
+                return;
+                @endauth
+            } else if (paymentMethod === 'online_payment') {
                 const onlinePaymentType = document.querySelector('input[name="online_payment_type"]:checked');
                 const transactionId = document.querySelector('input[name="transaction_id"]').value.trim();
                 

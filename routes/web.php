@@ -22,9 +22,6 @@ Route::get('/cart-modal-test', function () {
     return view('cart-modal-test');
 })->name('cart.modal.test');
 
-// Include test routes
-require __DIR__.'/test.php';
-
 // Marketing Plan Routes - Public Access (No Authentication Required)
 Route::get('/marketing-plan', function() {
     return response()->file(base_path('marketing-plan.html'));

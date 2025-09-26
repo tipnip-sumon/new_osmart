@@ -407,7 +407,7 @@ class CheckoutController extends Controller
             'zip_code' => 'nullable|string|max:20',
             'state' => 'nullable|string|max:255',
             'area' => 'nullable|string|max:255', // Accept both area and state
-            'payment_method' => 'required|string|in:cash_on_delivery,bank_transfer,online_payment',
+            'payment_method' => 'required|string|in:cash_on_delivery,bank_transfer,online_payment,wallet_payment',
             'shipping_method' => 'required|string|in:inside_dhaka,outside_dhaka,across_country,free',
             'cart_items' => 'required|array|min:1', // Should be array, not string
             'cart_items.*.product_id' => 'required|integer',
@@ -625,16 +625,52 @@ class CheckoutController extends Controller
                 $proceedWithUpdatedTotal = false;
             }
 
+            // Handle wallet payment processing
+            if ($request->payment_method === 'wallet_payment') {
+                $user = Auth::user();
+                if (!$user) {
+                    throw new \Exception('Authentication required for wallet payment');
+                }
+                
+                // Reload user to get fresh data
+                $user = User::find($user->id);
+                
+                // Check wallet balance
+                if ($user->deposit_wallet < $finalTotal) {
+                    throw new \Exception('Insufficient wallet balance. Available: ৳' . number_format($user->deposit_wallet, 2) . ', Required: ৳' . number_format($finalTotal, 2));
+                }
+                
+                // Deduct amount from wallet using decrement for atomic operation
+                User::where('id', $user->id)->decrement('deposit_wallet', $finalTotal);
+                
+                // Get updated balance for logging
+                $updatedUser = User::find($user->id);
+                
+                Log::info('Wallet payment processed:', [
+                    'user_id' => $user->id,
+                    'order_amount' => $finalTotal,
+                    'previous_balance' => $user->deposit_wallet,
+                    'remaining_balance' => $updatedUser->deposit_wallet
+                ]);
+            }
+
             // Create the order using the correct Order model field names
             $orderNumber = 'ORD-' . date('Ymd') . '-' . str_pad(random_int(1, 9999), 4, '0', STR_PAD_LEFT);
+            
+            // Determine payment status based on payment method
+            $paymentStatus = 'pending';
+            if ($request->payment_method === 'wallet_payment') {
+                $paymentStatus = 'paid'; // Wallet payments are instant
+            } elseif ($request->payment_method === 'cash_on_delivery') {
+                $paymentStatus = 'pending';
+            }
             
             $orderData = [
                 'order_number' => $orderNumber,
                 'customer_id' => Auth::id() ?? 1, // Use 1 for testing if not authenticated
                 'vendor_id' => 1, // Add vendor_id field (use 1 for testing)
-                'status' => 'pending',
-                'payment_status' => $request->payment_method === 'cash_on_delivery' ? 'pending' : 
-                                   ($request->payment_method === 'online_payment' ? 'pending' : 'pending'),
+                'status' => $request->payment_method === 'wallet_payment' ? 'confirmed' : 'pending',
+                'payment_status' => $paymentStatus,
                 'shipping_status' => 'not_shipped', // Use correct shipping status
                 'total_amount' => $finalTotal,
                 'tax_amount' => $taxAmount,
@@ -666,7 +702,7 @@ class CheckoutController extends Controller
                 ],
                 'payment_details' => [
                     'method' => $request->payment_method,
-                    'status' => $request->payment_method === 'cash_on_delivery' ? 'pending' : 'pending',
+                    'status' => $paymentStatus, // Use the same status as payment_status
                     'online_payment_type' => $request->online_payment_type ?? null,
                     'transaction_id' => $request->transaction_id ?? null,
                     'sender_phone' => $request->sender_phone ?? null,
@@ -794,7 +830,7 @@ class CheckoutController extends Controller
                 'shipping_address.postal_code' => 'sometimes|string',
                 'shipping_address.country' => 'sometimes|string',
                 'billing_address' => 'sometimes|array',
-                'payment_method' => 'required|string',
+                'payment_method' => 'required|string|in:cash_on_delivery,bank_transfer,online_payment,wallet_payment',
                 'shipping_method' => 'required|string',
                 'cart_items' => 'required|array|min:1',
                 'cart_items.*.product_id' => 'required|integer',
@@ -863,6 +899,35 @@ class CheckoutController extends Controller
 
             DB::beginTransaction();
 
+            // Handle wallet payment processing
+            if ($request->payment_method === 'wallet_payment') {
+                $user = Auth::user();
+                if (!$user) {
+                    throw new \Exception('Authentication required for wallet payment');
+                }
+                
+                // Reload user to get fresh data
+                $user = User::find($user->id);
+                
+                // Check wallet balance
+                if ($user->deposit_wallet < $request->total_amount) {
+                    throw new \Exception('Insufficient wallet balance. Available: ৳' . number_format($user->deposit_wallet, 2) . ', Required: ৳' . number_format($request->total_amount, 2));
+                }
+                
+                // Deduct amount from wallet using decrement for atomic operation
+                User::where('id', $user->id)->decrement('deposit_wallet', $request->total_amount);
+                
+                // Get updated balance for logging
+                $updatedUser = User::find($user->id);
+                
+                Log::info('Wallet payment processed in processOrder:', [
+                    'user_id' => $user->id,
+                    'order_amount' => $request->total_amount,
+                    'previous_balance' => $user->deposit_wallet,
+                    'remaining_balance' => $updatedUser->deposit_wallet
+                ]);
+            }
+
             // Determine customer ID based on authentication status and checkout type
             $customerId = null;
             $authenticatedUser = Auth::user();
@@ -916,7 +981,7 @@ class CheckoutController extends Controller
             // Prepare payment details based on payment method
             $paymentDetails = [
                 'method' => $request->payment_method,
-                'status' => 'pending'
+                'status' => $request->payment_method === 'wallet_payment' ? 'paid' : 'pending'
             ];
 
             // Add specific payment details based on method
@@ -978,8 +1043,8 @@ class CheckoutController extends Controller
                 'order_number' => $orderNumber,
                 'customer_id' => $customerId,
                 'vendor_id' => 1, // Default vendor - adjust based on your multi-vendor logic
-                'status' => 'pending',
-                'payment_status' => $request->payment_method === 'online_payment' ? 'pending' : 'pending',
+                'status' => $request->payment_method === 'wallet_payment' ? 'confirmed' : 'pending',
+                'payment_status' => $request->payment_method === 'wallet_payment' ? 'paid' : ($request->payment_method === 'cash_on_delivery' ? 'pending' : 'pending'),
                 'shipping_status' => 'not_shipped',
                 'subtotal' => $request->subtotal,
                 'tax_amount' => $request->tax_amount ?? 0,
