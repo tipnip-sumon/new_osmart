@@ -1117,6 +1117,42 @@
                     </a>
                 </li>
 
+                <!-- Contact Management -->
+                <li class="slide has-sub {{ request()->routeIs('admin.contacts.*') ? 'open' : '' }}">
+                    <a href="javascript:void(0);" class="side-menu__item {{ request()->routeIs('admin.contacts.*') ? 'active' : '' }}">
+                        <i class="bx bx-envelope side-menu__icon"></i>
+                        <span class="side-menu__label">Contact Management</span>
+                        <i class="fe fe-chevron-right side-menu__angle"></i>
+                    </a>
+                    <ul class="slide-menu child1">
+                        <li class="slide">
+                            <a href="{{ route('admin.contacts.index') }}" class="side-menu__item {{ request()->routeIs('admin.contacts.index') ? 'active' : '' }}">
+                                <i class="bx bx-list-ul"></i> All Contacts
+                            </a>
+                        </li>
+                        <li class="slide">
+                            <a href="{{ route('admin.contacts.index', ['status' => 'unread']) }}" class="side-menu__item {{ request()->routeIs('admin.contacts.index') && request('status') == 'unread' ? 'active' : '' }}">
+                                <i class="bx bx-envelope"></i> Unread Messages
+                            </a>
+                        </li>
+                        <li class="slide">
+                            <a href="{{ route('admin.contacts.index', ['status' => 'replied']) }}" class="side-menu__item {{ request()->routeIs('admin.contacts.index') && request('status') == 'replied' ? 'active' : '' }}">
+                                <i class="bx bx-check-circle"></i> Replied Messages
+                            </a>
+                        </li>
+                        <li class="slide">
+                            <a href="{{ route('admin.contacts.index', ['newsletter' => '1']) }}" class="side-menu__item {{ request()->routeIs('admin.contacts.index') && request('newsletter') == '1' ? 'active' : '' }}">
+                                <i class="bx bx-news"></i> Newsletter Subscribers
+                            </a>
+                        </li>
+                        <li class="slide">
+                            <a href="{{ route('admin.contacts.export') }}" class="side-menu__item">
+                                <i class="bx bx-download"></i> Export Contacts
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
                 <!-- Inventory -->
                 <li class="slide has-sub {{ request()->routeIs('admin.inventory.*') ? 'open' : '' }}">
                     <a href="javascript:void(0);" class="side-menu__item {{ request()->routeIs('admin.inventory.*') ? 'active' : '' }}">

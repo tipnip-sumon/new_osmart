@@ -55,6 +55,7 @@ use App\Http\Controllers\Admin\AffiliateCommissionController;
 use App\Http\Controllers\Admin\ProductSpecificationController;
 use App\Http\Controllers\Admin\AdminPackageLinkSharingController;
 use App\Http\Controllers\Admin\SupportController as AdminSupportController;
+use App\Http\Controllers\Admin\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -184,7 +185,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth:admin'])->group(functi
         Route::get('/export/csv', [PaymentController::class, 'export'])->name('export');
         Route::get('/analytics', [PaymentController::class, 'analytics'])->name('analytics');
     });
-     // Modal Management Routes
+    // Modal Management Routes
     Route::controller(ModalManagementController::class)->group(function () {
         Route::get('/modals', 'index')->name('modal.index');
         Route::get('/modals/create', 'create')->name('modal.create');
@@ -197,6 +198,21 @@ Route::prefix('admin')->name('admin.')->middleware(['auth:admin'])->group(functi
         Route::get('/modals/analytics', 'analytics')->name('modal.analytics');
         Route::post('/modals/bulk-action', 'bulkAction')->name('modal.bulk-action');
         Route::get('/modals/quick-stats', 'quickStats')->name('modal.quick-stats');
+    });
+    
+    // Contact Management Routes
+    Route::controller(ContactController::class)->prefix('contacts')->name('contacts.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{contact}', 'show')->name('show');
+        Route::get('/{contact}/edit', 'edit')->name('edit');
+        Route::put('/{contact}', 'update')->name('update');
+        Route::delete('/{contact}', 'destroy')->name('destroy');
+        Route::post('/{contact}/reply', 'sendReply')->name('reply');
+        Route::post('/{contact}/status', 'updateStatus')->name('update-status');
+        Route::post('/bulk-action', 'bulkAction')->name('bulk-action');
+        Route::get('/export/csv', 'export')->name('export');
     });
     // Email Campaign Management Routes
     Route::controller(EmailCampaignController::class)->group(function () {
