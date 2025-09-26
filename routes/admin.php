@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PopupController;
 use App\Http\Controllers\Admin\ToolsController;
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\BannerCollectionController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ReviewController;
@@ -535,6 +536,19 @@ Route::prefix('admin')->name('admin.')->middleware(['auth:admin'])->group(functi
         Route::post('/{id}/track-impression', [BannerController::class, 'trackImpression'])->name('track-impression');
         Route::post('/{id}/track-click', [BannerController::class, 'trackClick'])->name('track-click');
         Route::post('/reorder', [BannerController::class, 'reorder'])->name('reorder');
+    });
+
+    // Banner Collection Management
+    Route::prefix('banner-collections')->name('banner-collections.')->group(function () {
+        Route::get('/', [BannerCollectionController::class, 'index'])->name('index');
+        Route::get('/create', [BannerCollectionController::class, 'create'])->name('create');
+        Route::post('/', [BannerCollectionController::class, 'store'])->name('store');
+        Route::get('/{bannerCollection}', [BannerCollectionController::class, 'show'])->name('show');
+        Route::get('/{bannerCollection}/edit', [BannerCollectionController::class, 'edit'])->name('edit');
+        Route::put('/{bannerCollection}', [BannerCollectionController::class, 'update'])->name('update');
+        Route::delete('/{bannerCollection}', [BannerCollectionController::class, 'destroy'])->name('destroy');
+        Route::patch('/{bannerCollection}/toggle-status', [BannerCollectionController::class, 'toggleStatus'])->name('toggle-status');
+        Route::post('/update-order', [BannerCollectionController::class, 'updateOrder'])->name('update-order');
     });
 
     // Popup Management

@@ -196,13 +196,12 @@
     background: rgba(255,255,255,1);
 }
 
-/* Flash Sale Styles */
+/* Flash Sale Styles - Updated for Swiper */
 .flash-sale-card {
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
-    margin: 10px;
     overflow: hidden;
 }
 
@@ -241,10 +240,6 @@
 .flash-sale-card a {
     text-decoration: none;
     color: inherit;
-}
-
-.owl-carousel .owl-item {
-    padding: 5px;
 }
 </style>
 @endpush
@@ -653,9 +648,9 @@ function getCategoryImageSrc($category, $defaultImage = 'assets/ecomus/images/co
                                         <span class="tooltip">Quick View</span>
                                     </button>
                                 </div>
-                                @if($product->discount > 0)
+                                @if($product->sale_price && $product->sale_price < $product->price)
                                 <div class="on-sale-wrap">
-                                    <div class="on-sale-item">{{ $product->discount }}% OFF</div>
+                                    <div class="on-sale-item">-{{ $product->discount_percentage }}%</div>
                                 </div>
                                 @endif
                             </div>
@@ -1283,86 +1278,260 @@ function getCategoryImageSrc($category, $defaultImage = 'assets/ecomus/images/co
             <span class="title">Flash Sale</span>
             <p class="sub-title">Limited time offers - Grab them before they're gone!</p>
         </div>
-        <div class="flash-sale-slide owl-carousel">
-            @forelse($flashSaleProducts ?? [] as $product)
-            <!-- Flash Sale Card -->
-            <div class="card flash-sale-card">
-                <div class="card-body">
-                    <a href="{{ route('products.show', $product->slug) }}">
-                        @php
-                            // Dynamic image handling for flash sale products
-                            $legacyImageUrl = '';
-                            
-                            // First try images array
-                            if (isset($product->images) && $product->images) {
-                                $images = is_string($product->images) ? json_decode($product->images, true) : $product->images;
-                                if (is_array($images) && !empty($images)) {
-                                    $image = $images[0]; // Get first image
-                                    
-                                    // Handle complex nested structure first
-                                    if (is_array($image) && isset($image['sizes']['medium']['storage_url'])) {
-                                        // New complex structure - use medium size storage_url
-                                        $legacyImageUrl = $image['sizes']['medium']['storage_url'];
-                                    } elseif (is_array($image) && isset($image['sizes']['original']['storage_url'])) {
-                                        // Fallback to original if medium not available
-                                        $legacyImageUrl = $image['sizes']['original']['storage_url'];
-                                    } elseif (is_array($image) && isset($image['sizes']['large']['storage_url'])) {
-                                        // Fallback to large if original not available
-                                        $legacyImageUrl = $image['sizes']['large']['storage_url'];
-                                    } elseif (is_array($image) && isset($image['urls']['medium'])) {
-                                        // Legacy complex URL structure - use medium size
-                                        $legacyImageUrl = $image['urls']['medium'];
-                                    } elseif (is_array($image) && isset($image['urls']['original'])) {
-                                        // Legacy fallback to original if medium not available
-                                        $legacyImageUrl = $image['urls']['original'];
-                                    } elseif (is_array($image) && isset($image['url']) && is_string($image['url'])) {
-                                        $legacyImageUrl = $image['url'];
-                                    } elseif (is_array($image) && isset($image['path']) && is_string($image['path'])) {
-                                        $legacyImageUrl = asset('storage/' . $image['path']);
-                                    } elseif (is_string($image)) {
-                                        // Simple string path
-                                        $legacyImageUrl = asset('storage/' . $image);
-                                    }
+        <div class="hover-sw-nav hover-sw-2">
+            <div dir="ltr" class="swiper tf-sw-product-flash wrap-sw-over" data-preview="4" data-tablet="3" data-mobile="2" data-space-lg="30" data-space-md="15" data-pagination="2" data-pagination-md="3" data-pagination-lg="3">
+                <div class="swiper-wrapper">
+                    @forelse($flashSaleProducts ?? [] as $product)
+                    @php
+                        // Dynamic image handling for flash sale products
+                        $legacyImageUrl = '';
+                        
+                        // First try images array
+                        if (isset($product->images) && $product->images) {
+                            $images = is_string($product->images) ? json_decode($product->images, true) : $product->images;
+                            if (is_array($images) && !empty($images)) {
+                                $image = $images[0]; // Get first image
+                                
+                                // Handle complex nested structure first
+                                if (is_array($image) && isset($image['sizes']['medium']['storage_url'])) {
+                                    $legacyImageUrl = $image['sizes']['medium']['storage_url'];
+                                } elseif (is_array($image) && isset($image['sizes']['original']['storage_url'])) {
+                                    $legacyImageUrl = $image['sizes']['original']['storage_url'];
+                                } elseif (is_array($image) && isset($image['sizes']['large']['storage_url'])) {
+                                    $legacyImageUrl = $image['sizes']['large']['storage_url'];
+                                } elseif (is_array($image) && isset($image['urls']['medium'])) {
+                                    $legacyImageUrl = $image['urls']['medium'];
+                                } elseif (is_array($image) && isset($image['urls']['original'])) {
+                                    $legacyImageUrl = $image['urls']['original'];
+                                } elseif (is_array($image) && isset($image['url']) && is_string($image['url'])) {
+                                    $legacyImageUrl = $image['url'];
+                                } elseif (is_array($image) && isset($image['path']) && is_string($image['path'])) {
+                                    $legacyImageUrl = asset('storage/' . $image['path']);
+                                } elseif (is_string($image)) {
+                                    $legacyImageUrl = asset('storage/' . $image);
                                 }
                             }
-                            
-                            // Fallback to image accessor
-                            if (empty($legacyImageUrl)) {
-                                $productImage = $product->image;
-                                if ($productImage && $productImage !== 'products/product1.jpg') {
-                                    $legacyImageUrl = str_starts_with($productImage, 'http') ? $productImage : asset('storage/' . $productImage);
-                                } else {
-                                    $legacyImageUrl = asset('assets/img/product/1.png'); // Default for flash sale
+                        }
+                        
+                        // Fallback to image accessor
+                        if (empty($legacyImageUrl)) {
+                            $productImage = $product->image;
+                            if ($productImage && $productImage !== 'products/product1.jpg') {
+                                $legacyImageUrl = str_starts_with($productImage, 'http') ? $productImage : asset('storage/' . $productImage);
+                            } else {
+                                $legacyImageUrl = asset('assets/ecomus/images/products/default-product.jpg');
+                            }
+                        }
+                        
+                        // Handle hover image (second image from gallery)
+                        $hoverImageUrl = $legacyImageUrl; // Default to same image
+                        if (isset($product->images) && $product->images) {
+                            $images = is_string($product->images) ? json_decode($product->images, true) : $product->images;
+                            if (is_array($images) && count($images) > 1) {
+                                $hoverImage = $images[1]; // Get second image
+                                
+                                // Handle complex nested structure for hover image
+                                if (is_array($hoverImage) && isset($hoverImage['sizes']['medium']['storage_url'])) {
+                                    $hoverImageUrl = $hoverImage['sizes']['medium']['storage_url'];
+                                } elseif (is_array($hoverImage) && isset($hoverImage['sizes']['original']['storage_url'])) {
+                                    $hoverImageUrl = $hoverImage['sizes']['original']['storage_url'];
+                                } elseif (is_array($hoverImage) && isset($hoverImage['sizes']['large']['storage_url'])) {
+                                    $hoverImageUrl = $hoverImage['sizes']['large']['storage_url'];
+                                } elseif (is_array($hoverImage) && isset($hoverImage['urls']['medium'])) {
+                                    $hoverImageUrl = $hoverImage['urls']['medium'];
+                                } elseif (is_array($hoverImage) && isset($hoverImage['urls']['original'])) {
+                                    $hoverImageUrl = $hoverImage['urls']['original'];
+                                } elseif (is_array($hoverImage) && isset($hoverImage['url']) && is_string($hoverImage['url'])) {
+                                    $hoverImageUrl = $hoverImage['url'];
+                                } elseif (is_array($hoverImage) && isset($hoverImage['path']) && is_string($hoverImage['path'])) {
+                                    $hoverImageUrl = asset('storage/' . $hoverImage['path']);
+                                } elseif (is_string($hoverImage)) {
+                                    $hoverImageUrl = asset('storage/' . $hoverImage);
                                 }
                             }
-                        @endphp
-                        <img src="{{ $legacyImageUrl }}" 
-                             alt="{{ $product->name }}"
-                             style="width: 100%; height: 120px; object-fit: cover;"
-                             onerror="this.src='{{ asset('assets/img/product/1.png') }}'">
-                        <span class="product-title">{{ Str::limit($product->name, 15) }}</span>
-                        @if($product->sale_price && $product->sale_price < $product->price)
-                            <p class="sale-price">৳{{ number_format($product->sale_price, 0) }}</p>
-                            <p class="real-price">৳{{ number_format($product->price, 0) }}</p>
-                        @else
-                            <p class="sale-price">৳{{ number_format($product->price, 0) }}</p>
-                        @endif
-                    </a>
+                        }
+                    @endphp
+                    <div class="swiper-slide" lazy="true">
+                        <div class="card-product" data-product-id="{{ $product->id }}">
+                            <div class="card-product-wrapper">
+                                <a href="{{ route('products.show', $product->slug) }}" class="product-img">
+                                    <img class="lazyload img-product" 
+                                         data-src="{{ $legacyImageUrl }}" 
+                                         src="{{ $legacyImageUrl }}" 
+                                         alt="{{ $product->name }}"
+                                         onerror="this.src='{{ asset('assets/ecomus/images/products/default-product.jpg') }}'; this.onerror=null;">
+                                    <img class="lazyload img-hover" 
+                                         data-src="{{ $hoverImageUrl }}" 
+                                         src="{{ $hoverImageUrl }}" 
+                                         alt="{{ $product->name }}"
+                                         onerror="this.src='{{ asset('assets/ecomus/images/products/default-product.jpg') }}'; this.onerror=null;">
+                                </a>
+                                <div class="list-product-btn">
+                                    <button type="button" class="box-icon bg_white quick-add tf-btn-loading" data-action="add-to-cart" data-product-id="{{ $product->id }}">
+                                        <span class="icon icon-bag"></span>
+                                        <span class="tooltip">Quick Add</span>
+                                    </button>
+                                    <button type="button" class="box-icon bg_white wishlist btn-icon-action" data-action="add-to-wishlist" data-product-id="{{ $product->id }}">
+                                        <span class="icon icon-heart"></span>
+                                        <span class="tooltip">Add to Wishlist</span>
+                                        <span class="icon icon-delete"></span>
+                                    </button>
+                                    <a href="#compare" data-bs-toggle="offcanvas" aria-controls="offcanvasLeft" class="box-icon bg_white compare btn-icon-action">
+                                        <span class="icon icon-compare"></span>
+                                        <span class="tooltip">Add to Compare</span>
+                                        <span class="icon icon-check"></span>
+                                    </a>
+                                    <button type="button" class="box-icon bg_white quickview tf-btn-loading" 
+                                            data-bs-toggle="modal" data-bs-target="#quick_view"
+                                            data-action="quick-view" data-product-id="{{ $product->id }}" data-product-slug="{{ $product->slug }}">
+                                        <span class="icon icon-view"></span>
+                                        <span class="tooltip">Quick View</span>
+                                    </button>
+                                </div>
+                                @if(isset($product->sizes) && $product->sizes)
+                                <div class="size-list">
+                                    @php
+                                        $sizes = is_string($product->sizes) ? json_decode($product->sizes, true) : $product->sizes;
+                                        if (is_array($sizes)) {
+                                            $limitedSizes = array_slice($sizes, 0, 4); // Show only first 4 sizes
+                                        } else {
+                                            $limitedSizes = ['S', 'M', 'L', 'XL']; // Default sizes
+                                        }
+                                    @endphp
+                                    @foreach($limitedSizes as $size)
+                                        <span>{{ is_array($size) ? ($size['name'] ?? $size['value'] ?? 'S') : $size }}</span>
+                                    @endforeach
+                                </div>
+                                @endif
+                                @if($product->sale_price && $product->sale_price < $product->price)
+                                <div class="on-sale-wrap">
+                                    <div class="on-sale-item">-{{ $product->discount_percentage }}%</div>
+                                </div>
+                                @endif
+                            </div>
+                            <div class="card-product-info">
+                                <a href="{{ route('products.show', $product->slug) }}" class="title link">{{ $product->name }}</a>
+                                <span class="price">
+                                    @if($product->sale_price && $product->sale_price < $product->price)
+                                        <span class="compare-at-price">৳{{ number_format($product->price, 0) }}</span>
+                                        <span class="price-on-sale fw-6">৳{{ number_format($product->sale_price, 0) }}</span>
+                                    @else
+                                        <span class="fw-6">৳{{ number_format($product->price, 0) }}</span>
+                                    @endif
+                                </span>
+                                @if(isset($product->colors) && $product->colors)
+                                <ul class="list-color-product">
+                                    @php
+                                        $colors = is_string($product->colors) ? json_decode($product->colors, true) : $product->colors;
+                                        if (is_array($colors)) {
+                                            $limitedColors = array_slice($colors, 0, 3); // Show only first 3 colors
+                                        } else {
+                                            $limitedColors = [];
+                                        }
+                                    @endphp
+                                    @foreach($limitedColors as $index => $color)
+                                    @php
+                                        $colorName = is_array($color) ? ($color['name'] ?? $color['value'] ?? 'Color') : $color;
+                                        $colorValue = strtolower(str_replace(' ', '-', $colorName));
+                                        $isActive = $index === 0 ? 'active' : '';
+                                    @endphp
+                                    <li class="list-color-item color-swatch {{ $isActive }}">
+                                        <span class="tooltip">{{ ucfirst($colorName) }}</span>
+                                        <span class="swatch-value bg_{{ $colorValue }}"></span>
+                                        <img class="lazyload" 
+                                             data-src="{{ $legacyImageUrl }}" 
+                                             src="{{ $legacyImageUrl }}" 
+                                             alt="{{ $product->name }}"
+                                             onerror="this.src='{{ asset('assets/ecomus/images/products/default-product.jpg') }}'; this.onerror=null;">
+                                    </li>
+                                    @endforeach
+                                </ul>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    @empty
+                    <!-- No flash sale products -->
+                    <div class="swiper-slide">
+                        <div class="text-center py-5">
+                            <p class="text-muted">No flash sale products available at the moment.</p>
+                            <a href="{{ route('shop.index') }}" class="tf-btn btn-outline animate-hover-btn">
+                                <span>Browse All Products</span>
+                            </a>
+                        </div>
+                    </div>
+                    @endforelse
                 </div>
             </div>
-            @empty
-            <!-- No flash sale products -->
-            <div class="col-12 text-center py-4">
-                <p class="text-muted">No flash sale products available at the moment.</p>
-            </div>
-            @endforelse
+            <div class="nav-sw nav-next-slider nav-next-flash box-icon w_46 round"><span class="icon icon-arrow-left"></span></div>
+            <div class="nav-sw nav-prev-slider nav-prev-flash box-icon w_46 round"><span class="icon icon-arrow-right"></span></div>
         </div>
     </div>
 </section>
 <!-- /Flash Sale Products -->
 @endif
 
+@if(isset($bannerCollections) && $bannerCollections->count() > 0)
+@foreach($bannerCollections as $bannerCollection)
 <!-- Banner Collection -->
+<section class="flat-spacing-8">
+    <div class="container">
+        <div class="tf-grid-layout md-col-2 tf-img-with-text style-4">
+            <div class="tf-content-left has-bg-color-2 wow fadeInLeft" data-wow-delay="0s" 
+                 style="background-color: {{ $bannerCollection->background_color }};">
+                <div class="text-center">
+                    <h2 class="heading" style="color: {{ $bannerCollection->text_color }};">{{ $bannerCollection->title }}</h2>
+                    <p class="text-paragraph" style="color: {{ $bannerCollection->text_color }};">{{ $bannerCollection->description }}</p>
+                    
+                    @if($bannerCollection->show_countdown && $bannerCollection->is_countdown_active)
+                    <div class="tf-countdown-v2 justify-content-center">
+                        <div class="js-countdown" data-timer="{{ $bannerCollection->countdown_timer }}" data-labels=" :  :  : ">
+                            @php $remaining = $bannerCollection->time_remaining; @endphp
+                            <div class="countdown__item">
+                                <span class="countdown__value countdown-days">{{ $remaining['days'] ?? 0 }}</span>
+                                <span class="countdown__label">Days</span>
+                            </div>
+                            <div class="countdown__item">
+                                <span class="countdown__value countdown-hours">{{ $remaining['hours'] ?? 0 }}</span>
+                                <span class="countdown__label">Hours</span>
+                            </div>
+                            <div class="countdown__item">
+                                <span class="countdown__value countdown-minutes">{{ $remaining['minutes'] ?? 0 }}</span>
+                                <span class="countdown__label">Mins</span>
+                            </div>
+                            <div class="countdown__item">
+                                <span class="countdown__value countdown-seconds">{{ $remaining['seconds'] ?? 0 }}</span>
+                                <span class="countdown__label">Secs</span>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+                    
+                    @if($bannerCollection->button_url)
+                    <a href="{{ $bannerCollection->button_url }}" class="tf-btn style-3 fw-6 animate-hover-btn btn-xl radius-3">
+                        <span>{{ $bannerCollection->button_text }}</span><i class="icon icon-arrow-right"></i>
+                    </a>
+                    @else
+                    <span class="tf-btn style-3 fw-6 btn-xl radius-3" style="cursor: default;">
+                        <span>{{ $bannerCollection->button_text }}</span>
+                    </span>
+                    @endif
+                </div>
+            </div>
+            <div class="tf-image-wrap wow fadeInRight" data-wow-delay="0s">
+                <img class="lazyload" 
+                     data-src="{{ $bannerCollection->image_url }}" 
+                     src="{{ $bannerCollection->image_url }}" 
+                     alt="{{ $bannerCollection->title }}"
+                     onerror="this.src='{{ asset('assets/ecomus/images/collections/banner-collection-3.png') }}'; this.onerror=null;">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /Banner Collection -->
+@endforeach
+@else
+<!-- Default Banner Collection (fallback) -->
 <section class="flat-spacing-8">
     <div class="container">
         <div class="tf-grid-layout md-col-2 tf-img-with-text style-4">
@@ -1390,7 +1559,7 @@ function getCategoryImageSrc($category, $defaultImage = 'assets/ecomus/images/co
                             </div>
                         </div>
                     </div>
-                    <a href="{{ route('collections.show', 'summer-sale') }}" class="tf-btn style-3 fw-6 animate-hover-btn btn-xl radius-3">
+                    <a href="/collections/summer-sale" class="tf-btn style-3 fw-6 animate-hover-btn btn-xl radius-3">
                         <span>Shop Collection</span><i class="icon icon-arrow-right"></i>
                     </a>
                 </div>
@@ -1402,6 +1571,7 @@ function getCategoryImageSrc($category, $defaultImage = 'assets/ecomus/images/co
     </div>
 </section>
 <!-- /Banner Collection -->
+@endif
 
 <!-- Testimonial -->
 <section class="flat-spacing-2 pt_0">

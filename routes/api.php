@@ -555,3 +555,9 @@ Route::post('/check-auto-placement-availability', function (Request $request) {
         'message' => 'No available positions found in the ' . $preferredPosition . ' leg. Please try the other position.'
     ]);
 });
+
+// Banner Collections API routes
+Route::prefix('banner-collections')->group(function () {
+    Route::get('/', [App\Http\Controllers\Api\BannerCollectionController::class, 'index']);
+    Route::get('/{id}', [App\Http\Controllers\Api\BannerCollectionController::class, 'show']);
+});

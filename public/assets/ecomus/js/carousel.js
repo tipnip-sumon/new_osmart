@@ -658,6 +658,44 @@ if ($(".tf-sw-product-sell").length > 0) {
   });
 }
 
+if ($(".tf-sw-product-flash").length > 0) {
+  var preview = $(".tf-sw-product-flash").data("preview");
+  var tablet = $(".tf-sw-product-flash").data("tablet");
+  var mobile = $(".tf-sw-product-flash").data("mobile");
+  var spacingLg = $(".tf-sw-product-flash").data("space-lg");
+  var spacingMd = $(".tf-sw-product-flash").data("space-md");
+  var perGroup = $(".tf-sw-product-flash").data("pagination");
+  var perGroupMd = $(".tf-sw-product-flash").data("pagination-md");
+  var perGroupLg = $(".tf-sw-product-flash").data("pagination-lg");
+  var swiper = new Swiper(".tf-sw-product-flash", {
+    slidesPerView: mobile,
+    spaceBetween: spacingMd,
+    speed: 1000,
+    pagination: {
+      el: ".sw-pagination-flash",
+      clickable: true,
+    },
+    slidesPerGroup: perGroup,
+    navigation: {
+      clickable: true,
+      nextEl: ".nav-prev-flash",
+      prevEl: ".nav-next-flash",
+    },
+    breakpoints: {
+      768: {
+        slidesPerView: tablet,
+        spaceBetween: spacingLg,
+        slidesPerGroup: perGroupMd,
+      },
+      1150: {
+        slidesPerView: preview,
+        spaceBetween: spacingLg,
+        slidesPerGroup: perGroupLg,
+      },
+    },
+  });
+}
+
 if ($(".tf-sw-recent").length > 0) {
   var preview = $(".tf-sw-recent").data("preview");
   var tablet = $(".tf-sw-recent").data("tablet");

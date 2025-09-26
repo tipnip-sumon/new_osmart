@@ -1195,8 +1195,8 @@
 
                 <!-- Marketing -->
                 <li class="slide__category"><span class="category-name">Marketing</span></li>
-                <li class="slide has-sub {{ request()->routeIs('admin.banners.*') || request()->routeIs('admin.popups.*') || request()->routeIs('admin.marketing.*') ? 'open' : '' }}">
-                    <a href="javascript:void(0);" class="side-menu__item {{ request()->routeIs('admin.banners.*') || request()->routeIs('admin.popups.*') || request()->routeIs('admin.marketing.*') ? 'active' : '' }}">
+                <li class="slide has-sub {{ request()->routeIs('admin.banners.*') || request()->routeIs('admin.banner-collections.*') || request()->routeIs('admin.popups.*') || request()->routeIs('admin.marketing.*') ? 'open' : '' }}">
+                    <a href="javascript:void(0);" class="side-menu__item {{ request()->routeIs('admin.banners.*') || request()->routeIs('admin.banner-collections.*') || request()->routeIs('admin.popups.*') || request()->routeIs('admin.marketing.*') ? 'active' : '' }}">
                         <i class="bx bx-megaphone side-menu__icon"></i>
                         <span class="side-menu__label">Marketing</span>
                         <i class="fe fe-chevron-right side-menu__angle"></i>
@@ -1205,6 +1205,11 @@
                         <li class="slide">
                             <a href="{{ route('admin.banners.index') }}" class="side-menu__item {{ request()->routeIs('admin.banners.*') ? 'active' : '' }}">
                                 <i class="bx bx-image"></i> Banners
+                            </a>
+                        </li>
+                        <li class="slide">
+                            <a href="{{ route('admin.banner-collections.index') }}" class="side-menu__item {{ request()->routeIs('admin.banner-collections.*') ? 'active' : '' }}">
+                                <i class="bx bx-collection"></i> Banner Collections
                             </a>
                         </li>
                         <li class="slide">

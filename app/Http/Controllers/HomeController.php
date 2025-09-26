@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Collection;
 use App\Models\User;
 use App\Models\Banner;
+use App\Models\BannerCollection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -89,17 +90,12 @@ class HomeController extends Controller
             ->limit(12)
             ->get();
 
-        // Get sale products (products with discount > 0 or sale_price < price)
+        // Get sale products (products with sale_price < price)
         $saleProducts = Product::where('status', 'active')
-            ->where(function($query) {
-                $query->where('discount', '>', 0)
-                      ->orWhere(function($q) {
-                          $q->whereNotNull('sale_price')
-                            ->whereColumn('sale_price', '<', 'price');
-                      });
-            })
+            ->whereNotNull('sale_price')
+            ->whereColumn('sale_price', '<', 'price')
             ->with(['brand', 'category', 'vendor'])
-            ->orderBy('discount', 'desc')
+            ->orderByRaw('((price - sale_price) / price * 100) desc')
             ->limit(12)
             ->get();
 
@@ -129,6 +125,11 @@ class HomeController extends Controller
             ->limit(6)
             ->get();
 
+        // Get active banner collections
+        $bannerCollections = BannerCollection::active()
+            ->ordered()
+            ->get();
+
         // Pass heroBanners as banners for the view
         return view('home-ecomus', [
             'banners' => $heroBanners,
@@ -139,7 +140,8 @@ class HomeController extends Controller
             'bestSellingProducts' => $bestSellingProducts,
             'newArrivals' => $newArrivals,
             'saleProducts' => $saleProducts,
-            'collections' => $collections
+            'collections' => $collections,
+            'bannerCollections' => $bannerCollections
         ]);
     }
 }
