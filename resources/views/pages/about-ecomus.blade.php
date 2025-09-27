@@ -393,10 +393,10 @@
     <div class="container">
         <div class="bg_grey-2 radius-10 flat-wrap-iconbox">
             <div class="flat-title lg">
-                <span class="title fw-5">{{ __('about.excellence_title') }}</span>
+                <span class="title fw-5 excellence-title">{{ __('about.excellence_title') }}</span>
                 <div>
-                    <p class="sub-title text_black-2">{{ __('about.excellence_subtitle_1') }}</p>
-                    <p class="sub-title text_black-2">{{ __('about.excellence_subtitle_2') }}</p>
+                    <p class="sub-title text_black-2 excellence-subtitle-1">{{ __('about.excellence_subtitle_1') }}</p>
+                    <p class="sub-title text_black-2 excellence-subtitle-2">{{ __('about.excellence_subtitle_2') }}</p>
                 </div>
             </div>
             <div class="flat-iconbox-v3 lg">
@@ -404,35 +404,35 @@
                     <div dir="ltr" class="swiper tf-sw-mobile" data-preview="1" data-space="15">
                         <div class="swiper-wrapper wrap-iconbox lg">
                             <div class="swiper-slide">
-                                <div class="tf-icon-box text-center">
+                                <div class="tf-icon-box text-center feature-quality">
                                     <div class="icon">
                                         <i class="icon-materials"></i>
                                     </div>
                                     <div class="content">
-                                        <div class="title">{{ __('about.feature_quality_title') }}</div>
-                                        <p class="text_black-2">{{ __('about.feature_quality_description') }}</p>
+                                        <div class="title feature-title">{{ __('about.feature_quality_title') }}</div>
+                                        <p class="text_black-2 feature-description">{{ __('about.feature_quality_description') }}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="swiper-slide">
-                                <div class="tf-icon-box text-center">
+                                <div class="tf-icon-box text-center feature-technology">
                                     <div class="icon">
                                         <i class="icon-design"></i>
                                     </div>
                                     <div class="content">
-                                        <div class="title">{{ __('about.feature_technology_title') }}</div>
-                                        <p class="text_black-2">{{ __('about.feature_technology_description') }}</p>
+                                        <div class="title feature-title">{{ __('about.feature_technology_title') }}</div>
+                                        <p class="text_black-2 feature-description">{{ __('about.feature_technology_description') }}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="swiper-slide">
-                                <div class="tf-icon-box text-center">
+                                <div class="tf-icon-box text-center feature-support">
                                     <div class="icon">
                                         <i class="icon-sizes"></i>
                                     </div>
                                     <div class="content">
-                                        <div class="title">{{ __('about.feature_support_title') }}</div>
-                                        <p class="text_black-2">{{ __('about.feature_support_description') }}</p>
+                                        <div class="title feature-title">{{ __('about.feature_support_title') }}</div>
+                                        <p class="text_black-2 feature-description">{{ __('about.feature_support_description') }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -455,26 +455,26 @@
         <div class="row">
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="team-member">
-                    <img src="{{ asset('assets/ecomus/images/item/tets3.jpg') }}" alt="CEO">
-                    <h4>John Anderson</h4>
-                    <div class="position">{{ __('about.team_ceo') }}</div>
-                    <p class="text_black-2">{{ __('about.team_ceo_description') }}</p>
+                    <img src="{{ asset('assets/ecomus/images/item/tets3.jpg') }}" alt="{{ __('about.team_ceo') }}">
+                    <h4>{{ __('about.team_ceo_name') }}</h4>
+                    <div class="position">{{ __('about.team_ceo_position') }}</div>
+                    <p class="text_black-2">{{ __('about.team_ceo_bio', ['app_name' => config('app.name')]) }}</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="team-member">
-                    <img src="{{ asset('assets/ecomus/images/item/tets4.jpg') }}" alt="CTO">
-                    <h4>Sarah Mitchell</h4>
-                    <div class="position">{{ __('about.team_cto') }}</div>
-                    <p class="text_black-2">{{ __('about.team_cto_description') }}</p>
+                    <img src="{{ asset('assets/ecomus/images/item/tets4.jpg') }}" alt="{{ __('about.team_cto') }}">
+                    <h4>{{ __('about.team_cto_name') }}</h4>
+                    <div class="position">{{ __('about.team_cto_position') }}</div>
+                    <p class="text_black-2">{{ __('about.team_cto_bio') }}</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="team-member">
-                    <img src="{{ asset('assets/ecomus/images/item/tets3.jpg') }}" alt="COO">
-                    <h4>Michael Roberts</h4>
-                    <div class="position">{{ __('about.team_coo') }}</div>
-                    <p class="text_black-2">{{ __('about.team_coo_description') }}</p>
+                    <img src="{{ asset('assets/ecomus/images/item/tets3.jpg') }}" alt="{{ __('about.team_marketing') }}">
+                    <h4>{{ __('about.team_marketing_name') }}</h4>
+                    <div class="position">{{ __('about.team_marketing_position') }}</div>
+                    <p class="text_black-2">{{ __('about.team_marketing_bio') }}</p>
                 </div>
             </div>
         </div>
@@ -585,17 +585,17 @@
     <div class="container">
         <div class="bg_grey-2 radius-10 text-center p-5">
             <div class="flat-title">
-                <span class="title">{{ __('about.cta_title') }}</span>
-                <p class="sub-title text_black-2">
+                <span class="title cta-title">{{ __('about.cta_title') }}</span>
+                <p class="sub-title text_black-2 cta-subtitle">
                     {{ __('about.cta_subtitle', ['app_name' => config('app.name')]) }}
                 </p>
             </div>
             <div class="d-flex justify-content-center gap-3 flex-wrap">
                 <a href="{{ route('register') }}" class="tf-btn btn-fill animate-hover-btn radius-3">
-                    <span>{{ __('about.cta_join') }}</span>
+                    <span class="cta-join-btn">{{ __('about.cta_join') }}</span>
                 </a>
                 <a href="{{ route('contact.show') }}" class="tf-btn btn-outline animate-hover-btn radius-3">
-                    <span>{{ __('about.cta_contact') }}</span>
+                    <span class="cta-contact-btn">{{ __('about.cta_contact') }}</span>
                 </a>
             </div>
         </div>
@@ -606,8 +606,8 @@
 <section class="flat-spacing-1">
     <div class="container">
         <div class="flat-title">
-            <span class="title">{{ __('about.gallery_title') }}</span>
-            <p class="sub-title">{{ __('about.gallery_subtitle') }}</p>
+            <span class="title gallery-title">{{ __('about.gallery_title') }}</span>
+            <p class="sub-title gallery-subtitle">{{ __('about.gallery_subtitle') }}</p>
         </div>
         <div class="wrap-shop-gram">
             <div dir="ltr" class="swiper tf-sw-shop-gallery" data-preview="5" data-tablet="3" data-mobile="2"
@@ -774,40 +774,49 @@ $(document).ready(function() {
         });
         
         // Update excellence section
-        $('.flat-title .title:contains("Excellence")').text(translations.excellence_title);
-        $('.flat-title .sub-title').eq(0).text(translations.excellence_subtitle_1);
-        $('.flat-title .sub-title').eq(1).text(translations.excellence_subtitle_2);
+        $('.excellence-title').text(translations.excellence_title);
+        $('.excellence-subtitle-1').text(translations.excellence_subtitle_1);
+        $('.excellence-subtitle-2').text(translations.excellence_subtitle_2);
         
         // Update feature boxes
-        $('.tf-icon-box').each(function(index) {
-            const featureKeys = [
-                ['feature_quality_title', 'feature_quality_description'],
-                ['feature_technology_title', 'feature_technology_description'], 
-                ['feature_support_title', 'feature_support_description']
-            ];
-            
-            if (featureKeys[index]) {
-                $(this).find('.title').text(translations[featureKeys[index][0]]);
-                $(this).find('.text_black-2').text(translations[featureKeys[index][1]]);
-            }
-        });
+        $('.feature-quality .feature-title').text(translations.feature_quality_title);
+        $('.feature-quality .feature-description').text(translations.feature_quality_description);
+        $('.feature-technology .feature-title').text(translations.feature_technology_title);
+        $('.feature-technology .feature-description').text(translations.feature_technology_description);
+        $('.feature-support .feature-title').text(translations.feature_support_title);
+        $('.feature-support .feature-description').text(translations.feature_support_description);
         
         // Update team section
         $('.team-section .title').text(translations.team_title);
         $('.team-section .sub-title').text(translations.team_subtitle);
         
+        // Update team members
+        $('.team-member').each(function(index) {
+            const teamKeys = [
+                ['team_ceo_name', 'team_ceo_position', 'team_ceo_bio'],
+                ['team_cto_name', 'team_cto_position', 'team_cto_bio'],
+                ['team_marketing_name', 'team_marketing_position', 'team_marketing_bio']
+            ];
+            
+            if (teamKeys[index]) {
+                $(this).find('h4').text(translations[teamKeys[index][0]]);
+                $(this).find('.position').text(translations[teamKeys[index][1]]);
+                $(this).find('.text_black-2').text(translations[teamKeys[index][2]]);
+            }
+        });
+        
         // Update testimonials
         $('.testimonial-item h4').text(translations.testimonials_title);
         
         // Update CTA section
-        $('.bg_grey-2 .title').text(translations.cta_title);
-        $('.bg_grey-2 .sub-title').text(translations.cta_subtitle);
-        $('.tf-btn span').eq(0).text(translations.cta_join);
-        $('.tf-btn span').eq(1).text(translations.cta_contact);
+        $('.cta-title').text(translations.cta_title);
+        $('.cta-subtitle').text(translations.cta_subtitle);
+        $('.cta-join-btn').text(translations.cta_join);
+        $('.cta-contact-btn').text(translations.cta_contact);
         
         // Update gallery section
-        $('.wrap-shop-gram').prev('.flat-title').find('.title').text(translations.gallery_title);
-        $('.wrap-shop-gram').prev('.flat-title').find('.sub-title').text(translations.gallery_subtitle);
+        $('.gallery-title').text(translations.gallery_title);
+        $('.gallery-subtitle').text(translations.gallery_subtitle);
         
         // Smooth transition effect
         $('body').addClass('language-switching');
