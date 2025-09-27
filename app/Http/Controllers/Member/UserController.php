@@ -1685,7 +1685,12 @@ class UserController extends Controller
                 'right_leg_points' => $rightLegPoints,
                 'rank' => $user->rank ?: 'Bronze',
                 'exists' => true,
-                'avatar' => $user->avatar_url
+                'avatar' => $user->avatar_url,
+                'status' => $user->status ?? 'inactive',
+                'is_active' => $user->is_active ?? false,
+                'has_points' => ($user->active_points ?? 0) > 0,
+                'is_qualified' => ($user->active_points ?? 0) >= 100,
+                'point_status' => $this->getPointStatus($user->active_points ?? 0)
             ],
             'level_1' => [
                 'left' => $leftDownline ? [
@@ -1699,7 +1704,12 @@ class UserController extends Controller
                     'active_points' => $leftDownline->active_points ?: 0,
                     'rank' => $leftDownline->rank ?: 'Bronze',
                     'exists' => true,
-                    'avatar' => $leftDownline->avatar_url
+                    'avatar' => $leftDownline->avatar_url,
+                    'status' => $leftDownline->status ?? 'inactive',
+                    'is_active' => $leftDownline->is_active ?? false,
+                    'has_points' => ($leftDownline->active_points ?? 0) > 0,
+                    'is_qualified' => ($leftDownline->active_points ?? 0) >= 100,
+                    'point_status' => $this->getPointStatus($leftDownline->active_points ?? 0)
                 ] : [
                     'id' => null,
                     'name' => 'Available Position',
@@ -1711,7 +1721,12 @@ class UserController extends Controller
                     'active_points' => 0,
                     'rank' => '',
                     'exists' => false,
-                    'avatar' => 'admin-assets/images/users/1.jpg'
+                    'avatar' => 'admin-assets/images/users/1.jpg',
+                    'status' => 'available',
+                    'is_active' => false,
+                    'has_points' => false,
+                    'is_qualified' => false,
+                    'point_status' => 'available'
                 ],
                 'right' => $rightDownline ? [
                     'id' => $rightDownline->id,
@@ -1724,7 +1739,12 @@ class UserController extends Controller
                     'active_points' => $rightDownline->active_points ?: 0,
                     'rank' => $rightDownline->rank ?: 'Bronze',
                     'exists' => true,
-                    'avatar' => $rightDownline->avatar_url
+                    'avatar' => $rightDownline->avatar_url,
+                    'status' => $rightDownline->status ?? 'inactive',
+                    'is_active' => $rightDownline->is_active ?? false,
+                    'has_points' => ($rightDownline->active_points ?? 0) > 0,
+                    'is_qualified' => ($rightDownline->active_points ?? 0) >= 100,
+                    'point_status' => $this->getPointStatus($rightDownline->active_points ?? 0)
                 ] : [
                     'id' => null,
                     'name' => 'Available Position',
@@ -1736,7 +1756,12 @@ class UserController extends Controller
                     'active_points' => 0,
                     'rank' => '',
                     'exists' => false,
-                    'avatar' => 'admin-assets/images/users/1.jpg'
+                    'avatar' => 'admin-assets/images/users/1.jpg',
+                    'status' => 'available',
+                    'is_active' => false,
+                    'has_points' => false,
+                    'is_qualified' => false,
+                    'point_status' => 'available'
                 ]
             ],
             'level_2' => [
@@ -1751,7 +1776,9 @@ class UserController extends Controller
                     'active_points' => $leftLeftDownline->active_points ?: 0,
                     'rank' => $leftLeftDownline->rank ?: 'Bronze',
                     'exists' => true,
-                    'avatar' => $leftLeftDownline->avatar_url
+                    'avatar' => $leftLeftDownline->avatar_url,
+                    'is_qualified' => ($leftLeftDownline->active_points ?? 0) >= 100,
+                    'point_status' => $this->getPointStatus($leftLeftDownline->active_points ?? 0)
                 ] : [
                     'id' => null,
                     'name' => 'Available Position',
@@ -1763,7 +1790,9 @@ class UserController extends Controller
                     'active_points' => 0,
                     'rank' => '',
                     'exists' => false,
-                    'avatar' => 'admin-assets/images/users/1.jpg'
+                    'avatar' => 'admin-assets/images/users/1.jpg',
+                    'is_qualified' => false,
+                    'point_status' => 'available'
                 ],
                 'left_right' => $leftRightDownline ? [
                     'id' => $leftRightDownline->id,
@@ -1776,7 +1805,9 @@ class UserController extends Controller
                     'active_points' => $leftRightDownline->active_points ?: 0,
                     'rank' => $leftRightDownline->rank ?: 'Bronze',
                     'exists' => true,
-                    'avatar' => $leftRightDownline->avatar_url
+                    'avatar' => $leftRightDownline->avatar_url,
+                    'is_qualified' => ($leftRightDownline->active_points ?? 0) >= 100,
+                    'point_status' => $this->getPointStatus($leftRightDownline->active_points ?? 0)
                 ] : [
                     'id' => null,
                     'name' => 'Available Position',
@@ -1788,7 +1819,9 @@ class UserController extends Controller
                     'active_points' => 0,
                     'rank' => '',
                     'exists' => false,
-                    'avatar' => 'admin-assets/images/users/1.jpg'
+                    'avatar' => 'admin-assets/images/users/1.jpg',
+                    'is_qualified' => false,
+                    'point_status' => 'available'
                 ],
                 'right_left' => $rightLeftDownline ? [
                     'id' => $rightLeftDownline->id,
@@ -1801,7 +1834,11 @@ class UserController extends Controller
                     'active_points' => $rightLeftDownline->active_points ?: 0,
                     'rank' => $rightLeftDownline->rank ?: 'Bronze',
                     'exists' => true,
-                    'avatar' => $rightLeftDownline->avatar_url
+                    'avatar' => $rightLeftDownline->avatar_url,
+                    'is_qualified' => ($rightLeftDownline->active_points ?? 0) >= 100,
+                    'point_status' => $this->getPointStatus($rightLeftDownline->active_points ?? 0),
+                    'is_qualified' => ($rightLeftDownline->active_points ?? 0) >= 100,
+                    'point_status' => $this->getPointStatus($rightLeftDownline->active_points ?? 0)
                 ] : [
                     'id' => null,
                     'name' => 'Available Position',
@@ -1813,7 +1850,9 @@ class UserController extends Controller
                     'active_points' => 0,
                     'rank' => '',
                     'exists' => false,
-                    'avatar' => 'admin-assets/images/users/1.jpg'
+                    'avatar' => 'admin-assets/images/users/1.jpg',
+                    'is_qualified' => false,
+                    'point_status' => 'available'
                 ],
                 'right_right' => $rightRightDownline ? [
                     'id' => $rightRightDownline->id,
@@ -1826,7 +1865,9 @@ class UserController extends Controller
                     'active_points' => $rightRightDownline->active_points ?: 0,
                     'rank' => $rightRightDownline->rank ?: 'Bronze',
                     'exists' => true,
-                    'avatar' => $rightRightDownline->avatar_url
+                    'avatar' => $rightRightDownline->avatar_url,
+                    'is_qualified' => ($rightRightDownline->active_points ?? 0) >= 100,
+                    'point_status' => $this->getPointStatus($rightRightDownline->active_points ?? 0)
                 ] : [
                     'id' => null,
                     'name' => 'Available Position',
@@ -1838,7 +1879,9 @@ class UserController extends Controller
                     'active_points' => 0,
                     'rank' => '',
                     'exists' => false,
-                    'avatar' => 'admin-assets/images/users/1.jpg'
+                    'avatar' => 'admin-assets/images/users/1.jpg',
+                    'is_qualified' => false,
+                    'point_status' => 'available'
                 ]
             ]
         ];
@@ -2835,5 +2878,18 @@ class UserController extends Controller
         }
         
         return $totalCount;
+    }
+    /**
+     * Get point status for UI display
+     */
+    private function getPointStatus($activePoints)
+    {
+        if ($activePoints >= 100) {
+            return 'qualified'; // Green - eligible for matching
+        } elseif ($activePoints > 0) {
+            return 'partial'; // Orange/Yellow - has some points but not qualified
+        } else {
+            return 'none'; // Red/Gray - no points
+        }
     }
 }

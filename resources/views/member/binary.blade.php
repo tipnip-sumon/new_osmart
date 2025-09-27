@@ -132,6 +132,31 @@
                             <small><i class="fe fe-info me-1"></i>Pinch to zoom or use zoom controls. Swipe to navigate the tree.</small>
                         </div>
                         
+                        <!-- Color Legend for Point Status -->
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <div class="d-flex align-items-center justify-content-center flex-wrap gap-3 p-2 bg-light rounded">
+                                    <small class="fw-semibold text-muted me-2">User Status Legend:</small>
+                                    <div class="d-flex align-items-center">
+                                        <div class="legend-circle qualified me-1"></div>
+                                        <small class="text-success fw-medium">100+ Points (Qualified)</small>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="legend-circle partial me-1"></div>
+                                        <small class="text-warning fw-medium">1-99 Points (Partial)</small>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="legend-circle none me-1"></div>
+                                        <small class="text-danger fw-medium">0 Points (Inactive)</small>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="legend-circle available me-1"></div>
+                                        <small class="text-muted fw-medium">Available Position</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <!-- Binary Tree Visualization -->
                         <div class="binary-tree-wrapper">
                             <div class="binary-tree-container" id="binaryTreeContainer">
@@ -144,9 +169,11 @@
                                         Level: ROOT
                                         Left: {{ $binaryTree['main_user']['left_count'] }} | Right: {{ $binaryTree['main_user']['right_count'] }}
                                         Points: {{ number_format($binaryTree['main_user']['total_points'], 0) }} pts
+                                        Active Points: {{ number_format($binaryTree['main_user']['active_points'], 0) }} pts
                                         Rank: {{ $binaryTree['main_user']['rank'] }}
+                                        Status: {{ $binaryTree['main_user']['point_status'] ?? 'none' }}
                                     </div>
-                                    <div class="user-circle main {{ $binaryTree['main_user']['exists'] ? 'filled' : 'empty' }}">
+                                    <div class="user-circle main {{ $binaryTree['main_user']['exists'] ? $binaryTree['main_user']['point_status'] ?? 'none' : 'empty' }}">
                                         @if($binaryTree['main_user']['exists'])
                                             <img src="{{ $binaryTree['main_user']['avatar'] ? asset($binaryTree['main_user']['avatar']) : asset('assets/images/avatars/default-customer.svg') }}" 
                                                  alt="{{ $binaryTree['main_user']['name'] }}" 
@@ -179,9 +206,11 @@
                                         Level: L1 (Left)
                                         Left: {{ $binaryTree['level_1']['left']['left_count'] }} | Right: {{ $binaryTree['level_1']['left']['right_count'] }}
                                         Points: {{ number_format($binaryTree['level_1']['left']['total_points'], 0) }} pts
+                                        Active Points: {{ number_format($binaryTree['level_1']['left']['active_points'], 0) }} pts
                                         Rank: {{ $binaryTree['level_1']['left']['rank'] }}
+                                        Status: {{ $binaryTree['level_1']['left']['point_status'] ?? 'none' }}
                                     </div>
-                                    <div class="user-circle left {{ $binaryTree['level_1']['left']['exists'] ? 'filled' : 'empty' }}">
+                                    <div class="user-circle left {{ $binaryTree['level_1']['left']['exists'] ? $binaryTree['level_1']['left']['point_status'] ?? 'none' : 'empty' }}">
                                         @if($binaryTree['level_1']['left']['exists'])
                                             <img src="{{ $binaryTree['level_1']['left']['avatar'] ? asset($binaryTree['level_1']['left']['avatar']) : asset('assets/images/avatars/default-customer.svg') }}" 
                                                  alt="{{ $binaryTree['level_1']['left']['name'] }}" 
@@ -211,9 +240,11 @@
                                         Level: L1 (Right)
                                         Left: {{ $binaryTree['level_1']['right']['left_count'] }} | Right: {{ $binaryTree['level_1']['right']['right_count'] }}
                                         Points: {{ number_format($binaryTree['level_1']['right']['total_points'], 0) }} pts
+                                        Active Points: {{ number_format($binaryTree['level_1']['right']['active_points'], 0) }} pts
                                         Rank: {{ $binaryTree['level_1']['right']['rank'] }}
+                                        Status: {{ $binaryTree['level_1']['right']['point_status'] ?? 'none' }}
                                     </div>
-                                    <div class="user-circle right {{ $binaryTree['level_1']['right']['exists'] ? 'filled' : 'empty' }}">
+                                    <div class="user-circle right {{ $binaryTree['level_1']['right']['exists'] ? $binaryTree['level_1']['right']['point_status'] ?? 'none' : 'empty' }}">
                                         @if($binaryTree['level_1']['right']['exists'])
                                             <img src="{{ $binaryTree['level_1']['right']['avatar'] ? asset($binaryTree['level_1']['right']['avatar']) : asset('assets/images/avatars/default-customer.svg') }}" 
                                                  alt="{{ $binaryTree['level_1']['right']['name'] }}" 
@@ -241,7 +272,16 @@
                             <div class="tree-level level-2">
                                 <!-- Left-Left User -->
                                 <div class="tree-node left-left" data-user-id="{{ $binaryTree['level_2']['left_left']['id'] }}" data-user-name="{{ $binaryTree['level_2']['left_left']['name'] }}" data-left-count="{{ $binaryTree['level_2']['left_left']['left_count'] }}" data-right-count="{{ $binaryTree['level_2']['left_left']['right_count'] }}" data-total-business="{{ number_format($binaryTree['level_2']['left_left']['total_points'], 0) }}" data-rank="{{ $binaryTree['level_2']['left_left']['rank'] }}">
-                                    <div class="user-circle left-child {{ $binaryTree['level_2']['left_left']['exists'] ? 'filled' : 'empty' }}">
+                                    <div class="tooltip-content">
+                                        {{ $binaryTree['level_2']['left_left']['name'] }}
+                                        Level: L2 (Left-Left)
+                                        Left: {{ $binaryTree['level_2']['left_left']['left_count'] }} | Right: {{ $binaryTree['level_2']['left_left']['right_count'] }}
+                                        Points: {{ number_format($binaryTree['level_2']['left_left']['total_points'], 0) }} pts
+                                        Active Points: {{ number_format($binaryTree['level_2']['left_left']['active_points'], 0) }} pts
+                                        Rank: {{ $binaryTree['level_2']['left_left']['rank'] }}
+                                        Status: {{ $binaryTree['level_2']['left_left']['point_status'] ?? 'none' }}
+                                    </div>
+                                    <div class="user-circle left-child {{ $binaryTree['level_2']['left_left']['exists'] ? $binaryTree['level_2']['left_left']['point_status'] ?? 'none' : 'empty' }}">
                                         @if($binaryTree['level_2']['left_left']['exists'])
                                             <img src="{{ $binaryTree['level_2']['left_left']['avatar'] ? asset($binaryTree['level_2']['left_left']['avatar']) : asset('assets/images/avatars/default-customer.svg') }}" 
                                                  alt="{{ $binaryTree['level_2']['left_left']['name'] }}" 
@@ -272,7 +312,16 @@
 
                                 <!-- Left-Right User -->
                                 <div class="tree-node left-right" data-user-id="{{ $binaryTree['level_2']['left_right']['id'] }}" data-user-name="{{ $binaryTree['level_2']['left_right']['name'] }}" data-left-count="{{ $binaryTree['level_2']['left_right']['left_count'] }}" data-right-count="{{ $binaryTree['level_2']['left_right']['right_count'] }}" data-total-business="{{ number_format($binaryTree['level_2']['left_right']['total_points'], 0) }}" data-rank="{{ $binaryTree['level_2']['left_right']['rank'] }}">
-                                    <div class="user-circle left-child {{ $binaryTree['level_2']['left_right']['exists'] ? 'filled' : 'empty' }}">
+                                    <div class="tooltip-content">
+                                        {{ $binaryTree['level_2']['left_right']['name'] }}
+                                        Level: L2 (Left-Right)
+                                        Left: {{ $binaryTree['level_2']['left_right']['left_count'] }} | Right: {{ $binaryTree['level_2']['left_right']['right_count'] }}
+                                        Points: {{ number_format($binaryTree['level_2']['left_right']['total_points'], 0) }} pts
+                                        Active Points: {{ number_format($binaryTree['level_2']['left_right']['active_points'], 0) }} pts
+                                        Rank: {{ $binaryTree['level_2']['left_right']['rank'] }}
+                                        Status: {{ $binaryTree['level_2']['left_right']['point_status'] ?? 'none' }}
+                                    </div>
+                                    <div class="user-circle left-child {{ $binaryTree['level_2']['left_right']['exists'] ? $binaryTree['level_2']['left_right']['point_status'] ?? 'none' : 'empty' }}">
                                         @if($binaryTree['level_2']['left_right']['exists'])
                                             <img src="{{ $binaryTree['level_2']['left_right']['avatar'] ? asset($binaryTree['level_2']['left_right']['avatar']) : asset('assets/images/avatars/default-customer.svg') }}" 
                                                  alt="{{ $binaryTree['level_2']['left_right']['name'] }}" 
@@ -303,7 +352,16 @@
 
                                 <!-- Right-Left User -->
                                 <div class="tree-node right-left" data-user-id="{{ $binaryTree['level_2']['right_left']['id'] }}" data-user-name="{{ $binaryTree['level_2']['right_left']['name'] }}" data-left-count="{{ $binaryTree['level_2']['right_left']['left_count'] }}" data-right-count="{{ $binaryTree['level_2']['right_left']['right_count'] }}" data-total-business="{{ number_format($binaryTree['level_2']['right_left']['total_points'], 0) }}" data-rank="{{ $binaryTree['level_2']['right_left']['rank'] }}">
-                                    <div class="user-circle right-child {{ $binaryTree['level_2']['right_left']['exists'] ? 'filled' : 'empty' }}">
+                                    <div class="tooltip-content">
+                                        {{ $binaryTree['level_2']['right_left']['name'] }}
+                                        Level: L2 (Right-Left)
+                                        Left: {{ $binaryTree['level_2']['right_left']['left_count'] }} | Right: {{ $binaryTree['level_2']['right_left']['right_count'] }}
+                                        Points: {{ number_format($binaryTree['level_2']['right_left']['total_points'], 0) }} pts
+                                        Active Points: {{ number_format($binaryTree['level_2']['right_left']['active_points'], 0) }} pts
+                                        Rank: {{ $binaryTree['level_2']['right_left']['rank'] }}
+                                        Status: {{ $binaryTree['level_2']['right_left']['point_status'] ?? 'none' }}
+                                    </div>
+                                    <div class="user-circle right-child {{ $binaryTree['level_2']['right_left']['exists'] ? $binaryTree['level_2']['right_left']['point_status'] ?? 'none' : 'empty' }}">
                                         @if($binaryTree['level_2']['right_left']['exists'])
                                             <img src="{{ $binaryTree['level_2']['right_left']['avatar'] ? asset($binaryTree['level_2']['right_left']['avatar']) : asset('assets/images/avatars/default-customer.svg') }}" 
                                                  alt="{{ $binaryTree['level_2']['right_left']['name'] }}" 
@@ -334,7 +392,16 @@
 
                                 <!-- Right-Right User -->
                                 <div class="tree-node right-right" data-user-id="{{ $binaryTree['level_2']['right_right']['id'] }}" data-user-name="{{ $binaryTree['level_2']['right_right']['name'] }}" data-left-count="{{ $binaryTree['level_2']['right_right']['left_count'] }}" data-right-count="{{ $binaryTree['level_2']['right_right']['right_count'] }}" data-total-business="{{ number_format($binaryTree['level_2']['right_right']['total_points'], 0) }}" data-rank="{{ $binaryTree['level_2']['right_right']['rank'] }}">
-                                    <div class="user-circle right-child {{ $binaryTree['level_2']['right_right']['exists'] ? 'filled' : 'empty' }}">
+                                    <div class="tooltip-content">
+                                        {{ $binaryTree['level_2']['right_right']['name'] }}
+                                        Level: L2 (Right-Right)
+                                        Left: {{ $binaryTree['level_2']['right_right']['left_count'] }} | Right: {{ $binaryTree['level_2']['right_right']['right_count'] }}
+                                        Points: {{ number_format($binaryTree['level_2']['right_right']['total_points'], 0) }} pts
+                                        Active Points: {{ number_format($binaryTree['level_2']['right_right']['active_points'], 0) }} pts
+                                        Rank: {{ $binaryTree['level_2']['right_right']['rank'] }}
+                                        Status: {{ $binaryTree['level_2']['right_right']['point_status'] ?? 'none' }}
+                                    </div>
+                                    <div class="user-circle right-child {{ $binaryTree['level_2']['right_right']['exists'] ? $binaryTree['level_2']['right_right']['point_status'] ?? 'none' : 'empty' }}">
                                         @if($binaryTree['level_2']['right_right']['exists'])
                                             <img src="{{ $binaryTree['level_2']['right_right']['avatar'] ? asset($binaryTree['level_2']['right_right']['avatar']) : asset('assets/images/avatars/default-customer.svg') }}" 
                                                  alt="{{ $binaryTree['level_2']['right_right']['name'] }}" 
@@ -836,7 +903,89 @@
     height: 70px;
 }
 
-/* Filled vs Empty User States */
+/* Point Status Based Colors - Active Points Qualification System */
+.user-circle.qualified {
+    opacity: 1;
+    box-shadow: 0 4px 15px rgba(40,167,69,0.3) !important;
+    background: linear-gradient(135deg, #28a745, #20c997) !important;
+    border-color: #28a745 !important;
+    border-style: solid !important;
+}
+
+.user-circle.partial {
+    opacity: 0.85;
+    box-shadow: 0 4px 15px rgba(255,193,7,0.3) !important;
+    background: linear-gradient(135deg, #ffc107, #ff8c00) !important;
+    border-color: #ffc107 !important;
+    border-style: solid !important;
+}
+
+.user-circle.none {
+    opacity: 0.7;
+    box-shadow: 0 4px 15px rgba(220,53,69,0.3) !important;
+    background: linear-gradient(135deg, #dc3545, #c82333) !important;
+    border-color: #dc3545 !important;
+    border-style: solid !important;
+}
+
+.user-circle.available, .user-circle.empty {
+    opacity: 0.6;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef) !important;
+    border-color: #dee2e6 !important;
+    border-style: dashed !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+}
+
+/* Override position-based colors when point status is set */
+.user-circle.main.qualified, .user-circle.left.qualified, .user-circle.right.qualified, 
+.user-circle.left-child.qualified, .user-circle.right-child.qualified {
+    background: linear-gradient(135deg, #28a745, #20c997) !important;
+    border-color: #28a745 !important;
+}
+
+.user-circle.main.partial, .user-circle.left.partial, .user-circle.right.partial, 
+.user-circle.left-child.partial, .user-circle.right-child.partial {
+    background: linear-gradient(135deg, #ffc107, #ff8c00) !important;
+    border-color: #ffc107 !important;
+}
+
+.user-circle.main.none, .user-circle.left.none, .user-circle.right.none, 
+.user-circle.left-child.none, .user-circle.right-child.none {
+    background: linear-gradient(135deg, #dc3545, #c82333) !important;
+    border-color: #dc3545 !important;
+}
+
+/* Legend Circle Styles */
+.legend-circle {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid;
+    display: inline-block;
+}
+
+.legend-circle.qualified {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    border-color: #28a745;
+}
+
+.legend-circle.partial {
+    background: linear-gradient(135deg, #ffc107, #ff8c00);
+    border-color: #ffc107;
+}
+
+.legend-circle.none {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+    border-color: #dc3545;
+}
+
+.legend-circle.available {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-color: #dee2e6;
+    border-style: dashed;
+}
+
+/* Filled vs Empty User States - DEPRECATED, replaced with point status */
 .user-circle.filled {
     opacity: 1;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
