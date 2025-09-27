@@ -5,7 +5,9 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\App;
 use App\Models\Order;
+use App\Models\User;
 use App\Observers\OrderObserver;
+use App\Observers\UserObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,6 +33,9 @@ class AppServiceProvider extends ServiceProvider
         Order::observe(OrderObserver::class);
         
         // Register User Point Observer for automatic commission distribution
-        \App\Models\User::observe(\App\Observers\UserPointObserver::class);
+        User::observe(\App\Observers\UserPointObserver::class);
+        
+        // Register User Observer for automatic binary summary updates
+        User::observe(UserObserver::class);
     }
 }

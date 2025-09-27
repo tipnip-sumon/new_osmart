@@ -80,6 +80,21 @@ Schedule::command('sales:update-tracking --frequency=hour')
 // ===========================
 // Matching Bonus Scheduling (Updated for Payment-Based System)
 // ===========================
+// Real-time binary summaries update - every 5 minutes for active users
+Schedule::command('matching:update-summaries')
+    ->everyFiveMinutes()
+    ->withoutOverlapping()
+    ->onOneServer()
+    ->runInBackground()
+    ->appendOutputTo(storage_path('logs/binary-summaries-update.log'));
+
+// Hourly binary summaries comprehensive update for all users
+Schedule::command('matching:update-summaries --comprehensive')
+    ->hourly()
+    ->withoutOverlapping()
+    ->onOneServer()
+    ->runInBackground()
+    ->appendOutputTo(storage_path('logs/binary-summaries-hourly.log'));
 
 // Daily matching process - runs every day at 08:00 AM BDT
 Schedule::command('matching:daily-process')
