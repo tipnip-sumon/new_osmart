@@ -952,6 +952,73 @@ Route::get('/about', function () {
     return view('pages.about-ecomus');
 })->name('pages.about');
 
+// Language switching
+Route::get('/language/{locale}', function ($locale, Request $request) {
+    if (in_array($locale, ['en', 'bn'])) {
+        session(['locale' => $locale]);
+        
+        // If it's an AJAX request, return JSON response
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'locale' => $locale,
+                'message' => 'Language switched successfully'
+            ]);
+        }
+    }
+    
+    return redirect()->back();
+})->name('lang.switch');
+
+// Get translations for AJAX language switching
+Route::get('/api/translations/{locale}', function ($locale) {
+    if (!in_array($locale, ['en', 'bn'])) {
+        return response()->json(['error' => 'Invalid locale'], 400);
+    }
+    
+    // Temporarily set locale to get translations
+    $originalLocale = app()->getLocale();
+    app()->setLocale($locale);
+    
+    $translations = [
+        'hero_title' => __('about.hero_title'),
+        'hero_subtitle' => __('about.hero_subtitle'),
+        'company_title' => __('about.company_title', ['app_name' => config('app.name')]),
+        'company_description' => __('about.company_description'),
+        'story_title' => __('about.story_title'),
+        'story_description' => __('about.story_description', ['app_name' => config('app.name')]),
+        'mission_title' => __('about.mission_title'),
+        'mission_description' => __('about.mission_description'),
+        'stats_customers' => __('about.stats_customers'),
+        'stats_products' => __('about.stats_products'),
+        'stats_countries' => __('about.stats_countries'),
+        'stats_uptime' => __('about.stats_uptime'),
+        'excellence_title' => __('about.excellence_title'),
+        'excellence_subtitle_1' => __('about.excellence_subtitle_1'),
+        'excellence_subtitle_2' => __('about.excellence_subtitle_2'),
+        'feature_quality_title' => __('about.feature_quality_title'),
+        'feature_quality_description' => __('about.feature_quality_description'),
+        'feature_technology_title' => __('about.feature_technology_title'),
+        'feature_technology_description' => __('about.feature_technology_description'),
+        'feature_support_title' => __('about.feature_support_title'),
+        'feature_support_description' => __('about.feature_support_description'),
+        'team_title' => __('about.team_title'),
+        'team_subtitle' => __('about.team_subtitle', ['app_name' => config('app.name')]),
+        'testimonials_title' => __('about.testimonials_title'),
+        'cta_title' => __('about.cta_title'),
+        'cta_subtitle' => __('about.cta_subtitle', ['app_name' => config('app.name')]),
+        'cta_join' => __('about.cta_join'),
+        'cta_contact' => __('about.cta_contact'),
+        'gallery_title' => __('about.gallery_title'),
+        'gallery_subtitle' => __('about.gallery_subtitle'),
+    ];
+    
+    // Restore original locale
+    app()->setLocale($originalLocale);
+    
+    return response()->json($translations);
+})->name('api.translations');
+
 Route::get('/contact', [App\Http\Controllers\ContactController::class, 'index'])->name('contact.show');
 Route::post('/contact', [App\Http\Controllers\ContactController::class, 'submit'])->name('contact.submit');
 

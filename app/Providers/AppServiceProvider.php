@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\App;
 use App\Models\Order;
 use App\Observers\OrderObserver;
 
@@ -21,6 +22,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Set application locale based on session
+        if (session('locale')) {
+            App::setLocale(session('locale'));
+        }
+        
         // Register Order Observer for automatic volume tracking
         Order::observe(OrderObserver::class);
         
