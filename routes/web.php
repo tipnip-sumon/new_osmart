@@ -949,7 +949,7 @@ Route::middleware('auth')->group(function () {
 
 // Static pages
 Route::get('/about', function () {
-    return view('pages.about');
+    return view('pages.about-ecomus');
 })->name('pages.about');
 
 Route::get('/contact', [App\Http\Controllers\ContactController::class, 'index'])->name('contact.show');
