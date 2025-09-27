@@ -41,6 +41,11 @@ class BinarySummary extends Model
         'last_monthly_reset',
         'is_active',
         'last_calculated_at',
+        // Point-based fields
+        'summary_type',
+        'left_total_points',
+        'right_total_points',
+        'matched_points',
     ];
 
     protected $casts = [
@@ -71,6 +76,10 @@ class BinarySummary extends Model
         'last_monthly_reset' => 'date',
         'is_active' => 'boolean',
         'last_calculated_at' => 'datetime',
+        // Point-based fields
+        'left_total_points' => 'decimal:2',
+        'right_total_points' => 'decimal:2',
+        'matched_points' => 'decimal:2',
     ];
 
     /**

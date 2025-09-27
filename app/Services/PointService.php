@@ -256,23 +256,12 @@ class PointService
     
     /**
      * Check if user has minimum points for binary matching
+     * Updated to match DailyMatchingProcess logic
      */
     public function hasMinimumPointsForMatching(User $user)
     {
-        $leftPoints = 0;
-        $rightPoints = 0;
-        
-        // Get direct downline users
-        $leftUser = User::where('sponsor_id', $user->id)->where('position', 'left')->first();
-        $rightUser = User::where('sponsor_id', $user->id)->where('position', 'right')->first();
-        
-        if ($leftUser) {
-            $leftPoints = $this->calculateUserTotalPoints($leftUser);
-        }
-        
-        if ($rightUser) {
-            $rightPoints = $this->calculateUserTotalPoints($rightUser);
-        }
+        $leftPoints = $this->calculateLegPointsForPosition($user, 'left');
+        $rightPoints = $this->calculateLegPointsForPosition($user, 'right');
         
         return [
             'left_points' => $leftPoints,
@@ -282,21 +271,46 @@ class PointService
     }
     
     /**
-     * Calculate total points for a user and their downline
+     * Calculate total points for a specific leg position (unlimited generations)
+     */
+    private function calculateLegPointsForPosition($user, $position)
+    {
+        // Get all users in this leg position under the user
+        $legUsers = User::where('upline_id', $user->id)
+            ->where('position', $position)
+            ->get();
+        
+        $totalPoints = 0;
+        
+        foreach ($legUsers as $legUser) {
+            // Add user's active points
+            $totalPoints += $legUser->active_points ?? 0;
+            
+            // Recursively add points from their downlines
+            $totalPoints += $this->calculateUserTotalPoints($legUser);
+        }
+        
+        return $totalPoints;
+    }
+    
+    /**
+     * Calculate total points for a user and their downline (unlimited generations)
      */
     private function calculateUserTotalPoints(User $user)
     {
-        // Only count active points (reserve points must be >= 100 to count)
-        $userPoints = $user->active_points ?? 0;
+        $totalPoints = 0;
         
-        // Add points from immediate downline
-        $downline = User::where('sponsor_id', $user->id)->get();
-        $downlinePoints = 0;
+        // Get all direct downlines (both left and right)
+        $downlines = User::where('upline_id', $user->id)->get();
         
-        foreach ($downline as $downlineUser) {
-            $downlinePoints += $this->calculateUserTotalPoints($downlineUser);
+        foreach ($downlines as $downlineUser) {
+            // Add downline's active points
+            $totalPoints += $downlineUser->active_points ?? 0;
+            
+            // Recursively add points from their downlines
+            $totalPoints += $this->calculateUserTotalPoints($downlineUser);
         }
         
-        return $userPoints + $downlinePoints;
+        return $totalPoints;
     }
 }
