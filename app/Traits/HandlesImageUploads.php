@@ -382,4 +382,93 @@ trait HandlesImageUploads
         // For PDF receipts, use the existing PDF upload method
         return $this->processPdfUpload($file, $folder);
     }
+
+    /**
+     * Generic image upload method for backward compatibility
+     */
+    protected function uploadImage(UploadedFile $file, string $folder, array $customSizes = null): array
+    {
+        return $this->uploadSingleImage($file, $folder, $customSizes);
+    }
+
+    /**
+     * Generic delete image method for backward compatibility
+     */
+    protected function deleteImage($imageData): bool
+    {
+        if (is_array($imageData)) {
+            return $this->deleteImageFiles($imageData);
+        } elseif (is_string($imageData)) {
+            return $this->deleteLegacyImageFile($imageData);
+        }
+        return false;
+    }
+
+    /**
+     * Upload gallery image with compact JSON structure
+     */
+    protected function uploadGalleryImage(UploadedFile $file, string $folder = 'gallery'): array
+    {
+        $sizes = [
+            'original' => ['width' => 800, 'height' => 600],
+            'medium' => ['width' => 400, 'height' => 300],
+            'small' => ['width' => 200, 'height' => 150]
+        ];
+
+        try {
+            // Create Intervention Image manager
+            $manager = new ImageManager(new Driver());
+            
+            // Generate unique filename
+            $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $extension = $file->getClientOriginalExtension();
+            $timestamp = time();
+            $filename = Str::slug($originalName) . '_' . $timestamp . '.' . $extension;
+            
+            // Create date-based folder structure
+            $datePath = Carbon::now()->format('Y/m');
+            $fullFolder = $folder . '/' . $datePath;
+            
+            // Ensure directory exists
+            Storage::disk('public')->makeDirectory($fullFolder);
+            
+            $imageData = [
+                'filename' => $filename,
+                'folder' => $fullFolder,
+                'sizes' => []
+            ];
+
+            // Process each size
+            foreach ($sizes as $sizeName => $dimensions) {
+                $image = $manager->read($file->getPathname());
+                
+                // Resize image
+                $image->resize($dimensions['width'], $dimensions['height']);
+                
+                // Create size-specific folder
+                $sizePath = $fullFolder . '/' . $sizeName;
+                Storage::disk('public')->makeDirectory($sizePath);
+                
+                // Encode image with proper format and quality
+                $encodedImage = $this->encodeImageByFormat($image, $extension, 85);
+                
+                // Save image
+                $filePath = $sizePath . '/' . $filename;
+                Storage::disk('public')->put($filePath, $encodedImage);
+                
+                // Store only essential information (no URLs)
+                $imageData['sizes'][$sizeName] = [
+                    'path' => $filePath,
+                    'width' => $dimensions['width'],
+                    'height' => $dimensions['height']
+                ];
+            }
+
+            return $imageData;
+
+        } catch (\Exception $e) {
+            Log::error('Gallery image upload failed: ' . $e->getMessage());
+            throw $e;
+        }
+    }
 }

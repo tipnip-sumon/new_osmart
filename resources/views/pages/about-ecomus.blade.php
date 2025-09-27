@@ -250,6 +250,56 @@
         font-size: 2.5rem;
     }
 }
+
+/* Gallery Achievement Overlay */
+.gallery-item {
+    position: relative;
+}
+
+.gallery-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: white;
+    padding: 15px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.gallery-item:hover .gallery-overlay {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.achievement-rank {
+    background: var(--primary-color);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.achiever-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    margin-bottom: 3px;
+}
+
+.achievement-desc {
+    font-size: 0.75rem;
+    opacity: 0.9;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    line-height: 1.3;
+}
 </style>
 @endpush
 
@@ -613,46 +663,76 @@
             <div dir="ltr" class="swiper tf-sw-shop-gallery" data-preview="5" data-tablet="3" data-mobile="2"
                 data-space-lg="7" data-space-md="7">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="gallery-item hover-img">
-                            <div class="img-style">
-                                <img class="lazyload img-hover" data-src="{{ asset('assets/ecomus/images/shop/gallery/gallery-7.jpg') }}"
-                                    src="{{ asset('assets/ecomus/images/shop/gallery/gallery-7.jpg') }}" alt="gallery">
+                    @php
+                        $galleryImages = App\Models\GalleryImage::active()
+                            ->achievements()
+                            ->ordered()
+                            ->limit(10)
+                            ->get();
+                    @endphp
+                    
+                    @forelse($galleryImages as $image)
+                        <div class="swiper-slide" lazy="true">
+                            <div class="gallery-item hover-img">
+                                <div class="img-style">
+                                    <img class="lazyload img-hover" 
+                                         data-src="{{ $image->image_url }}"
+                                         src="{{ $image->image_url }}" 
+                                         alt="{{ $image->title }}"
+                                         title="{{ $image->achiever_name ? $image->achiever_name . ' - ' . $image->title : $image->title }}"
+                                         onerror="this.src='{{ asset('assets/ecomus/images/shop/gallery/gallery-' . (($loop->index % 5) + 3) . '.jpg') }}'; this.onerror=null;">
+                                </div>
+                                @if($image->achiever_name || $image->rank)
+                                    <div class="gallery-overlay">
+                                        @if($image->rank)
+                                            <div class="achievement-rank">Rank #{{ $image->rank }}</div>
+                                        @endif
+                                        @if($image->achiever_name)
+                                            <div class="achiever-name">{{ $image->achiever_name }}</div>
+                                        @endif
+                                        @if($image->description)
+                                            <div class="achievement-desc">{{ Str::limit($image->description, 50) }}</div>
+                                        @endif
+                                    </div>
+                                @endif
                             </div>
                         </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="gallery-item hover-img">
-                            <div class="img-style">
-                                <img class="lazyload img-hover" data-src="{{ asset('assets/ecomus/images/shop/gallery/gallery-3.jpg') }}"
-                                    src="{{ asset('assets/ecomus/images/shop/gallery/gallery-3.jpg') }}" alt="gallery">
+                    @empty
+                        {{-- Fallback to default images if no gallery images exist --}}
+                        <div class="swiper-slide" lazy="true">
+                            <div class="gallery-item hover-img">
+                                <div class="img-style">
+                                    <img class="lazyload img-hover" 
+                                         data-src="{{ asset('assets/ecomus/images/shop/gallery/gallery-7.jpg') }}"
+                                         src="{{ asset('assets/ecomus/images/shop/gallery/gallery-7.jpg') }}" 
+                                         alt="gallery"
+                                         onerror="this.src='{{ asset('assets/ecomus/images/collections/collection-69.jpg') }}'; this.onerror=null;">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="gallery-item hover-img">
-                            <div class="img-style">
-                                <img class="lazyload img-hover" data-src="{{ asset('assets/ecomus/images/shop/gallery/gallery-5.jpg') }}"
-                                    src="{{ asset('assets/ecomus/images/shop/gallery/gallery-5.jpg') }}" alt="gallery">
+                        <div class="swiper-slide" lazy="true">
+                            <div class="gallery-item hover-img">
+                                <div class="img-style">
+                                    <img class="lazyload img-hover" 
+                                         data-src="{{ asset('assets/ecomus/images/shop/gallery/gallery-3.jpg') }}"
+                                         src="{{ asset('assets/ecomus/images/shop/gallery/gallery-3.jpg') }}" 
+                                         alt="gallery"
+                                         onerror="this.src='{{ asset('assets/ecomus/images/collections/collection-70.jpg') }}'; this.onerror=null;">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="gallery-item hover-img">
-                            <div class="img-style">
-                                <img class="lazyload img-hover" data-src="{{ asset('assets/ecomus/images/shop/gallery/gallery-8.jpg') }}"
-                                    src="{{ asset('assets/ecomus/images/shop/gallery/gallery-8.jpg') }}" alt="gallery">
+                        <div class="swiper-slide" lazy="true">
+                            <div class="gallery-item hover-img">
+                                <div class="img-style">
+                                    <img class="lazyload img-hover" 
+                                         data-src="{{ asset('assets/ecomus/images/shop/gallery/gallery-5.jpg') }}"
+                                         src="{{ asset('assets/ecomus/images/shop/gallery/gallery-5.jpg') }}" 
+                                         alt="gallery"
+                                         onerror="this.src='{{ asset('assets/ecomus/images/collections/collection-71.jpg') }}'; this.onerror=null;">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="gallery-item hover-img">
-                            <div class="img-style">
-                                <img class="lazyload img-hover" data-src="{{ asset('assets/ecomus/images/shop/gallery/gallery-6.jpg') }}"
-                                    src="{{ asset('assets/ecomus/images/shop/gallery/gallery-6.jpg') }}" alt="gallery">
-                            </div>
-                        </div>
-                    </div>
+                    @endforelse
                 </div>
             </div>
             <div class="sw-dots sw-pagination-gallery justify-content-center"></div>

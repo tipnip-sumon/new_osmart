@@ -404,6 +404,11 @@
                                 <i class="bx bx-bug"></i> Debug & Testing
                             </a>
                         </li>
+                        <li class="slide">
+                            <a href="{{ route('admin.gallery.index') }}" class="side-menu__item {{ request()->routeIs('admin.gallery.*') ? 'active' : '' }}">
+                                <i class="bx bx-images"></i> Achievement Gallery
+                            </a>
+                        </li>
                     </ul>
                 </li>
 

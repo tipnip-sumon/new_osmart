@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\TaxController;
 use App\Http\Controllers\Admin\FileController;
@@ -139,6 +140,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth:admin'])->group(functi
         Route::post('/{id}/toggle-status', 'toggleStatus')->name('toggle-status');
         Route::post('/bulk-delete', 'bulkDelete')->name('bulk-delete');
     });
+    
+    // Gallery Management Routes
+    Route::resource('gallery', GalleryController::class);
+    Route::post('/gallery/{gallery}/toggle-status', [GalleryController::class, 'toggleStatus'])->name('gallery.toggle-status');
     
     // Plans/Packages Management Routes
     Route::controller(App\Http\Controllers\Admin\PlanController::class)->prefix('plans')->name('plans.')->group(function () {
