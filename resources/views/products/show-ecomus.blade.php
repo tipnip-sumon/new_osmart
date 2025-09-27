@@ -276,26 +276,80 @@
 }
 
 .badges {
-    background: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color, #007bff), #2c3e50);
     color: white;
-    padding: 4px 8px;
-    border-radius: 4px;
+    padding: 8px 16px;
+    border-radius: 8px;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 800;
     text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.2);
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    min-width: 60px;
+    text-align: center;
+    display: inline-block;
 }
 
 .badges.sale {
-    background: #e74c3c;
+    background: linear-gradient(135deg, #ff4757, #ff3838);
+    color: white;
+    animation: pulse 2s infinite;
+    box-shadow: 0 4px 20px rgba(255, 71, 87, 0.4);
+    border: 2px solid rgba(255,255,255,0.3);
+}
+
+.badges:not(.sale) {
+    background: linear-gradient(135deg, #2ed573, #1dd1a1);
+    box-shadow: 0 4px 20px rgba(46, 213, 115, 0.3);
+}
+
+@keyframes pulse {
+    0% { 
+        transform: scale(1); 
+        box-shadow: 0 4px 20px rgba(255, 71, 87, 0.4);
+    }
+    50% { 
+        transform: scale(1.05); 
+        box-shadow: 0 6px 25px rgba(255, 71, 87, 0.6);
+    }
+    100% { 
+        transform: scale(1); 
+        box-shadow: 0 4px 20px rgba(255, 71, 87, 0.4);
+    }
 }
 
 .badges-on-sale {
-    background: #27ae60;
+    background: linear-gradient(135deg, #ffa726, #ff9800);
     color: white;
-    padding: 4px 8px;
-    border-radius: 4px;
+    padding: 8px 16px;
+    border-radius: 8px;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 800;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 12px rgba(255, 167, 38, 0.4);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.2);
+    animation: glow 2s ease-in-out infinite alternate;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    text-align: center;
+    display: inline-block;
+    min-width: 80px;
+}
+
+@keyframes glow {
+    from { 
+        box-shadow: 0 4px 12px rgba(255, 167, 38, 0.4);
+        transform: translateY(0);
+    }
+    to { 
+        box-shadow: 0 6px 20px rgba(255, 167, 38, 0.7);
+        transform: translateY(-2px);
+    }
 }
 
 /* Product Trust Elements */
@@ -521,18 +575,18 @@ $galleryImages = getProductGalleryImages($product);
                                 <div class="badges text-uppercase">Featured</div>
                                 @endif
                                 @if($product->sale_price && $product->sale_price < $product->price)
-                                <div class="badges">Sale</div>
+                                <div class="badges sale text-uppercase">Sale</div>
                                 @endif
                             </div>
                             <div class="tf-product-info-price">
                                 @if($product->sale_price && $product->sale_price < $product->price)
-                                <div class="price-on-sale">${{ number_format($product->sale_price, 2) }}</div>
-                                <div class="compare-at-price">${{ number_format($product->price, 2) }}</div>
+                                <div class="price-on-sale">{{ formatCurrency($product->sale_price) }}</div>
+                                <div class="compare-at-price">{{ formatCurrency($product->price) }}</div>
                                 <div class="badges-on-sale">
                                     <span>{{ round((($product->price - $product->sale_price) / $product->price) * 100) }}% OFF</span>
                                 </div>
                                 @else
-                                <div class="price-current">${{ number_format($product->price, 2) }}</div>
+                                <div class="price-current">{{ formatCurrency($product->price) }}</div>
                                 @endif
                             </div>
                             <div class="tf-product-info-variant-picker">
@@ -952,10 +1006,10 @@ $galleryImages = getProductGalleryImages($product);
                                 <a href="{{ route('products.show', $relatedProduct->slug) }}" class="title link">{{ $relatedProduct->name }}</a>
                                 <span class="price">
                                     @if($relatedProduct->sale_price && $relatedProduct->sale_price < $relatedProduct->price)
-                                        <span class="compare-at-price">${{ number_format($relatedProduct->price, 2) }}</span>
-                                        <span class="price-on-sale fw-6">${{ number_format($relatedProduct->sale_price, 2) }}</span>
+                                        <span class="compare-at-price">{{ formatCurrency($relatedProduct->price) }}</span>
+                                        <span class="price-on-sale fw-6">{{ formatCurrency($relatedProduct->sale_price) }}</span>
                                     @else
-                                        <span class="fw-6">${{ number_format($relatedProduct->price, 2) }}</span>
+                                        <span class="fw-6">{{ formatCurrency($relatedProduct->price) }}</span>
                                     @endif
                                 </span>
                             </div>
@@ -982,10 +1036,10 @@ $galleryImages = getProductGalleryImages($product);
                 <h6 class="mb-1">{{ $product->name }}</h6>
                 <span class="price">
                     @if($product->sale_price && $product->sale_price < $product->price)
-                        <span class="price-on-sale fw-6">${{ number_format($product->sale_price, 2) }}</span>
-                        <span class="compare-at-price">${{ number_format($product->price, 2) }}</span>
+                        <span class="price-on-sale fw-6">{{ formatCurrency($product->sale_price) }}</span>
+                        <span class="compare-at-price">{{ formatCurrency($product->price) }}</span>
                     @else
-                        <span class="fw-6">${{ number_format($product->price, 2) }}</span>
+                        <span class="fw-6">{{ formatCurrency($product->price) }}</span>
                     @endif
                 </span>
             </div>

@@ -713,7 +713,13 @@ function getBrandLogoSrc($brand, $defaultLogo = 'assets/ecomus/images/brand/defa
 <section class="flat-spacing-12 bg_grey-3">
     <div class="container">
         <div class="flat-title flex-row justify-content-between align-items-center px-0 wow fadeInUp" data-wow-delay="0s">
-            <h3 class="title">Season Collection</h3>
+            <h3 class="title">
+                @if(isset($categories) && $categories->count() > 0)
+                    Shop by Categories
+                @else
+                    Featured Collections
+                @endif
+            </h3>
             <a href="{{ route('collections.index') }}" class="tf-btn btn-line">View all categories<i class="icon icon-arrow1-top-left"></i></a>
         </div>
         <div class="hover-sw-nav hover-sw-2">

@@ -226,10 +226,10 @@ Route::get('/debug-member', function () {
     
     return response()->json([
         'success' => true,
-        'user' => $user->only(['id', 'email', 'role', 'firstname', 'lastname']),
+        'user' => $user->toArray(),
         'message' => 'Member access OK'
     ]);
-})->middleware(['auth', 'role.session:member|affiliate']);
+})->middleware(['auth', 'role.session:customer|affiliate']);
 
 Route::get('/debug/test-link-sharing/{userId}/{productSlug}', function ($userId, $productSlug) {
     $linkSharingService = new PackageLinkSharingService();
